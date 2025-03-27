@@ -1,0 +1,7 @@
+{
+  "parent": "remnant_ossukage:custom/sword",
+  "textures": {
+    "1": "remnant_ossukage:block/sword",
+    "particle": "remnant_ossukage:item/sword"
+  }
+}

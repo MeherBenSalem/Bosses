@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "remnant_ossukage:blocks/ancient_ruin_block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "remnant_ossukage:ancient_ruin_block"
+        }
+      ]
+    }
+  ]
+}

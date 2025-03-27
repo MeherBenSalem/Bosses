@@ -1,0 +1,40 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="remnant_ossukage"
+version="1.1.0"
+displayName="Remnant Ossukage"
+displayURL="https://meherbensalem.github.io"
+logoFile="logo.png"
+credits="no credits"
+authors="NAIZO"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[dependencies.remnant_ossukage]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.remnant_ossukage]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.remnant_ossukage]]
+    modId="geckolib"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+
+
+# Start of user code block dependencies configuration
+# End of user code block dependencies configuration
