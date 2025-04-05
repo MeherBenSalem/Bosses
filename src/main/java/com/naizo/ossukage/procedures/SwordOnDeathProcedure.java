@@ -1,9 +1,9 @@
 package com.naizo.ossukage.procedures;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,13 +12,13 @@ import net.minecraft.world.entity.Entity;
 import javax.annotation.Nullable;
 
 import com.naizo.ossukage.init.RemnantOssukageModItems;
-import com.naizo.ossukage.configuration.RemnantConfigConfiguration;
+import com.naizo.ossukage.configuration.MainConfigConfiguration;
 
-@Mod.EventBusSubscriber
+@EventBusSubscriber
 public class SwordOnDeathProcedure {
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event) {
-		if (event != null && event.getEntity() != null) {
+		if (event.getEntity() != null) {
 			execute(event, event.getEntity(), event.getSource().getEntity());
 		}
 	}
@@ -32,8 +32,8 @@ public class SwordOnDeathProcedure {
 			return;
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == RemnantOssukageModItems.OSSUKAGE_SWORD.get()) {
 			if (sourceentity instanceof LivingEntity _entity)
-				_entity.setHealth((float) ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)
-						+ (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * ((double) RemnantConfigConfiguration.LIFE_STEAL_POWER.get() / 100)));
+				_entity.setHealth(
+						(float) ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) + (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * ((double) MainConfigConfiguration.LIFE_STEAL_POWER.get() / 100)));
 		}
 	}
 }

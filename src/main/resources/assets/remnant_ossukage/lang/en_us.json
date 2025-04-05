@@ -28,6 +28,8 @@
   "item.bosses.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
   "subtitles.skeletonfight_theme": "skeleton fight theme music",
   "entity.remnant_ossukage.ossukage": "Remnant : Ossukage",
+  "key.remnant_ossukage.throw_shuriken_key_bind": "Throw Shuriken Key Bind",
+  "key.categories.remnant": "Remnant",
   "entity.bosses.ossukage": "Remnant : Ossukage",
   "block.bosses.ancient_ruin_block": "Ancient Ruin Block",
   "item.remnant_ossukage.ossukage_sword.description_10": "§6Unbreakable"

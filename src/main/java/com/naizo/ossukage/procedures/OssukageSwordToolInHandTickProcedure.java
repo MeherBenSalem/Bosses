@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 
-import com.naizo.ossukage.configuration.RemnantConfigConfiguration;
+import com.naizo.ossukage.configuration.MainConfigConfiguration;
 
 public class OssukageSwordToolInHandTickProcedure {
 	public static void execute(Entity entity) {
@@ -13,7 +13,7 @@ public class OssukageSwordToolInHandTickProcedure {
 			return;
 		if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.MOVEMENT_SPEED) ? _livEnt.getEffect(MobEffects.MOVEMENT_SPEED).getDuration() : 0) <= 20) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, (int) (double) RemnantConfigConfiguration.SPEED_AMPLIFIER.get(), true, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, (int) (double) MainConfigConfiguration.SPEED_AMPLIFIER.get(), true, false));
 		}
 	}
 }
