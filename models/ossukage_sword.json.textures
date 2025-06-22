@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "oni_shogun_katana"
+      },
+      "name": "default"
+    }
+  }
+}

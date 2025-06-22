@@ -1,0 +1,7 @@
+{
+  "parent": "remnant_bosses:custom/ossukage_sword",
+  "textures": {
+    "1": "remnant_bosses:block/oni_shogun_katana",
+    "particle": "remnant_bosses:item/sword"
+  }
+}

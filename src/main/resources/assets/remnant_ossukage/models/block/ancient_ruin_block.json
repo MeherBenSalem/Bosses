@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "remnant_ossukage:block/ancient_ruin",
-    "particle": "remnant_ossukage:block/ancient_ruin"
-  },
-  "render_type": "solid"
-}
