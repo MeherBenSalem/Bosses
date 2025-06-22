@@ -3,9 +3,9 @@ loaderVersion="[4,)"
 license="All Rights Reserved"
 
 [[mods]]
-modId="remnant_ossukage"
-version="1.0.4"
-displayName="Remnant Ossukage"
+modId="remnant_bosses"
+version="1.1.0"
+displayName="Remnant Bosses"
 displayURL="https://meherbensalem.github.io"
 logoFile="logo.png"
 credits="no credits"
@@ -15,29 +15,35 @@ description="Face the deadliest skeletal entity ever forged combat, fights, and 
 # Start of user code block mod configuration
 # End of user code block mod configuration
 
-[[dependencies.remnant_ossukage]]
+[[dependencies.remnant_bosses]]
     modId="neoforge"
     type="required"
     versionRange="[21.1.65,)"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.remnant_ossukage]]
+[[dependencies.remnant_bosses]]
     modId="minecraft"
     type="required"
     versionRange="[1.21.1]"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.remnant_ossukage]]
+[[dependencies.remnant_bosses]]
     modId="geckolib"
     type="required"
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.remnant_ossukage]]
+[[dependencies.remnant_bosses]]
     modId="geckolib"
+    type="optional"
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.remnant_bosses]]
+    modId="jauml"
     type="optional"
     versionRange="[0,)"
     ordering="NONE"

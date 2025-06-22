@@ -28,6 +28,12 @@ description="Face the deadliest skeletal entity ever forged combat, fights, and 
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.remnant_bosses]]
+    modId="jauml"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.remnant_bosses]]
     modId="geckolib"

@@ -540,7 +540,8 @@
     "serverSideOnly": false,
     "modPicture": "1",
     "requiredMods": [
-      "geckolib"
+      "geckolib",
+      "jauml"
     ],
     "dependencies": [],
     "dependants": [],
