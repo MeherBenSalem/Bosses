@@ -3,7 +3,7 @@ package tn.naizo.remnants.procedures;
 import tn.naizo.remnants.init.RemnantBossesModEntities;
 import tn.naizo.remnants.entity.OssukageEntity;
 import tn.naizo.remnants.entity.KunaiEntity;
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
@@ -35,7 +35,8 @@ public class ThrowKunaisProcedureProcedure {
 						entityToSpawn.setCritArrow(true);
 						return entityToSpawn;
 					}
-				}.getArrow(projectileLevel, (float) (double) MainConfigConfiguration.SHURIKEN_DAMAGE.get(), (int) (double) MainConfigConfiguration.SHURIKEN_KNOCKBACK.get(), (byte) ((double) MainConfigConfiguration.SHURIKEN_PIERCE.get()));
+				}.getArrow(projectileLevel, (float) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_damage"), (int) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_knockback"),
+						(byte) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_pierce"));
 				_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 				_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, 2, 0);
 				projectileLevel.addFreshEntity(_entityToSpawn);

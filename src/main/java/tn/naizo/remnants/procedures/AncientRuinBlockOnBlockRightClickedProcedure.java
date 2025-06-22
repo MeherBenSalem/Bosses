@@ -1,8 +1,8 @@
 package tn.naizo.remnants.procedures;
 
 import tn.naizo.remnants.init.RemnantBossesModEntities;
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
 import tn.naizo.remnants.RemnantBossesMod;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -11,7 +11,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.MobSpawnType;
@@ -33,7 +32,7 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if ((ForgeRegistries.ITEMS.getKey((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem()).toString()).equals(MainConfigConfiguration.PORTAL_ACTIVATION_ITEM.get())) {
+		if ((ForgeRegistries.ITEMS.getKey((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem()).toString()).equals(JaumlConfigLib.getStringValue("remnant", "main", "portal_activation_item"))) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.growl")), SoundSource.NEUTRAL, 1, 1);
@@ -48,7 +47,7 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
 						if (entity instanceof Player _player) {
-							ItemStack _stktoremove = new ItemStack(Items.NETHER_STAR);
+							ItemStack _stktoremove = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant", "main", "portal_activation_item")).toLowerCase(java.util.Locale.ENGLISH))));
 							_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
 						}
 						if (world instanceof Level _level) {

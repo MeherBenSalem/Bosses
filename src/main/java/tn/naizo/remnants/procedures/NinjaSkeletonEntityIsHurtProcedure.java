@@ -1,8 +1,8 @@
 package tn.naizo.remnants.procedures;
 
 import tn.naizo.remnants.entity.OssukageEntity;
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
 import tn.naizo.remnants.RemnantBossesMod;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
@@ -23,9 +23,9 @@ public class NinjaSkeletonEntityIsHurtProcedure {
 		if (entity == null)
 			return;
 		Entity toSpawn = null;
-		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= ((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 100) * (double) MainConfigConfiguration.HP_THRESHOLD.get()) {
+		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= ((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 100) * JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "hp_threshold_phase_2")) {
 			if (!(entity instanceof OssukageEntity _datEntL3 && _datEntL3.getEntityData().get(OssukageEntity.DATA_transform))) {
-				RemnantBossesMod.queueServerWork((int) (double) MainConfigConfiguration.TRANSFORM_DELAY.get(), () -> {
+				RemnantBossesMod.queueServerWork((int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "transform_delay_phase_2"), () -> {
 					if (world instanceof ServerLevel _level) {
 						LightningBolt entityToSpawn = EntityType.LIGHTNING_BOLT.create(_level);
 						entityToSpawn.moveTo(Vec3.atBottomCenterOf(BlockPos.containing(x, y, z)));
@@ -36,7 +36,7 @@ public class NinjaSkeletonEntityIsHurtProcedure {
 						_level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, x, y, z, 5, 3, 3, 3, 1);
 					if (entity instanceof OssukageEntity animatable)
 						animatable.setTexture("ninja_skeleton_phase_2");
-					for (int index0 = 0; index0 < (int) (double) MainConfigConfiguration.SKELETONS_ON_TRANSFORM.get(); index0++) {
+					for (int index0 = 0; index0 < (int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "skeletons_on_transform_phase_2"); index0++) {
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = EntityType.SKELETON.spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
 							if (entityToSpawn != null) {
@@ -45,13 +45,13 @@ public class NinjaSkeletonEntityIsHurtProcedure {
 						}
 					}
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) (double) MainConfigConfiguration.INVISIBILITY_TIMER.get(), 3, false, true));
+						_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "invisibility_timer_phase_2"), 3, false, true));
 					if (entity instanceof LivingEntity _livingEntity12 && _livingEntity12.getAttributes().hasAttribute(Attributes.KNOCKBACK_RESISTANCE))
 						_livingEntity12.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
 					if (entity instanceof LivingEntity _livingEntity14 && _livingEntity14.getAttributes().hasAttribute(Attributes.MOVEMENT_SPEED))
-						_livingEntity14.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(((double) MainConfigConfiguration.MOVEMENT_SPEED_P2.get()));
+						_livingEntity14.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "movement_speed_phase_2"));
 					if (entity instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ATTACK_DAMAGE))
-						_livingEntity16.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(((double) MainConfigConfiguration.ATTACK_DAMAGE_P2.get()));
+						_livingEntity16.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "attack_damage_phase_2"));
 				});
 				if (entity instanceof OssukageEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(OssukageEntity.DATA_transform, true);

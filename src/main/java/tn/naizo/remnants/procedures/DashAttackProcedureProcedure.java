@@ -1,7 +1,7 @@
 package tn.naizo.remnants.procedures;
 
 import tn.naizo.remnants.entity.OssukageEntity;
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -34,18 +34,18 @@ public class DashAttackProcedureProcedure {
 		entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY()),
 				((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ())));
 		if (entity instanceof OssukageEntity _datEntL7 && _datEntL7.getEntityData().get(OssukageEntity.DATA_transform)) {
-			if (Mth.nextInt(RandomSource.create(), 0, 100) <= (double) MainConfigConfiguration.SPECIAL_ATTACK_CHANCE.get()) {
+			if (Mth.nextInt(RandomSource.create(), 0, 100) <= JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "special_attack_chance_phase_2")) {
 				if (world instanceof ServerLevel _level) {
 					LightningBolt entityToSpawn = EntityType.LIGHTNING_BOLT.create(_level);
 					entityToSpawn.moveTo(Vec3.atBottomCenterOf(BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(),
 							(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ())));;
 					_level.addFreshEntity(entityToSpawn);
 				}
-			} else if (Mth.nextInt(RandomSource.create(), 0, 100) <= (double) MainConfigConfiguration.SPECIAL_ATTACK_CHANCE.get()) {
+			} else if (Mth.nextInt(RandomSource.create(), 0, 100) <= JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "special_attack_chance_phase_2")) {
 				if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 150, 1, false, false));
-			} else if (Mth.nextInt(RandomSource.create(), 0, 100) <= (double) MainConfigConfiguration.SPECIAL_ATTACK_CHANCE.get()) {
-				for (int index0 = 0; index0 < (int) (double) MainConfigConfiguration.SKELETONS_ON_DASH.get(); index0++) {
+			} else if (Mth.nextInt(RandomSource.create(), 0, 100) <= JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "special_attack_chance_phase_2")) {
+				for (int index0 = 0; index0 < (int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "skeletons_on_dash_phase_2"); index0++) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = EntityType.SKELETON.spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
 						if (entityToSpawn != null) {
@@ -58,8 +58,9 @@ public class DashAttackProcedureProcedure {
 		if (entity instanceof OssukageEntity) {
 			((OssukageEntity) entity).setAnimation("leap_attack");
 		}
-		entity.setDeltaMovement(new Vec3(((entity.getDeltaMovement().x() + entity.getLookAngle().x) * (double) MainConfigConfiguration.DASH_DISTANCE.get()),
-				((entity.getDeltaMovement().y() + entity.getLookAngle().y) * (double) MainConfigConfiguration.DASH_DISTANCE.get()), ((entity.getDeltaMovement().z() + entity.getLookAngle().z) * (double) MainConfigConfiguration.DASH_DISTANCE.get())));
+		entity.setDeltaMovement(new Vec3(((entity.getDeltaMovement().x() + entity.getLookAngle().x) * JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "dash_distance")),
+				((entity.getDeltaMovement().y() + entity.getLookAngle().y) * JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "dash_distance")),
+				((entity.getDeltaMovement().z() + entity.getLookAngle().z) * JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "dash_distance"))));
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
 				_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("remnant_bosses:dash_sfx")), SoundSource.HOSTILE, 1, 1);

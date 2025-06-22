@@ -1,7 +1,7 @@
 package tn.naizo.remnants.procedures;
 
 import tn.naizo.remnants.init.RemnantBossesModItems;
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,8 +32,8 @@ public class SwordOnDeathProcedure {
 			return;
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == RemnantBossesModItems.OSSUKAGE_SWORD.get()) {
 			if (sourceentity instanceof LivingEntity _entity)
-				_entity.setHealth(
-						(float) ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) + (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * ((double) MainConfigConfiguration.LIFE_STEAL_POWER.get() / 100)));
+				_entity.setHealth((float) ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)
+						+ (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * (JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "life_steal_power") / 100)));
 		}
 	}
 }

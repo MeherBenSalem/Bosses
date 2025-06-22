@@ -52,7 +52,7 @@ public class ThrowShurikenKeyBindMessage {
 			return;
 		if (type == 0) {
 
-			OssukageSwordRightclickedProcedure.execute(entity);
+			OssukageSwordRightclickedProcedure.execute(world, x, y, z, entity);
 		}
 	}
 

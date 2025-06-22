@@ -1,6 +1,6 @@
 package tn.naizo.remnants.procedures;
 
-import tn.naizo.remnants.configuration.MainConfigConfiguration;
+import tn.naizo.jauml.JaumlConfigLib;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
@@ -13,7 +13,7 @@ public class OssukageSwordToolInHandTickProcedure {
 			return;
 		if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.MOVEMENT_SPEED) ? _livEnt.getEffect(MobEffects.MOVEMENT_SPEED).getDuration() : 0) <= 20) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, (int) (double) MainConfigConfiguration.SPEED_AMPLIFIER.get(), true, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, (int) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "speed_amplifier"), true, false));
 		}
 	}
 }
