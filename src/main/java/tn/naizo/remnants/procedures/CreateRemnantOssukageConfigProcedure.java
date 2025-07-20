@@ -37,7 +37,7 @@ public class CreateRemnantOssukageConfigProcedure {
 			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "hp_threshold_phase_2", 50);
 		}
 		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "transform_delay_phase_2")) {
-			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "transform_delay_phase_2", 40);
+			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "transform_delay_phase_2", 60);
 		}
 		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "skeletons_on_transform_phase_2")) {
 			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "skeletons_on_transform_phase_2", 5);

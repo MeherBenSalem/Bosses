@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="remnant_bosses"
-version="1.1.0"
+version="1.2.0"
 displayName="Remnant Bosses"
 displayURL="https://meherbensalem.github.io"
 logoFile="logo.png"
@@ -31,6 +31,12 @@ description="Face the deadliest skeletal entity ever forged combat, fights, and 
 
 [[dependencies.remnant_bosses]]
     modId="geckolib"
+    type="required"
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.remnant_bosses]]
+    modId="jauml"
     type="required"
     versionRange="[0,)"
     ordering="NONE"

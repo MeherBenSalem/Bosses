@@ -1,5 +1,6 @@
 package tn.naizo.remnants.procedures;
 
+import tn.naizo.remnants.init.RemnantBossesModEntities;
 import tn.naizo.remnants.entity.OssukageEntity;
 import tn.naizo.jauml.JaumlConfigLib;
 
@@ -47,7 +48,7 @@ public class DashAttackProcedureProcedure {
 			} else if (Mth.nextInt(RandomSource.create(), 0, 100) <= JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "special_attack_chance_phase_2")) {
 				for (int index0 = 0; index0 < (int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "skeletons_on_dash_phase_2"); index0++) {
 					if (world instanceof ServerLevel _level) {
-						Entity entityToSpawn = EntityType.SKELETON.spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+						Entity entityToSpawn = RemnantBossesModEntities.SKELETON_MINIONS.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 						}

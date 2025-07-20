@@ -1,5 +1,7 @@
 package tn.naizo.remnants.init;
 
+import tn.naizo.remnants.entity.SkeletonMinionsEntity;
+import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.OssukageEntity;
 
 import net.minecraftforge.fml.common.Mod;
@@ -12,6 +14,20 @@ public class EntityAnimationFactory {
 	public static void onEntityTick(LivingEvent.LivingTickEvent event) {
 		if (event != null && event.getEntity() != null) {
 			if (event.getEntity() instanceof OssukageEntity syncable) {
+				String animation = syncable.getSyncedAnimation();
+				if (!animation.equals("undefined")) {
+					syncable.setAnimation("undefined");
+					syncable.animationprocedure = animation;
+				}
+			}
+			if (event.getEntity() instanceof SkeletonMinionsEntity syncable) {
+				String animation = syncable.getSyncedAnimation();
+				if (!animation.equals("undefined")) {
+					syncable.setAnimation("undefined");
+					syncable.animationprocedure = animation;
+				}
+			}
+			if (event.getEntity() instanceof RatEntity syncable) {
 				String animation = syncable.getSyncedAnimation();
 				if (!animation.equals("undefined")) {
 					syncable.setAnimation("undefined");

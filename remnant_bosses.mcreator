@@ -146,10 +146,10 @@
       "registry_name": "ossukage",
       "metadata": {
         "files": [
-          "src/main/java/tn/naizo/remnants/entity/OssukageEntity.java",
-          "src/main/resources/assets/remnant_bosses/models/item/ossukage_spawn_egg.json",
           "src/main/java/tn/naizo/remnants/client/renderer/OssukageRenderer.java",
-          "src/main/java/tn/naizo/remnants/entity/model/OssukageModel.java"
+          "src/main/java/tn/naizo/remnants/entity/model/OssukageModel.java",
+          "src/main/java/tn/naizo/remnants/entity/OssukageEntity.java",
+          "src/main/resources/assets/remnant_bosses/models/item/ossukage_spawn_egg.json"
         ]
       },
       "path": "~/Remnant Ossukage"
@@ -162,11 +162,11 @@
       "registry_name": "ancient_ruin_block",
       "metadata": {
         "files": [
-          "src/main/java/tn/naizo/remnants/block/AncientRuinBlockBlock.java",
-          "src/main/resources/assets/remnant_bosses/blockstates/ancient_ruin_block.json",
-          "src/main/resources/assets/remnant_bosses/models/block/ancient_ruin_block.json",
           "src/main/resources/assets/remnant_bosses/models/item/ancient_ruin_block.json",
-          "src/main/resources/data/remnant_bosses/loot_tables/blocks/ancient_ruin_block.json"
+          "src/main/resources/assets/remnant_bosses/models/block/ancient_ruin_block.json",
+          "src/main/resources/data/remnant_bosses/loot_tables/blocks/ancient_ruin_block.json",
+          "src/main/java/tn/naizo/remnants/block/AncientRuinBlockBlock.java",
+          "src/main/resources/assets/remnant_bosses/blockstates/ancient_ruin_block.json"
         ]
       },
       "path": "~/Blocks"
@@ -427,6 +427,81 @@
         "dependencies": []
       },
       "path": "~/Config"
+    },
+    {
+      "name": "SkeletonMinions",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_minions",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/remnant_bosses/models/item/skeleton_minions_spawn_egg.json",
+          "src/main/java/tn/naizo/remnants/entity/SkeletonMinionsEntity.java",
+          "src/main/java/tn/naizo/remnants/entity/model/SkeletonMinionsModel.java",
+          "src/main/java/tn/naizo/remnants/client/renderer/SkeletonMinionsRenderer.java"
+        ]
+      },
+      "path": "~/Skeleton Minnions"
+    },
+    {
+      "name": "SkeletonMinionsOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_minions_on_initial_entity_spawn",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonMinionsOnInitialEntitySpawnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Skeleton Minnions"
+    },
+    {
+      "name": "Rat",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/entity/model/RatModel.java",
+          "src/main/resources/data/remnant_bosses/forge/biome_modifier/rat_biome_modifier.json",
+          "src/main/java/tn/naizo/remnants/client/renderer/RatRenderer.java",
+          "src/main/java/tn/naizo/remnants/entity/RatEntity.java",
+          "src/main/resources/assets/remnant_bosses/models/item/rat_spawn_egg.json"
+        ]
+      },
+      "path": "~/Rats"
+    },
+    {
+      "name": "RatOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_on_initial_entity_spawn",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatOnInitialEntitySpawnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Rats"
     }
   ],
   "variable_elements": [],
@@ -468,6 +543,7 @@
       "item.remnant_ossukage.ossukage_sword.description_4": " ",
       "item.bosses.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
       "item.remnant_ossukage.ossukage_sword.description_5": "§ePowers:§r",
+      "entity.remnant_bosses.skeleton_minions": "Skeleton Minions",
       "item.bosses.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
       "item.remnant_ossukage.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
       "subtitles.dash_sfx": "dash sound effect",
@@ -478,8 +554,9 @@
       "item.bosses.ossukage_sword.description_7": "§cCursed Shuriken:§7 Right click to shoot shuriken",
       "item.remnant_ossukage.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
       "item.bosses.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
-      "block.remnant_bosses.ancient_ruin_block": "Ancient Ruin Block",
       "item.bosses.ossukage_sword.description_5": "§ePowers:§r",
+      "block.remnant_bosses.ancient_ruin_block": "Ancient Ruin Block",
+      "item.remnant_bosses.rat_spawn_egg": "Rat Spawn Egg",
       "item.remnant_ossukage.ossukage_sword": "§4§lOssukage Blade",
       "item.bosses.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
       "item.remnant_bosses.ossukage_sword": "§4§lOssukage Blade",
@@ -490,6 +567,7 @@
       "block.bosses.ancient_ruin_block": "Ancient Ruin Block",
       "item.bosses.ossukage_sword.description_10": "§6Unbreakable",
       "block.remnant_ossukage.ancient_ruin_block": "Ancient Ruin Block",
+      "entity.remnant_bosses.rat": "Rat",
       "item.remnant_bosses.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
       "item.bosses.ossukage_sword": "§4§lOssukage Blade",
       "item.remnant_bosses.ossukage_sword.description_5": "§ePowers:§r",
@@ -499,6 +577,7 @@
       "item.remnant_bosses.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
       "item.remnant_bosses.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
       "item.remnant_bosses.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
+      "item.remnant_bosses.skeleton_minions_spawn_egg": "Skeleton Minions Spawn Egg",
       "item.remnant_bosses.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
       "item.remnant_bosses.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
       "item.remnant_bosses.ossukage_sword.description_4": " ",
@@ -526,19 +605,27 @@
       {
         "name": "Config",
         "children": []
+      },
+      {
+        "name": "Skeleton Minnions",
+        "children": []
+      },
+      {
+        "name": "Rats",
+        "children": []
       }
     ]
   },
   "workspaceSettings": {
     "modid": "remnant_bosses",
     "modName": "Remnant Bosses",
-    "version": "1.1.0",
-    "description": "Face the deadliest skeletal entity ever forged combat, fights, and chaos await!",
+    "version": "1.3.0",
+    "description": "Face the deadliest bosses ever forged combat, fights, and chaos await!",
     "author": "NAIZO",
     "websiteURL": "https://meherbensalem.github.io",
     "license": "All Rights Reserved",
     "serverSideOnly": false,
-    "modPicture": "1",
+    "modPicture": "a29c5907-108d-4b10-a1f5-b8a466a6651c",
     "requiredMods": [
       "geckolib",
       "jauml"

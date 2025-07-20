@@ -4,6 +4,8 @@
  */
 package tn.naizo.remnants.init;
 
+import tn.naizo.remnants.entity.SkeletonMinionsEntity;
+import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.OssukageEntity;
 import tn.naizo.remnants.entity.KunaiEntity;
 import tn.naizo.remnants.RemnantBossesMod;
@@ -29,6 +31,14 @@ public class RemnantBossesModEntities {
 			EntityType.Builder.<OssukageEntity>of(OssukageEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(OssukageEntity::new)
 
 					.sized(0.9f, 2.5f));
+	public static final RegistryObject<EntityType<SkeletonMinionsEntity>> SKELETON_MINIONS = register("skeleton_minions",
+			EntityType.Builder.<SkeletonMinionsEntity>of(SkeletonMinionsEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(SkeletonMinionsEntity::new)
+
+					.sized(0.6f, 1.8f));
+	public static final RegistryObject<EntityType<RatEntity>> RAT = register("rat",
+			EntityType.Builder.<RatEntity>of(RatEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(RatEntity::new)
+
+					.sized(1f, 1f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -40,11 +50,15 @@ public class RemnantBossesModEntities {
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			OssukageEntity.init();
+			SkeletonMinionsEntity.init();
+			RatEntity.init();
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(OSSUKAGE.get(), OssukageEntity.createAttributes().build());
+		event.put(SKELETON_MINIONS.get(), SkeletonMinionsEntity.createAttributes().build());
+		event.put(RAT.get(), RatEntity.createAttributes().build());
 	}
 }

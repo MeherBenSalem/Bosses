@@ -23,6 +23,8 @@ public class RemnantBossesModTabs {
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
 		if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			tabData.accept(RemnantBossesModItems.OSSUKAGE_SPAWN_EGG.get());
+			tabData.accept(RemnantBossesModItems.SKELETON_MINIONS_SPAWN_EGG.get());
+			tabData.accept(RemnantBossesModItems.RAT_SPAWN_EGG.get());
 		} else if (tabData.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
 			tabData.accept(RemnantBossesModBlocks.ANCIENT_RUIN_BLOCK.get().asItem());
 		} else if (tabData.getTabKey() == CreativeModeTabs.COMBAT) {

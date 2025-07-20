@@ -4,6 +4,8 @@
  */
 package tn.naizo.remnants.init;
 
+import tn.naizo.remnants.client.renderer.SkeletonMinionsRenderer;
+import tn.naizo.remnants.client.renderer.RatRenderer;
 import tn.naizo.remnants.client.renderer.OssukageRenderer;
 import tn.naizo.remnants.client.renderer.KunaiRenderer;
 
@@ -18,5 +20,7 @@ public class RemnantBossesModEntityRenderers {
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(RemnantBossesModEntities.KUNAI.get(), KunaiRenderer::new);
 		event.registerEntityRenderer(RemnantBossesModEntities.OSSUKAGE.get(), OssukageRenderer::new);
+		event.registerEntityRenderer(RemnantBossesModEntities.SKELETON_MINIONS.get(), SkeletonMinionsRenderer::new);
+		event.registerEntityRenderer(RemnantBossesModEntities.RAT.get(), RatRenderer::new);
 	}
 }
