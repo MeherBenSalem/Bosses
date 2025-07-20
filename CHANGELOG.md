@@ -15,6 +15,7 @@
 ### ⚔️ Skeleton Minions
 - Added **Skeleton Minions** that now spawn instead of regular skeletons during the **Ossukage** fight.
 - These minions now spawn **randomly around** the Ossukage, no longer directly on top of him.
+- These can also spawn randomly in the wilderness.
 
 ### 🌀 Ossukage Enhancements
 - Added **transformation animation** when the Ossukage reaches its HP threshold.
@@ -27,6 +28,7 @@
   - Available in **5 colors**: white, red, black, grey, and brown.
   - Colors are randomly chosen on spawn.
   - Rats will **instantly attack** villagers, players, sheep, and cows.
+  - These can also spawn randomly in the wilderness.
 
 =============================================
 ## Changelog 1.2.0
