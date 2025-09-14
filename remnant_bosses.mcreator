@@ -155,23 +155,6 @@
       "path": "~/Remnant Ossukage"
     },
     {
-      "name": "AncientRuinBlock",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ancient_ruin_block",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/remnant_bosses/models/item/ancient_ruin_block.json",
-          "src/main/resources/assets/remnant_bosses/models/block/ancient_ruin_block.json",
-          "src/main/resources/data/remnant_bosses/loot_tables/blocks/ancient_ruin_block.json",
-          "src/main/java/tn/naizo/remnants/block/AncientRuinBlockBlock.java",
-          "src/main/resources/assets/remnant_bosses/blockstates/ancient_ruin_block.json"
-        ]
-      },
-      "path": "~/Blocks"
-    },
-    {
       "name": "AncientRuins",
       "type": "structure",
       "compiles": true,
@@ -219,7 +202,7 @@
           }
         ]
       },
-      "path": "~/Blocks"
+      "path": "~/Blocks/AncientAltar"
     },
     {
       "name": "OssukageEntityDies",
@@ -503,6 +486,89 @@
         ]
       },
       "path": "~/Rats"
+    },
+    {
+      "name": "RemnantBossesTab",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remnant_bosses_tab",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "AncientAltar",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ancient_altar",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/block/AncientAltarBlock.java",
+          "src/main/resources/assets/remnant_bosses/models/item/ancient_altar.json",
+          "src/main/resources/assets/remnant_bosses/models/block/ancient_altar.json",
+          "src/main/resources/assets/remnant_bosses/blockstates/ancient_altar.json",
+          "src/main/resources/data/remnant_bosses/loot_tables/blocks/ancient_altar.json"
+        ]
+      },
+      "path": "~/Blocks/AncientAltar"
+    },
+    {
+      "name": "AncientPedestal",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ancient_pedestal",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/remnant_bosses/models/item/ancient_pedestal.json",
+          "src/main/java/tn/naizo/remnants/block/AncientPedestalBlock.java",
+          "src/main/resources/assets/remnant_bosses/models/block/ancient_pedestal.json",
+          "src/main/resources/data/remnant_bosses/loot_tables/blocks/ancient_pedestal.json",
+          "src/main/resources/assets/remnant_bosses/blockstates/ancient_pedestal.json"
+        ]
+      },
+      "path": "~/Blocks/AncientPedestal"
+    },
+    {
+      "name": "AncientAltarRecipe",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ancient_altar_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/recipes/ancient_altar_recipe.json"
+        ]
+      },
+      "path": "~/Blocks/AncientAltar"
+    },
+    {
+      "name": "AncientPedestalRecipe",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ancient_pedestal_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/recipes/ancient_pedestal_recipe.json"
+        ]
+      },
+      "path": "~/Blocks/AncientPedestal"
+    },
+    {
+      "name": "SkeletonSkullRecipe",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_skull_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/recipes/skeleton_skull_recipe.json"
+        ]
+      },
+      "path": "~/Misc"
     }
   ],
   "variable_elements": [],
@@ -532,6 +598,7 @@
   "tab_element_order": {},
   "language_map": {
     "en_us": {
+      "block.remnant_bosses.ancient_altar": "Ancient Altar",
       "item.bosses.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
       "item.bosses.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
       "entity.remnant_bosses.ossukage": "Remnant : Ossukage",
@@ -556,7 +623,6 @@
       "item.bosses.ossukage_sword.description_7": "§cCursed Shuriken:§7 Right click to shoot shuriken",
       "item.bosses.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
       "item.bosses.ossukage_sword.description_5": "§ePowers:§r",
-      "block.remnant_bosses.ancient_ruin_block": "Ancient Ruin Block",
       "item.remnant_bosses.rat_spawn_egg": "Rat Spawn Egg",
       "item.remnant_ossukage.ossukage_sword": "§4§lOssukage Blade",
       "item.bosses.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
@@ -566,6 +632,7 @@
       "entity.remnant_ossukage.ossukage": "Remnant : Ossukage",
       "entity.bosses.ossukage": "Remnant : Ossukage",
       "block.bosses.ancient_ruin_block": "Ancient Ruin Block",
+      "block.remnant_bosses.ancient_pedestal": "Ancient Pedestal",
       "item.bosses.ossukage_sword.description_10": "§6Unbreakable",
       "block.remnant_ossukage.ancient_ruin_block": "Ancient Ruin Block",
       "entity.remnant_bosses.rat": "Rat",
@@ -580,6 +647,7 @@
       "item.remnant_bosses.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
       "item.remnant_bosses.skeleton_minions_spawn_egg": "Skeleton Minions Spawn Egg",
       "item.remnant_bosses.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
+      "item_group.remnant_bosses.remnant_bosses_tab": "Remnant Bosses Tab",
       "item.remnant_bosses.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
       "item.remnant_bosses.ossukage_sword.description_4": " ",
       "key.remnant_bosses.throw_shuriken_key_bind": "Throw Shuriken Key Bind",
@@ -601,7 +669,16 @@
       },
       {
         "name": "Blocks",
-        "children": []
+        "children": [
+          {
+            "name": "AncientAltar",
+            "children": []
+          },
+          {
+            "name": "AncientPedestal",
+            "children": []
+          }
+        ]
       },
       {
         "name": "Config",
@@ -614,13 +691,17 @@
       {
         "name": "Rats",
         "children": []
+      },
+      {
+        "name": "Misc",
+        "children": []
       }
     ]
   },
   "workspaceSettings": {
     "modid": "remnant_bosses",
     "modName": "Remnant Bosses",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Face the deadliest bosses ever forged combat, fights, and chaos await!",
     "author": "NAIZO",
     "websiteURL": "https://meherbensalem.github.io",

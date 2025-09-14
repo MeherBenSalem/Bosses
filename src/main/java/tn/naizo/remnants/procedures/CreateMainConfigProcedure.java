@@ -21,11 +21,23 @@ public class CreateMainConfigProcedure {
 	}
 
 	private static void execute(@Nullable Event event) {
-		if (JaumlConfigLib.createConfigFile("remnant", "main")) {
+		if (JaumlConfigLib.createConfigFile("remnant/bosses", "ossukage_summon")) {
 			JaumlConfigLib.createConfigFile("remnant", "main");
 		}
-		if (!JaumlConfigLib.arrayKeyExists("remnant", "main", "portal_activation_item")) {
-			JaumlConfigLib.setStringValue("remnant", "main", "portal_activation_item", "minecraft:nether_star");
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage_summon", "portal_activation_item")) {
+			JaumlConfigLib.setStringValue("remnant/bosses", "ossukage_summon", "portal_activation_item", "minecraft:nether_star");
+		}
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block")) {
+			JaumlConfigLib.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block", "minecraft:skeleton_skull");
+		}
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block")) {
+			JaumlConfigLib.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block", "minecraft:skeleton_skull");
+		}
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block")) {
+			JaumlConfigLib.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block", "minecraft:skeleton_skull");
+		}
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block")) {
+			JaumlConfigLib.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block", "minecraft:skeleton_skull");
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:block",
-  "random_sequence": "remnant_bosses:blocks/ancient_ruin_block",
+  "random_sequence": "remnant_bosses:blocks/ancient_altar",
   "pools": [
     {
       "rolls": 1.0,
@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "remnant_bosses:ancient_ruin_block"
+          "name": "remnant_bosses:ancient_altar"
         }
       ]
     }

@@ -638,7 +638,7 @@
 					"rotation": [2.5, 0, 5]
 				},
 				{
-					"name": "backTunic",
+					"name": "back_tunic",
 					"parent": "torso",
 					"pivot": [-0.00083, 18.22407, 3.84373],
 					"rotation": [10, 0, 0],

@@ -1,4 +1,15 @@
 =============================================
+## Changelog 1.4.0
+=============================================
+
+### New Features
+- Added **Ancient Pedestal** and **Ancient Altar** blocks, used to summon bosses.  
+- Introduced a new **configuration option** to customize summoning behavior.  
+
+### Changes
+- The **Remnant Ossukage** now spawns with **two skeletons** at the start of the fight.  
+
+=============================================
 ## Changelog 1.3.0
 =============================================
 

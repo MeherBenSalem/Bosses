@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "remnant_bosses:skeleton_minions",
     "remnant_bosses:ossukage"
   ]
 }

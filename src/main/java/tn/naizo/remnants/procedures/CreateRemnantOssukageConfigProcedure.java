@@ -24,6 +24,9 @@ public class CreateRemnantOssukageConfigProcedure {
 		if (JaumlConfigLib.createConfigFile("remnant/bosses", "ossukage")) {
 			JaumlConfigLib.createConfigFile("remnant/bosses", "ossukage");
 		}
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "on_spawn_skeletons")) {
+			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "on_spawn_skeletons", 2);
+		}
 		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "max_health_phase_1")) {
 			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "max_health_phase_1", 800);
 		}

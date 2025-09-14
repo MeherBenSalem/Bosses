@@ -1,5 +1,5 @@
 {
-  "parent": "remnant_bosses:block/ancient_ruin_block",
+  "parent": "remnant_bosses:block/ancient_pedestal",
   "display": {
     "thirdperson": {
       "rotation": [

@@ -4,13 +4,13 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="remnant_bosses"
-version="1.2.0"
+version="1.4.0"
 displayName="Remnant Bosses"
 displayURL="https://meherbensalem.github.io"
 logoFile="logo.png"
 credits="no credits"
 authors="NAIZO"
-description="Face the deadliest skeletal entity ever forged combat, fights, and chaos await!"
+description="Face the deadliest bosses ever forged combat, fights, and chaos await!"
 
 # Start of user code block mod configuration
 # End of user code block mod configuration
