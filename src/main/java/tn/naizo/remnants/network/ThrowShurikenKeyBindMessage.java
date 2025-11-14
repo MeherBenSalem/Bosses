@@ -1,4 +1,3 @@
-
 package tn.naizo.remnants.network;
 
 import tn.naizo.remnants.procedures.OssukageSwordRightclickedProcedure;

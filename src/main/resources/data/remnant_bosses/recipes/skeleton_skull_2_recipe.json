@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "remnant_bosses:old_skeleton_head"
+    }
+  ],
+  "result": {
+    "item": "minecraft:skeleton_skull",
+    "count": 1
+  }
+}

@@ -1,9 +1,9 @@
-
 package tn.naizo.remnants.item;
 
 import tn.naizo.remnants.procedures.OssukageSwordToolInHandTickProcedure;
 import tn.naizo.remnants.procedures.OssukageSwordRightclickedProcedure;
 import tn.naizo.remnants.procedures.OssukageSwordLivingEntityIsHitWithToolProcedure;
+import tn.naizo.remnants.init.RemnantBossesModItems;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,7 +45,7 @@ public class OssukageSwordItem extends SwordItem {
 			}
 
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of();
+				return Ingredient.of(new ItemStack(RemnantBossesModItems.OLD_SKELETON_BONE.get()));
 			}
 		}, 3, -2f, new Item.Properties().fireResistant());
 	}

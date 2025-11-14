@@ -1,12 +1,11 @@
-
 /*
  *    MCreator note: This file will be REGENERATED on each build.
  */
 package tn.naizo.remnants.init;
 
-import tn.naizo.remnants.client.renderer.SkeletonMinionsRenderer;
+import tn.naizo.remnants.client.renderer.SkeletonMinionRenderer;
+import tn.naizo.remnants.client.renderer.RemnantOssukageRenderer;
 import tn.naizo.remnants.client.renderer.RatRenderer;
-import tn.naizo.remnants.client.renderer.OssukageRenderer;
 import tn.naizo.remnants.client.renderer.KunaiRenderer;
 
 import net.minecraftforge.fml.common.Mod;
@@ -19,8 +18,8 @@ public class RemnantBossesModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(RemnantBossesModEntities.KUNAI.get(), KunaiRenderer::new);
-		event.registerEntityRenderer(RemnantBossesModEntities.OSSUKAGE.get(), OssukageRenderer::new);
-		event.registerEntityRenderer(RemnantBossesModEntities.SKELETON_MINIONS.get(), SkeletonMinionsRenderer::new);
 		event.registerEntityRenderer(RemnantBossesModEntities.RAT.get(), RatRenderer::new);
+		event.registerEntityRenderer(RemnantBossesModEntities.SKELETON_MINION.get(), SkeletonMinionRenderer::new);
+		event.registerEntityRenderer(RemnantBossesModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);
 	}
 }

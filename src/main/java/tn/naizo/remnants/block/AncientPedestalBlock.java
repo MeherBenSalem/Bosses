@@ -1,4 +1,3 @@
-
 package tn.naizo.remnants.block;
 
 import net.minecraft.world.phys.shapes.VoxelShape;

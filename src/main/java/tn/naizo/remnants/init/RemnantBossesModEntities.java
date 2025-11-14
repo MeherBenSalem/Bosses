@@ -1,12 +1,11 @@
-
 /*
  *    MCreator note: This file will be REGENERATED on each build.
  */
 package tn.naizo.remnants.init;
 
-import tn.naizo.remnants.entity.SkeletonMinionsEntity;
+import tn.naizo.remnants.entity.SkeletonMinionEntity;
+import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.entity.RatEntity;
-import tn.naizo.remnants.entity.OssukageEntity;
 import tn.naizo.remnants.entity.KunaiEntity;
 import tn.naizo.remnants.RemnantBossesMod;
 
@@ -27,18 +26,18 @@ public class RemnantBossesModEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, RemnantBossesMod.MODID);
 	public static final RegistryObject<EntityType<KunaiEntity>> KUNAI = register("kunai",
 			EntityType.Builder.<KunaiEntity>of(KunaiEntity::new, MobCategory.MISC).setCustomClientFactory(KunaiEntity::new).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
-	public static final RegistryObject<EntityType<OssukageEntity>> OSSUKAGE = register("ossukage",
-			EntityType.Builder.<OssukageEntity>of(OssukageEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(OssukageEntity::new)
-
-					.sized(0.9f, 2.5f));
-	public static final RegistryObject<EntityType<SkeletonMinionsEntity>> SKELETON_MINIONS = register("skeleton_minions",
-			EntityType.Builder.<SkeletonMinionsEntity>of(SkeletonMinionsEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(SkeletonMinionsEntity::new)
-
-					.sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<RatEntity>> RAT = register("rat",
 			EntityType.Builder.<RatEntity>of(RatEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(RatEntity::new)
 
-					.sized(1f, 1f));
+					.sized(1.2f, 1f));
+	public static final RegistryObject<EntityType<SkeletonMinionEntity>> SKELETON_MINION = register("skeleton_minion",
+			EntityType.Builder.<SkeletonMinionEntity>of(SkeletonMinionEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(SkeletonMinionEntity::new)
+
+					.sized(0.8f, 1.8f));
+	public static final RegistryObject<EntityType<RemnantOssukageEntity>> REMNANT_OSSUKAGE = register("remnant_ossukage",
+			EntityType.Builder.<RemnantOssukageEntity>of(RemnantOssukageEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(RemnantOssukageEntity::new)
+
+					.sized(0.8f, 2.4f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -49,16 +48,16 @@ public class RemnantBossesModEntities {
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			OssukageEntity.init();
-			SkeletonMinionsEntity.init();
 			RatEntity.init();
+			SkeletonMinionEntity.init();
+			RemnantOssukageEntity.init();
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
-		event.put(OSSUKAGE.get(), OssukageEntity.createAttributes().build());
-		event.put(SKELETON_MINIONS.get(), SkeletonMinionsEntity.createAttributes().build());
 		event.put(RAT.get(), RatEntity.createAttributes().build());
+		event.put(SKELETON_MINION.get(), SkeletonMinionEntity.createAttributes().build());
+		event.put(REMNANT_OSSUKAGE.get(), RemnantOssukageEntity.createAttributes().build());
 	}
 }

@@ -45,13 +45,13 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 					&& (world.getBlockState(BlockPos.containing(x, y, z + 3))).getBlock() == RemnantBossesModBlocks.ANCIENT_PEDESTAL.get()
 					&& (world.getBlockState(BlockPos.containing(x, y, z - 3))).getBlock() == RemnantBossesModBlocks.ANCIENT_PEDESTAL.get()) {
 				if ((world.getBlockState(BlockPos.containing(x + 3, y + 1, z))).getBlock() == ForgeRegistries.BLOCKS
-						.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
+						.getValue(ResourceLocation.parse((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
 						&& (world.getBlockState(BlockPos.containing(x - 3, y + 1, z))).getBlock() == ForgeRegistries.BLOCKS
-								.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
+								.getValue(ResourceLocation.parse((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
 						&& (world.getBlockState(BlockPos.containing(x, y + 1, z + 3))).getBlock() == ForgeRegistries.BLOCKS
-								.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
+								.getValue(ResourceLocation.parse((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))
 						&& (world.getBlockState(BlockPos.containing(x, y + 1, z - 3))).getBlock() == ForgeRegistries.BLOCKS
-								.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))) {
+								.getValue(ResourceLocation.parse((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block")).toLowerCase(java.util.Locale.ENGLISH)))) {
 					if (world instanceof ServerLevel _level)
 						_level.setDayTime(0);
 					if (world instanceof ServerLevel _level) {
@@ -84,9 +84,9 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 					world.setBlock(BlockPos.containing(x, y + 1, z - 3), Blocks.AIR.defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.growl")), SoundSource.NEUTRAL, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("entity.ender_dragon.growl")), SoundSource.NEUTRAL, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.growl")), SoundSource.NEUTRAL, 1, 1, false);
+							_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("entity.ender_dragon.growl")), SoundSource.NEUTRAL, 1, 1, false);
 						}
 					}
 					{
@@ -96,14 +96,14 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 							if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
 								if (entity instanceof Player _player) {
 									ItemStack _stktoremove = new ItemStack(
-											ForgeRegistries.ITEMS.getValue(new ResourceLocation((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "portal_activation_item")).toLowerCase(java.util.Locale.ENGLISH))));
+											ForgeRegistries.ITEMS.getValue(ResourceLocation.parse((JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "portal_activation_item")).toLowerCase(java.util.Locale.ENGLISH))));
 									_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("remnant_bosses:skeletonfight_theme")), SoundSource.MUSIC, 1, 1);
+										_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("remnant_bosses:skeletonfight_theme")), SoundSource.MUSIC, 1, 1);
 									} else {
-										_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("remnant_bosses:skeletonfight_theme")), SoundSource.MUSIC, 1, 1, false);
+										_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("remnant_bosses:skeletonfight_theme")), SoundSource.MUSIC, 1, 1, false);
 									}
 								}
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
@@ -116,14 +116,14 @@ public class AncientRuinBlockOnBlockRightClickedProcedure {
 										_level.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel _level) {
-										Entity entityToSpawn = RemnantBossesModEntities.OSSUKAGE.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
+										Entity entityToSpawn = RemnantBossesModEntities.REMNANT_OSSUKAGE.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 										}
 									}
 									for (int index0 = 0; index0 < (int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "on_spawn_skeletons"); index0++) {
 										if (world instanceof ServerLevel _level) {
-											Entity entityToSpawn = RemnantBossesModEntities.SKELETON_MINIONS.get().spawn(_level, BlockPos.containing(x + Mth.nextInt(RandomSource.create(), -1, 1), y + 1, z + Mth.nextInt(RandomSource.create(), -1, 1)),
+											Entity entityToSpawn = RemnantBossesModEntities.SKELETON_MINION.get().spawn(_level, BlockPos.containing(x + Mth.nextInt(RandomSource.create(), -1, 1), y + 1, z + Mth.nextInt(RandomSource.create(), -1, 1)),
 													MobSpawnType.MOB_SUMMONED);
 											if (entityToSpawn != null) {
 												entityToSpawn.setDeltaMovement(0, 0, 0);

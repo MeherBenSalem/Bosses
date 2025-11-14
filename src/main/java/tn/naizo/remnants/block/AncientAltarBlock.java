@@ -1,4 +1,3 @@
-
 package tn.naizo.remnants.block;
 
 import tn.naizo.remnants.procedures.AncientRuinBlockOnBlockRightClickedProcedure;

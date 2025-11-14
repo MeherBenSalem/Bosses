@@ -16,7 +16,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 public class KunaiRenderer extends EntityRenderer<KunaiEntity> {
-	private static final ResourceLocation texture = new ResourceLocation("remnant_bosses:textures/entities/kunai.png");
+	private static final ResourceLocation texture = ResourceLocation.parse("remnant_bosses:textures/entities/kunai.png");
 	private final Modelshuriken model;
 
 	public KunaiRenderer(EntityRendererProvider.Context context) {

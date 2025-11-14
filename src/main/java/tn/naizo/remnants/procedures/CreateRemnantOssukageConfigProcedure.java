@@ -51,8 +51,8 @@ public class CreateRemnantOssukageConfigProcedure {
 		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "special_attack_chance_phase_2")) {
 			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "special_attack_chance_phase_2", 20);
 		}
-		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "invisibility_timer_phase_2")) {
-			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "invisibility_timer_phase_2", 200);
+		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "health_boost_timer_phase_2")) {
+			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "health_boost_timer_phase_2", 200);
 		}
 		if (!JaumlConfigLib.arrayKeyExists("remnant/bosses", "ossukage", "attack_damage_phase_2")) {
 			JaumlConfigLib.setNumberValue("remnant/bosses", "ossukage", "attack_damage_phase_2", 9);

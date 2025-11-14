@@ -33,7 +33,7 @@
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "NinjaSkeletonEntityIsHurt",
@@ -68,7 +68,7 @@
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "Kunai",
@@ -82,7 +82,7 @@
           "src/main/java/tn/naizo/remnants/client/renderer/KunaiRenderer.java"
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "DashAttackProcedure",
@@ -117,7 +117,7 @@
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "ThrowKunaisProcedure",
@@ -136,38 +136,7 @@
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
-    },
-    {
-      "name": "Ossukage",
-      "type": "animatedentity",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ossukage",
-      "metadata": {
-        "files": [
-          "src/main/java/tn/naizo/remnants/client/renderer/OssukageRenderer.java",
-          "src/main/java/tn/naizo/remnants/entity/model/OssukageModel.java",
-          "src/main/java/tn/naizo/remnants/entity/OssukageEntity.java",
-          "src/main/resources/assets/remnant_bosses/models/item/ossukage_spawn_egg.json"
-        ]
-      },
-      "path": "~/Remnant Ossukage"
-    },
-    {
-      "name": "AncientRuins",
-      "type": "structure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ancient_ruins",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/remnant_bosses/worldgen/structure/ancient_ruins.json",
-          "src/main/resources/data/remnant_bosses/worldgen/structure_set/ancient_ruins.json",
-          "src/main/resources/data/remnant_bosses/worldgen/template_pool/ancient_ruins.json"
-        ]
-      },
-      "path": "~/Blocks"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "AncientRuinBlockOnBlockRightClicked",
@@ -216,12 +185,12 @@
         ],
         "dependencies": [
           {
-            "name": "entity",
+            "name": "sourceentity",
             "type": "entity"
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "OssukageSwordRightclicked",
@@ -256,7 +225,7 @@
           }
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "OssukageSwordToolInHandTick",
@@ -275,7 +244,7 @@
           }
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "OssukageSwordLivingEntityIsHitWithTool",
@@ -294,7 +263,7 @@
           }
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "OssukageSword",
@@ -308,7 +277,7 @@
           "src/main/resources/assets/remnant_bosses/models/item/ossukage_sword.json"
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "SwordOnDeath",
@@ -331,7 +300,7 @@
           }
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "ThrowShurikenKeyBind",
@@ -344,7 +313,7 @@
           "src/main/java/tn/naizo/remnants/network/ThrowShurikenKeyBindMessage.java"
         ]
       },
-      "path": "~/Weapons"
+      "path": "~/Weapons/OssukageSword"
     },
     {
       "name": "OssukageOnInitialEntitySpawn",
@@ -367,7 +336,7 @@
           }
         ]
       },
-      "path": "~/Remnant Ossukage"
+      "path": "~/Mobs/Remnant Ossukage"
     },
     {
       "name": "CreateMainConfig",
@@ -410,82 +379,6 @@
         "dependencies": []
       },
       "path": "~/Config"
-    },
-    {
-      "name": "SkeletonMinions",
-      "type": "animatedentity",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "skeleton_minions",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/remnant_bosses/models/item/skeleton_minions_spawn_egg.json",
-          "src/main/resources/data/remnant_bosses/forge/biome_modifier/skeleton_minions_biome_modifier.json",
-          "src/main/java/tn/naizo/remnants/entity/SkeletonMinionsEntity.java",
-          "src/main/java/tn/naizo/remnants/entity/model/SkeletonMinionsModel.java",
-          "src/main/java/tn/naizo/remnants/client/renderer/SkeletonMinionsRenderer.java"
-        ]
-      },
-      "path": "~/Skeleton Minnions"
-    },
-    {
-      "name": "SkeletonMinionsOnInitialEntitySpawn",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "skeleton_minions_on_initial_entity_spawn",
-      "metadata": {
-        "files": [
-          "src/main/java/tn/naizo/remnants/procedures/SkeletonMinionsOnInitialEntitySpawnProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Skeleton Minnions"
-    },
-    {
-      "name": "Rat",
-      "type": "animatedentity",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "rat",
-      "metadata": {
-        "files": [
-          "src/main/java/tn/naizo/remnants/entity/model/RatModel.java",
-          "src/main/resources/data/remnant_bosses/forge/biome_modifier/rat_biome_modifier.json",
-          "src/main/java/tn/naizo/remnants/client/renderer/RatRenderer.java",
-          "src/main/java/tn/naizo/remnants/entity/RatEntity.java",
-          "src/main/resources/assets/remnant_bosses/models/item/rat_spawn_egg.json"
-        ]
-      },
-      "path": "~/Rats"
-    },
-    {
-      "name": "RatOnInitialEntitySpawn",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "rat_on_initial_entity_spawn",
-      "metadata": {
-        "files": [
-          "src/main/java/tn/naizo/remnants/procedures/RatOnInitialEntitySpawnProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/Rats"
     },
     {
       "name": "RemnantBossesTab",
@@ -569,6 +462,422 @@
         ]
       },
       "path": "~/Misc"
+    },
+    {
+      "name": "CheckAttackAnim",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "check_attack_anim",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/CheckAttackAnimProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Procedures"
+    },
+    {
+      "name": "CheckIsIdleAnim",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "check_is_idle_anim",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/CheckIsIdleAnimProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Procedures"
+    },
+    {
+      "name": "Rat",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/forge/biome_modifier/rat_biome_modifier.json",
+          "src/main/java/tn/naizo/remnants/client/renderer/RatRenderer.java",
+          "src/main/java/tn/naizo/remnants/entity/RatEntity.java",
+          "src/main/resources/assets/remnant_bosses/models/item/rat_spawn_egg.json"
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "RatOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_on_initial_entity_spawn",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatOnInitialEntitySpawnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "RatDisplayCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_display_condition",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatDisplayConditionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "RatDisplayCondition2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_display_condition_2",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatDisplayCondition2Procedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "RatDisplayCondition3",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_display_condition_3",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatDisplayCondition3Procedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "RatDisplayCondition4",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_display_condition_4",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/RatDisplayCondition4Procedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "SkeletonNinjaPlaybackCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_ninja_playback_condition",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonNinjaPlaybackConditionProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Remnant Ossukage"
+    },
+    {
+      "name": "SkeletonNinjaLeapCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_ninja_leap_condition",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonNinjaLeapConditionProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Remnant Ossukage"
+    },
+    {
+      "name": "SkeletonNinjaSpawnCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_ninja_spawn_condition",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonNinjaSpawnConditionProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Remnant Ossukage"
+    },
+    {
+      "name": "SkeletonNinjaDisplayCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_ninja_display_condition",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonNinjaDisplayConditionProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Remnant Ossukage"
+    },
+    {
+      "name": "SkeletonMinion",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_minion",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/client/renderer/SkeletonMinionRenderer.java",
+          "src/main/java/tn/naizo/remnants/entity/SkeletonMinionEntity.java",
+          "src/main/resources/assets/remnant_bosses/models/item/skeleton_minion_spawn_egg.json"
+        ]
+      },
+      "path": "~/Mobs/Skeletons"
+    },
+    {
+      "name": "SkeletonSpawnCondition",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_spawn_condition",
+      "metadata": {
+        "return_type": "logic",
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonSpawnConditionProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Skeletons"
+    },
+    {
+      "name": "SkeletonMinionOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_minion_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/tn/naizo/remnants/procedures/SkeletonMinionOnInitialEntitySpawnProcedure.java"
+        ]
+      },
+      "path": "~/Mobs/Skeletons"
+    },
+    {
+      "name": "RemnantOssukage",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remnant_ossukage",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/client/renderer/RemnantOssukageRenderer.java",
+          "src/main/resources/assets/remnant_bosses/models/item/remnant_ossukage_spawn_egg.json",
+          "src/main/java/tn/naizo/remnants/entity/RemnantOssukageEntity.java"
+        ]
+      },
+      "path": "~/Mobs/Remnant Ossukage"
+    },
+    {
+      "name": "RatFang",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_fang",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/remnant_bosses/models/item/rat_fang.json",
+          "src/main/java/tn/naizo/remnants/item/RatFangItem.java"
+        ]
+      },
+      "path": "~/Items"
+    },
+    {
+      "name": "FangOnAStick",
+      "type": "tool",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fang_on_a_stick",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/remnant_bosses/models/item/fang_on_a_stick.json",
+          "src/main/java/tn/naizo/remnants/item/FangOnAStickItem.java"
+        ]
+      },
+      "path": "~/Weapons/Normal"
+    },
+    {
+      "name": "RatDropTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rat_drop_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/loot_tables/entities/rat.json"
+        ]
+      },
+      "path": "~/Mobs/Rat"
+    },
+    {
+      "name": "FangOnAStickRecipe",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fang_on_a_stick_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/recipes/fang_on_a_stick_recipe.json"
+        ]
+      },
+      "path": "~/Weapons/Normal"
+    },
+    {
+      "name": "OldSkeletonBone",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "old_skeleton_bone",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/remnant_bosses/models/item/old_skeleton_bone.json",
+          "src/main/java/tn/naizo/remnants/item/OldSkeletonBoneItem.java"
+        ]
+      },
+      "path": "~/Items"
+    },
+    {
+      "name": "OldSkeletonHead",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "old_skeleton_head",
+      "metadata": {
+        "files": [
+          "src/main/java/tn/naizo/remnants/item/OldSkeletonHeadItem.java",
+          "src/main/resources/assets/remnant_bosses/models/item/old_skeleton_head.json"
+        ]
+      },
+      "path": "~/Items"
+    },
+    {
+      "name": "SkeletonMinionDropTable",
+      "type": "loottable",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_minion_drop_table",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/loot_tables/entities/skeleton_minion.json"
+        ]
+      },
+      "path": "~/Mobs/Skeletons"
+    },
+    {
+      "name": "SkeletonSkull2Recipe",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skeleton_skull_2_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/remnant_bosses/recipes/skeleton_skull_2_recipe.json"
+        ]
+      },
+      "path": "~/Misc"
     }
   ],
   "variable_elements": [],
@@ -592,18 +901,33 @@
   ],
   "tag_elements": {
     "ITEMS:minecraft:swords": [
+      "~CUSTOM:FangOnAStick",
       "~CUSTOM:OssukageSword"
+    ],
+    "ITEMS:remnant_bosses:ossukage_sword_repair_items": [],
+    "ITEMS:remnant_bosses:fang_on_a_stick_repair_items": []
+  },
+  "tab_element_order": {
+    "CUSTOM:RemnantBossesTab": [
+      "AncientAltar",
+      "AncientPedestal",
+      "RatFang",
+      "OldSkeletonBone",
+      "OldSkeletonHead",
+      "SkeletonMinion",
+      "Rat",
+      "RemnantOssukage",
+      "OssukageSword",
+      "FangOnAStick"
     ]
   },
-  "tab_element_order": {},
   "language_map": {
     "en_us": {
-      "block.remnant_bosses.ancient_altar": "Ancient Altar",
       "item.bosses.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
+      "block.remnant_bosses.ancient_altar": "Ancient Altar",
       "item.bosses.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
-      "entity.remnant_bosses.ossukage": "Remnant : Ossukage",
-      "item.remnant_ossukage.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
       "item.remnant_ossukage.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
+      "item.remnant_ossukage.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
       "item.remnant_ossukage.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
       "item.remnant_ossukage.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
       "item.remnant_ossukage.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
@@ -611,16 +935,15 @@
       "item.remnant_ossukage.ossukage_sword.description_4": " ",
       "item.bosses.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
       "item.remnant_ossukage.ossukage_sword.description_5": "§ePowers:§r",
-      "entity.remnant_bosses.skeleton_minions": "Skeleton Minions",
       "item.bosses.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
       "item.remnant_ossukage.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
-      "item.remnant_ossukage.ossukage_sword.description_7": "§cCursed Shuriken:§7 Right click to shoot shuriken",
-      "item.bosses.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
       "subtitles.dash_sfx": "dash sound effect",
-      "item.remnant_ossukage.ossukage_sword.description_8": "§9Ninja’s Reflex:§7 Get speed effect when holding the weapon",
+      "item.bosses.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
+      "item.remnant_ossukage.ossukage_sword.description_7": "§cCursed Shuriken:§7 Right click to shoot shuriken",
       "item.bosses.ossukage_sword.description_8": "§9Ninja’s Reflex:§7 Get speed effect when holding the weapon",
-      "item.remnant_ossukage.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
+      "item.remnant_ossukage.ossukage_sword.description_8": "§9Ninja’s Reflex:§7 Get speed effect when holding the weapon",
       "item.bosses.ossukage_sword.description_7": "§cCursed Shuriken:§7 Right click to shoot shuriken",
+      "item.remnant_ossukage.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
       "item.bosses.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
       "item.bosses.ossukage_sword.description_5": "§ePowers:§r",
       "item.remnant_bosses.rat_spawn_egg": "Rat Spawn Egg",
@@ -636,7 +959,6 @@
       "item.bosses.ossukage_sword.description_10": "§6Unbreakable",
       "block.remnant_ossukage.ancient_ruin_block": "Ancient Ruin Block",
       "entity.remnant_bosses.rat": "Rat",
-      "item.remnant_bosses.ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
       "item.bosses.ossukage_sword": "§4§lOssukage Blade",
       "item.remnant_bosses.ossukage_sword.description_5": "§ePowers:§r",
       "item.remnant_bosses.ossukage_sword.description_6": "§8Shadow Strike:§7 Attacks apply blindness to the enemies",
@@ -645,7 +967,6 @@
       "item.remnant_bosses.ossukage_sword.description_9": "§fSoul Bind:§7 Steal life on kill",
       "item.remnant_bosses.ossukage_sword.description_0": "§7Forged from the §8blackened bones§7 of the §4Demon Ninja Skeleton§7,",
       "item.remnant_bosses.ossukage_sword.description_1": "§7tempered in §cunderworld flames§7, this §4§lkatana§r§7 hums with",
-      "item.remnant_bosses.skeleton_minions_spawn_egg": "Skeleton Minions Spawn Egg",
       "item.remnant_bosses.ossukage_sword.description_2": "§8eerie power§7. Its §6runes§7 pulse with §0shadow§7 and §cflame§7,",
       "item_group.remnant_bosses.remnant_bosses_tab": "Remnant Bosses Tab",
       "item.remnant_bosses.ossukage_sword.description_3": "§7whispering of §fsouls§7 it has claimed. A shard of chaos reborn.",
@@ -653,19 +974,51 @@
       "key.remnant_bosses.throw_shuriken_key_bind": "Throw Shuriken Key Bind",
       "key.remnant_ossukage.throw_shuriken_key_bind": "Throw Shuriken Key Bind",
       "key.categories.remnant": "Remnant",
-      "item.remnant_ossukage.ossukage_sword.description_10": "§6Unbreakable"
+      "item.remnant_ossukage.ossukage_sword.description_10": "§6Unbreakable",
+      "entity.remnant_bosses.skeleton_minion": "Skeleton Minion",
+      "item.remnant_bosses.skeleton_minion_spawn_egg": "Skeleton Minion Spawn Egg",
+      "entity.remnant_bosses.remnant_ossukage": "Remnant : Ossukage",
+      "item.remnant_bosses.remnant_ossukage_spawn_egg": "Remnant : Ossukage Spawn Egg",
+      "item.remnant_bosses.rat_fang": "Rat Fang",
+      "item.remnant_bosses.fang_on_a_stick": "Fang On A Stick",
+      "item.remnant_bosses.old_skeleton_bone": "Old Skeleton Bone",
+      "item.remnant_bosses.old_skeleton_head": "Old Skeleton Head",
+      "itemGroup.remnant_bosses.remnant_bosses_tab": "Remnant Bosses Tab",
+      "item.remnant_bosses.ancient_altar": "Ancient Altar",
+      "item.remnant_bosses.ancient_pedestal": "Ancient Pedestal"
     }
+  },
+  "metadata": {
+    "files": [
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModSounds.java",
+      "src/main/java/tn/naizo/remnants/RemnantBossesMod.java",
+      "src/main/resources/assets/remnant_bosses/sounds.json",
+      "src/main/resources/META-INF/mods.toml",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModTabs.java",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModModels.java",
+      "src/main/resources/pack.mcmeta",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModKeyMappings.java",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModBlocks.java",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModItems.java",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModEntities.java",
+      "src/main/java/tn/naizo/remnants/init/RemnantBossesModEntityRenderers.java"
+    ]
   },
   "foldersRoot": {
     "name": "~",
     "children": [
       {
-        "name": "Remnant Ossukage",
-        "children": []
-      },
-      {
         "name": "Weapons",
-        "children": []
+        "children": [
+          {
+            "name": "OssukageSword",
+            "children": []
+          },
+          {
+            "name": "Normal",
+            "children": []
+          }
+        ]
       },
       {
         "name": "Blocks",
@@ -685,42 +1038,61 @@
         "children": []
       },
       {
-        "name": "Skeleton Minnions",
-        "children": []
-      },
-      {
-        "name": "Rats",
-        "children": []
-      },
-      {
         "name": "Misc",
         "children": []
+      },
+      {
+        "name": "Procedures",
+        "children": []
+      },
+      {
+        "name": "Items",
+        "children": []
+      },
+      {
+        "name": "Effects",
+        "children": []
+      },
+      {
+        "name": "Mobs",
+        "children": [
+          {
+            "name": "Remnant Ossukage",
+            "children": []
+          },
+          {
+            "name": "Skeletons",
+            "children": []
+          },
+          {
+            "name": "Rat",
+            "children": []
+          }
+        ]
       }
     ]
   },
   "workspaceSettings": {
     "modid": "remnant_bosses",
     "modName": "Remnant Bosses",
-    "version": "1.4.0",
+    "version": "2.0.0b",
     "description": "Face the deadliest bosses ever forged combat, fights, and chaos await!",
     "author": "NAIZO",
-    "websiteURL": "https://meherbensalem.github.io",
+    "websiteURL": "https://www.nightbeam.cloud",
     "license": "All Rights Reserved",
     "serverSideOnly": false,
-    "modPicture": "a29c5907-108d-4b10-a1f5-b8a466a6651c",
+    "modPicture": "logo",
     "requiredMods": [
-      "geckolib",
       "jauml"
     ],
     "dependencies": [],
     "dependants": [],
     "mcreatorDependencies": [
-      "geckolib",
       "jauml"
     ],
     "currentGenerator": "forge-1.20.1",
     "credits": "no credits",
     "modElementsPackage": "tn.naizo.remnants"
   },
-  "mcreatorVersion": 202400452410
+  "mcreatorVersion": 202500228610
 }

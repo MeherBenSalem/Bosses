@@ -1,4 +1,3 @@
-
 /*
  *    MCreator note: This file will be REGENERATED on each build.
  */
@@ -15,6 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RemnantBossesModSounds {
 	public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, RemnantBossesMod.MODID);
-	public static final RegistryObject<SoundEvent> SKELETONFIGHT_THEME = REGISTRY.register("skeletonfight_theme", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("remnant_bosses", "skeletonfight_theme")));
-	public static final RegistryObject<SoundEvent> DASH_SFX = REGISTRY.register("dash_sfx", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("remnant_bosses", "dash_sfx")));
+	public static final RegistryObject<SoundEvent> SKELETONFIGHT_THEME = REGISTRY.register("skeletonfight_theme", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("remnant_bosses", "skeletonfight_theme")));
+	public static final RegistryObject<SoundEvent> DASH_SFX = REGISTRY.register("dash_sfx", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("remnant_bosses", "dash_sfx")));
 }

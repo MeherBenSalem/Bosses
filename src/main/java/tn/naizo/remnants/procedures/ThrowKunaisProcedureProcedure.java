@@ -1,7 +1,6 @@
 package tn.naizo.remnants.procedures;
 
 import tn.naizo.remnants.init.RemnantBossesModEntities;
-import tn.naizo.remnants.entity.OssukageEntity;
 import tn.naizo.remnants.entity.KunaiEntity;
 import tn.naizo.jauml.JaumlConfigLib;
 
@@ -41,9 +40,6 @@ public class ThrowKunaisProcedureProcedure {
 				_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, 2, 0);
 				projectileLevel.addFreshEntity(_entityToSpawn);
 			}
-		}
-		if (entity instanceof OssukageEntity) {
-			((OssukageEntity) entity).setAnimation("throw");
 		}
 	}
 }
