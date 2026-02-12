@@ -28,6 +28,7 @@ public class ModTabs {
 					tabData.accept(ModEntities.RAT_SPAWN_EGG.get());
 					tabData.accept(ModEntities.SKELETON_MINION_SPAWN_EGG.get());
 					tabData.accept(ModEntities.REMNANT_OSSUKAGE_SPAWN_EGG.get());
+					tabData.accept(ModEntities.WRAITH_SPAWN_EGG.get());
 				})
 				.build());
 }

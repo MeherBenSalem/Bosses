@@ -61,5 +61,7 @@
   "item.remnant_bosses.old_skeleton_head": "Old Skeleton Head",
   "itemGroup.remnant_bosses.remnant_bosses_tab": "Remnant Bosses Tab",
   "item.remnant_bosses.ancient_altar": "Ancient Altar",
-  "item.remnant_bosses.ancient_pedestal": "Ancient Pedestal"
+  "item.remnant_bosses.ancient_pedestal": "Ancient Pedestal",
+  "entity.remnant_bosses.wraith": "Wraith",
+  "item.remnant_bosses.wraith_spawn_egg": "Wraith Spawn Egg"
 }

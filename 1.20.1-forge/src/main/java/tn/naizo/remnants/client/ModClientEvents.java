@@ -6,10 +6,12 @@ import tn.naizo.remnants.client.model.Modelrat;
 import tn.naizo.remnants.client.model.Modelshuriken;
 import tn.naizo.remnants.client.model.Modelskeleton_minion;
 import tn.naizo.remnants.client.model.Modelskeleton_ninja;
+import tn.naizo.remnants.client.model.Modelwraith;
 import tn.naizo.remnants.client.renderer.RatRenderer;
 import tn.naizo.remnants.client.renderer.KunaiRenderer;
 import tn.naizo.remnants.client.renderer.SkeletonMinionRenderer;
 import tn.naizo.remnants.client.renderer.RemnantOssukageRenderer;
+import tn.naizo.remnants.client.renderer.WraithRenderer;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,6 +44,7 @@ public class ModClientEvents {
 		EntityRenderers.register(ModEntities.SKELETON_MINION.get(), SkeletonMinionRenderer::new);
 		EntityRenderers.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);
 		EntityRenderers.register(ModEntities.KUNAI.get(), KunaiRenderer::new);
+		EntityRenderers.register(ModEntities.WRAITH.get(), WraithRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -51,5 +54,6 @@ public class ModClientEvents {
 		event.registerLayerDefinition(Modelshuriken.LAYER_LOCATION, Modelshuriken::createBodyLayer);
 		event.registerLayerDefinition(Modelskeleton_minion.LAYER_LOCATION, Modelskeleton_minion::createBodyLayer);
 		event.registerLayerDefinition(Modelskeleton_ninja.LAYER_LOCATION, Modelskeleton_ninja::createBodyLayer);
+		event.registerLayerDefinition(Modelwraith.LAYER_LOCATION, Modelwraith::createBodyLayer);
 	}
 }

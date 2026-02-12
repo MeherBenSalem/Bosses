@@ -3,6 +3,7 @@ package tn.naizo.remnants.event;
 import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.entity.SkeletonMinionEntity;
+import tn.naizo.remnants.entity.WraithEntity;
 import tn.naizo.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -36,7 +37,7 @@ public class EntitySpawnEvents {
 
 		// Dimension Filtering
 		if (entity instanceof RatEntity || entity instanceof RemnantOssukageEntity
-				|| entity instanceof SkeletonMinionEntity) {
+				|| entity instanceof SkeletonMinionEntity || entity instanceof WraithEntity) {
 			if (!isDimensionAllowed(level)) {
 				event.setCanceled(true);
 				return;
@@ -56,6 +57,11 @@ public class EntitySpawnEvents {
 		// Initialize Skeleton Minion entity
 		if (entity instanceof SkeletonMinionEntity skeleton) {
 			initializeSkeletonMinionSpawn(skeleton);
+		}
+
+		// Initialize Wraith entity
+		if (entity instanceof WraithEntity wraith) {
+			initializeWraithSpawn(wraith);
 		}
 	}
 
@@ -108,5 +114,14 @@ public class EntitySpawnEvents {
 	private static void initializeSkeletonMinionSpawn(SkeletonMinionEntity entity) {
 		// Mark as spawned (automatically synced to clients)
 		entity.setSpawned(true);
+	}
+
+	/**
+	 * Initialize Wraith entity on spawn.
+	 * Configuration is loaded in finalizeSpawn() method.
+	 */
+	private static void initializeWraithSpawn(WraithEntity entity) {
+		// Config values are loaded in WraithEntity.finalizeSpawn()
+		// This method ensures dimension filtering works
 	}
 }

@@ -3,6 +3,7 @@ package tn.naizo.remnants.event;
 import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.entity.SkeletonMinionEntity;
+import tn.naizo.remnants.entity.WraithEntity;
 import tn.naizo.remnants.procedures.NinjaSkeletonOnEntityTickUpdateProcedure;
 import tn.naizo.remnants.procedures.NinjaSkeletonEntityIsHurtProcedure;
 
@@ -49,6 +50,10 @@ public class EntityTickEvents {
 
 		if (entity instanceof SkeletonMinionEntity skeleton) {
 			updateSkeletonMinionAnimations(skeleton);
+		}
+
+		if (entity instanceof WraithEntity wraith) {
+			updateWraithAnimations(wraith);
 		}
 	}
 
@@ -150,6 +155,40 @@ public class EntityTickEvents {
 			entity.animationState0.startIfStopped(tickCount);
 			entity.animationState2.stop();
 		}
+	}
+
+	/**
+	 * Update animation states for Wraith entity.
+	 * Controls idle, walk, attack, and death animations.
+	 */
+	private static void updateWraithAnimations(WraithEntity entity) {
+		int tickCount = entity.tickCount;
+
+		// Check if entity is dead
+		boolean isDead = entity.isDeadOrDying();
+
+		// Only treat as attacking during actual attack swing
+		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
+
+		// Death animation takes priority
+		if (isDead) {
+			entity.animationState3.startIfStopped(tickCount);
+			entity.animationState0.stop();
+			entity.animationState2.stop();
+		} else {
+			// Stop death animation if not dead
+			entity.animationState3.stop();
+
+			// Attack and Idle animations - mutually exclusive
+			if (isAttacking) {
+				entity.animationState2.startIfStopped(tickCount);
+				entity.animationState0.stop();
+			} else {
+				entity.animationState0.startIfStopped(tickCount);
+				entity.animationState2.stop();
+			}
+		}
+		// Walk animation is handled by renderer's animateWalk
 	}
 
 	/**

@@ -4,6 +4,7 @@ import tn.naizo.remnants.entity.SkeletonMinionEntity;
 import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.KunaiEntity;
+import tn.naizo.remnants.entity.WraithEntity;
 import tn.naizo.remnants.RemnantBossesMod;
 
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -55,6 +56,12 @@ public class ModEntities {
 					.setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3)
 					.sized(0.8f, 2.4f));
 
+	public static final DeferredHolder<EntityType<?>, EntityType<WraithEntity>> WRAITH = registerEntity(
+			"wraith",
+			EntityType.Builder.<WraithEntity>of(WraithEntity::new, MobCategory.MONSTER)
+					.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
+					.sized(0.8f, 1.8f));
+
 	// Spawn eggs (registered as items) — use DeferredSpawnEggItem for modded
 	// entities
 	public static final DeferredHolder<Item, Item> RAT_SPAWN_EGG = SPAWN_EGGS.register("rat_spawn_egg",
@@ -67,6 +74,10 @@ public class ModEntities {
 	public static final DeferredHolder<Item, Item> REMNANT_OSSUKAGE_SPAWN_EGG = SPAWN_EGGS.register(
 			"remnant_ossukage_spawn_egg",
 			() -> new DeferredSpawnEggItem(REMNANT_OSSUKAGE, 0xCC0000, 0xFF0000, new Item.Properties()));
+
+	public static final DeferredHolder<Item, Item> WRAITH_SPAWN_EGG = SPAWN_EGGS.register(
+			"wraith_spawn_egg",
+			() -> new DeferredSpawnEggItem(WRAITH, 0x000000, 0xFFFFFF, new Item.Properties()));
 
 	private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> registerEntity(String registryname,
 			EntityType.Builder<T> entityTypeBuilder) {
@@ -81,6 +92,7 @@ public class ModEntities {
 				RatEntity.init();
 				SkeletonMinionEntity.init();
 				RemnantOssukageEntity.init();
+				WraithEntity.init();
 			});
 		}
 
@@ -89,11 +101,24 @@ public class ModEntities {
 			event.put(RAT.get(), RatEntity.createAttributes().build());
 			event.put(SKELETON_MINION.get(), SkeletonMinionEntity.createAttributes().build());
 			event.put(REMNANT_OSSUKAGE.get(), RemnantOssukageEntity.createAttributes().build());
+			event.put(WRAITH.get(), WraithEntity.createAttributes().build());
 		}
 
 		@SubscribeEvent
 		public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
 			event.register(RAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
+									&& Monster.isDarkEnoughToSpawn(world, pos, random)
+									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)),
+					RegisterSpawnPlacementsEvent.Operation.AND);
+			event.register(SKELETON_MINION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
+									&& Monster.isDarkEnoughToSpawn(world, pos, random)
+									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)),
+					RegisterSpawnPlacementsEvent.Operation.AND);
+			event.register(WRAITH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 					(entityType, world, reason, pos,
 							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 									&& Monster.isDarkEnoughToSpawn(world, pos, random)

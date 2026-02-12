@@ -140,7 +140,7 @@ public final class JaumlConfigBootstrap {
 			api.createConfigFile("remnant/spawning", "rat_spawns");
 		}
 		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "enable_natural_spawning")) {
-			api.setNumberValue("remnant/spawning", "rat_spawns", "enable_natural_spawning", 1);
+			api.setStringValue("remnant/spawning", "rat_spawns", "enable_natural_spawning", "true");
 		}
 		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "spawn_weight")) {
 			api.setNumberValue("remnant/spawning", "rat_spawns", "spawn_weight", 10);
@@ -174,6 +174,52 @@ public final class JaumlConfigBootstrap {
 		}
 		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_armor")) {
 			api.setNumberValue("remnant/balance", "rat_stats", "rat_armor", 2.0);
+		}
+
+		// Wraith Spawning Settings
+		if (api.createConfigFile("remnant/spawning", "wraith_spawns")) {
+			api.createConfigFile("remnant/spawning", "wraith_spawns");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "enable_natural_spawning")) {
+			api.setStringValue("remnant/spawning", "wraith_spawns", "enable_natural_spawning", "true");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "spawn_weight")) {
+			api.setNumberValue("remnant/spawning", "wraith_spawns", "spawn_weight", 5);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "min_group_size")) {
+			api.setNumberValue("remnant/spawning", "wraith_spawns", "min_group_size", 1);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "max_group_size")) {
+			api.setNumberValue("remnant/spawning", "wraith_spawns", "max_group_size", 2);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "dimension_whitelist")) {
+			api.setStringValue("remnant/spawning", "wraith_spawns", "dimension_whitelist", "minecraft:overworld");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "dimension_blacklist")) {
+			api.setStringValue("remnant/spawning", "wraith_spawns", "dimension_blacklist", "minecraft:the_nether,minecraft:the_end");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "biome_blacklist")) {
+			api.setStringValue("remnant/spawning", "wraith_spawns", "biome_blacklist", "");
+		}
+
+		// Wraith Balance Settings
+		if (api.createConfigFile("remnant/balance", "wraith_stats")) {
+			api.createConfigFile("remnant/balance", "wraith_stats");
+		}
+		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_health")) {
+			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_health", 20.0);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_attack_damage")) {
+			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_attack_damage", 3.0);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_armor")) {
+			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_armor", 0.0);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_movement_speed")) {
+			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_movement_speed", 0.25);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_follow_range")) {
+			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_follow_range", 16.0);
 		}
 	}
 
