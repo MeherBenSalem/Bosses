@@ -77,22 +77,22 @@ public class ModEntities {
 			WraithEntity.init();
 
 			// Register spawn placements
-			SpawnPlacements.register(RAT.get(), SpawnPlacements.Type.MONSTER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+			SpawnPlacements.register(RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 					(entityType, world, reason, pos,
 							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 									&& Monster.isDarkEnoughToSpawn(world, pos, random)
 									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(SKELETON_MINION.get(), SpawnPlacements.Type.MONSTER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+			SpawnPlacements.register(SKELETON_MINION.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 					(entityType, world, reason, pos,
 							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 									&& Monster.isDarkEnoughToSpawn(world, pos, random)
 									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(REMNANT_OSSUKAGE.get(), SpawnPlacements.Type.MONSTER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+			SpawnPlacements.register(REMNANT_OSSUKAGE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 					(entityType, world, reason, pos,
 							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 									&& Monster.isDarkEnoughToSpawn(world, pos, random)
 									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(WRAITH.get(), SpawnPlacements.Type.MONSTER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+			SpawnPlacements.register(WRAITH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 					(entityType, world, reason, pos,
 							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 									&& Monster.isDarkEnoughToSpawn(world, pos, random)

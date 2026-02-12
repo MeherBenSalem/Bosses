@@ -26,10 +26,10 @@ versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
-# JAuml is optional — runtime will use JAuml if present on the user's mods folder.
+# JAuml is required
 [[dependencies.${mod_id}]]
 modId="jauml"
-type="optional"
-versionRange="[0,)"
+type="required"
+versionRange="[1.2.0,)"
 ordering="NONE"
 side="BOTH"
