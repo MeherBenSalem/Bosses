@@ -22,13 +22,7 @@ versionRange="[1.20.1]"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.remnant_bosses]]
-modId="jauml"
-mandatory=true
-versionRange="[0,)"
-ordering="NONE"
-side="BOTH"
-
+# JAuml is optional for development — runtime will use JAuml if present on the user's mods folder.
 [[dependencies.remnant_bosses]]
 modId="jauml"
 mandatory=false

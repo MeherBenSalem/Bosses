@@ -2,9 +2,8 @@ package tn.naizo.remnants.event;
 
 import tn.naizo.remnants.block.AncientAltarBlock;
 
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -15,7 +14,6 @@ import net.minecraft.world.phys.BlockHitResult;
  * Handles player interactions with blocks.
  * Replaces the deleted AncientRuinBlockOnBlockRightClickedProcedure.
  */
-@Mod.EventBusSubscriber(modid = "remnant_bosses")
 public class BlockInteractionEvents {
 
 	@SubscribeEvent

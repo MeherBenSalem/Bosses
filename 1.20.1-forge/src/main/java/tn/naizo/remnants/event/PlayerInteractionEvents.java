@@ -1,6 +1,8 @@
 package tn.naizo.remnants.event;
 
 import tn.naizo.remnants.item.OssukageSwordItem;
+import tn.naizo.remnants.procedures.ThrowKunaisProcedureProcedure;
+import tn.naizo.remnants.config.JaumlConfigLib;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,7 +21,7 @@ import net.minecraft.world.level.Level;
  * - OssukageSwordLivingEntityIsHitWithToolProcedure
  * - OssukageSwordToolInHandTickProcedure
  */
-@Mod.EventBusSubscriber(modid = "remnant_bosses")
+@Mod.EventBusSubscriber(modid = "remnant_bosses", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PlayerInteractionEvents {
 
 	@SubscribeEvent
@@ -67,8 +69,17 @@ public class PlayerInteractionEvents {
 	 * Original procedure shot kunai or performed special attack.
 	 */
 	private static void handleOssukageSwordRightClick(Player player, ItemStack itemStack, Level level) {
-		// Placeholder for right-click logic
-		// This would typically spawn kunai entities or perform special attack
+		// Server-only: spawn kunai projectile, play sound, add cooldown
+		if (level.isClientSide()) return;
+
+		// spawn kunai using existing procedure (reuses mob-targeted logic)
+		ThrowKunaisProcedureProcedure.execute(player);
+
+		// play arrow shoot sound (server-side)
+		level.playSound(null, player.blockPosition(), net.minecraftforge.registries.ForgeRegistries.SOUND_EVENTS.getValue(new net.minecraft.resources.ResourceLocation("entity.arrow.shoot")), net.minecraft.sounds.SoundSource.PLAYERS, 1f, 1f);
+
+		// apply cooldown from config
+		player.getCooldowns().addCooldown(itemStack.getItem(), (int) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_timer"));
 	}
 
 	/**

@@ -3,10 +3,13 @@ package tn.naizo.remnants.event;
 import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.entity.SkeletonMinionEntity;
+import tn.naizo.remnants.procedures.NinjaSkeletonOnEntityTickUpdateProcedure;
+import tn.naizo.remnants.procedures.NinjaSkeletonEntityIsHurtProcedure;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -17,7 +20,7 @@ import net.minecraft.world.level.Level;
  * Replaces the deleted animation and tick logic procedures.
  * Handles animation state updates and entity AI behavior.
  */
-@Mod.EventBusSubscriber(modid = "remnant_bosses")
+@Mod.EventBusSubscriber(modid = "remnant_bosses", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntityTickEvents {
 
 	@SubscribeEvent
@@ -55,13 +58,17 @@ public class EntityTickEvents {
 	private static void updateRatAnimations(RatEntity entity) {
 		int tickCount = entity.tickCount;
 
-		// Idle animation - play when entity is not attacking
-		boolean isIdle = entity.getTarget() == null;
-		entity.animationState0.animateWhen(isIdle, tickCount);
+		// Only treat as attacking during actual attack swing
+		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
 
-		// Attack animation - play when entity is attacking
-		boolean isAttacking = entity.getTarget() != null;
-		entity.animationState2.animateWhen(isAttacking, tickCount);
+		// Properly manage idle and attack animations - only one should play at a time
+		if (isAttacking) {
+			entity.animationState2.startIfStopped(tickCount);
+			entity.animationState0.stop();
+		} else {
+			entity.animationState0.startIfStopped(tickCount);
+			entity.animationState2.stop();
+		}
 	}
 
 	/**
@@ -74,24 +81,46 @@ public class EntityTickEvents {
 		// Get entity state for animation selection
 		String state = entity.getEntityState();
 
-		// Idle animation - play when entity is idle
-		boolean isIdle = state.equals("idle") || state.isEmpty();
-		entity.animationState0.animateWhen(isIdle, tickCount);
-
-		// Attack animation - play when entity is attacking
-		boolean isAttacking = entity.isAttacking() || state.equals("attack");
-		entity.animationState2.animateWhen(isAttacking, tickCount);
-
-		// Leap animation - play during special move
-		boolean isLeaping = state.equals("leap");
-		entity.animationState3.animateWhen(isLeaping, tickCount);
-
-		// Transform animation - play during transformation
+		// Only treat as attacking during actual attack swing
+		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
 		boolean isTransforming = entity.isTransformed();
-		entity.animationState4.animateWhen(isTransforming, tickCount);
+		boolean isSpawning = tickCount < 120;
+		boolean isLeaping = state.equals("leap");
+		boolean isIdle = !isAttacking && (state.equals("idle") || state.isEmpty());
 
-		// Additional animation state
-		entity.animationState5.animateWhen(false, tickCount);
+		// Spawn animation takes priority (first 120 ticks)
+		if (isSpawning) {
+			entity.animationState5.startIfStopped(tickCount);
+		} else {
+			entity.animationState5.stop();
+		}
+
+		// Transform animation when transformed
+		if (isTransforming) {
+			entity.animationState4.startIfStopped(tickCount);
+		} else {
+			entity.animationState4.stop();
+		}
+
+		// Leap animation during special move
+		if (isLeaping) {
+			entity.animationState3.startIfStopped(tickCount);
+		} else {
+			entity.animationState3.stop();
+		}
+
+		// Attack and Idle animations - mutually exclusive
+		if (isAttacking) {
+			entity.animationState2.startIfStopped(tickCount);
+			entity.animationState0.stop();
+		} else if (isIdle) {
+			entity.animationState0.startIfStopped(tickCount);
+			entity.animationState2.stop();
+		} else {
+			// Neither attacking nor idle
+			entity.animationState0.stop();
+			entity.animationState2.stop();
+		}
 	}
 
 	/**
@@ -101,26 +130,43 @@ public class EntityTickEvents {
 	private static void updateSkeletonMinionAnimations(SkeletonMinionEntity entity) {
 		int tickCount = entity.tickCount;
 
-		// Idle animation - play when entity is not attacking
-		boolean isIdle = entity.getTarget() == null;
-		entity.animationState0.animateWhen(isIdle, tickCount);
+		// Only treat as attacking during actual attack swing
+		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
+		boolean isSpawning = tickCount < 120;
 
-		// Attack animation - play when entity is attacking (use synced field on client)
-		boolean isAttacking = entity.isAttacking();
-		entity.animationState2.animateWhen(isAttacking, tickCount);
+		// Spawn animation takes priority (first 120 ticks)
+		if (isSpawning) {
+			entity.animationState3.startIfStopped(tickCount);
+		} else {
+			entity.animationState3.stop();
+		}
 
-		// Spawn animation - play when newly spawned
-		boolean isSpawn = entity.isSpawned();
-		entity.animationState3.animateWhen(isSpawn, tickCount);
+		// Attack and Idle animations - mutually exclusive
+		if (isAttacking) {
+			entity.animationState2.startIfStopped(tickCount);
+			entity.animationState0.stop();
+		} else {
+			entity.animationState0.startIfStopped(tickCount);
+			entity.animationState2.stop();
+		}
 	}
 
 	/**
 	 * Update Ossukage server-side tick logic.
-	 * This would handle AI state transitions and behavior.
+	 * This handles AI state transitions, attack timers, and special behaviors.
 	 */
 	private static void updateOssukageServerTick(RemnantOssukageEntity entity) {
-		// Placeholder for server-side AI logic
-		// This would include state machine updates, phase transitions, etc.
-		// The original NinjaSkeletonOnEntityTickUpdateProcedure logic would go here
+		NinjaSkeletonOnEntityTickUpdateProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+	}
+
+	/**
+	 * Handle Ossukage entity taking damage.
+	 * Triggers transformation when health threshold is reached.
+	 */
+	@SubscribeEvent
+	public static void onLivingHurt(LivingHurtEvent event) {
+		if (event.getEntity() instanceof RemnantOssukageEntity ossukage) {
+			NinjaSkeletonEntityIsHurtProcedure.execute(ossukage.level(), ossukage.getX(), ossukage.getY(), ossukage.getZ(), ossukage);
+		}
 	}
 }

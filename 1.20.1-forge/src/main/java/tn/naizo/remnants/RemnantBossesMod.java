@@ -15,10 +15,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.common.MinecraftForge;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod("remnant_bosses")
 public class RemnantBossesMod {
 	public static final Logger LOGGER = LogManager.getLogger(RemnantBossesMod.class);
 	public static final String MODID = "remnant_bosses";
+	
+	private static final List<AbstractMap.SimpleEntry<Runnable, Integer>> workQueue = new ArrayList<>();
 
 	public RemnantBossesMod(FMLJavaModLoadingContext context) {
 		IEventBus modEventBus = context.getModEventBus();
@@ -46,5 +52,31 @@ public class RemnantBossesMod {
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		LOGGER.info("Remnant Bosses mod loaded successfully");
+	}
+
+	/**
+	 * Queue work to be executed on the next server tick.
+	 */
+	public static void queueServerWork(int delay, Runnable runnable) {
+		workQueue.add(new AbstractMap.SimpleEntry<>(runnable, delay));
+	}
+	
+	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+	private static class ServerTickHandler {
+		private ServerTickHandler() {}
+		
+		@net.minecraftforge.eventbus.api.SubscribeEvent
+		public static void onServerTick(net.minecraftforge.event.TickEvent.ServerTickEvent event) {
+			if (event.phase == net.minecraftforge.event.TickEvent.Phase.END) {
+				List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
+				workQueue.forEach(work -> {
+					work.setValue(work.getValue() - 1);
+					if (work.getValue() == 0)
+						actions.add(work);
+				});
+				actions.forEach(e -> e.getKey().run());
+				workQueue.removeAll(actions);
+			}
+		}
 	}
 }

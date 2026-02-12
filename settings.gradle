@@ -16,12 +16,13 @@ pluginManagement {
     }
 }
 
-plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
-}
+// plugins {
+//    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+//}  // temporarily disabled for diagnostics
 
 rootProject.name = 'remnant-bosses'
 
+// Modules moved to standalone projects (no longer included in the root multi-project)
 include '1.21.1-neoforge'
 include '1.20.1-forge'
 // include 'common'  // Include when shared code is created

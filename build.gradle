@@ -17,8 +17,16 @@ subprojects {
         maven { name = 'ParchmentMC'; url = 'https://maven.parchmentmc.org' }
     }
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = 'UTF-8'
-        options.release = 17
+    // Only apply Java 17 to non-NeoForge modules
+    if (project.name != '1.21.1-neoforge') {
+        tasks.withType(JavaCompile).configureEach {
+            options.encoding = 'UTF-8'
+            options.release = 17
+        }
+    } else {
+        // NeoForge 1.21.1 requires Java 21
+        tasks.withType(JavaCompile).configureEach {
+            options.encoding = 'UTF-8'
+        }
     }
 }

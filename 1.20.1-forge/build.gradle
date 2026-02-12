@@ -3,7 +3,9 @@ plugins {
     id 'net.neoforged.moddev.legacyforge' version '2.0.99'
 }
 
-archivesBaseName = 'remnant-bosses-forge'
+base {
+    archivesName = 'remnant-bosses-forge'
+}
 version = rootProject.version
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -31,6 +33,9 @@ legacyForge {
         }
     }
 }
+
+// Note: JAuml is declared in mods.toml as an optional runtime dependency.
+// If you want JAuml available in development runs add it to `localRuntime` or `libs/` and reference it from here.
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

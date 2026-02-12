@@ -2,10 +2,10 @@ package tn.naizo.remnants.event;
 
 import tn.naizo.remnants.item.OssukageSwordItem;
 
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
  * - OssukageSwordLivingEntityIsHitWithToolProcedure
  * - OssukageSwordToolInHandTickProcedure
  */
-@Mod.EventBusSubscriber(modid = "remnant_bosses")
 public class PlayerInteractionEvents {
 
 	@SubscribeEvent

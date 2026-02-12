@@ -52,6 +52,50 @@
     {
       "type": "java",
       "request": "launch",
+      "name": "1.21.1-neoforge - Client",
+      "presentation": {
+        "group": "Mod Development - 1.21.1-neoforge",
+        "order": 0
+      },
+      "projectName": "1.21.1-neoforge",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dremnant_bosses%%D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\1.21.1-neoforge\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "1.21.1-neoforge - Server",
+      "presentation": {
+        "group": "Mod Development - 1.21.1-neoforge",
+        "order": 1
+      },
+      "projectName": "1.21.1-neoforge",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\serverRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\serverRunVmArgs.txt",
+        "-Dfml.modFolders\u003dremnant_bosses%%D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\1.21.1-neoforge\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
       "name": "1.20.1-forge - Client",
       "presentation": {
         "group": "Mod Development - 1.20.1-forge",
@@ -94,50 +138,6 @@
       "env": {
         "MOD_CLASSES": "remnant_bosses%%D:\\Projects\\NightBeam\\Bosses\\1.20.1-forge\\bin\\main"
       },
-      "console": "internalConsole",
-      "shortenCommandLine": "none"
-    },
-    {
-      "type": "java",
-      "request": "launch",
-      "name": "1.21.1-neoforge - Client",
-      "presentation": {
-        "group": "Mod Development - 1.21.1-neoforge",
-        "order": 0
-      },
-      "projectName": "1.21.1-neoforge",
-      "mainClass": "net.neoforged.devlaunch.Main",
-      "args": [
-        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\clientRunProgramArgs.txt"
-      ],
-      "vmArgs": [
-        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\clientRunVmArgs.txt",
-        "-Dfml.modFolders\u003dremnant_bosses%%D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\bin\\main"
-      ],
-      "cwd": "${workspaceFolder}\\1.21.1-neoforge\\run",
-      "env": {},
-      "console": "internalConsole",
-      "shortenCommandLine": "none"
-    },
-    {
-      "type": "java",
-      "request": "launch",
-      "name": "1.21.1-neoforge - Server",
-      "presentation": {
-        "group": "Mod Development - 1.21.1-neoforge",
-        "order": 1
-      },
-      "projectName": "1.21.1-neoforge",
-      "mainClass": "net.neoforged.devlaunch.Main",
-      "args": [
-        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\serverRunProgramArgs.txt"
-      ],
-      "vmArgs": [
-        "@D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\build\\moddev\\serverRunVmArgs.txt",
-        "-Dfml.modFolders\u003dremnant_bosses%%D:\\Projects\\NightBeam\\Bosses\\1.21.1-neoforge\\bin\\main"
-      ],
-      "cwd": "${workspaceFolder}\\1.21.1-neoforge\\run",
-      "env": {},
       "console": "internalConsole",
       "shortenCommandLine": "none"
     }

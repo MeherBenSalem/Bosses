@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
  * Handles entity death events for custom entities.
  * Replaces the deleted OssukageEntityDiesProcedure.
  */
-@Mod.EventBusSubscriber(modid = "remnant_bosses")
+@Mod.EventBusSubscriber(modid = "remnant_bosses", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntityDeathEvents {
 
 	@SubscribeEvent
@@ -39,8 +39,13 @@ public class EntityDeathEvents {
 	 * Stops the boss music when the entity dies.
 	 */
 	private static void handleOssukageDeath(RemnantOssukageEntity entity, Level level) {
-		// Stop the boss fight music when the Ossukage dies
-		// The exact implementation would depend on how the music system works.
-		// This is a placeholder for the logic that was in OssukageEntityDiesProcedure.
+		// Stop the boss fight music when the Ossukage dies (use server command like previous implementation)
+		if (!level.isClientSide() && level.getServer() != null) {
+			level.getServer().getCommands().performPrefixedCommand(
+				new net.minecraft.commands.CommandSourceStack(net.minecraft.commands.CommandSource.NULL, entity.position(), entity.getRotationVector(),
+					level instanceof net.minecraft.server.level.ServerLevel ? (net.minecraft.server.level.ServerLevel) level : null, 4, entity.getName().getString(), entity.getDisplayName(), level.getServer(), entity),
+				"stopsound @p music remnant_bosses:skeletonfight_theme"
+			);
+		}
 	}
 }
