@@ -25,59 +25,62 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/rat.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity,
+					float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+					float headPitch) {
 				if ((entity.getSkinVariant() == 0)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					VertexConsumer vertexConsumer = bufferSource
+							.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+							LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});
 		this.addLayer(new RenderLayer<RatEntity, Modelrat<RatEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/rat_blue.png");
+			final ResourceLocation LAYER_TEXTURE = ResourceLocation
+					.parse("remnant_bosses:textures/entities/rat_blue.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity,
+					float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+					float headPitch) {
 				if ((entity.getSkinVariant() == 1)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					VertexConsumer vertexConsumer = bufferSource
+							.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+							LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});
 		this.addLayer(new RenderLayer<RatEntity, Modelrat<RatEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/rat_grey.png");
+			final ResourceLocation LAYER_TEXTURE = ResourceLocation
+					.parse("remnant_bosses:textures/entities/rat_grey.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity,
+					float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+					float headPitch) {
 				if ((entity.getSkinVariant() == 2)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					VertexConsumer vertexConsumer = bufferSource
+							.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+							LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});
 		this.addLayer(new RenderLayer<RatEntity, Modelrat<RatEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/rat_yellow.png");
+			final ResourceLocation LAYER_TEXTURE = ResourceLocation
+					.parse("remnant_bosses:textures/entities/rat_yellow.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RatEntity entity,
+					float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+					float headPitch) {
 				if ((entity.getSkinVariant() == 3)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					VertexConsumer vertexConsumer = bufferSource
+							.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+							LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});
@@ -97,7 +100,8 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 			}
 
 			@Override
-			public void setupAnim(RatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+			public void setupAnim(RatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+					float netHeadYaw, float headPitch) {
 				this.root().getAllParts().forEach(ModelPart::resetPose);
 				this.animate(entity.animationState0, ratAnimation.idle, ageInTicks, 1f);
 				this.animateWalk(ratAnimation.walk, limbSwing, limbSwingAmount, 1f, 1f);
@@ -111,7 +115,8 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 		}
 
 		@Override
-		public void setupAnim(RatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		public void setupAnim(RatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+				float netHeadYaw, float headPitch) {
 			animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 			super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		}

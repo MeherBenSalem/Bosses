@@ -18,30 +18,36 @@ import net.minecraft.client.model.HierarchicalModel;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
-public class RemnantOssukageRenderer extends MobRenderer<RemnantOssukageEntity, Modelskeleton_ninja<RemnantOssukageEntity>> {
+public class RemnantOssukageRenderer
+		extends MobRenderer<RemnantOssukageEntity, Modelskeleton_ninja<RemnantOssukageEntity>> {
 	public RemnantOssukageRenderer(EntityRendererProvider.Context context) {
 		super(context, new AnimatedModel(context.bakeLayer(Modelskeleton_ninja.LAYER_LOCATION)), 0.5f);
 		this.addLayer(new RenderLayer<RemnantOssukageEntity, Modelskeleton_ninja<RemnantOssukageEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/ninja_dead.png");
+			final ResourceLocation LAYER_TEXTURE = ResourceLocation
+					.parse("remnant_bosses:textures/entities/ninja_dead.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light,
+					RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks,
+					float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-				this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+				this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+						LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 			}
 		});
 		this.addLayer(new RenderLayer<RemnantOssukageEntity, Modelskeleton_ninja<RemnantOssukageEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("remnant_bosses:textures/entities/ninja_skeleton_orignal.png");
+			final ResourceLocation LAYER_TEXTURE = ResourceLocation
+					.parse("remnant_bosses:textures/entities/ninja_skeleton_orignal.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light,
+					RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks,
+					float ageInTicks, float netHeadYaw, float headPitch) {
 				if ((entity.isTransformed() == true)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					VertexConsumer vertexConsumer = bufferSource
+							.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light,
+							LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});
@@ -61,7 +67,8 @@ public class RemnantOssukageRenderer extends MobRenderer<RemnantOssukageEntity, 
 			}
 
 			@Override
-			public void setupAnim(RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+			public void setupAnim(RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount,
+					float ageInTicks, float netHeadYaw, float headPitch) {
 				this.root().getAllParts().forEach(ModelPart::resetPose);
 				this.animate(entity.animationState0, skeleton_ninjaAnimation.idle, ageInTicks, 1f);
 				this.animateWalk(skeleton_ninjaAnimation.walk, limbSwing, limbSwingAmount, 1f, 1f);
@@ -78,7 +85,8 @@ public class RemnantOssukageRenderer extends MobRenderer<RemnantOssukageEntity, 
 		}
 
 		@Override
-		public void setupAnim(RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		public void setupAnim(RemnantOssukageEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+				float netHeadYaw, float headPitch) {
 			animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 			super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		}

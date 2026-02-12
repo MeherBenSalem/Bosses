@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+displayURL="https://www.nightbeam.cloud"
+logoFile="logo.png"
+credits="no credits"
+authors="NAIZO"
+description="Face the deadliest bosses ever forged combat, fights, and chaos await!"
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+# JAuml is optional — runtime will use JAuml if present on the user's mods folder.
+[[dependencies.${mod_id}]]
+modId="jauml"
+type="optional"
+versionRange="[0,)"
+ordering="NONE"
+side="BOTH"

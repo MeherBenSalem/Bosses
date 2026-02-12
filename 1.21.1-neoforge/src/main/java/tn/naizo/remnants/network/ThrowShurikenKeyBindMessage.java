@@ -2,18 +2,10 @@ package tn.naizo.remnants.network;
 
 import tn.naizo.remnants.RemnantBossesMod;
 
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.bus.api.SubscribeEvent;
-
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.FriendlyByteBuf;
 
-import java.util.function.Supplier;
-
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ThrowShurikenKeyBindMessage {
 	int type, pressedms;
 
@@ -32,14 +24,6 @@ public class ThrowShurikenKeyBindMessage {
 		buffer.writeInt(message.pressedms);
 	}
 
-	public static void handler(ThrowShurikenKeyBindMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			pressAction(context.getSender(), message.type, message.pressedms);
-		});
-		context.setPacketHandled(true);
-	}
-
 	public static void pressAction(Player entity, int type, int pressedms) {
 		Level world = entity.level();
 		double x = entity.getX();
@@ -51,11 +35,5 @@ public class ThrowShurikenKeyBindMessage {
 		if (type == 0) {
 			// Procedure call removed - will be handled by event system
 		}
-	}
-
-	@SubscribeEvent
-	public static void registerMessage(FMLCommonSetupEvent event) {
-		// Network message registration disabled - will be refactored to event-based system
-		// RemnantBossesMod.addNetworkMessage(ThrowShurikenKeyBindMessage.class, ThrowShurikenKeyBindMessage::buffer, ThrowShurikenKeyBindMessage::new, ThrowShurikenKeyBindMessage::handler);
 	}
 }

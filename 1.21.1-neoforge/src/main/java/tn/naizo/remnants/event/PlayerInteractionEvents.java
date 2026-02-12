@@ -5,7 +5,7 @@ import tn.naizo.remnants.item.OssukageSwordItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +39,7 @@ public class PlayerInteractionEvents {
 	}
 
 	@SubscribeEvent
-	public static void onLivingHurt(LivingHurtEvent event) {
+	public static void onLivingHurt(LivingIncomingDamageEvent event) {
 		LivingEntity target = event.getEntity();
 		Level level = target.level();
 
@@ -66,8 +66,11 @@ public class PlayerInteractionEvents {
 	 * Original procedure shot kunai or performed special attack.
 	 */
 	private static void handleOssukageSwordRightClick(Player player, ItemStack itemStack, Level level) {
-		// Placeholder for right-click logic
-		// This would typically spawn kunai entities or perform special attack
+		// Execute the throw kunai procedure
+		tn.naizo.remnants.procedures.ThrowKunaisProcedureProcedure.execute(player);
+
+		// Add cooldown (1 second = 20 ticks)
+		player.getCooldowns().addCooldown(itemStack.getItem(), 20);
 	}
 
 	/**

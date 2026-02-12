@@ -8,8 +8,8 @@ import tn.naizo.remnants.procedures.NinjaSkeletonEntityIsHurtProcedure;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -23,8 +23,10 @@ import net.minecraft.world.level.Level;
 public class EntityTickEvents {
 
 	@SubscribeEvent
-	public static void onLivingTick(LivingEvent.LivingTickEvent event) {
-		LivingEntity entity = event.getEntity();
+	public static void onEntityTick(EntityTickEvent.Post event) {
+		if (!(event.getEntity() instanceof LivingEntity entity))
+			return;
+		// EntityTickEvent fires for all entities, filter to LivingEntity
 		Level level = entity.level();
 
 		// Only run on client for animation updates
@@ -155,7 +157,8 @@ public class EntityTickEvents {
 	 * This handles AI state transitions, attack timers, and special behaviors.
 	 */
 	private static void updateOssukageServerTick(RemnantOssukageEntity entity) {
-		NinjaSkeletonOnEntityTickUpdateProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+		NinjaSkeletonOnEntityTickUpdateProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(),
+				entity);
 	}
 
 	/**
@@ -163,9 +166,10 @@ public class EntityTickEvents {
 	 * Triggers transformation when health threshold is reached.
 	 */
 	@SubscribeEvent
-	public static void onLivingHurt(LivingHurtEvent event) {
+	public static void onLivingHurt(LivingIncomingDamageEvent event) {
 		if (event.getEntity() instanceof RemnantOssukageEntity ossukage) {
-			NinjaSkeletonEntityIsHurtProcedure.execute(ossukage.level(), ossukage.getX(), ossukage.getY(), ossukage.getZ(), ossukage);
+			NinjaSkeletonEntityIsHurtProcedure.execute(ossukage.level(), ossukage.getX(), ossukage.getY(),
+					ossukage.getZ(), ossukage);
 		}
 	}
 }

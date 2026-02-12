@@ -9,11 +9,13 @@ import tn.naizo.remnants.init.ModTabs;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import net.neoforged.fml.IModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -26,9 +28,7 @@ public class RemnantBossesMod {
 
 	private static final List<AbstractMap.SimpleEntry<Runnable, Integer>> workQueue = new ArrayList<>();
 
-	public RemnantBossesMod(IModLoadingContext context) {
-		IEventBus modEventBus = context.getModEventBus();
-
+	public RemnantBossesMod(IEventBus modEventBus) {
 		// Register all registries
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
@@ -39,6 +39,9 @@ public class RemnantBossesMod {
 
 		// Setup event
 		modEventBus.addListener(this::commonSetup);
+
+		// Register config bootstrap
+		modEventBus.register(tn.naizo.remnants.config.JaumlConfigBootstrap.class);
 
 		// Register gameplay event handlers
 		NeoForge.EVENT_BUS.register(tn.naizo.remnants.event.EntitySpawnEvents.class);
@@ -60,22 +63,21 @@ public class RemnantBossesMod {
 		workQueue.add(new AbstractMap.SimpleEntry<>(runnable, delay));
 	}
 
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+	@EventBusSubscriber
 	private static class ServerTickHandler {
-		private ServerTickHandler() {}
+		private ServerTickHandler() {
+		}
 
-		@net.neoforged.bus.api.SubscribeEvent
-		public static void onServerTick(net.neoforged.neoforge.event.TickEvent.ServerTickEvent event) {
-			if (event.phase == net.neoforged.neoforge.event.TickEvent.Phase.END) {
-				List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
-				workQueue.forEach(work -> {
-					work.setValue(work.getValue() - 1);
-					if (work.getValue() == 0)
-						actions.add(work);
-				});
-				actions.forEach(e -> e.getKey().run());
-				workQueue.removeAll(actions);
-			}
+		@SubscribeEvent
+		public static void onServerTick(ServerTickEvent.Post event) {
+			List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
+			workQueue.forEach(work -> {
+				work.setValue(work.getValue() - 1);
+				if (work.getValue() == 0)
+					actions.add(work);
+			});
+			actions.forEach(e -> e.getKey().run());
+			workQueue.removeAll(actions);
 		}
 	}
 }

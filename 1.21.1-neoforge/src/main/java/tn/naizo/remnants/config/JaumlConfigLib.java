@@ -5,15 +5,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Safe wrapper for JaumlConfigLib that uses reflection to avoid hard dependency.
- * Allows procedures to call Jauml config methods safely even if library isn't present.
+ * Safe wrapper for JaumlConfigLib that uses reflection to avoid hard
+ * dependency.
+ * Allows procedures to call Jauml config methods safely even if library isn't
+ * present.
  */
 public class JaumlConfigLib {
 	private static final Logger LOGGER = LogManager.getLogger(JaumlConfigLib.class);
 	private static Object configLibInstance = null;
 	private static Method getNumberMethod = null;
 	private static Method getStringMethod = null;
-	
+
 	static {
 		try {
 			Class<?> jaumlClass = Class.forName("tn.naizo.jauml.JaumlConfigLib");
@@ -24,7 +26,7 @@ public class JaumlConfigLib {
 			LOGGER.debug("JaumlConfigLib not found in classpath - config values will return defaults");
 		}
 	}
-	
+
 	/**
 	 * Get a number value from Jauml config, with fallback to default.
 	 * Returns the result as a double for compatibility.
@@ -45,7 +47,7 @@ public class JaumlConfigLib {
 			return getDefaultNumber(category, file, key);
 		}
 	}
-	
+
 	/**
 	 * Get a string value from Jauml config, with fallback to default.
 	 */
@@ -60,14 +62,14 @@ public class JaumlConfigLib {
 			return getDefaultString(category, file, key);
 		}
 	}
-	
+
 	/**
 	 * Provide sensible fallback defaults for config values.
 	 */
 	private static double getDefaultNumber(String category, String file, String key) {
 		// Return configuration defaults
 		if ("remnant/items".equals(category) && "ossukage_sword".equals(file)) {
-			return switch(key) {
+			return switch (key) {
 				case "dash_timer" -> 100.0;
 				case "dash_distance" -> 2.0;
 				case "shuriken_timer" -> 50.0;
@@ -77,7 +79,7 @@ public class JaumlConfigLib {
 				default -> 1.0;
 			};
 		} else if ("remnant/bosses".equals(category) && "ossukage".equals(file)) {
-			return switch(key) {
+			return switch (key) {
 				case "on_spawn_skeletons" -> 2.0;
 				case "max_health_phase_1" -> 800.0;
 				case "attack_damage_phase_1" -> 7.0;
@@ -95,11 +97,21 @@ public class JaumlConfigLib {
 		}
 		return 1.0;
 	}
-	
+
 	/**
 	 * Provide sensible fallback defaults for string values.
 	 */
 	private static String getDefaultString(String category, String file, String key) {
+		if ("remnant/bosses".equals(category) && "ossukage_summon".equals(file)) {
+			return switch (key) {
+				case "portal_activation_item" -> "remnant_bosses:old_skeleton_head";
+				case "pedestal_one_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_two_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_three_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_four_activation_block" -> "minecraft:skeleton_skull";
+				default -> "";
+			};
+		}
 		return "";
 	}
 }
