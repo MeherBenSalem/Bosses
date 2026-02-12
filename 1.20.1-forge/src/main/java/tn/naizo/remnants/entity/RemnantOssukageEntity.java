@@ -52,6 +52,7 @@ public class RemnantOssukageEntity extends Monster {
 	public final AnimationState animationState3 = new AnimationState();
 	public final AnimationState animationState4 = new AnimationState();
 	public final AnimationState animationState5 = new AnimationState();
+	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(RemnantOssukageEntity.class, EntityDataSerializers.BOOLEAN);
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.PINK, ServerBossEvent.BossBarOverlay.PROGRESS);
 
 	public RemnantOssukageEntity(PlayMessages.SpawnEntity packet, Level world) {
@@ -76,6 +77,19 @@ public class RemnantOssukageEntity extends Monster {
 		this.entityData.define(DATA_transform, false);
 		this.entityData.define(DATA_AI, 0);
 		this.entityData.define(DATA_state, "");
+		this.entityData.define(DATA_isAttacking, false);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (!this.level().isClientSide) {
+			this.entityData.set(DATA_isAttacking, this.getTarget() != null || "attack".equals(this.getEntityState()));
+		}
+	}
+
+	public boolean isAttacking() {
+		return this.entityData.get(DATA_isAttacking);
 	}
 
 	@Override
@@ -160,13 +174,6 @@ public class RemnantOssukageEntity extends Monster {
 			this.entityData.set(DATA_state, compound.getString("Datastate"));
 	}
 
-	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			// Animation state updates moved to event handler
-		}
-	}
 
 	@Override
 	public void baseTick() {

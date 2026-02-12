@@ -43,6 +43,7 @@ import javax.annotation.Nullable;
 
 public class RatEntity extends Monster {
 	public static final EntityDataAccessor<Integer> DATA_skin = SynchedEntityData.defineId(RatEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(RatEntity.class, EntityDataSerializers.BOOLEAN);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 
@@ -66,6 +67,24 @@ public class RatEntity extends Monster {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(DATA_skin, 0);
+		this.entityData.define(DATA_isAttacking, false);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (!this.level().isClientSide) {
+			// Sync attacking state to client so animations can react
+			this.entityData.set(DATA_isAttacking, this.getTarget() != null);
+		}
+		if (this.level().isClientSide()) {
+			// Animation state updates moved to event handler
+		}
+	}
+
+	// Public accessor for client animation logic
+	public boolean isAttacking() {
+		return this.entityData.get(DATA_isAttacking);
 	}
 
 	@Override
@@ -119,13 +138,6 @@ public class RatEntity extends Monster {
 			this.entityData.set(DATA_skin, compound.getInt("Dataskin"));
 	}
 
-	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			// Animation state updates moved to event handler
-		}
-	}
 
 	public static void init() {
 		SpawnPlacements.register(ModEntities.RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,

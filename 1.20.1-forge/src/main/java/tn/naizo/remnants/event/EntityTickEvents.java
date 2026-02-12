@@ -79,7 +79,7 @@ public class EntityTickEvents {
 		entity.animationState0.animateWhen(isIdle, tickCount);
 
 		// Attack animation - play when entity is attacking
-		boolean isAttacking = state.equals("attack");
+		boolean isAttacking = entity.isAttacking() || state.equals("attack");
 		entity.animationState2.animateWhen(isAttacking, tickCount);
 
 		// Leap animation - play during special move
@@ -105,12 +105,13 @@ public class EntityTickEvents {
 		boolean isIdle = entity.getTarget() == null;
 		entity.animationState0.animateWhen(isIdle, tickCount);
 
-		// Attack animation - play when entity is attacking
-		boolean isAttacking = entity.getTarget() != null;
+		// Attack animation - play when entity is attacking (use synced field on client)
+		boolean isAttacking = entity.isAttacking();
 		entity.animationState2.animateWhen(isAttacking, tickCount);
 
-		// Special move animation
-		entity.animationState3.animateWhen(false, tickCount);
+		// Spawn animation - play when newly spawned
+		boolean isSpawn = entity.isSpawned();
+		entity.animationState3.animateWhen(isSpawn, tickCount);
 	}
 
 	/**

@@ -40,6 +40,7 @@ import javax.annotation.Nullable;
 
 public class SkeletonMinionEntity extends Monster {
 	public static final EntityDataAccessor<Boolean> DATA_Spawned = SynchedEntityData.defineId(SkeletonMinionEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(SkeletonMinionEntity.class, EntityDataSerializers.BOOLEAN);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 	public final AnimationState animationState3 = new AnimationState();
@@ -64,6 +65,24 @@ public class SkeletonMinionEntity extends Monster {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(DATA_Spawned, false);
+		this.entityData.define(DATA_isAttacking, false);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (!this.level().isClientSide) {
+			// Sync attacking state to client
+			this.entityData.set(DATA_isAttacking, this.getTarget() != null);
+		}
+		if (this.level().isClientSide()) {
+			// Animation state updates moved to event handler
+		}
+	}
+
+	// Public accessor for client animation logic
+	public boolean isAttacking() {
+		return this.entityData.get(DATA_isAttacking);
 	}
 
 	@Override
@@ -117,13 +136,6 @@ public class SkeletonMinionEntity extends Monster {
 			this.entityData.set(DATA_Spawned, compound.getBoolean("DataSpawned"));
 	}
 
-	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			// Animation state updates moved to event handler
-		}
-	}
 
 	public static void init() {
 	}
