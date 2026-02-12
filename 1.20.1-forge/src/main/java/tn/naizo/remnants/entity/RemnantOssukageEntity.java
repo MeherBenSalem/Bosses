@@ -3,9 +3,13 @@ package tn.naizo.remnants.entity;
 import tn.naizo.remnants.init.ModItems;
 import tn.naizo.remnants.init.ModEntities;
 
+import tn.naizo.remnants.network.PacketHandler;
+import tn.naizo.remnants.network.ClientboundBossMusicPacket;
+
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PacketDistributor;
 
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
@@ -42,18 +46,27 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class RemnantOssukageEntity extends Monster {
-	public static final EntityDataAccessor<Boolean> DATA_transform = SynchedEntityData.defineId(RemnantOssukageEntity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Integer> DATA_AI = SynchedEntityData.defineId(RemnantOssukageEntity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<String> DATA_state = SynchedEntityData.defineId(RemnantOssukageEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<Boolean> DATA_transform = SynchedEntityData
+			.defineId(RemnantOssukageEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Integer> DATA_AI = SynchedEntityData.defineId(RemnantOssukageEntity.class,
+			EntityDataSerializers.INT);
+	public static final EntityDataAccessor<String> DATA_state = SynchedEntityData.defineId(RemnantOssukageEntity.class,
+			EntityDataSerializers.STRING);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 	public final AnimationState animationState3 = new AnimationState();
 	public final AnimationState animationState4 = new AnimationState();
 	public final AnimationState animationState5 = new AnimationState();
-	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(RemnantOssukageEntity.class, EntityDataSerializers.BOOLEAN);
-	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.PINK, ServerBossEvent.BossBarOverlay.PROGRESS);
+	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData
+			.defineId(RemnantOssukageEntity.class, EntityDataSerializers.BOOLEAN);
+	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(),
+			ServerBossEvent.BossBarColor.PINK, ServerBossEvent.BossBarOverlay.PROGRESS);
+	private final Set<UUID> playersHearingMusic = new HashSet<>();
 
 	public RemnantOssukageEntity(PlayMessages.SpawnEntity packet, Level world) {
 		this(ModEntities.REMNANT_OSSUKAGE.get(), world);
@@ -85,6 +98,45 @@ public class RemnantOssukageEntity extends Monster {
 		super.tick();
 		if (!this.level().isClientSide) {
 			this.entityData.set(DATA_isAttacking, this.getTarget() != null || "attack".equals(this.getEntityState()));
+			if (this.tickCount % 20 == 0) {
+				updateBossMusic();
+			}
+		}
+	}
+
+	private void updateBossMusic() {
+		if (tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+				"boss_music_enabled") <= 0)
+			return;
+
+		int radius = (int) tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+				"boss_music_radius");
+		double radiusSqr = radius * radius;
+
+		// Cleanup invalid players from set
+		playersHearingMusic.removeIf(uuid -> {
+			Player p = this.level().getPlayerByUUID(uuid);
+			return p == null || !p.isAlive() || p.distanceToSqr(this) > radiusSqr;
+		});
+
+		for (Player player : this.level().players()) {
+			if (player instanceof ServerPlayer serverPlayer) {
+				double distSqr = this.distanceToSqr(player);
+				boolean inRange = distSqr <= radiusSqr;
+				boolean isHearing = playersHearingMusic.contains(player.getUUID());
+
+				if (inRange && !isHearing) {
+					// Start Music
+					PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
+							new ClientboundBossMusicPacket(this.getId(), true));
+					playersHearingMusic.add(player.getUUID());
+				} else if (!inRange && isHearing) {
+					// Stop Music
+					PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
+							new ClientboundBossMusicPacket(this.getId(), false));
+					playersHearingMusic.remove(player.getUUID());
+				}
+			}
 		}
 	}
 
@@ -130,28 +182,30 @@ public class RemnantOssukageEntity extends Monster {
 
 	@Override
 	public boolean hurt(DamageSource damagesource, float amount) {
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		Level world = this.level();
-		Entity entity = this;
-		Entity sourceentity = damagesource.getEntity();
-		Entity immediatesourceentity = damagesource.getDirectEntity();
-
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 		return super.hurt(damagesource, amount);
 	}
 
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		// Procedure call removed - will be handled by event system
+		if (!this.level().isClientSide) {
+			for (UUID uuid : playersHearingMusic) {
+				Player p = this.level().getPlayerByUUID(uuid);
+				if (p instanceof ServerPlayer serverPlayer) {
+					PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
+							new ClientboundBossMusicPacket(this.getId(), false));
+				}
+			}
+			playersHearingMusic.clear();
+		}
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason,
+			@Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 		return retval;
 	}
 
@@ -174,20 +228,14 @@ public class RemnantOssukageEntity extends Monster {
 			this.entityData.set(DATA_state, compound.getString("Datastate"));
 	}
 
-
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 	}
 
 	@Override
 	public boolean isPushedByFluid() {
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		Level world = this.level();
-		Entity entity = this;
 		return false;
 	}
 

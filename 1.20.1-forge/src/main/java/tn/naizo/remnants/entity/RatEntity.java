@@ -42,8 +42,10 @@ import net.minecraft.nbt.CompoundTag;
 import javax.annotation.Nullable;
 
 public class RatEntity extends Monster {
-	public static final EntityDataAccessor<Integer> DATA_skin = SynchedEntityData.defineId(RatEntity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(RatEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Integer> DATA_skin = SynchedEntityData.defineId(RatEntity.class,
+			EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> DATA_isAttacking = SynchedEntityData.defineId(RatEntity.class,
+			EntityDataSerializers.BOOLEAN);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 
@@ -119,9 +121,25 @@ public class RatEntity extends Monster {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason,
+			@Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		// Procedure call removed - will be handled by event system
+
+		// Apply configuration values
+		// Apply configuration values
+		double health = tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/balance", "rat_stats",
+				"rat_health");
+		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(health);
+		this.setHealth(this.getMaxHealth());
+
+		double armor = tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/balance", "rat_stats",
+				"rat_armor");
+		this.getAttribute(Attributes.ARMOR).setBaseValue(armor);
+
+		double damage = tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/balance", "rat_stats",
+				"rat_attack_damage");
+		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(damage);
+
 		return retval;
 	}
 
@@ -138,18 +156,21 @@ public class RatEntity extends Monster {
 			this.entityData.set(DATA_skin, compound.getInt("Dataskin"));
 	}
 
-
 	public static void init() {
-		SpawnPlacements.register(ModEntities.RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
+		SpawnPlacements.register(ModEntities.RAT.get(), SpawnPlacements.Type.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos,
+						random) -> (world.getDifficulty() != Difficulty.PEACEFUL
+								&& Monster.isDarkEnoughToSpawn(world, pos, random)
+								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 20);
-		builder = builder.add(Attributes.ARMOR, 0);
-		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
+		builder = builder.add(Attributes.MAX_HEALTH, 30.0); // Default, updated in finalizeSpawn
+		builder = builder.add(Attributes.ARMOR, 2.0); // Default, updated in finalizeSpawn
+		builder = builder.add(Attributes.ATTACK_DAMAGE, 4.0); // Default, updated in finalizeSpawn
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
 		return builder;
 	}

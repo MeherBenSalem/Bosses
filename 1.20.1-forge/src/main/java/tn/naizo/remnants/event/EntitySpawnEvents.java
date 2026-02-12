@@ -18,7 +18,8 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 /**
  * Handles entity spawn initialization for custom entities.
  * Replaces the deleted OssukageOnInitialEntitySpawnProcedure,
- * RatOnInitialEntitySpawnProcedure, and SkeletonMinionOnInitialEntitySpawnProcedure.
+ * RatOnInitialEntitySpawnProcedure, and
+ * SkeletonMinionOnInitialEntitySpawnProcedure.
  */
 @Mod.EventBusSubscriber(modid = "remnant_bosses", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntitySpawnEvents {
@@ -31,6 +32,15 @@ public class EntitySpawnEvents {
 		// Only run on server for initialization
 		if (level.isClientSide) {
 			return;
+		}
+
+		// Dimension Filtering
+		if (entity instanceof RatEntity || entity instanceof RemnantOssukageEntity
+				|| entity instanceof SkeletonMinionEntity) {
+			if (!isDimensionAllowed(level)) {
+				event.setCanceled(true);
+				return;
+			}
 		}
 
 		// Initialize Ossukage entity
@@ -49,13 +59,35 @@ public class EntitySpawnEvents {
 		}
 	}
 
+	private static boolean isDimensionAllowed(Level level) {
+		String dimensionKey = level.dimension().location().toString();
+
+		// Check Whitelist
+		java.util.List<? extends String> whitelist = tn.naizo.remnants.config.JaumlConfigLib
+				.getStringListValue("remnant/spawning", "rat_spawns", "dimension_whitelist");
+		if (!whitelist.isEmpty() && !whitelist.contains(dimensionKey)) {
+			return false;
+		}
+
+		// Check Blacklist
+		java.util.List<? extends String> blacklist = tn.naizo.remnants.config.JaumlConfigLib
+				.getStringListValue("remnant/spawning", "rat_spawns", "dimension_blacklist");
+		if (blacklist.contains(dimensionKey)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * Initialize Ossukage entity on spawn.
 	 * Sets up initial state, AI behavior, and data values using config values.
 	 */
 	private static void initializeOssukageSpawn(RemnantOssukageEntity entity) {
-		// Initialize boss bar is handled in the entity class itself via startSeenByPlayer()
-		// Call the spawn initialization procedure which reads config values and sets attributes
+		// Initialize boss bar is handled in the entity class itself via
+		// startSeenByPlayer()
+		// Call the spawn initialization procedure which reads config values and sets
+		// attributes
 		OssukageOnInitialEntitySpawnProcedure.execute((LevelAccessor) entity.level(), entity);
 	}
 

@@ -5,15 +5,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Safe wrapper for JaumlConfigLib that uses reflection to avoid hard dependency.
- * Allows procedures to call Jauml config methods safely even if library isn't present.
+ * Safe wrapper for JaumlConfigLib that uses reflection to avoid hard
+ * dependency.
+ * Allows procedures to call Jauml config methods safely even if library isn't
+ * present.
  */
 public class JaumlConfigLib {
 	private static final Logger LOGGER = LogManager.getLogger(JaumlConfigLib.class);
 	private static Object configLibInstance = null;
 	private static Method getNumberMethod = null;
 	private static Method getStringMethod = null;
-	
+
 	static {
 		try {
 			Class<?> jaumlClass = Class.forName("tn.naizo.jauml.JaumlConfigLib");
@@ -24,7 +26,7 @@ public class JaumlConfigLib {
 			LOGGER.debug("JaumlConfigLib not found in classpath - config values will return defaults");
 		}
 	}
-	
+
 	/**
 	 * Get a number value from Jauml config, with fallback to default.
 	 * Returns the result as a double for compatibility.
@@ -45,7 +47,7 @@ public class JaumlConfigLib {
 			return getDefaultNumber(category, file, key);
 		}
 	}
-	
+
 	/**
 	 * Get a string value from Jauml config, with fallback to default.
 	 */
@@ -60,24 +62,41 @@ public class JaumlConfigLib {
 			return getDefaultString(category, file, key);
 		}
 	}
-	
+
+	/**
+	 * Get a string list value from Jauml config (comma separated).
+	 */
+	public static java.util.List<String> getStringListValue(String category, String file, String key) {
+		String val = getStringValue(category, file, key);
+		if (val.isEmpty())
+			return java.util.Collections.emptyList();
+		String[] split = val.split(",");
+		java.util.List<String> list = new java.util.ArrayList<>();
+		for (String s : split) {
+			list.add(s.trim());
+		}
+		return list;
+	}
+
 	/**
 	 * Provide sensible fallback defaults for config values.
 	 */
 	private static double getDefaultNumber(String category, String file, String key) {
 		// Return configuration defaults
 		if ("remnant/items".equals(category) && "ossukage_sword".equals(file)) {
-			return switch(key) {
+			return switch (key) {
 				case "dash_timer" -> 100.0;
 				case "dash_distance" -> 2.0;
 				case "shuriken_timer" -> 50.0;
 				case "shuriken_damage" -> 50.0;
 				case "shuriken_knockback" -> 1.0;
 				case "shuriken_pierce" -> 0.0;
+				case "speed_amplifier" -> 1.0;
+				case "life_steal_power" -> 20.0;
 				default -> 1.0;
 			};
 		} else if ("remnant/bosses".equals(category) && "ossukage".equals(file)) {
-			return switch(key) {
+			return switch (key) {
 				case "on_spawn_skeletons" -> 2.0;
 				case "max_health_phase_1" -> 800.0;
 				case "attack_damage_phase_1" -> 7.0;
@@ -90,16 +109,50 @@ public class JaumlConfigLib {
 				case "movement_speed_phase_2" -> 0.3;
 				case "skeletons_on_dash_phase_2" -> 2.0;
 				case "special_attack_chance_phase_2" -> 20.0;
+				case "boss_music_enabled" -> 1.0;
+				case "boss_music_radius" -> 64.0;
+				default -> 1.0;
+			};
+		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
+			return switch (key) {
+				case "enable_natural_spawning" -> 1.0;
+				case "spawn_weight" -> 10.0;
+				case "min_group_size" -> 1.0;
+				case "max_group_size" -> 3.0;
+				default -> 1.0;
+			};
+		} else if ("remnant/balance".equals(category) && "rat_stats".equals(file)) {
+			return switch (key) {
+				case "rat_health" -> 30.0;
+				case "rat_attack_damage" -> 4.0;
+				case "rat_armor" -> 2.0;
 				default -> 1.0;
 			};
 		}
 		return 1.0;
 	}
-	
+
 	/**
 	 * Provide sensible fallback defaults for string values.
 	 */
 	private static String getDefaultString(String category, String file, String key) {
+		if ("remnant/bosses".equals(category) && "ossukage_summon".equals(file)) {
+			return switch (key) {
+				case "portal_activation_item" -> "minecraft:nether_star";
+				case "pedestal_one_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_two_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_three_activation_block" -> "minecraft:skeleton_skull";
+				case "pedestal_four_activation_block" -> "minecraft:skeleton_skull";
+				default -> "";
+			};
+		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
+			return switch (key) {
+				case "dimension_whitelist" -> "minecraft:overworld";
+				case "dimension_blacklist" -> "minecraft:the_nether,minecraft:the_end";
+				case "biome_blacklist" -> "";
+				default -> "";
+			};
+		}
 		return "";
 	}
 }

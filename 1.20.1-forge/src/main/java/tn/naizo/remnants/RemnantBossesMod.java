@@ -23,7 +23,7 @@ import java.util.List;
 public class RemnantBossesMod {
 	public static final Logger LOGGER = LogManager.getLogger(RemnantBossesMod.class);
 	public static final String MODID = "remnant_bosses";
-	
+
 	private static final List<AbstractMap.SimpleEntry<Runnable, Integer>> workQueue = new ArrayList<>();
 
 	public RemnantBossesMod(FMLJavaModLoadingContext context) {
@@ -36,9 +36,16 @@ public class RemnantBossesMod {
 		ModEntities.SPAWN_EGGS.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		ModTabs.TABS.register(modEventBus);
+		tn.naizo.remnants.init.ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
+
+		// Register Config
+		// CommonConfig removed in favor of JAUML
 
 		// Setup event
 		modEventBus.addListener(this::commonSetup);
+
+		// Initialize Networking
+		tn.naizo.remnants.network.PacketHandler.init();
 
 		// Register gameplay event handlers
 		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.EntitySpawnEvents.class);
@@ -51,6 +58,9 @@ public class RemnantBossesMod {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
+		event.enqueueWork(() -> {
+			tn.naizo.remnants.config.JaumlConfigBootstrap.initConfigs();
+		});
 		LOGGER.info("Remnant Bosses mod loaded successfully");
 	}
 
@@ -60,11 +70,12 @@ public class RemnantBossesMod {
 	public static void queueServerWork(int delay, Runnable runnable) {
 		workQueue.add(new AbstractMap.SimpleEntry<>(runnable, delay));
 	}
-	
+
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 	private static class ServerTickHandler {
-		private ServerTickHandler() {}
-		
+		private ServerTickHandler() {
+		}
+
 		@net.minecraftforge.eventbus.api.SubscribeEvent
 		public static void onServerTick(net.minecraftforge.event.TickEvent.ServerTickEvent event) {
 			if (event.phase == net.minecraftforge.event.TickEvent.Phase.END) {

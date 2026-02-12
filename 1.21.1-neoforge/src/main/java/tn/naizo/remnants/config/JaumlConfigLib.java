@@ -63,6 +63,18 @@ public class JaumlConfigLib {
 		}
 	}
 
+	public static java.util.List<String> getStringListValue(String category, String file, String key) {
+		String val = getStringValue(category, file, key);
+		if (val.isEmpty())
+			return java.util.Collections.emptyList();
+		String[] split = val.split(",");
+		java.util.List<String> list = new java.util.ArrayList<>();
+		for (String s : split) {
+			list.add(s.trim());
+		}
+		return list;
+	}
+
 	/**
 	 * Provide sensible fallback defaults for config values.
 	 */
@@ -76,6 +88,8 @@ public class JaumlConfigLib {
 				case "shuriken_damage" -> 50.0;
 				case "shuriken_knockback" -> 1.0;
 				case "shuriken_pierce" -> 0.0;
+				case "speed_amplifier" -> 1.0;
+				case "life_steal_power" -> 20.0;
 				default -> 1.0;
 			};
 		} else if ("remnant/bosses".equals(category) && "ossukage".equals(file)) {
@@ -92,6 +106,23 @@ public class JaumlConfigLib {
 				case "movement_speed_phase_2" -> 0.3;
 				case "skeletons_on_dash_phase_2" -> 2.0;
 				case "special_attack_chance_phase_2" -> 20.0;
+				case "boss_music_enabled" -> 1.0;
+				case "boss_music_radius" -> 64.0;
+				default -> 1.0;
+			};
+		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
+			return switch (key) {
+				case "enable_natural_spawning" -> 1.0;
+				case "spawn_weight" -> 10.0;
+				case "min_group_size" -> 1.0;
+				case "max_group_size" -> 3.0;
+				default -> 1.0;
+			};
+		} else if ("remnant/balance".equals(category) && "rat_stats".equals(file)) {
+			return switch (key) {
+				case "rat_health" -> 30.0;
+				case "rat_attack_damage" -> 4.0;
+				case "rat_armor" -> 2.0;
 				default -> 1.0;
 			};
 		}
@@ -109,6 +140,13 @@ public class JaumlConfigLib {
 				case "pedestal_two_activation_block" -> "minecraft:skeleton_skull";
 				case "pedestal_three_activation_block" -> "minecraft:skeleton_skull";
 				case "pedestal_four_activation_block" -> "minecraft:skeleton_skull";
+				default -> "";
+			};
+		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
+			return switch (key) {
+				case "dimension_whitelist" -> "minecraft:overworld";
+				case "dimension_blacklist" -> "minecraft:the_nether,minecraft:the_end";
+				case "biome_blacklist" -> "";
 				default -> "";
 			};
 		}

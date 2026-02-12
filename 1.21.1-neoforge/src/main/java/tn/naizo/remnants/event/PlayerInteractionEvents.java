@@ -33,9 +33,7 @@ public class PlayerInteractionEvents {
 		}
 
 		// Handle Ossukage sword right-click
-		if (itemStack.getItem() instanceof OssukageSwordItem) {
-			handleOssukageSwordRightClick(player, itemStack, level);
-		}
+		// Removed: Logic moved to OssukageSwordItem.use() for better cooldown handling
 	}
 
 	@SubscribeEvent

@@ -71,9 +71,34 @@ public class OssukageSwordItem extends SwordItem {
 	}
 
 	@Override
+	public net.minecraft.world.InteractionResultHolder<ItemStack> use(net.minecraft.world.level.Level level,
+			Player player, net.minecraft.world.InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		// Check cooldown to prevent offhand exploit
+		if (player.getCooldowns().isOnCooldown(this)) {
+			return net.minecraft.world.InteractionResultHolder.fail(itemstack);
+		}
+
+		if (!level.isClientSide()) {
+			// Execute logic
+			tn.naizo.remnants.procedures.ThrowKunaisProcedureProcedure.execute(player);
+
+			// Play sound
+			level.playSound(null, player.blockPosition(),
+					net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT
+							.get(net.minecraft.resources.ResourceLocation.parse("entity.arrow.shoot")),
+					net.minecraft.sounds.SoundSource.PLAYERS, 1f, 1f);
+
+			// Add Cooldown (20 ticks)
+			player.getCooldowns().addCooldown(this, 20);
+		}
+
+		return net.minecraft.world.InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+	}
+
+	@Override
 	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
 		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
-		// Procedure call removed - will be handled by event system
 		return retval;
 	}
 

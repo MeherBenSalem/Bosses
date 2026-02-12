@@ -36,9 +36,7 @@ public class PlayerInteractionEvents {
 		}
 
 		// Handle Ossukage sword right-click
-		if (itemStack.getItem() instanceof OssukageSwordItem) {
-			handleOssukageSwordRightClick(player, itemStack, level);
-		}
+		// Removed: Logic moved to OssukageSwordItem.use() for better cooldown handling
 	}
 
 	@SubscribeEvent
@@ -70,16 +68,21 @@ public class PlayerInteractionEvents {
 	 */
 	private static void handleOssukageSwordRightClick(Player player, ItemStack itemStack, Level level) {
 		// Server-only: spawn kunai projectile, play sound, add cooldown
-		if (level.isClientSide()) return;
+		if (level.isClientSide())
+			return;
 
 		// spawn kunai using existing procedure (reuses mob-targeted logic)
 		ThrowKunaisProcedureProcedure.execute(player);
 
 		// play arrow shoot sound (server-side)
-		level.playSound(null, player.blockPosition(), net.minecraftforge.registries.ForgeRegistries.SOUND_EVENTS.getValue(new net.minecraft.resources.ResourceLocation("entity.arrow.shoot")), net.minecraft.sounds.SoundSource.PLAYERS, 1f, 1f);
+		level.playSound(null, player.blockPosition(),
+				net.minecraftforge.registries.ForgeRegistries.SOUND_EVENTS
+						.getValue(new net.minecraft.resources.ResourceLocation("entity.arrow.shoot")),
+				net.minecraft.sounds.SoundSource.PLAYERS, 1f, 1f);
 
 		// apply cooldown from config
-		player.getCooldowns().addCooldown(itemStack.getItem(), (int) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_timer"));
+		player.getCooldowns().addCooldown(itemStack.getItem(),
+				(int) JaumlConfigLib.getNumberValue("remnant/items", "ossukage_sword", "shuriken_timer"));
 	}
 
 	/**

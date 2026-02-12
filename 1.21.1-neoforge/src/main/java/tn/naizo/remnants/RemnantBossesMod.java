@@ -28,7 +28,7 @@ public class RemnantBossesMod {
 
 	private static final List<AbstractMap.SimpleEntry<Runnable, Integer>> workQueue = new ArrayList<>();
 
-	public RemnantBossesMod(IEventBus modEventBus) {
+	public RemnantBossesMod(IEventBus modEventBus, net.neoforged.fml.ModContainer modContainer) {
 		// Register all registries
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
@@ -36,6 +36,7 @@ public class RemnantBossesMod {
 		ModEntities.SPAWN_EGGS.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		ModTabs.TABS.register(modEventBus);
+		tn.naizo.remnants.init.ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 
 		// Setup event
 		modEventBus.addListener(this::commonSetup);

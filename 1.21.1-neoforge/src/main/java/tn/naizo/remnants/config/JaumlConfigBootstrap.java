@@ -21,7 +21,7 @@ public final class JaumlConfigBootstrap {
 		event.enqueueWork(JaumlConfigBootstrap::initConfigs);
 	}
 
-	private static void initConfigs() {
+	public static void initConfigs() {
 		JaumlApi api = JaumlApi.load();
 		if (api == null) {
 			LOGGER.warn("JaumlConfigLib not present; skipping config bootstrap.");
@@ -30,7 +30,8 @@ public final class JaumlConfigBootstrap {
 
 		if (api.createConfigFile("remnant/bosses", "ossukage_summon")) {
 			if (api.createConfigFile("remnant", "main")) {
-				// Populate a couple of safe defaults so main.json is not empty and is discoverable by users
+				// Populate a couple of safe defaults so main.json is not empty and is
+				// discoverable by users
 				if (!api.arrayKeyExists("remnant", "main", "config_version"))
 					api.setStringValue("remnant", "main", "config_version", "1");
 				if (!api.arrayKeyExists("remnant", "main", "generated_by"))
@@ -41,16 +42,20 @@ public final class JaumlConfigBootstrap {
 			api.setStringValue("remnant/bosses", "ossukage_summon", "portal_activation_item", "minecraft:nether_star");
 		}
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block")) {
-			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block", "minecraft:skeleton_skull");
+			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block",
+					"minecraft:skeleton_skull");
 		}
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block")) {
-			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block", "minecraft:skeleton_skull");
+			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block",
+					"minecraft:skeleton_skull");
 		}
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block")) {
-			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block", "minecraft:skeleton_skull");
+			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block",
+					"minecraft:skeleton_skull");
 		}
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block")) {
-			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block", "minecraft:skeleton_skull");
+			api.setStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block",
+					"minecraft:skeleton_skull");
 		}
 
 		if (api.createConfigFile("remnant/items", "ossukage_sword")) {
@@ -120,6 +125,54 @@ public final class JaumlConfigBootstrap {
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "movement_speed_phase_2")) {
 			api.setNumberValue("remnant/bosses", "ossukage", "movement_speed_phase_2", 0.3);
 		}
+		// Boss Music Settings
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "boss_music_enabled")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "boss_music_enabled", 1);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "boss_music_radius")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "boss_music_radius", 64);
+		}
+
+		// Spawning Settings
+		if (api.createConfigFile("remnant/spawning", "rat_spawns")) {
+			api.createConfigFile("remnant/spawning", "rat_spawns");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "enable_natural_spawning")) {
+			api.setNumberValue("remnant/spawning", "rat_spawns", "enable_natural_spawning", 1);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "spawn_weight")) {
+			api.setNumberValue("remnant/spawning", "rat_spawns", "spawn_weight", 10);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "min_group_size")) {
+			api.setNumberValue("remnant/spawning", "rat_spawns", "min_group_size", 1);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "max_group_size")) {
+			api.setNumberValue("remnant/spawning", "rat_spawns", "max_group_size", 3);
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "dimension_whitelist")) {
+			api.setStringValue("remnant/spawning", "rat_spawns", "dimension_whitelist", "minecraft:overworld");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "dimension_blacklist")) {
+			api.setStringValue("remnant/spawning", "rat_spawns", "dimension_blacklist",
+					"minecraft:the_nether,minecraft:the_end");
+		}
+		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "biome_blacklist")) {
+			api.setStringValue("remnant/spawning", "rat_spawns", "biome_blacklist", "");
+		}
+
+		// Balance Settings
+		if (api.createConfigFile("remnant/balance", "rat_stats")) {
+			api.createConfigFile("remnant/balance", "rat_stats");
+		}
+		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_health")) {
+			api.setNumberValue("remnant/balance", "rat_stats", "rat_health", 30.0);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_attack_damage")) {
+			api.setNumberValue("remnant/balance", "rat_stats", "rat_attack_damage", 4.0);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_armor")) {
+			api.setNumberValue("remnant/balance", "rat_stats", "rat_armor", 2.0);
+		}
 	}
 
 	private static final class JaumlApi {
@@ -129,7 +182,8 @@ public final class JaumlConfigBootstrap {
 		private final Method setNumberValue;
 		private final Class<?> numberParamType;
 
-		private JaumlApi(Method createConfigFile, Method arrayKeyExists, Method setStringValue, Method setNumberValue, Class<?> numberParamType) {
+		private JaumlApi(Method createConfigFile, Method arrayKeyExists, Method setStringValue, Method setNumberValue,
+				Class<?> numberParamType) {
 			this.createConfigFile = createConfigFile;
 			this.arrayKeyExists = arrayKeyExists;
 			this.setStringValue = setStringValue;
@@ -142,9 +196,11 @@ public final class JaumlConfigBootstrap {
 				Class<?> clazz = Class.forName("tn.naizo.jauml.JaumlConfigLib");
 				Method createConfigFile = clazz.getMethod("createConfigFile", String.class, String.class);
 				Method arrayKeyExists = clazz.getMethod("arrayKeyExists", String.class, String.class, String.class);
-				Method setStringValue = clazz.getMethod("setStringValue", String.class, String.class, String.class, String.class);
+				Method setStringValue = clazz.getMethod("setStringValue", String.class, String.class, String.class,
+						String.class);
 				Method setNumberValue = findSetNumberValue(clazz);
-				return new JaumlApi(createConfigFile, arrayKeyExists, setStringValue, setNumberValue, setNumberValue.getParameterTypes()[3]);
+				return new JaumlApi(createConfigFile, arrayKeyExists, setStringValue, setNumberValue,
+						setNumberValue.getParameterTypes()[3]);
 			} catch (ClassNotFoundException e) {
 				return null;
 			} catch (ReflectiveOperationException e) {
@@ -158,7 +214,8 @@ public final class JaumlConfigBootstrap {
 			if (method != null) {
 				return method;
 			}
-			Class<?>[] candidates = new Class<?>[] { Double.class, double.class, Integer.class, int.class, Float.class, float.class, Long.class, long.class };
+			Class<?>[] candidates = new Class<?>[] { Double.class, double.class, Integer.class, int.class, Float.class,
+					float.class, Long.class, long.class };
 			for (Class<?> type : candidates) {
 				method = tryGetMethod(clazz, "setNumberValue", type);
 				if (method != null) {

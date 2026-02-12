@@ -1,0 +1,5 @@
+{
+    "type": "remnant_bosses:configurable_spawn",
+    "biomes": "#minecraft:is_overworld",
+    "entity": "remnant_bosses:rat"
+}

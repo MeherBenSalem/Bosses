@@ -3,6 +3,8 @@ package tn.naizo.remnants.entity;
 import tn.naizo.remnants.init.ModItems;
 import tn.naizo.remnants.init.ModEntities;
 
+import tn.naizo.remnants.network.ClientboundBossMusicPacket;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -38,6 +40,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class RemnantOssukageEntity extends Monster {
 	public static final EntityDataAccessor<Boolean> DATA_transform = SynchedEntityData
@@ -53,6 +58,7 @@ public class RemnantOssukageEntity extends Monster {
 	public final AnimationState animationState5 = new AnimationState();
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(),
 			ServerBossEvent.BossBarColor.PINK, ServerBossEvent.BossBarOverlay.PROGRESS);
+	private final Set<UUID> playersHearingMusic = new HashSet<>();
 
 	public RemnantOssukageEntity(EntityType<RemnantOssukageEntity> type, Level world) {
 		super(type, world);
@@ -66,6 +72,53 @@ public class RemnantOssukageEntity extends Monster {
 		builder.define(DATA_transform, false);
 		builder.define(DATA_AI, 0);
 		builder.define(DATA_state, "");
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (this.level().isClientSide()) {
+			// Animation state updates moved to event handler
+		} else {
+			// Server side
+			if (this.tickCount % 20 == 0) {
+				updateBossMusic();
+			}
+		}
+	}
+
+	private void updateBossMusic() {
+		if (tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+				"boss_music_enabled") <= 0)
+			return;
+
+		int radius = (int) tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+				"boss_music_radius");
+		double radiusSqr = radius * radius;
+
+		// Cleanup invalid players from set
+		playersHearingMusic.removeIf(uuid -> {
+			Player p = this.level().getPlayerByUUID(uuid);
+			return p == null || !p.isAlive() || p.distanceToSqr(this) > radiusSqr;
+		});
+
+		for (Player player : this.level().players()) {
+			if (player instanceof ServerPlayer serverPlayer) {
+				double distSqr = this.distanceToSqr(player);
+				boolean inRange = distSqr <= radiusSqr;
+				boolean isHearing = playersHearingMusic.contains(player.getUUID());
+
+				if (inRange && !isHearing) {
+					// Start Music
+					serverPlayer.connection.send(new ClientboundBossMusicPacket(this.getId(), true));
+					playersHearingMusic.add(player.getUUID());
+				} else if (!inRange && isHearing) {
+					// Stop Music
+					serverPlayer.connection.send(new ClientboundBossMusicPacket(this.getId(), false));
+					playersHearingMusic.remove(player.getUUID());
+				}
+			}
+		}
 	}
 
 	@Override
@@ -96,29 +149,29 @@ public class RemnantOssukageEntity extends Monster {
 
 	@Override
 	public boolean hurt(DamageSource damagesource, float amount) {
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		Level world = this.level();
-		Entity entity = this;
-		Entity sourceentity = damagesource.getEntity();
-		Entity immediatesourceentity = damagesource.getDirectEntity();
-
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 		return super.hurt(damagesource, amount);
 	}
 
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		// Procedure call removed - will be handled by event system
+		if (!this.level().isClientSide) {
+			for (UUID uuid : playersHearingMusic) {
+				Player p = this.level().getPlayerByUUID(uuid);
+				if (p instanceof ServerPlayer serverPlayer) {
+					serverPlayer.connection.send(new ClientboundBossMusicPacket(this.getId(), false));
+				}
+			}
+			playersHearingMusic.clear();
+		}
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason,
 			@Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 		return retval;
 	}
 
@@ -142,17 +195,9 @@ public class RemnantOssukageEntity extends Monster {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			// Animation state updates moved to event handler
-		}
-	}
-
-	@Override
 	public void baseTick() {
 		super.baseTick();
-		// Procedure call removed - will be handled by event system
+		// Event system handles procedure logic
 	}
 
 	@Override

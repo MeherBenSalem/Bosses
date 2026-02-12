@@ -77,7 +77,18 @@ public class RatEntity extends Monster {
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason,
 			@Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
-		// Procedure call removed - will be handled by event system
+		// Apply JAUML Config Attributes
+		if (this.getAttribute(Attributes.MAX_HEALTH) != null)
+			this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(tn.naizo.remnants.config.JaumlConfigLib
+					.getNumberValue("remnant/balance", "rat_stats", "rat_health"));
+		if (this.getAttribute(Attributes.ARMOR) != null)
+			this.getAttribute(Attributes.ARMOR).setBaseValue(tn.naizo.remnants.config.JaumlConfigLib
+					.getNumberValue("remnant/balance", "rat_stats", "rat_armor"));
+		if (this.getAttribute(Attributes.ATTACK_DAMAGE) != null)
+			this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(tn.naizo.remnants.config.JaumlConfigLib
+					.getNumberValue("remnant/balance", "rat_stats", "rat_attack_damage"));
+		// Set Health to Max Health after applying config
+		this.setHealth(this.getMaxHealth());
 		return retval;
 	}
 
@@ -110,9 +121,9 @@ public class RatEntity extends Monster {
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 20);
-		builder = builder.add(Attributes.ARMOR, 0);
-		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
+		builder = builder.add(Attributes.MAX_HEALTH, 30.0);
+		builder = builder.add(Attributes.ARMOR, 2.0);
+		builder = builder.add(Attributes.ATTACK_DAMAGE, 4.0);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		return builder;
