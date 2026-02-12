@@ -1,6 +1,6 @@
 package tn.naizo.remnants.entity;
 
-import tn.naizo.remnants.init.RemnantBossesModEntities;
+import tn.naizo.remnants.init.ModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -26,7 +26,7 @@ public class KunaiEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
 
 	public KunaiEntity(PlayMessages.SpawnEntity packet, Level world) {
-		super(RemnantBossesModEntities.KUNAI.get(), world);
+		super(ModEntities.KUNAI.get(), world);
 	}
 
 	public KunaiEntity(EntityType<? extends KunaiEntity> type, Level world) {
@@ -79,7 +79,7 @@ public class KunaiEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	public static KunaiEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-		KunaiEntity entityarrow = new KunaiEntity(RemnantBossesModEntities.KUNAI.get(), entity, world);
+		KunaiEntity entityarrow = new KunaiEntity(ModEntities.KUNAI.get(), entity, world);
 		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
@@ -91,7 +91,7 @@ public class KunaiEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	public static KunaiEntity shoot(LivingEntity entity, LivingEntity target) {
-		KunaiEntity entityarrow = new KunaiEntity(RemnantBossesModEntities.KUNAI.get(), entity, entity.level());
+		KunaiEntity entityarrow = new KunaiEntity(ModEntities.KUNAI.get(), entity, entity.level());
 		double dx = target.getX() - entity.getX();
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();

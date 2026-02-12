@@ -1,6 +1,6 @@
 package tn.naizo.remnants.item;
 
-import tn.naizo.remnants.init.RemnantBossesModItems;
+import tn.naizo.remnants.init.ModItems;
 
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.Tier;
@@ -32,7 +32,7 @@ public class FangOnAStickItem extends SwordItem {
 			}
 
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(RemnantBossesModItems.RAT_FANG.get()));
+				return Ingredient.of(new ItemStack(ModItems.RAT_FANG.get()));
 			}
 		}, 3, -2f, new Item.Properties());
 	}

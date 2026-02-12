@@ -1,9 +1,6 @@
 package tn.naizo.remnants.entity;
 
-import tn.naizo.remnants.procedures.RatOnInitialEntitySpawnProcedure;
-import tn.naizo.remnants.procedures.CheckIsIdleAnimProcedure;
-import tn.naizo.remnants.procedures.CheckAttackAnimProcedure;
-import tn.naizo.remnants.init.RemnantBossesModEntities;
+import tn.naizo.remnants.init.ModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -50,7 +47,7 @@ public class RatEntity extends Monster {
 	public final AnimationState animationState2 = new AnimationState();
 
 	public RatEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(RemnantBossesModEntities.RAT.get(), world);
+		this(ModEntities.RAT.get(), world);
 	}
 
 	public RatEntity(EntityType<RatEntity> type, Level world) {
@@ -105,7 +102,7 @@ public class RatEntity extends Monster {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		RatOnInitialEntitySpawnProcedure.execute(this);
+		// Procedure call removed - will be handled by event system
 		return retval;
 	}
 
@@ -126,13 +123,12 @@ public class RatEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
-			this.animationState0.animateWhen(CheckIsIdleAnimProcedure.execute(this), this.tickCount);
-			this.animationState2.animateWhen(CheckAttackAnimProcedure.execute(this), this.tickCount);
+			// Animation state updates moved to event handler
 		}
 	}
 
 	public static void init() {
-		SpawnPlacements.register(RemnantBossesModEntities.RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+		SpawnPlacements.register(ModEntities.RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 	}
 

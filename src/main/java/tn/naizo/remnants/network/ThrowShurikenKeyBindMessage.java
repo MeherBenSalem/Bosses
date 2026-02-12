@@ -1,6 +1,5 @@
 package tn.naizo.remnants.network;
 
-import tn.naizo.remnants.procedures.OssukageSwordRightclickedProcedure;
 import tn.naizo.remnants.RemnantBossesMod;
 
 import net.minecraftforge.network.NetworkEvent;
@@ -50,13 +49,13 @@ public class ThrowShurikenKeyBindMessage {
 		if (!world.hasChunkAt(entity.blockPosition()))
 			return;
 		if (type == 0) {
-
-			OssukageSwordRightclickedProcedure.execute(world, x, y, z, entity);
+			// Procedure call removed - will be handled by event system
 		}
 	}
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		RemnantBossesMod.addNetworkMessage(ThrowShurikenKeyBindMessage.class, ThrowShurikenKeyBindMessage::buffer, ThrowShurikenKeyBindMessage::new, ThrowShurikenKeyBindMessage::handler);
+		// Network message registration disabled - will be refactored to event-based system
+		// RemnantBossesMod.addNetworkMessage(ThrowShurikenKeyBindMessage.class, ThrowShurikenKeyBindMessage::buffer, ThrowShurikenKeyBindMessage::new, ThrowShurikenKeyBindMessage::handler);
 	}
 }

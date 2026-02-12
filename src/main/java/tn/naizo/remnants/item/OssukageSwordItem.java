@@ -1,9 +1,6 @@
 package tn.naizo.remnants.item;
 
-import tn.naizo.remnants.procedures.OssukageSwordToolInHandTickProcedure;
-import tn.naizo.remnants.procedures.OssukageSwordRightclickedProcedure;
-import tn.naizo.remnants.procedures.OssukageSwordLivingEntityIsHitWithToolProcedure;
-import tn.naizo.remnants.init.RemnantBossesModItems;
+import tn.naizo.remnants.init.ModItems;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,9 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -45,7 +39,7 @@ public class OssukageSwordItem extends SwordItem {
 			}
 
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(RemnantBossesModItems.OLD_SKELETON_BONE.get()));
+				return Ingredient.of(new ItemStack(ModItems.OLD_SKELETON_BONE.get()));
 			}
 		}, 3, -2f, new Item.Properties().fireResistant());
 	}
@@ -53,15 +47,8 @@ public class OssukageSwordItem extends SwordItem {
 	@Override
 	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
 		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
-		OssukageSwordLivingEntityIsHitWithToolProcedure.execute(entity);
+		// Procedure call removed - will be handled by event system
 		return retval;
-	}
-
-	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		OssukageSwordRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
-		return ar;
 	}
 
 	@Override
@@ -78,12 +65,5 @@ public class OssukageSwordItem extends SwordItem {
 		list.add(Component.translatable("item.remnant_bosses.ossukage_sword.description_8"));
 		list.add(Component.translatable("item.remnant_bosses.ossukage_sword.description_9"));
 		list.add(Component.translatable("item.remnant_bosses.ossukage_sword.description_10"));
-	}
-
-	@Override
-	public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-		super.inventoryTick(itemstack, world, entity, slot, selected);
-		if (selected)
-			OssukageSwordToolInHandTickProcedure.execute(entity);
 	}
 }

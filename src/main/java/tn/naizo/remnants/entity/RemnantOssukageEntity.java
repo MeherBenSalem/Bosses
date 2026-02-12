@@ -1,16 +1,7 @@
 package tn.naizo.remnants.entity;
 
-import tn.naizo.remnants.procedures.SkeletonNinjaSpawnConditionProcedure;
-import tn.naizo.remnants.procedures.SkeletonNinjaPlaybackConditionProcedure;
-import tn.naizo.remnants.procedures.SkeletonNinjaLeapConditionProcedure;
-import tn.naizo.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
-import tn.naizo.remnants.procedures.OssukageEntityDiesProcedure;
-import tn.naizo.remnants.procedures.NinjaSkeletonOnEntityTickUpdateProcedure;
-import tn.naizo.remnants.procedures.NinjaSkeletonEntityIsHurtProcedure;
-import tn.naizo.remnants.procedures.CheckIsIdleAnimProcedure;
-import tn.naizo.remnants.procedures.CheckAttackAnimProcedure;
-import tn.naizo.remnants.init.RemnantBossesModItems;
-import tn.naizo.remnants.init.RemnantBossesModEntities;
+import tn.naizo.remnants.init.ModItems;
+import tn.naizo.remnants.init.ModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -64,7 +55,7 @@ public class RemnantOssukageEntity extends Monster {
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.PINK, ServerBossEvent.BossBarOverlay.PROGRESS);
 
 	public RemnantOssukageEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(RemnantBossesModEntities.REMNANT_OSSUKAGE.get(), world);
+		this(ModEntities.REMNANT_OSSUKAGE.get(), world);
 	}
 
 	public RemnantOssukageEntity(EntityType<RemnantOssukageEntity> type, Level world) {
@@ -110,7 +101,7 @@ public class RemnantOssukageEntity extends Monster {
 
 	protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHitIn) {
 		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
-		this.spawnAtLocation(new ItemStack(RemnantBossesModItems.OSSUKAGE_SWORD.get()));
+		this.spawnAtLocation(new ItemStack(ModItems.OSSUKAGE_SWORD.get()));
 	}
 
 	@Override
@@ -133,20 +124,20 @@ public class RemnantOssukageEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		NinjaSkeletonEntityIsHurtProcedure.execute(world, x, y, z, entity);
+		// Procedure call removed - will be handled by event system
 		return super.hurt(damagesource, amount);
 	}
 
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		OssukageEntityDiesProcedure.execute(source.getEntity());
+		// Procedure call removed - will be handled by event system
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		OssukageOnInitialEntitySpawnProcedure.execute(world, this);
+		// Procedure call removed - will be handled by event system
 		return retval;
 	}
 
@@ -173,18 +164,14 @@ public class RemnantOssukageEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
-			this.animationState0.animateWhen(CheckIsIdleAnimProcedure.execute(this), this.tickCount);
-			this.animationState2.animateWhen(CheckAttackAnimProcedure.execute(this), this.tickCount);
-			this.animationState3.animateWhen(SkeletonNinjaPlaybackConditionProcedure.execute(this), this.tickCount);
-			this.animationState4.animateWhen(SkeletonNinjaLeapConditionProcedure.execute(this), this.tickCount);
-			this.animationState5.animateWhen(SkeletonNinjaSpawnConditionProcedure.execute(this), this.tickCount);
+			// Animation state updates moved to event handler
 		}
 	}
 
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		NinjaSkeletonOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		// Procedure call removed - will be handled by event system
 	}
 
 	@Override

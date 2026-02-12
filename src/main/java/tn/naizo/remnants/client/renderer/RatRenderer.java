@@ -1,9 +1,5 @@
 package tn.naizo.remnants.client.renderer;
 
-import tn.naizo.remnants.procedures.RatDisplayConditionProcedure;
-import tn.naizo.remnants.procedures.RatDisplayCondition4Procedure;
-import tn.naizo.remnants.procedures.RatDisplayCondition3Procedure;
-import tn.naizo.remnants.procedures.RatDisplayCondition2Procedure;
 import tn.naizo.remnants.entity.RatEntity;
 import tn.naizo.remnants.client.model.animations.ratAnimation;
 import tn.naizo.remnants.client.model.Modelrat;
@@ -34,7 +30,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if (RatDisplayConditionProcedure.execute(entity)) {
+				if ((entity.entityData.get(RatEntity.DATA_skin) == 0)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -49,7 +45,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if (RatDisplayCondition2Procedure.execute(entity)) {
+				if ((entity.entityData.get(RatEntity.DATA_skin) == 1)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -64,7 +60,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if (RatDisplayCondition3Procedure.execute(entity)) {
+				if ((entity.entityData.get(RatEntity.DATA_skin) == 2)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -79,7 +75,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if (RatDisplayCondition4Procedure.execute(entity)) {
+				if ((entity.entityData.get(RatEntity.DATA_skin) == 3)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}

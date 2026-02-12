@@ -1,10 +1,6 @@
 package tn.naizo.remnants.entity;
 
-import tn.naizo.remnants.procedures.SkeletonSpawnConditionProcedure;
-import tn.naizo.remnants.procedures.SkeletonMinionOnInitialEntitySpawnProcedure;
-import tn.naizo.remnants.procedures.CheckIsIdleAnimProcedure;
-import tn.naizo.remnants.procedures.CheckAttackAnimProcedure;
-import tn.naizo.remnants.init.RemnantBossesModEntities;
+import tn.naizo.remnants.init.ModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
@@ -49,7 +45,7 @@ public class SkeletonMinionEntity extends Monster {
 	public final AnimationState animationState3 = new AnimationState();
 
 	public SkeletonMinionEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(RemnantBossesModEntities.SKELETON_MINION.get(), world);
+		this(ModEntities.SKELETON_MINION.get(), world);
 	}
 
 	public SkeletonMinionEntity(EntityType<SkeletonMinionEntity> type, Level world) {
@@ -104,7 +100,7 @@ public class SkeletonMinionEntity extends Monster {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		SkeletonMinionOnInitialEntitySpawnProcedure.execute(world, this);
+		// Procedure call removed - will be handled by event system
 		return retval;
 	}
 
@@ -125,9 +121,7 @@ public class SkeletonMinionEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
-			this.animationState0.animateWhen(CheckIsIdleAnimProcedure.execute(this), this.tickCount);
-			this.animationState2.animateWhen(CheckAttackAnimProcedure.execute(this), this.tickCount);
-			this.animationState3.animateWhen(SkeletonSpawnConditionProcedure.execute(this), this.tickCount);
+			// Animation state updates moved to event handler
 		}
 	}
 

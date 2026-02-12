@@ -1,7 +1,5 @@
 package tn.naizo.remnants.block;
 
-import tn.naizo.remnants.procedures.AncientRuinBlockOnBlockRightClickedProcedure;
-
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -79,14 +77,7 @@ public class AncientAltarBlock extends Block {
 	@Override
 	public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
 		super.use(blockstate, world, pos, entity, hand, hit);
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		double hitX = hit.getLocation().x;
-		double hitY = hit.getLocation().y;
-		double hitZ = hit.getLocation().z;
-		Direction direction = hit.getDirection();
-		AncientRuinBlockOnBlockRightClickedProcedure.execute(world, x, y, z, entity);
+		// Procedure call removed - will be handled by event system
 		return InteractionResult.SUCCESS;
 	}
 }

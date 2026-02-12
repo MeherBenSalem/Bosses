@@ -1,6 +1,5 @@
 package tn.naizo.remnants.client.renderer;
 
-import tn.naizo.remnants.procedures.SkeletonNinjaDisplayConditionProcedure;
 import tn.naizo.remnants.entity.RemnantOssukageEntity;
 import tn.naizo.remnants.client.model.animations.skeleton_ninjaAnimation;
 import tn.naizo.remnants.client.model.Modelskeleton_ninja;
@@ -40,7 +39,7 @@ public class RemnantOssukageRenderer extends MobRenderer<RemnantOssukageEntity, 
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if (SkeletonNinjaDisplayConditionProcedure.execute(entity)) {
+				if ((entity.entityData.get(RemnantOssukageEntity.DATA_transform) == true)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
