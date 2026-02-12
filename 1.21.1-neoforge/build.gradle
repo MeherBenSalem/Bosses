@@ -1,0 +1,37 @@
+plugins {
+    id 'eclipse'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.99'
+}
+
+archivesBaseName = 'remnant-bosses-neoforge'
+version = rootProject.version
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+legacyForge {
+    version = "21.1.0"
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        remnant_bosses {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

@@ -1,0 +1,20 @@
+{
+  "skeletonfight_theme": {
+    "subtitle": "subtitles.skeletonfight_theme",
+    "sounds": [
+      {
+        "name": "remnant_bosses:skeleton_fight",
+        "stream": true
+      }
+    ]
+  },
+  "dash_sfx": {
+    "subtitle": "subtitles.dash_sfx",
+    "sounds": [
+      {
+        "name": "remnant_bosses:dash_sound_effect",
+        "stream": false
+      }
+    ]
+  }
+}

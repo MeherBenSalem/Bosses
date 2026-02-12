@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "tn.remnant_bosses.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

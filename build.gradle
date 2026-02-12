@@ -1,46 +1,24 @@
 plugins {
-    id 'eclipse'
-    id 'net.neoforged.moddev.legacyforge' version '2.0.99'
+    id 'java'
 }
-
-version = '1.0'
-base.archivesName = "modid"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-legacyForge {
-    version = "1.20.1-47.4.0"
-
-    runs {
-        client {
-            client()
-
-            def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
-            if (mcreatorJvmOptions) {
-                mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.each { arg ->
-                    jvmArgument(arg)
-                }
-            }
-        }
-        server {
-            server()
-        }
-
-        configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
-        }
-    }
-
-    mods {
-        mcreator {
-            sourceSet sourceSets.main
-        }
-    }
+allprojects {
+    group = 'tn.naizo.remnants'
+    version = '2.0.0'
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
+subprojects {
+    repositories {
+        mavenCentral()
+        maven { name = 'MinecraftForge'; url = 'https://maven.minecraftforge.net/' }
+        maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
+        maven { name = 'ParchmentMC'; url = 'https://maven.parchmentmc.org' }
+    }
 
-apply from: 'mcreator.gradle'
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release = 17
+    }
+}
