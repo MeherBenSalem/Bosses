@@ -55,7 +55,7 @@ public record ClientboundBossMusicPacket(int entityId, boolean play) implements 
                             SoundSource.RECORDS,
                             1.0f, 1.0f,
                             net.minecraft.util.RandomSource.create(),
-                            false,
+                            true, // looping enabled
                             0,
                             SimpleSoundInstance.Attenuation.NONE,
                             0.0, 0.0, 0.0,

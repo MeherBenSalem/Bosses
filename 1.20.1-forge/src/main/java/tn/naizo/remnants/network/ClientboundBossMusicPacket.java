@@ -51,17 +51,16 @@ public class ClientboundBossMusicPacket {
         Minecraft mc = Minecraft.getInstance();
         if (msg.play) {
             if (!playingSounds.containsKey(msg.entityId)) {
-                // Play Music (Records category for better volume control usually, or Music)
-                // Using generic SoundSource.RECORDS to allow it to be heard clearly as BGM
+                // Play Music (Records category)
                 SimpleSoundInstance sound = new SimpleSoundInstance(
                         ModSounds.SKELETONFIGHT_THEME.get().getLocation(),
                         SoundSource.RECORDS,
                         1.0f, 1.0f,
                         net.minecraft.util.RandomSource.create(),
-                        false, // looping?
+                        true, // looping enabled
                         0,
-                        SimpleSoundInstance.Attenuation.NONE, // Global sound (no attenuation)
-                        0.0, 0.0, 0.0, // x, y, z (ignored if attenuation is NONE)
+                        SimpleSoundInstance.Attenuation.NONE, // Global sound
+                        0.0, 0.0, 0.0,
                         true // relative
                 );
 

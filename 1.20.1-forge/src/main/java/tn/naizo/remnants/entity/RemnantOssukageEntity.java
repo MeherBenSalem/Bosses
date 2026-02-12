@@ -109,29 +109,31 @@ public class RemnantOssukageEntity extends Monster {
 				"boss_music_enabled") <= 0)
 			return;
 
-		int radius = (int) tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+		// Hysteresis: Start at configured radius, stop at radius + 15
+		int startRadius = (int) tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
 				"boss_music_radius");
-		double radiusSqr = radius * radius;
+		int stopRadius = startRadius + 15;
+		double startRadiusSqr = startRadius * startRadius;
+		double stopRadiusSqr = stopRadius * stopRadius;
 
-		// Cleanup invalid players from set
+		// Cleanup invalid players from set (using stop radius)
 		playersHearingMusic.removeIf(uuid -> {
 			Player p = this.level().getPlayerByUUID(uuid);
-			return p == null || !p.isAlive() || p.distanceToSqr(this) > radiusSqr;
+			return p == null || !p.isAlive() || p.distanceToSqr(this) > stopRadiusSqr;
 		});
 
 		for (Player player : this.level().players()) {
 			if (player instanceof ServerPlayer serverPlayer) {
 				double distSqr = this.distanceToSqr(player);
-				boolean inRange = distSqr <= radiusSqr;
 				boolean isHearing = playersHearingMusic.contains(player.getUUID());
 
-				if (inRange && !isHearing) {
-					// Start Music
+				if (distSqr <= startRadiusSqr && !isHearing) {
+					// Start Music (Enter Range)
 					PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
 							new ClientboundBossMusicPacket(this.getId(), true));
 					playersHearingMusic.add(player.getUUID());
-				} else if (!inRange && isHearing) {
-					// Stop Music
+				} else if (distSqr > stopRadiusSqr && isHearing) {
+					// Stop Music (Exit Outer Range)
 					PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
 							new ClientboundBossMusicPacket(this.getId(), false));
 					playersHearingMusic.remove(player.getUUID());
