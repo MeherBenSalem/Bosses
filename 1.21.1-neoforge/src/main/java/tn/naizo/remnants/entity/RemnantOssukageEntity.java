@@ -219,4 +219,29 @@ public class RemnantOssukageEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		return builder;
 	}
+
+	// Public accessor methods for event handlers
+	public boolean isTransformed() {
+		return this.entityData.get(DATA_transform);
+	}
+
+	public void setTransformed(boolean transformed) {
+		this.entityData.set(DATA_transform, transformed);
+	}
+
+	public int getAIState() {
+		return this.entityData.get(DATA_AI);
+	}
+
+	public void setAIState(int state) {
+		this.entityData.set(DATA_AI, state);
+	}
+
+	public String getEntityState() {
+		return this.entityData.get(DATA_state);
+	}
+
+	public void setEntityState(String state) {
+		this.entityData.set(DATA_state, state);
+	}
 }

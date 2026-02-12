@@ -39,7 +39,7 @@ public class RemnantOssukageRenderer extends MobRenderer<RemnantOssukageEntity, 
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if ((entity.entityData.get(RemnantOssukageEntity.DATA_transform) == true)) {
+				if ((entity.isTransformed() == true)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}

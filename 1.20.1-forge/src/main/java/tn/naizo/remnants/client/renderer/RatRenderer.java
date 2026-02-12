@@ -30,7 +30,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if ((entity.entityData.get(RatEntity.DATA_skin) == 0)) {
+				if ((entity.getSkinVariant() == 0)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -45,7 +45,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if ((entity.entityData.get(RatEntity.DATA_skin) == 1)) {
+				if ((entity.getSkinVariant() == 1)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -60,7 +60,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if ((entity.entityData.get(RatEntity.DATA_skin) == 2)) {
+				if ((entity.getSkinVariant() == 2)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}
@@ -75,7 +75,7 @@ public class RatRenderer extends MobRenderer<RatEntity, Modelrat<RatEntity>> {
 				double x = entity.getX();
 				double y = entity.getY();
 				double z = entity.getZ();
-				if ((entity.entityData.get(RatEntity.DATA_skin) == 3)) {
+				if ((entity.getSkinVariant() == 3)) {
 					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 					this.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
 				}

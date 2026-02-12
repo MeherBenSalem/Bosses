@@ -141,4 +141,13 @@ public class RatEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
 		return builder;
 	}
+
+	// Public accessor methods for event handlers
+	public int getSkinVariant() {
+		return this.entityData.get(DATA_skin);
+	}
+
+	public void setSkinVariant(int variant) {
+		this.entityData.set(DATA_skin, variant);
+	}
 }

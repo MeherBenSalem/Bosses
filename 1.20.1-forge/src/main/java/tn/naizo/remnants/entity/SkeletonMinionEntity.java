@@ -137,4 +137,13 @@ public class SkeletonMinionEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
 		return builder;
 	}
+
+	// Public accessor methods for event handlers
+	public boolean isSpawned() {
+		return this.entityData.get(DATA_Spawned);
+	}
+
+	public void setSpawned(boolean spawned) {
+		this.entityData.set(DATA_Spawned, spawned);
+	}
 }

@@ -35,12 +35,11 @@ public class RemnantBossesMod {
 		modEventBus.addListener(this::commonSetup);
 
 		// Register gameplay event handlers
-		// TODO: Add event handler classes here when created
-		// MinecraftForge.EVENT_BUS.register(EntitySpawnEvents.class);
-		// MinecraftForge.EVENT_BUS.register(EntityTickEvents.class);
-		// MinecraftForge.EVENT_BUS.register(EntityDeathEvents.class);
-		// MinecraftForge.EVENT_BUS.register(PlayerInteractionEvents.class);
-		// MinecraftForge.EVENT_BUS.register(BlockInteractionEvents.class);
+		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.EntitySpawnEvents.class);
+		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.EntityTickEvents.class);
+		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.EntityDeathEvents.class);
+		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.PlayerInteractionEvents.class);
+		MinecraftForge.EVENT_BUS.register(tn.naizo.remnants.event.BlockInteractionEvents.class);
 
 		LOGGER.info("Remnant Bosses mod registered");
 	}
