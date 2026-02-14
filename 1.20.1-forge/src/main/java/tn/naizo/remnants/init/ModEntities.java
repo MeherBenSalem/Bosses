@@ -19,12 +19,7 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.Difficulty;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
@@ -75,28 +70,6 @@ public class ModEntities {
 			SkeletonMinionEntity.init();
 			RemnantOssukageEntity.init();
 			WraithEntity.init();
-
-			// Register spawn placements
-			SpawnPlacements.register(RAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-									&& Monster.isDarkEnoughToSpawn(world, pos, random)
-									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(SKELETON_MINION.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-									&& Monster.isDarkEnoughToSpawn(world, pos, random)
-									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(REMNANT_OSSUKAGE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-									&& Monster.isDarkEnoughToSpawn(world, pos, random)
-									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
-			SpawnPlacements.register(WRAITH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-									&& Monster.isDarkEnoughToSpawn(world, pos, random)
-									&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 		});
 	}
 
