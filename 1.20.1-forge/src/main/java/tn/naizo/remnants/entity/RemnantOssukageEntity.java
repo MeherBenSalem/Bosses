@@ -109,6 +109,10 @@ public class RemnantOssukageEntity extends Monster {
 				"boss_music_enabled") <= 0)
 			return;
 
+		// Avoid re-starting music after the boss has died — skip when not alive
+		if (!this.isAlive())
+			return;
+
 		// Hysteresis: Start at configured radius, stop at radius + 15
 		int startRadius = (int) tn.naizo.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
 				"boss_music_radius");
