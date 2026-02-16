@@ -12,7 +12,6 @@ public class ClientboundBossMusicPacket {
     private final int entityId; // Use entity ID to track which boss is playing the music
     private final boolean play;
 
-    // Client-side map to track playing sounds
     public ClientboundBossMusicPacket(int entityId, boolean play) {
         this.entityId = entityId;
         this.play = play;
