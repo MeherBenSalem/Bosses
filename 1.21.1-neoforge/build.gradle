@@ -94,6 +94,8 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // JAuml dependency (resolved via Curse Maven coordinate)
+    // Add the jauml jar to localRuntime so it is available for dev runs (kept out of published compile/runtime deps).
+    localRuntime files("libs/jauml-neoforge-1.21.1-1.2.0.jar")
     // JAuml dependency intentionally omitted in NeoForge dev classpath (unavailable via default repositories).
     // For production use, install jauml on the runtime mods path or supply a resolved repository.
 
