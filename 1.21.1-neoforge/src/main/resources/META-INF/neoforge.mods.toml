@@ -26,6 +26,13 @@ versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies.${mod_id}]]
+modId="geckolib"
+type="required"
+versionRange="[${geckolib_version},)"
+ordering="AFTER"
+side="BOTH"
+
 # JAuml is required
 [[dependencies.${mod_id}]]
 modId="jauml"

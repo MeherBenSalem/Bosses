@@ -1,6 +1,6 @@
 plugins {
     id 'eclipse'
-    id 'net.neoforged.moddev.legacyforge' version '2.0.99'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
 }
 
 base {
@@ -10,32 +10,52 @@ version = rootProject.version
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-legacyForge {
-    version = "1.20.1-47.4.0"
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    copyIdeResources = true
 
     runs {
-        client {
-            client()
-        }
-        server {
-            server()
-        }
-
         configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
-        }
-    }
+            workingDirectory project.file('run')
 
-    mods {
-        remnant_bosses {
-            sourceSet sourceSets.main
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                remnant_bosses {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+        }
+
+        server {
         }
     }
 }
 
 // Note: JAuml is declared in mods.toml as an optional runtime dependency.
 // If you want JAuml available in development runs add it to `localRuntime` or `libs/` and reference it from here.
+
+repositories {
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.20.1-47.4.20"
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:${geckolib_version}")
+}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

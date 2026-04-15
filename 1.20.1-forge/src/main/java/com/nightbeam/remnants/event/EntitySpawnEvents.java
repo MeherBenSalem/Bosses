@@ -1,0 +1,127 @@
+package com.nightbeam.remnants.event;
+
+import com.nightbeam.remnants.entity.RatEntity;
+import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.SkeletonMinionEntity;
+import com.nightbeam.remnants.entity.WraithEntity;
+import com.nightbeam.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
+
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.common.MinecraftForge;
+
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+
+/**
+ * Handles entity spawn initialization for custom entities.
+ * Replaces the deleted OssukageOnInitialEntitySpawnProcedure,
+ * RatOnInitialEntitySpawnProcedure, and
+ * SkeletonMinionOnInitialEntitySpawnProcedure.
+ */
+@Mod.EventBusSubscriber(modid = "remnant_bosses", bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class EntitySpawnEvents {
+
+	@SubscribeEvent
+	public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+		Entity entity = event.getEntity();
+		Level level = event.getLevel();
+
+		// Only run on server for initialization
+		if (level.isClientSide) {
+			return;
+		}
+
+		// Dimension Filtering
+		if (entity instanceof RatEntity || entity instanceof RemnantOssukageEntity
+				|| entity instanceof SkeletonMinionEntity || entity instanceof WraithEntity) {
+			if (!isDimensionAllowed(level)) {
+				event.setCanceled(true);
+				return;
+			}
+		}
+
+		// Initialize Ossukage entity
+		if (entity instanceof RemnantOssukageEntity ossukage) {
+			initializeOssukageSpawn(ossukage);
+		}
+
+		// Initialize Rat entity
+		if (entity instanceof RatEntity rat) {
+			initializeRatSpawn(rat);
+		}
+
+		// Initialize Skeleton Minion entity
+		if (entity instanceof SkeletonMinionEntity skeleton) {
+			initializeSkeletonMinionSpawn(skeleton);
+		}
+
+		// Initialize Wraith entity
+		if (entity instanceof WraithEntity wraith) {
+			initializeWraithSpawn(wraith);
+		}
+	}
+
+	private static boolean isDimensionAllowed(Level level) {
+		String dimensionKey = level.dimension().location().toString();
+
+		// Check Whitelist
+		java.util.List<? extends String> whitelist = com.nightbeam.remnants.config.JaumlConfigLib
+				.getStringListValue("remnant/spawning", "rat_spawns", "dimension_whitelist");
+		if (!whitelist.isEmpty() && !whitelist.contains(dimensionKey)) {
+			return false;
+		}
+
+		// Check Blacklist
+		java.util.List<? extends String> blacklist = com.nightbeam.remnants.config.JaumlConfigLib
+				.getStringListValue("remnant/spawning", "rat_spawns", "dimension_blacklist");
+		if (blacklist.contains(dimensionKey)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Initialize Ossukage entity on spawn.
+	 * Sets up initial state, AI behavior, and data values using config values.
+	 */
+	private static void initializeOssukageSpawn(RemnantOssukageEntity entity) {
+		// Initialize boss bar is handled in the entity class itself via
+		// startSeenByPlayer()
+		// Call the spawn initialization procedure which reads config values and sets
+		// attributes
+		OssukageOnInitialEntitySpawnProcedure.execute((LevelAccessor) entity.level(), entity);
+	}
+
+	/**
+	 * Initialize Rat entity on spawn.
+	 * Sets up initial skin variant and state.
+	 */
+	private static void initializeRatSpawn(RatEntity entity) {
+		// Set random skin variant (0-3) - automatically synced to clients
+		int skinVariant = entity.getRandom().nextInt(4);
+		entity.setSkinVariant(skinVariant);
+	}
+
+	/**
+	 * Initialize Skeleton Minion entity on spawn.
+	 * Sets up initial spawn state.
+	 */
+	private static void initializeSkeletonMinionSpawn(SkeletonMinionEntity entity) {
+		// Mark as spawned (automatically synced to clients)
+		entity.setSpawned(true);
+	}
+
+	/**
+	 * Initialize Wraith entity on spawn.
+	 * Configuration is loaded in finalizeSpawn() method.
+	 */
+	private static void initializeWraithSpawn(WraithEntity entity) {
+		// Config values are loaded in WraithEntity.finalizeSpawn()
+		// This method ensures dimension filtering works
+	}
+}

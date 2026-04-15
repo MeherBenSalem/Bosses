@@ -11,6 +11,13 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
 }
 
 base {
@@ -93,6 +100,8 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
+    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:${geckolib_version}"
+
     // JAuml dependency (resolved via Curse Maven coordinate)
     // Add the jauml jar to localRuntime so it is available for dev runs (kept out of published compile/runtime deps).
     localRuntime files("libs/jauml-neoforge-1.21.1-1.2.0.jar")
@@ -136,6 +145,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_name               : mod_name,
             mod_license            : mod_license,
             mod_version            : mod_version,
+            geckolib_version       : geckolib_version,
     ]
     inputs.properties replaceProperties
 

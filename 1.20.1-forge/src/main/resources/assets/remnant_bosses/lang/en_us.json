@@ -63,5 +63,9 @@
   "item.remnant_bosses.ancient_altar": "Ancient Altar",
   "item.remnant_bosses.ancient_pedestal": "Ancient Pedestal",
   "entity.remnant_bosses.wraith": "Wraith",
-  "item.remnant_bosses.wraith_spawn_egg": "Wraith Spawn Egg"
+  "item.remnant_bosses.wraith_spawn_egg": "Wraith Spawn Egg",
+  "entity.remnant_bosses.armored_grub": "Armored Grub",
+  "item.remnant_bosses.armored_grub_spawn_egg": "Armored Grub Spawn Egg",
+  "subtitles.armored_grub_ambient": "Armored Grub hisses",
+  "subtitles.armored_grub_death": "Armored Grub dies"
 }

@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="remnant_bosses"
-version="2.0.2"
+version="2.1.0"
 displayName="Remnant Bosses"
 displayURL="https://www.nightbeam.cloud"
 logoFile="logo.png"
@@ -29,24 +29,13 @@ versionRange="[1.2.0,)"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies.remnant_bosses]]
+modId="geckolib"
+mandatory=true
+versionRange="[4.4.9,)"
+ordering="AFTER"
+side="BOTH"
+
 
 # Start of user code block dependencies configuration
-[[dependencies.memory_of_the_past]]
-modId="jauml"
-mandatory=true
-versionRange="[1.1.0,)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.memory_of_the_past]]
-modId="jauml"
-mandatory=true
-versionRange="[1.1.0,)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.memory_of_the_past]]
-modId="jauml"
-mandatory=true
-versionRange="[1.1.0,)"
-ordering="NONE"
-side="BOTH"
 # End of user code block dependencies configuration

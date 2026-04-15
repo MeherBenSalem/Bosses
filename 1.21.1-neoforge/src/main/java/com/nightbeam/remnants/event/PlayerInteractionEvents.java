@@ -1,0 +1,82 @@
+package com.nightbeam.remnants.event;
+
+import com.nightbeam.remnants.item.OssukageSwordItem;
+
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+
+/**
+ * Handles player interactions with items.
+ * Replaces deleted sword interaction procedures:
+ * - OssukageSwordRightclickedProcedure
+ * - OssukageSwordLivingEntityIsHitWithToolProcedure
+ * - OssukageSwordToolInHandTickProcedure
+ */
+public class PlayerInteractionEvents {
+
+	@SubscribeEvent
+	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+		Player player = event.getEntity();
+		ItemStack itemStack = event.getItemStack();
+		Level level = player.level();
+
+		// Only run on server
+		if (level.isClientSide) {
+			return;
+		}
+
+		// Handle Ossukage sword right-click
+		// Removed: Logic moved to OssukageSwordItem.use() for better cooldown handling
+	}
+
+	@SubscribeEvent
+	public static void onLivingHurt(LivingIncomingDamageEvent event) {
+		LivingEntity target = event.getEntity();
+		Level level = target.level();
+
+		// Only run on server
+		if (level.isClientSide) {
+			return;
+		}
+
+		// Get attacker from damage source
+		net.minecraft.world.entity.Entity attacker = event.getSource().getEntity();
+		if (!(attacker instanceof Player player)) {
+			return;
+		}
+
+		// Handle Ossukage sword hit
+		ItemStack itemStack = player.getMainHandItem();
+		if (itemStack.getItem() instanceof OssukageSwordItem) {
+			handleOssukageSwordHit(target, player, itemStack, level);
+		}
+	}
+
+	/**
+	 * Handle Ossukage sword right-click action.
+	 * Original procedure shot kunai or performed special attack.
+	 */
+	private static void handleOssukageSwordRightClick(Player player, ItemStack itemStack, Level level) {
+		// Execute the throw kunai procedure
+		com.nightbeam.remnants.procedures.ThrowKunaisProcedureProcedure.execute(player);
+
+		// Add cooldown (1 second = 20 ticks)
+		player.getCooldowns().addCooldown(itemStack.getItem(), 20);
+	}
+
+	/**
+	 * Handle Ossukage sword hitting an entity.
+	 * Original procedure applied effects or damage modifications.
+	 */
+	private static void handleOssukageSwordHit(LivingEntity target, Player attacker, ItemStack itemStack, Level level) {
+		// Placeholder for hit logic
+		// This could include special effects, damage bonuses, or status effects
+	}
+}

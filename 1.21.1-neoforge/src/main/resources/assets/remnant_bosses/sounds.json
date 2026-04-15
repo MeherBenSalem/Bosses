@@ -16,5 +16,23 @@
         "stream": false
       }
     ]
+  },
+  "armored_grub_ambient": {
+    "subtitle": "subtitles.armored_grub_ambient",
+    "sounds": [
+      {
+        "name": "remnant_bosses:armored_grub_ambient",
+        "stream": false
+      }
+    ]
+  },
+  "armored_grub_death": {
+    "subtitle": "subtitles.armored_grub_death",
+    "sounds": [
+      {
+        "name": "remnant_bosses:armored_grub_death",
+        "stream": false
+      }
+    ]
   }
 }
