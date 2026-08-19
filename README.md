@@ -11,42 +11,47 @@ A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and 
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
+The published version is `2.3.0` in both workspaces. Keep those `version=` lines identical.
+
 ## Requirements
 
-- JDK 17 for `1.20.1/`, JDK 21 for `1.21.1/`
-- [GeckoLib](https://github.com/bernie-g/geckolib) (required)
-- JAuml 2.1.1 (required at runtime; bundled in `libs/`)
+- JDK 17 for `1.20.1/`
+- JDK 21 for `1.21.1/`
+- GeckoLib (required)
+- JAuml 2.1.1 (required at runtime)
 
 ## Build
 
-From the repository root (builds both workspaces):
+From a version folder:
+
+```
+cd 1.20.1
+./gradlew :forge:build :fabric:build
+
+cd ../1.21.1
+./gradlew :neoforge:build :fabric:build
+```
+
+From the repository root:
 
 ```
 ./gradlew buildAll
 ```
 
-Or from a single version folder:
+That builds both workspaces and copies the four loader jars into `releases/`.
+
+## Run clients
 
 ```
 cd 1.20.1
-./gradlew :forge:build :fabric:build
-```
+./gradlew :forge:runClient
+./gradlew :fabric:runClient
 
-## Run a client
-
-```
-cd 1.20.1
+cd ../1.21.1
+./gradlew :neoforge:runClient
 ./gradlew :fabric:runClient
 ```
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Security
-
-See [SECURITY.md](.github/SECURITY.md).
-
 ## License
 
-Licensed under the [Apache License 2.0](LICENSE).
+See [LICENSE](LICENSE).
