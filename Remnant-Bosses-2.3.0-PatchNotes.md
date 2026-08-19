@@ -19,6 +19,7 @@
 * Fixed Fabric Umbrakar not walking: melee AI treated the player as already in range because the collision box did not match the long model.
 * Fixed 1.21.1 world-save crash when a kunai was in the world (`Cannot encode empty ItemStack`).
 * Completed Umbrakar config keys on 1.21.1 so movement speed and combat values always exist.
+* Ossukage can be summoned again outside the Overworld (`/summon`, spawn eggs, Craft to Exile 2). The rat spawn dimension whitelist no longer deletes the boss.
 
 ### Configuration
 * `remnant/bosses/umbrakar_summon` — activation item and pedestal blocks.

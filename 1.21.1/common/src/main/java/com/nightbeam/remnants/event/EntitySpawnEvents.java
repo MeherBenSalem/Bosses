@@ -19,8 +19,10 @@ public final class EntitySpawnEvents {
 			return true;
 		}
 
-		if (entity instanceof RatEntity || entity instanceof RemnantOssukageEntity
-				|| entity instanceof SkeletonMinionEntity || entity instanceof WraithEntity) {
+		// Natural-spawn dimension limits apply only to rats/wraiths.
+		// Bosses and ritual minions must spawn from commands, eggs, altars, and
+		// other mods (e.g. Craft to Exile 2) in any dimension.
+		if (entity instanceof RatEntity || entity instanceof WraithEntity) {
 			if (!isDimensionAllowed(level)) {
 				return false;
 			}
