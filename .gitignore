@@ -1,13 +1,33 @@
-.gradle
+# Gradle
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.eclipse/
+.settings/
+bin/
+
+# Minecraft run directories
+run/
+runs/
+
+# MCreator (legacy)
 .mcreator
-.eclipse
-.settings
-bin
-elements
-run
-runs
 mcreator.gradle
-/build/
-**/build
+elements/
+
+# Build artifacts
+releases/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Session files
 tools/.bb_mcp_session
 **/.bb_mcp_session
