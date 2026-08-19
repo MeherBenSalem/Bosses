@@ -1,0 +1,36 @@
+{
+    "schemaVersion": 1,
+    "id": "remnant_bosses",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://www.nightbeam.cloud"
+    },
+    "license": "${license}",
+    "icon": "assets/remnant_bosses/textures/logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.nightbeam.remnants.fabric.RemnantBossesFabric"
+        ],
+        "client": [
+            "com.nightbeam.remnants.fabric.RemnantBossesFabricClient"
+        ]
+    },
+    "mixins": [
+        "remnant_bosses.mixins.json",
+        "remnant_bosses.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.0",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=17",
+        "geckolib": "*",
+        "jauml": "*"
+    }
+}

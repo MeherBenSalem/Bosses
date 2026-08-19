@@ -1,0 +1,89 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.umbrakar_orb",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "hitbox",
+					"pivot": [0, 6.5, -0.5]
+				},
+				{
+					"name": "orb",
+					"pivot": [0, 6, 0],
+					"cubes": [
+						{
+							"origin": [-4, 2, -4],
+							"size": [8, 8, 8],
+							"uv": {
+								"north": {"uv": [28, 0], "uv_size": [8, 8]},
+								"east": {"uv": [28, 8], "uv_size": [8, 8]},
+								"south": {"uv": [28, 16], "uv_size": [8, 8]},
+								"west": {"uv": [28, 24], "uv_size": [8, 8]},
+								"up": {"uv": [28, 32], "uv_size": [8, 8]},
+								"down": {"uv": [36, 8], "uv_size": [8, -8]}
+							}
+						},
+						{
+							"origin": [-4, 2, -4],
+							"size": [8, 8, 8],
+							"inflate": -0.1,
+							"pivot": [0, 6, 0],
+							"rotation": [45, 0, 0],
+							"uv": {
+								"north": {"uv": [36, 8], "uv_size": [8, 8]},
+								"east": {"uv": [36, 16], "uv_size": [8, 8]},
+								"south": {"uv": [36, 24], "uv_size": [8, 8]},
+								"west": {"uv": [36, 32], "uv_size": [8, 8]},
+								"up": {"uv": [28, 40], "uv_size": [8, 8]},
+								"down": {"uv": [36, 48], "uv_size": [8, -8]}
+							}
+						},
+						{
+							"origin": [-4, 2, -4],
+							"size": [8, 8, 8],
+							"inflate": -0.1,
+							"pivot": [0, 6, 0],
+							"rotation": [0, 45, 0],
+							"uv": {
+								"north": {"uv": [44, 0], "uv_size": [8, 8]},
+								"east": {"uv": [44, 8], "uv_size": [8, 8]},
+								"south": {"uv": [44, 16], "uv_size": [8, 8]},
+								"west": {"uv": [44, 24], "uv_size": [8, 8]},
+								"up": {"uv": [44, 32], "uv_size": [8, 8]},
+								"down": {"uv": [44, 48], "uv_size": [8, -8]}
+							}
+						},
+						{
+							"origin": [-4, 2, -4],
+							"size": [8, 8, 8],
+							"inflate": -0.1,
+							"pivot": [0, 6, 0],
+							"rotation": [0, 0, 45],
+							"uv": {
+								"north": {"uv": [0, 46], "uv_size": [8, 8]},
+								"east": {"uv": [8, 46], "uv_size": [8, 8]},
+								"south": {"uv": [16, 46], "uv_size": [8, 8]},
+								"west": {"uv": [24, 48], "uv_size": [8, 8]},
+								"up": {"uv": [32, 48], "uv_size": [8, 8]},
+								"down": {"uv": [40, 56], "uv_size": [8, -8]}
+							}
+						}
+					]
+				},
+				{
+					"name": "orbitals",
+					"parent": "orb",
+					"pivot": [0.3, 7, 0.8]
+				}
+			]
+		}
+	]
+}

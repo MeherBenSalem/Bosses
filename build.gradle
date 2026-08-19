@@ -1,32 +1,115 @@
-plugins {
-    id 'java'
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-allprojects {
-    group = 'com.nightbeam.remnants'
-    version = '2.1.0'
-}
-
-subprojects {
-    repositories {
-        mavenCentral()
-        maven { name = 'MinecraftForge'; url = 'https://maven.minecraftforge.net/' }
-        maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
-        maven { name = 'ParchmentMC'; url = 'https://maven.parchmentmc.org' }
+String wrapperCmd(String rootDirName) {
+    File root = file(rootDirName)
+    if (System.getProperty('os.name').toLowerCase().contains('win')) {
+        return new File(root, 'gradlew.bat').absolutePath
     }
+    return new File(root, 'gradlew').absolutePath
+}
 
-    // Only apply Java 17 to non-NeoForge modules
-    if (project.name != '1.21.1-neoforge') {
-        tasks.withType(JavaCompile).configureEach {
-            options.encoding = 'UTF-8'
-            options.release = 17
+tasks.register('build1201', Exec) {
+    group = 'build'
+    description = 'Build all 1.20.1 loaders (Fabric + Forge).'
+    workingDir = file('1.20.1')
+    commandLine wrapperCmd('1.20.1'), 'build'
+}
+
+tasks.register('build1211', Exec) {
+    group = 'build'
+    description = 'Build all 1.21.1 loaders (Fabric + NeoForge).'
+    workingDir = file('1.21.1')
+    commandLine wrapperCmd('1.21.1'), 'build'
+}
+
+tasks.register('clean1201', Exec) {
+    group = 'build'
+    description = 'Clean the 1.20.1 workspace.'
+    workingDir = file('1.20.1')
+    commandLine wrapperCmd('1.20.1'), 'clean'
+}
+
+tasks.register('clean1211', Exec) {
+    group = 'build'
+    description = 'Clean the 1.21.1 workspace.'
+    workingDir = file('1.21.1')
+    commandLine wrapperCmd('1.21.1'), 'clean'
+}
+
+tasks.register('dist') {
+    group = 'build'
+    description = 'Build both workspaces and copy loader jars into releases/.'
+    dependsOn 'build1201', 'build1211'
+    doLast {
+        def outDir = file('releases')
+        outDir.mkdirs()
+        ['1.20.1/fabric', '1.20.1/forge', '1.21.1/fabric', '1.21.1/neoforge'].each { modDir ->
+            def libsDir = file("${modDir}/build/libs")
+            if (libsDir.exists()) {
+                fileTree(libsDir).matching {
+                    include '*.jar'
+                    exclude '*-sources.jar', '*-javadoc.jar', '*-dev.jar', '*-shadow.jar', '*-dev-shadow.jar'
+                }.each { jar ->
+                    copy {
+                        from jar
+                        into outDir
+                    }
+                }
+            }
         }
-    } else {
-        // NeoForge 1.21.1 requires Java 21
-        tasks.withType(JavaCompile).configureEach {
-            options.encoding = 'UTF-8'
+        println "Loader JARs collected in: ${outDir.absolutePath}"
+    }
+}
+
+tasks.register('buildAll') {
+    group = 'build'
+    description = 'Build 1.20.1 and 1.21.1 and collect jars into releases/.'
+    dependsOn 'dist'
+}
+
+tasks.register('build') {
+    group = 'build'
+    description = 'Alias for buildAll so ./gradlew build still produces every loader jar.'
+    dependsOn 'buildAll'
+}
+
+tasks.register('cleanAll') {
+    group = 'build'
+    description = 'Clean both workspaces and releases/.'
+    dependsOn 'clean1201', 'clean1211'
+    doLast {
+        def outDir = file('releases')
+        if (outDir.exists()) {
+            outDir.deleteDir()
+            println 'Cleaned releases directory.'
+        }
+    }
+}
+
+tasks.register('syncVersion') {
+    group = 'build'
+    description = 'Set version= in both workspace gradle.properties (use -PmodVersion=x.y.z).'
+    doLast {
+        def v = project.findProperty('modVersion')
+        if (!v) {
+            throw new GradleException('Pass -PmodVersion=x.y.z')
+        }
+        ['1.20.1', '1.21.1'].each { dir ->
+            def file = file("${dir}/gradle.properties")
+            if (!file.exists()) {
+                throw new GradleException("Missing ${file}")
+            }
+            def updated = false
+            def out = file.readLines().collect { line ->
+                if (line.startsWith('version=')) {
+                    updated = true
+                    return "version=${v}"
+                }
+                return line
+            }
+            if (!updated) {
+                throw new GradleException("No version= line in ${file}")
+            }
+            file.text = out.join(System.lineSeparator()) + System.lineSeparator()
+            println "Synced ${file} -> ${v}"
         }
     }
 }

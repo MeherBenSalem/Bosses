@@ -1,49 +1,56 @@
 # Remnant Bosses
 
-Minecraft mod project for multi-version support across Forge and NeoForge.
+Minecraft boss content pack for NightBeam's MultiLoader layout.
 
-## Modules
+## Supported versions
 
-- `1.20.1-forge`: Forge 1.20.1 (Java 17)
-- `1.21.1-neoforge`: NeoForge 1.21.1 (Java 21)
+| Workspace | Minecraft | Loaders | Java |
+| --- | --- | --- | --- |
+| `1.20.1/` | 1.20.1 | Fabric, Forge | 17 |
+| `1.21.1/` | 1.21.1 | Fabric, NeoForge | 21 |
+
+Each version folder is an independent Gradle project. Shared gameplay lives in `common/`; loader modules only register content, events, and networking.
+
+The published version is `2.3.0` in **both** workspaces. Keep those `version=` lines identical.
 
 ## Requirements
 
-- JDK 17 for Forge 1.20.1
-- JDK 21 for NeoForge 1.21.1
-- Gradle wrapper (included)
+- JDK 17 for `1.20.1/`
+- JDK 21 for `1.21.1/`
+- GeckoLib (required)
+- JAuml 2.1.1 (required at runtime)
 
-## Quick start
+## Build
+
+From a version folder:
+
+```powershell
+cd 1.20.1
+.\gradlew.bat :forge:build :fabric:build
+
+cd ..\1.21.1
+.\gradlew.bat :neoforge:build :fabric:build
+```
 
 From the repository root:
 
-```bash
-# Forge 1.20.1 client
-./gradlew :1.20.1-forge:runClient
-
-# NeoForge 1.21.1 client
-./gradlew :1.21.1-neoforge:runClient
+```powershell
+.\gradlew.bat buildAll
 ```
 
-## Build jars
+That builds both workspaces and copies the four loader jars into `releases/`.
 
-```bash
-# Forge 1.20.1 jar
-./gradlew :1.20.1-forge:jar
+## Run clients
 
-# NeoForge 1.21.1 jar
-./gradlew :1.21.1-neoforge:jar
+```powershell
+cd 1.20.1
+.\gradlew.bat :forge:runClient
+.\gradlew.bat :fabric:runClient
+
+cd ..\1.21.1
+.\gradlew.bat :neoforge:runClient
+.\gradlew.bat :fabric:runClient
 ```
-
-Outputs are placed under each module's `build/libs` directory.
-
-## Optional dependency
-
-- JAuml is an optional runtime dependency. For development, add the JAuml jar to a module's runtime classpath or place it under `libs/` and wire it in the module build script if needed.
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

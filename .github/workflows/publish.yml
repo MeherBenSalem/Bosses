@@ -59,10 +59,8 @@ jobs:
 
       - name: Build
         run: |
-          chmod +x gradlew 2>/dev/null || true
-          if [ -f gradlew ]; then ./gradlew build --no-daemon
-          else gradle build --no-daemon
-          fi
+          chmod +x gradlew 1.20.1/gradlew 1.21.1/gradlew 2>/dev/null || true
+          ./gradlew buildAll --no-daemon
 
       - name: Find jars
         id: jars

@@ -9,3 +9,5 @@ runs
 mcreator.gradle
 /build/
 **/build
+tools/.bb_mcp_session
+**/.bb_mcp_session

@@ -1,0 +1,53 @@
+package com.nightbeam.remnants.forge.worldgen;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.common.world.ModifiableBiomeInfo;
+import net.minecraftforge.registries.ForgeRegistries;
+
+public record ConfigurableSpawnBiomeModifier(HolderSet<Biome> biomes, EntityType<?> entityType)
+		implements BiomeModifier {
+
+	public static final Codec<ConfigurableSpawnBiomeModifier> CODEC = RecordCodecBuilder.create(builder -> builder
+			.group(
+					Biome.LIST_CODEC.fieldOf("biomes").forGetter(ConfigurableSpawnBiomeModifier::biomes),
+					ForgeRegistries.ENTITY_TYPES.getCodec().fieldOf("entity")
+							.forGetter(ConfigurableSpawnBiomeModifier::entityType))
+			.apply(builder, ConfigurableSpawnBiomeModifier::new));
+
+	@Override
+	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
+		if (phase == Phase.ADD && biomes.contains(biome)) {
+			if (com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/spawning", "rat_spawns",
+					"enable_natural_spawning") > 0) {
+				int weight = (int) com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/spawning",
+						"rat_spawns", "spawn_weight");
+				int min = (int) com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/spawning", "rat_spawns",
+						"min_group_size");
+				int max = (int) com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/spawning", "rat_spawns",
+						"max_group_size");
+
+				String biomeKey = biome.unwrapKey().map(k -> k.location().toString()).orElse("");
+				java.util.List<String> blacklist = com.nightbeam.remnants.config.JaumlConfigLib
+						.getStringListValue("remnant/spawning", "rat_spawns", "biome_blacklist");
+				if (blacklist.contains(biomeKey))
+					return;
+
+				builder.getMobSpawnSettings().addSpawn(MobCategory.MONSTER,
+						new MobSpawnSettings.SpawnerData(entityType, weight, min, max));
+			}
+		}
+	}
+
+	@Override
+	public Codec<? extends BiomeModifier> codec() {
+		return CODEC;
+	}
+}
