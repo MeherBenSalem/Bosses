@@ -100,6 +100,7 @@ public class RemnantBossesForge {
 		bindEntity(ModEntities.RAT, () -> ModEntities.createRat().build(ModEntities.RAT.path()));
 		bindEntity(ModEntities.SKELETON_MINION, () -> ModEntities.createSkeletonMinion().build(ModEntities.SKELETON_MINION.path()));
 		bindEntity(ModEntities.REMNANT_OSSUKAGE, () -> ModEntities.createRemnantOssukage().build(ModEntities.REMNANT_OSSUKAGE.path()));
+		bindEntity(ModEntities.OSSUKAGE_RUNE_EFFECT, () -> ModEntities.createOssukageRuneEffect().build(ModEntities.OSSUKAGE_RUNE_EFFECT.path()));
 		bindEntity(ModEntities.WRAITH, () -> ModEntities.createWraith().build(ModEntities.WRAITH.path()));
 		bindEntity(ModEntities.ARMORED_GRUB, () -> ModEntities.createArmoredGrub().build(ModEntities.ARMORED_GRUB.path()));
 		bindEntity(ModEntities.UMBRAKAR, () -> ModEntities.createUmbrakar().build(ModEntities.UMBRAKAR.path()));

@@ -6,6 +6,7 @@ import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.KunaiEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.OssukageRuneEffectEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
@@ -50,6 +51,16 @@ public final class ModEntities {
 					.clientTrackingRange(128)
 					.updateInterval(3)
 					.build("remnant_ossukage"));
+
+	public static final RegistryHolder<EntityType<OssukageRuneEffectEntity>> OSSUKAGE_RUNE_EFFECT = new RegistryHolder<>(
+			"ossukage_rune_effect",
+			() -> EntityType.Builder.<OssukageRuneEffectEntity>of(OssukageRuneEffectEntity::new, MobCategory.MISC)
+					.sized(0.1f, 0.1f)
+					.clientTrackingRange(128)
+					.updateInterval(1)
+					.noSave()
+					.noSummon()
+					.build("ossukage_rune_effect"));
 
 	public static final RegistryHolder<EntityType<WraithEntity>> WRAITH = new RegistryHolder<>("wraith",
 			() -> EntityType.Builder.<WraithEntity>of(WraithEntity::new, MobCategory.MONSTER)

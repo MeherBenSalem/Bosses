@@ -68,6 +68,7 @@ public final class NeoForgeModRegistry {
 		bindEntity(ModEntities.RAT);
 		bindEntity(ModEntities.SKELETON_MINION);
 		bindEntity(ModEntities.REMNANT_OSSUKAGE);
+		bindEntity(ModEntities.OSSUKAGE_RUNE_EFFECT);
 		bindEntity(ModEntities.WRAITH);
 		bindEntity(ModEntities.ARMORED_GRUB);
 		bindEntity(ModEntities.UMBRAKAR);

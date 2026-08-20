@@ -79,6 +79,7 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerEntity(ModEntities.RAT, ModEntities.createRat().build(ModEntities.RAT.path()));
 		registerEntity(ModEntities.SKELETON_MINION, ModEntities.createSkeletonMinion().build(ModEntities.SKELETON_MINION.path()));
 		registerEntity(ModEntities.REMNANT_OSSUKAGE, ModEntities.createRemnantOssukage().build(ModEntities.REMNANT_OSSUKAGE.path()));
+		registerEntity(ModEntities.OSSUKAGE_RUNE_EFFECT, ModEntities.createOssukageRuneEffect().build(ModEntities.OSSUKAGE_RUNE_EFFECT.path()));
 		registerEntity(ModEntities.WRAITH, ModEntities.createWraith().build(ModEntities.WRAITH.path()));
 		registerEntity(ModEntities.ARMORED_GRUB, ModEntities.createArmoredGrub().build(ModEntities.ARMORED_GRUB.path()));
 		registerEntity(ModEntities.UMBRAKAR, ModEntities.createUmbrakar().build(ModEntities.UMBRAKAR.path()));

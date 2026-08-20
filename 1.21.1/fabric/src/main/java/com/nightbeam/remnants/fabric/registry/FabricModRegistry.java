@@ -36,6 +36,7 @@ public final class FabricModRegistry {
 		registerEntity(ModEntities.RAT);
 		registerEntity(ModEntities.SKELETON_MINION);
 		registerEntity(ModEntities.REMNANT_OSSUKAGE);
+		registerEntity(ModEntities.OSSUKAGE_RUNE_EFFECT);
 		registerEntity(ModEntities.WRAITH);
 		registerEntity(ModEntities.ARMORED_GRUB);
 		registerEntity(ModEntities.UMBRAKAR);

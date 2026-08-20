@@ -10,8 +10,6 @@ import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModEntities;
 import com.nightbeam.remnants.item.OssukageSwordItem;
-import com.nightbeam.remnants.procedures.NinjaSkeletonEntityIsHurtProcedure;
-import com.nightbeam.remnants.procedures.NinjaSkeletonOnEntityTickUpdateProcedure;
 import com.nightbeam.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
 import com.nightbeam.remnants.procedures.ThrowKunaisProcedureProcedure;
 
@@ -62,43 +60,7 @@ public final class GameEvents {
 	}
 
 	public static void updateOssukageAnimations(RemnantOssukageEntity entity) {
-		int tickCount = entity.tickCount;
-		String state = entity.getEntityState();
-
-		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
-		boolean isTransforming = entity.isTransformed();
-		boolean isSpawning = tickCount < 120;
-		boolean isLeaping = state.equals("leap");
-		boolean isIdle = !isAttacking && (state.equals("idle") || state.isEmpty());
-
-		if (isSpawning) {
-			entity.animationState5.startIfStopped(tickCount);
-		} else {
-			entity.animationState5.stop();
-		}
-
-		if (isTransforming) {
-			entity.animationState4.startIfStopped(tickCount);
-		} else {
-			entity.animationState4.stop();
-		}
-
-		if (isLeaping) {
-			entity.animationState3.startIfStopped(tickCount);
-		} else {
-			entity.animationState3.stop();
-		}
-
-		if (isAttacking) {
-			entity.animationState2.startIfStopped(tickCount);
-			entity.animationState0.stop();
-		} else if (isIdle) {
-			entity.animationState0.startIfStopped(tickCount);
-			entity.animationState2.stop();
-		} else {
-			entity.animationState0.stop();
-			entity.animationState2.stop();
-		}
+		// GeckoLib reads the synchronized combat state directly from the entity.
 	}
 
 	public static void updateSkeletonMinionAnimations(SkeletonMinionEntity entity) {
@@ -143,12 +105,12 @@ public final class GameEvents {
 	}
 
 	public static void updateOssukageServerTick(RemnantOssukageEntity entity) {
-		NinjaSkeletonOnEntityTickUpdateProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+		// Ossukage owns its server-authoritative combat tick.
 	}
 
 	public static void onLivingHurt(LivingEntity entity, DamageSource source, float amount) {
 		if (entity instanceof RemnantOssukageEntity ossukage) {
-			NinjaSkeletonEntityIsHurtProcedure.execute(ossukage.level(), ossukage.getX(), ossukage.getY(), ossukage.getZ(), ossukage);
+			ossukage.onIncomingDamage();
 		}
 
 		if (entity.level().isClientSide) {

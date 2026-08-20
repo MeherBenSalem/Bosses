@@ -6,6 +6,7 @@ import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.KunaiEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.OssukageRuneEffectEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
@@ -18,6 +19,7 @@ public final class ModEntities {
 	public static final RegistryHolder<EntityType<RatEntity>> RAT = new RegistryHolder<>("rat");
 	public static final RegistryHolder<EntityType<SkeletonMinionEntity>> SKELETON_MINION = new RegistryHolder<>("skeleton_minion");
 	public static final RegistryHolder<EntityType<RemnantOssukageEntity>> REMNANT_OSSUKAGE = new RegistryHolder<>("remnant_ossukage");
+	public static final RegistryHolder<EntityType<OssukageRuneEffectEntity>> OSSUKAGE_RUNE_EFFECT = new RegistryHolder<>("ossukage_rune_effect");
 	public static final RegistryHolder<EntityType<WraithEntity>> WRAITH = new RegistryHolder<>("wraith");
 	public static final RegistryHolder<EntityType<ArmoredGrubEntity>> ARMORED_GRUB = new RegistryHolder<>("armored_grub");
 	public static final RegistryHolder<EntityType<UmbrakarEntity>> UMBRAKAR = new RegistryHolder<>("umbrakar");
@@ -59,6 +61,15 @@ public final class ModEntities {
 				.sized(0.8f, 2.4f)
 				.clientTrackingRange(128)
 				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<OssukageRuneEffectEntity> createOssukageRuneEffect() {
+		return EntityType.Builder.<OssukageRuneEffectEntity>of(OssukageRuneEffectEntity::new, MobCategory.MISC)
+				.sized(0.1f, 0.1f)
+				.clientTrackingRange(128)
+				.updateInterval(1)
+				.noSave()
+				.noSummon();
 	}
 
 	public static EntityType.Builder<WraithEntity> createWraith() {
