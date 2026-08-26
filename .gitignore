@@ -10,6 +10,11 @@
 .eclipse/
 .settings/
 bin/
+local.properties
+
+# Secrets / local env
+.env
+.env.*
 
 # Minecraft run directories
 run/
@@ -27,7 +32,3 @@ releases/
 # OS
 .DS_Store
 Thumbs.db
-
-# Session files
-tools/.bb_mcp_session
-**/.bb_mcp_session

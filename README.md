@@ -52,6 +52,14 @@ cd ../1.21.1
 ./gradlew :fabric:runClient
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Security
+
+See [.github/SECURITY.md](.github/SECURITY.md).
+
 ## License
 
-See [LICENSE](LICENSE).
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

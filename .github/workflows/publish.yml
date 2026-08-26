@@ -1,7 +1,6 @@
-# Dual-publish NightBeam mods/plugins to Modrinth + CurseForge on version tags.
-# Copy to each mod repo as: .github/workflows/publish.yml
+# Publish Remnant Bosses to Modrinth + CurseForge on version tags.
 #
-# Org/repo secrets:
+# Repo secrets:
 #   MODRINTH_TOKEN
 #   CURSEFORGE_TOKEN
 #   CURSEFORGE_API_KEY
