@@ -1,8 +1,9 @@
 {
   "replace": false,
   "values": [
-    "remnant_bosses:skeleton_minion",
-    "remnant_bosses:remnant_ossukage",
-    "remnant_bosses:umbrakar"
+    "remnants:skeleton_minion",
+    "remnants:ossukage",
+    "remnants:umbrakar",
+    "remnants:kotsukage"
   ]
 }

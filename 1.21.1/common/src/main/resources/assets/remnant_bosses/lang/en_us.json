@@ -70,5 +70,17 @@
   "subtitles.armored_grub_death": "Armored Grub dies",
   "entity.remnant_bosses.umbrakar": "Umbrakar, Riftmaw Colossus",
   "entity.remnant_bosses.umbrakar_orb": "Umbrakar Orb",
-  "item.remnant_bosses.umbrakar_spawn_egg": "Umbrakar Spawn Egg"
+  "item.remnant_bosses.umbrakar_spawn_egg": "Umbrakar Spawn Egg",
+  "entity.remnants.ossukage": "Remnant : Ossukage",
+  "entity.remnants.ossukage_rune_effect": "Ossukage Rune",
+  "entity.remnants.rat": "Rat",
+  "entity.remnants.skeleton_minion": "Skeleton Minion",
+  "entity.remnants.wraith": "Wraith",
+  "entity.remnants.armored_grub": "Armored Grub",
+  "entity.remnants.umbrakar": "Umbrakar, Riftmaw Colossus",
+  "entity.remnants.umbrakar_orb": "Umbrakar Orb",
+  "entity.remnants.kunai": "Kunai",
+  "entity.remnants.kotsukage": "Kotsukage, Bone Sovereign",
+  "entity.remnants.kotsukage_trap": "Bone Trap",
+  "item.remnant_bosses.kotsukage_spawn_egg": "Kotsukage Spawn Egg"
 }

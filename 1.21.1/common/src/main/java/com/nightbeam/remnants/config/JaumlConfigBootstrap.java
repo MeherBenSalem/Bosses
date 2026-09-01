@@ -123,6 +123,18 @@ public final class JaumlConfigBootstrap {
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "boss_music_radius")) {
 			api.setNumberValue("remnant/bosses", "ossukage", "boss_music_radius", 64);
 		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "armor_phase_1")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "armor_phase_1", 6);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "armor_phase_2")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "armor_phase_2", 8);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "follow_range")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "follow_range", 64);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "knockback_resistance")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "knockback_resistance", 0.6);
+		}
 
 		// Spawning Settings
 		if (api.createConfigFile("remnant/spawning", "rat_spawns")) {
@@ -269,6 +281,120 @@ public final class JaumlConfigBootstrap {
 		}
 		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "roar_range")) {
 			api.setNumberValue("remnant/bosses", "umbrakar", "roar_range", 16);
+		}
+
+		api.createConfigFile("remnant/bosses", "kotsukage_summon");
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "portal_activation_item")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item", "minecraft:wither_skeleton_skull");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block", "minecraft:bone_block");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block", "minecraft:soul_sand");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block", "minecraft:soul_soil");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block", "minecraft:nether_wart_block");
+		}
+
+		api.createConfigFile("remnant/bosses", "kotsukage");
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "max_health")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "max_health", 700);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "attack_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "attack_damage", 12);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "movement_speed")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "movement_speed", 0.28);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "armor")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "armor", 8);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "follow_range")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "follow_range", 40);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "knockback_resistance")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "knockback_resistance", 0.75);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "hp_threshold_phase_2")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "hp_threshold_phase_2", 45);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "attack_damage_phase_2")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "attack_damage_phase_2", 16);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "movement_speed_phase_2")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "movement_speed_phase_2", 0.34);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "swipe_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "swipe_damage", 14);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "stomp_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "stomp_damage", 16);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "stomp_radius")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "stomp_radius", 5);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "poison_damage", 10);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_range")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "poison_range", 8);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_duration")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "poison_duration", 120);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "roar_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "roar_damage", 8);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "roar_range")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "roar_range", 14);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_damage")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "trap_damage", 10);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_count")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "trap_count", 2);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_slow_duration")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "trap_slow_duration", 80);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "minion_count")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "minion_count", 2);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "boss_music_enabled")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "boss_music_enabled", 1);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "boss_music_radius")) {
+			api.setNumberValue("remnant/bosses", "kotsukage", "boss_music_radius", 64);
+		}
+
+		api.createConfigFile("remnant/balance", "skeleton_minion_stats");
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_health")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_health", 24);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_attack_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_attack_damage", 5);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_movement_speed")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_movement_speed", 0.32);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_armor")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_armor", 2);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "poison_duration")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "poison_duration", 60);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "leap_cooldown")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "leap_cooldown", 80);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "trap_chance")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "trap_chance", 18);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "trap_cooldown")) {
+			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "trap_cooldown", 160);
 		}
 	}
 

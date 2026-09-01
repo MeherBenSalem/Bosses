@@ -1,6 +1,8 @@
 package com.nightbeam.remnants.entity;
 
+import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.event.EntityTickEvents;
+import com.nightbeam.remnants.init.ModEntities;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.damagesource.DamageSource;
@@ -92,12 +95,64 @@ public class SkeletonMinionEntity extends Monster {
 			this.entityData.set(DATA_Spawned, compound.getBoolean("DataSpawned"));
 	}
 
+	private int leapCooldown;
+	private int trapCooldown;
+	private boolean statsApplied;
+
 	@Override
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
 			EntityTickEvents.updateSkeletonMinionAnimations(this);
+			return;
 		}
+		if (!statsApplied) {
+			statsApplied = true;
+			setMinionAttr(Attributes.MAX_HEALTH, minionCfg("minion_health", 24));
+			setMinionAttr(Attributes.ATTACK_DAMAGE, minionCfg("minion_attack_damage", 5));
+			setMinionAttr(Attributes.MOVEMENT_SPEED, minionCfg("minion_movement_speed", 0.32));
+			setMinionAttr(Attributes.ARMOR, minionCfg("minion_armor", 2));
+			this.setHealth(this.getMaxHealth());
+		}
+		if (this.leapCooldown > 0) this.leapCooldown--;
+		if (this.trapCooldown > 0) this.trapCooldown--;
+		LivingEntity target = this.getTarget();
+		if (target == null || !target.isAlive()) return;
+		double dist = this.distanceTo(target);
+		if (this.leapCooldown <= 0 && dist > 4.0 && dist < 12.0 && this.onGround()) {
+			this.setDeltaMovement(target.position().subtract(this.position()).normalize().scale(0.85).add(0, 0.42, 0));
+			this.leapCooldown = (int) minionCfg("leap_cooldown", 80);
+		}
+		if (this.trapCooldown <= 0 && dist < 8.0 && this.random.nextInt(100) < minionCfg("trap_chance", 18)
+				&& this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+			KotsukageTrapEntity trap = ModEntities.KOTSUKAGE_TRAP.get().create(serverLevel);
+			if (trap != null) {
+				trap.moveTo(target.getX(), target.getY(), target.getZ(), 0, 0);
+				trap.setOwner(this);
+				serverLevel.addFreshEntity(trap);
+			}
+			this.trapCooldown = (int) minionCfg("trap_cooldown", 160);
+		}
+	}
+
+	@Override
+	public boolean doHurtTarget(Entity target) {
+		boolean hit = super.doHurtTarget(target);
+		if (hit && target instanceof LivingEntity living) {
+			living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+					net.minecraft.world.effect.MobEffects.POISON, (int) minionCfg("poison_duration", 60), 0));
+		}
+		return hit;
+	}
+
+	private void setMinionAttr(net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute, double value) {
+		var instance = this.getAttribute(attribute);
+		if (instance != null) instance.setBaseValue(value);
+	}
+
+	private static double minionCfg(String key, double fallback) {
+		double value = JaumlConfigLib.getNumberValue("remnant/balance", "skeleton_minion_stats", key);
+		return value <= 0.0 ? fallback : value;
 	}
 
 	public static void init() {

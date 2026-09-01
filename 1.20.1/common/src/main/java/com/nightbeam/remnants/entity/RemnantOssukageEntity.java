@@ -132,6 +132,9 @@ public class RemnantOssukageEntity extends Monster implements GeoEntity {
 		this.initialized = true;
 		setAttribute(Attributes.MAX_HEALTH, config("max_health_phase_1"));
 		setAttribute(Attributes.ATTACK_DAMAGE, config("attack_damage_phase_1"));
+		setAttribute(Attributes.ARMOR, config("armor_phase_1"));
+		setAttribute(Attributes.FOLLOW_RANGE, config("follow_range"));
+		setAttribute(Attributes.KNOCKBACK_RESISTANCE, config("knockback_resistance"));
 		setAttribute(Attributes.MOVEMENT_SPEED, 0.0);
 		this.setHealth(this.getMaxHealth());
 		enterState("spawn");

@@ -29,6 +29,7 @@ public final class ModTabs {
 					tabData.accept(ModEntities.WRAITH_SPAWN_EGG.get());
 					tabData.accept(ModEntities.ARMORED_GRUB_SPAWN_EGG.get());
 					tabData.accept(ModEntities.UMBRAKAR_SPAWN_EGG.get());
+					tabData.accept(ModEntities.KOTSUKAGE_SPAWN_EGG.get());
 				})
 				.build();
 	}

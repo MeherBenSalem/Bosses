@@ -212,6 +212,12 @@ public final class GameEvents {
 		}
 
 		String heldKey = String.valueOf(BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()));
+		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item"))) {
+			trySummonBoss(player, pos, level, "kotsukage_summon", "kotsukage",
+					"\u00A76The \u00A7eBone Sovereign \u00A76rises from the \u00A78grave!",
+					ModEntities.KOTSUKAGE.get(), 0);
+			return;
+		}
 		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "umbrakar_summon", "portal_activation_item"))) {
 			trySummonBoss(player, pos, level, "umbrakar_summon", "umbrakar",
 					"\u00A75The \u00A7dRiftmaw Colossus \u00A75tears through the altar!",

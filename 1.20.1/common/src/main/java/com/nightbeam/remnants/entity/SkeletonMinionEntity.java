@@ -1,6 +1,8 @@
 package com.nightbeam.remnants.entity;
 
+import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.event.GameEvents;
+import com.nightbeam.remnants.init.ModEntities;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -39,6 +42,9 @@ public class SkeletonMinionEntity extends Monster {
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 	public final AnimationState animationState3 = new AnimationState();
+	private int leapCooldown;
+	private int trapCooldown;
+	private boolean statsApplied;
 
 	public SkeletonMinionEntity(EntityType<SkeletonMinionEntity> type, Level world) {
 		super(type, world);
@@ -57,11 +63,58 @@ public class SkeletonMinionEntity extends Monster {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level().isClientSide) {
-			this.entityData.set(DATA_isAttacking, this.getTarget() != null);
-		} else {
+		if (this.level().isClientSide) {
 			GameEvents.updateSkeletonMinionAnimations(this);
+			return;
 		}
+		this.entityData.set(DATA_isAttacking, this.getTarget() != null);
+		if (!statsApplied) {
+			statsApplied = true;
+			setMinionAttr(Attributes.MAX_HEALTH, minionCfg("minion_health", 24));
+			setMinionAttr(Attributes.ATTACK_DAMAGE, minionCfg("minion_attack_damage", 5));
+			setMinionAttr(Attributes.MOVEMENT_SPEED, minionCfg("minion_movement_speed", 0.32));
+			setMinionAttr(Attributes.ARMOR, minionCfg("minion_armor", 2));
+			this.setHealth(this.getMaxHealth());
+		}
+		if (this.leapCooldown > 0) this.leapCooldown--;
+		if (this.trapCooldown > 0) this.trapCooldown--;
+		LivingEntity target = this.getTarget();
+		if (target == null || !target.isAlive()) return;
+		double dist = this.distanceTo(target);
+		if (this.leapCooldown <= 0 && dist > 4.0 && dist < 12.0 && this.onGround()) {
+			this.setDeltaMovement(target.position().subtract(this.position()).normalize().scale(0.85).add(0, 0.42, 0));
+			this.leapCooldown = (int) minionCfg("leap_cooldown", 80);
+		}
+		if (this.trapCooldown <= 0 && dist < 8.0 && this.random.nextInt(100) < minionCfg("trap_chance", 18)
+				&& this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+			KotsukageTrapEntity trap = ModEntities.KOTSUKAGE_TRAP.get().create(serverLevel);
+			if (trap != null) {
+				trap.moveTo(target.getX(), target.getY(), target.getZ(), 0, 0);
+				trap.setOwner(this);
+				serverLevel.addFreshEntity(trap);
+			}
+			this.trapCooldown = (int) minionCfg("trap_cooldown", 160);
+		}
+	}
+
+	@Override
+	public boolean doHurtTarget(Entity target) {
+		boolean hit = super.doHurtTarget(target);
+		if (hit && target instanceof LivingEntity living) {
+			living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+					net.minecraft.world.effect.MobEffects.POISON, (int) minionCfg("poison_duration", 60), 0));
+		}
+		return hit;
+	}
+
+	private void setMinionAttr(net.minecraft.world.entity.ai.attributes.Attribute attribute, double value) {
+		var instance = this.getAttribute(attribute);
+		if (instance != null) instance.setBaseValue(value);
+	}
+
+	private static double minionCfg(String key, double fallback) {
+		double value = JaumlConfigLib.getNumberValue("remnant/balance", "skeleton_minion_stats", key);
+		return value <= 0.0 ? fallback : value;
 	}
 
 	public boolean isAttacking() {

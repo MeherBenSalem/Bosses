@@ -7,6 +7,8 @@ import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
 import com.nightbeam.remnants.entity.UmbrakarOrbEntity;
 import com.nightbeam.remnants.entity.ArmoredGrubEntity;
+import com.nightbeam.remnants.entity.KotsukageEntity;
+import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
@@ -84,6 +86,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerEntity(ModEntities.ARMORED_GRUB, ModEntities.createArmoredGrub().build(ModEntities.ARMORED_GRUB.path()));
 		registerEntity(ModEntities.UMBRAKAR, ModEntities.createUmbrakar().build(ModEntities.UMBRAKAR.path()));
 		registerEntity(ModEntities.UMBRAKAR_ORB, ModEntities.createUmbrakarOrb().build(ModEntities.UMBRAKAR_ORB.path()));
+		registerEntity(ModEntities.KOTSUKAGE, ModEntities.createKotsukage().build(ModEntities.KOTSUKAGE.path()));
+		registerEntity(ModEntities.KOTSUKAGE_TRAP, ModEntities.createKotsukageTrap().build(ModEntities.KOTSUKAGE_TRAP.path()));
 
 		registerItem(ModEntities.RAT_SPAWN_EGG, new SpawnEggItem(ModEntities.RAT.get(), 0xCC666B, 0xFF0000, new Item.Properties()));
 		registerItem(ModEntities.SKELETON_MINION_SPAWN_EGG, new SpawnEggItem(ModEntities.SKELETON_MINION.get(), 0xFF8C8C, 0xFF0000, new Item.Properties()));
@@ -91,6 +95,7 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerItem(ModEntities.WRAITH_SPAWN_EGG, new SpawnEggItem(ModEntities.WRAITH.get(), 0x000000, 0xFFFFFF, new Item.Properties()));
 		registerItem(ModEntities.ARMORED_GRUB_SPAWN_EGG, new SpawnEggItem(ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00, new Item.Properties()));
 		registerItem(ModEntities.UMBRAKAR_SPAWN_EGG, new SpawnEggItem(ModEntities.UMBRAKAR.get(), 0x3A1A4A, 0xC48CFF, new Item.Properties()));
+		registerItem(ModEntities.KOTSUKAGE_SPAWN_EGG, new SpawnEggItem(ModEntities.KOTSUKAGE.get(), 0xC4B59A, 0x3A7A3A, new Item.Properties()));
 
 		registerSound(ModSounds.SKELETONFIGHT_THEME, ModSounds.createSkeletonFightTheme());
 		registerSound(ModSounds.DASH_SFX, ModSounds.createDashSfx());
@@ -109,6 +114,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR.get(), UmbrakarEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes());
 	}
 
 	private void registerSpawnPlacements() {

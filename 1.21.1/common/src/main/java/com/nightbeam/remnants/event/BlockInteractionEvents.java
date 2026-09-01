@@ -51,6 +51,13 @@ public final class BlockInteractionEvents {
 		}
 
 		String heldKey = BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString();
+		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon",
+				"portal_activation_item"))) {
+			trySummon(player, pos, level, "kotsukage_summon",
+					"\u00A76The \u00A7eBone Sovereign \u00A76rises from the \u00A78grave!",
+					ModEntities.KOTSUKAGE.get(), 0, SoundEvents.WITHER_SPAWN);
+			return;
+		}
 		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "umbrakar_summon",
 				"portal_activation_item"))) {
 			trySummon(player, pos, level, "umbrakar_summon",

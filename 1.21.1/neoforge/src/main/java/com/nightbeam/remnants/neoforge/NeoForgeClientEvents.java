@@ -7,6 +7,8 @@ import com.nightbeam.remnants.client.model.Modelskeleton_minion;
 import com.nightbeam.remnants.client.model.Modelwraith;
 import com.nightbeam.remnants.client.renderer.UmbrakarOrbRenderer;
 import com.nightbeam.remnants.client.renderer.UmbrakarRenderer;
+import com.nightbeam.remnants.client.renderer.KotsukageRenderer;
+import com.nightbeam.remnants.client.renderer.KotsukageTrapRenderer;
 import com.nightbeam.remnants.client.renderer.ArmoredGrubRenderer;
 import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RatRenderer;
@@ -36,6 +38,8 @@ public final class NeoForgeClientEvents {
 		event.registerEntityRenderer(ModEntities.ARMORED_GRUB.get(), ArmoredGrubRenderer::new);
 		event.registerEntityRenderer(ModEntities.UMBRAKAR.get(), UmbrakarRenderer::new);
 		event.registerEntityRenderer(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbRenderer::new);
+		event.registerEntityRenderer(ModEntities.KOTSUKAGE.get(), KotsukageRenderer::new);
+		event.registerEntityRenderer(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapRenderer::new);
 	}
 
 	@SubscribeEvent

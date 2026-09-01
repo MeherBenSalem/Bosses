@@ -6,6 +6,8 @@ import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
 import com.nightbeam.remnants.entity.UmbrakarOrbEntity;
+import com.nightbeam.remnants.entity.KotsukageEntity;
+import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
@@ -60,6 +62,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR.get(), UmbrakarEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes());
 	}
 
 	private static void registerSpawnPlacements() {

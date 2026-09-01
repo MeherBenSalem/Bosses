@@ -41,6 +41,8 @@ public final class FabricModRegistry {
 		registerEntity(ModEntities.ARMORED_GRUB);
 		registerEntity(ModEntities.UMBRAKAR);
 		registerEntity(ModEntities.UMBRAKAR_ORB);
+		registerEntity(ModEntities.KOTSUKAGE);
+		registerEntity(ModEntities.KOTSUKAGE_TRAP);
 
 		registerSpawnEgg(ModEntities.RAT_SPAWN_EGG, ModEntities.RAT.get(), 0xCC666B, 0xFF0000);
 		registerSpawnEgg(ModEntities.SKELETON_MINION_SPAWN_EGG, ModEntities.SKELETON_MINION.get(), 0xFF8C8C, 0xFF0000);
@@ -48,6 +50,7 @@ public final class FabricModRegistry {
 		registerSpawnEgg(ModEntities.WRAITH_SPAWN_EGG, ModEntities.WRAITH.get(), 0x000000, 0xFFFFFF);
 		registerSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00);
 		registerSpawnEgg(ModEntities.UMBRAKAR_SPAWN_EGG, ModEntities.UMBRAKAR.get(), 0x3A1A4A, 0xC48CFF);
+		registerSpawnEgg(ModEntities.KOTSUKAGE_SPAWN_EGG, ModEntities.KOTSUKAGE.get(), 0xC4B59A, 0x3A7A3A);
 
 		registerSound(ModSounds.SKELETONFIGHT_THEME);
 		registerSound(ModSounds.DASH_SFX);

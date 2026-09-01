@@ -6,6 +6,8 @@ import com.nightbeam.remnants.client.model.Modelskeleton_minion;
 import com.nightbeam.remnants.client.model.Modelwraith;
 import com.nightbeam.remnants.client.renderer.UmbrakarOrbRenderer;
 import com.nightbeam.remnants.client.renderer.UmbrakarRenderer;
+import com.nightbeam.remnants.client.renderer.KotsukageRenderer;
+import com.nightbeam.remnants.client.renderer.KotsukageTrapRenderer;
 import com.nightbeam.remnants.client.renderer.ArmoredGrubRenderer;
 import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RatRenderer;
@@ -32,6 +34,8 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubRenderer::new);
 		EntityRendererRegistry.register(ModEntities.UMBRAKAR.get(), UmbrakarRenderer::new);
 		EntityRendererRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbRenderer::new);
+		EntityRendererRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageRenderer::new);
+		EntityRendererRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapRenderer::new);
 
 		EntityModelLayerRegistry.registerModelLayer(Modelrat.LAYER_LOCATION, Modelrat::createBodyLayer);
 		EntityModelLayerRegistry.registerModelLayer(Modelskeleton_minion.LAYER_LOCATION, Modelskeleton_minion::createBodyLayer);

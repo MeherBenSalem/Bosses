@@ -122,6 +122,18 @@ public final class JaumlConfigBootstrap {
 		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "boss_music_radius")) {
 			api.setNumberValue("remnant/bosses", "ossukage", "boss_music_radius", 64);
 		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "armor_phase_1")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "armor_phase_1", 6);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "armor_phase_2")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "armor_phase_2", 8);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "follow_range")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "follow_range", 64);
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "ossukage", "knockback_resistance")) {
+			api.setNumberValue("remnant/bosses", "ossukage", "knockback_resistance", 0.6);
+		}
 
 		// Spawning Settings
 		if (api.createConfigFile("remnant/spawning", "rat_spawns")) {
@@ -242,6 +254,58 @@ public final class JaumlConfigBootstrap {
 		putNumber(api, "remnant/bosses", "umbrakar", "roar_damage", 8);
 		putNumber(api, "remnant/bosses", "umbrakar", "roar_range", 16);
 		putNumber(api, "remnant/bosses", "umbrakar", "orb_damage", 8);
+
+		api.createConfigFile("remnant/bosses", "kotsukage_summon");
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "portal_activation_item")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item", "minecraft:wither_skeleton_skull");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block", "minecraft:bone_block");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block", "minecraft:soul_sand");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block", "minecraft:soul_soil");
+		}
+		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block")) {
+			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block", "minecraft:nether_wart_block");
+		}
+
+		api.createConfigFile("remnant/bosses", "kotsukage");
+		putNumber(api, "remnant/bosses", "kotsukage", "max_health", 700);
+		putNumber(api, "remnant/bosses", "kotsukage", "attack_damage", 12);
+		putNumber(api, "remnant/bosses", "kotsukage", "movement_speed", 0.28);
+		putNumber(api, "remnant/bosses", "kotsukage", "armor", 8);
+		putNumber(api, "remnant/bosses", "kotsukage", "follow_range", 40);
+		putNumber(api, "remnant/bosses", "kotsukage", "knockback_resistance", 0.75);
+		putNumber(api, "remnant/bosses", "kotsukage", "hp_threshold_phase_2", 45);
+		putNumber(api, "remnant/bosses", "kotsukage", "attack_damage_phase_2", 16);
+		putNumber(api, "remnant/bosses", "kotsukage", "movement_speed_phase_2", 0.34);
+		putNumber(api, "remnant/bosses", "kotsukage", "swipe_damage", 14);
+		putNumber(api, "remnant/bosses", "kotsukage", "stomp_damage", 16);
+		putNumber(api, "remnant/bosses", "kotsukage", "stomp_radius", 5);
+		putNumber(api, "remnant/bosses", "kotsukage", "poison_damage", 10);
+		putNumber(api, "remnant/bosses", "kotsukage", "poison_range", 8);
+		putNumber(api, "remnant/bosses", "kotsukage", "poison_duration", 120);
+		putNumber(api, "remnant/bosses", "kotsukage", "roar_damage", 8);
+		putNumber(api, "remnant/bosses", "kotsukage", "roar_range", 14);
+		putNumber(api, "remnant/bosses", "kotsukage", "trap_damage", 10);
+		putNumber(api, "remnant/bosses", "kotsukage", "trap_count", 2);
+		putNumber(api, "remnant/bosses", "kotsukage", "trap_slow_duration", 80);
+		putNumber(api, "remnant/bosses", "kotsukage", "minion_count", 2);
+		putNumber(api, "remnant/bosses", "kotsukage", "boss_music_enabled", 1);
+		putNumber(api, "remnant/bosses", "kotsukage", "boss_music_radius", 64);
+
+		api.createConfigFile("remnant/balance", "skeleton_minion_stats");
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "minion_health", 24);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "minion_attack_damage", 5);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "minion_movement_speed", 0.32);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "minion_armor", 2);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "poison_duration", 60);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "leap_cooldown", 80);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "trap_chance", 18);
+		putNumber(api, "remnant/balance", "skeleton_minion_stats", "trap_cooldown", 160);
 	}
 
 	private static void putNumber(JaumlApi api, String path, String name, String key, Number value) {

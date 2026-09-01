@@ -4,6 +4,8 @@ import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
 import com.nightbeam.remnants.entity.UmbrakarOrbEntity;
 import com.nightbeam.remnants.entity.ArmoredGrubEntity;
+import com.nightbeam.remnants.entity.KotsukageEntity;
+import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
@@ -36,7 +38,7 @@ import com.mojang.serialization.MapCodec;
 public final class NeoForgeModRegistry {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, Constants.MOD_ID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, Constants.MOD_ID);
-	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Constants.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Constants.ENTITY_NAMESPACE);
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Constants.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
 	public static final DeferredRegister<MapCodec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS = DeferredRegister
@@ -73,6 +75,8 @@ public final class NeoForgeModRegistry {
 		bindEntity(ModEntities.ARMORED_GRUB);
 		bindEntity(ModEntities.UMBRAKAR);
 		bindEntity(ModEntities.UMBRAKAR_ORB);
+		bindEntity(ModEntities.KOTSUKAGE);
+		bindEntity(ModEntities.KOTSUKAGE_TRAP);
 
 		bindSpawnEgg(ModEntities.RAT_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.RAT::get, 0xCC666B, 0xFF0000, new Item.Properties()));
 		bindSpawnEgg(ModEntities.SKELETON_MINION_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SKELETON_MINION::get, 0xFF8C8C, 0xFF0000, new Item.Properties()));
@@ -80,6 +84,7 @@ public final class NeoForgeModRegistry {
 		bindSpawnEgg(ModEntities.WRAITH_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.WRAITH::get, 0x000000, 0xFFFFFF, new Item.Properties()));
 		bindSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.ARMORED_GRUB::get, 0x4A7C00, 0x8B5E00, new Item.Properties()));
 		bindSpawnEgg(ModEntities.UMBRAKAR_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.UMBRAKAR::get, 0x3A1A4A, 0xC48CFF, new Item.Properties()));
+		bindSpawnEgg(ModEntities.KOTSUKAGE_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.KOTSUKAGE::get, 0xC4B59A, 0x3A7A3A, new Item.Properties()));
 
 		bindSound(ModSounds.SKELETONFIGHT_THEME);
 		bindSound(ModSounds.DASH_SFX);
@@ -103,6 +108,8 @@ public final class NeoForgeModRegistry {
 		event.put(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes().build());
 		event.put(ModEntities.UMBRAKAR.get(), UmbrakarEntity.createAttributes().build());
 		event.put(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes().build());
+		event.put(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes().build());
+		event.put(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes().build());
 	}
 
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

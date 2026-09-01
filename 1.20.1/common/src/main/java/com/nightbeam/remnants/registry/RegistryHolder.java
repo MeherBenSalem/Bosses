@@ -7,20 +7,34 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public final class RegistryHolder<T> {
+	private final String namespace;
 	private final String path;
 	private T value;
 
 	public RegistryHolder(String path) {
-		this.path = path;
+		this(Constants.MOD_ID, path);
 	}
 
 	public RegistryHolder(String path, Supplier<T> factory) {
-		this.path = path;
+		this(Constants.MOD_ID, path);
 		this.value = factory.get();
 	}
 
+	private RegistryHolder(String namespace, String path) {
+		this.namespace = namespace;
+		this.path = path;
+	}
+
+	public static <T> RegistryHolder<T> entity(String path) {
+		return new RegistryHolder<>(Constants.ENTITY_NAMESPACE, path);
+	}
+
 	public ResourceLocation id() {
-		return new ResourceLocation(Constants.MOD_ID, path);
+		return new ResourceLocation(namespace, path);
+	}
+
+	public String namespace() {
+		return namespace;
 	}
 
 	public String path() {
