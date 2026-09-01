@@ -8,6 +8,8 @@ import com.nightbeam.remnants.entity.KotsukageEntity;
 import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.init.ModBlocks;
@@ -77,6 +79,8 @@ public final class NeoForgeModRegistry {
 		bindEntity(ModEntities.UMBRAKAR_ORB);
 		bindEntity(ModEntities.KOTSUKAGE);
 		bindEntity(ModEntities.KOTSUKAGE_TRAP);
+		bindEntity(ModEntities.SKELETON_MELEE);
+		bindEntity(ModEntities.SKELETON_ARCHER);
 
 		bindSpawnEgg(ModEntities.RAT_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.RAT::get, 0xCC666B, 0xFF0000, new Item.Properties()));
 		bindSpawnEgg(ModEntities.SKELETON_MINION_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SKELETON_MINION::get, 0xFF8C8C, 0xFF0000, new Item.Properties()));
@@ -85,6 +89,8 @@ public final class NeoForgeModRegistry {
 		bindSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.ARMORED_GRUB::get, 0x4A7C00, 0x8B5E00, new Item.Properties()));
 		bindSpawnEgg(ModEntities.UMBRAKAR_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.UMBRAKAR::get, 0x3A1A4A, 0xC48CFF, new Item.Properties()));
 		bindSpawnEgg(ModEntities.KOTSUKAGE_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.KOTSUKAGE::get, 0xC4B59A, 0x3A7A3A, new Item.Properties()));
+		bindSpawnEgg(ModEntities.SKELETON_MELEE_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SKELETON_MELEE::get, 0xC8B89A, 0x5A2020, new Item.Properties()));
+		bindSpawnEgg(ModEntities.SKELETON_ARCHER_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SKELETON_ARCHER::get, 0xC8B89A, 0x6B4A2A, new Item.Properties()));
 
 		bindSound(ModSounds.SKELETONFIGHT_THEME);
 		bindSound(ModSounds.DASH_SFX);
@@ -110,6 +116,8 @@ public final class NeoForgeModRegistry {
 		event.put(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes().build());
 		event.put(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes().build());
 		event.put(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes().build());
+		event.put(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeEntity.createAttributes().build());
+		event.put(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherEntity.createAttributes().build());
 	}
 
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
@@ -118,6 +126,10 @@ public final class NeoForgeModRegistry {
 		event.register(ModEntities.SKELETON_MINION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
 		event.register(ModEntities.WRAITH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.SKELETON_MELEE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.SKELETON_ARCHER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
 	}
 

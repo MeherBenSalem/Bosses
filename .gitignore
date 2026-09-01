@@ -20,6 +20,10 @@ local.properties
 run/
 runs/
 
+# Leftover local workspaces (not part of the MultiLoader tree)
+/1.20.1-forge/
+/1.21.1-neoforge/
+
 # MCreator (legacy)
 .mcreator
 mcreator.gradle

@@ -82,5 +82,9 @@
   "entity.remnants.kunai": "Kunai",
   "entity.remnants.kotsukage": "Kotsukage, Bone Sovereign",
   "entity.remnants.kotsukage_trap": "Bone Trap",
-  "item.remnant_bosses.kotsukage_spawn_egg": "Kotsukage Spawn Egg"
+  "item.remnant_bosses.kotsukage_spawn_egg": "Kotsukage Spawn Egg",
+  "entity.remnants.skeleton_melee": "Skeleton Warrior",
+  "entity.remnants.skeleton_archer": "Skeleton Archer",
+  "item.remnant_bosses.skeleton_melee_spawn_egg": "Skeleton Warrior Spawn Egg",
+  "item.remnant_bosses.skeleton_archer_spawn_egg": "Skeleton Archer Spawn Egg"
 }

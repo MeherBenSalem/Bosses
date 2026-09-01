@@ -306,6 +306,23 @@ public final class JaumlConfigBootstrap {
 		putNumber(api, "remnant/balance", "skeleton_minion_stats", "leap_cooldown", 80);
 		putNumber(api, "remnant/balance", "skeleton_minion_stats", "trap_chance", 18);
 		putNumber(api, "remnant/balance", "skeleton_minion_stats", "trap_cooldown", 160);
+
+		api.createConfigFile("remnant/balance", "skeleton_melee_stats");
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "max_health", 28);
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "attack_damage", 6);
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "heavy_damage", 8);
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "movement_speed", 0.28);
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "armor", 4);
+		putNumber(api, "remnant/balance", "skeleton_melee_stats", "follow_range", 24);
+
+		api.createConfigFile("remnant/balance", "skeleton_archer_stats");
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "max_health", 22);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "attack_damage", 4);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "arrow_damage", 4);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "charged_damage", 6);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "movement_speed", 0.26);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "armor", 2);
+		putNumber(api, "remnant/balance", "skeleton_archer_stats", "follow_range", 28);
 	}
 
 	private static void putNumber(JaumlApi api, String path, String name, String key, Number value) {

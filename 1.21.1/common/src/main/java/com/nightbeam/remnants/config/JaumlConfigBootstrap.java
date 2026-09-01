@@ -396,6 +396,49 @@ public final class JaumlConfigBootstrap {
 		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "trap_cooldown")) {
 			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "trap_cooldown", 160);
 		}
+
+		api.createConfigFile("remnant/balance", "skeleton_melee_stats");
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "max_health")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "max_health", 28);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "attack_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "attack_damage", 6);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "heavy_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "heavy_damage", 8);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "movement_speed")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "movement_speed", 0.28);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "armor")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "armor", 4);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "follow_range")) {
+			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "follow_range", 24);
+		}
+
+		api.createConfigFile("remnant/balance", "skeleton_archer_stats");
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "max_health")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "max_health", 22);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "attack_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "attack_damage", 4);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "arrow_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "arrow_damage", 4);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "charged_damage")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "charged_damage", 6);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "movement_speed")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "movement_speed", 0.26);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "armor")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "armor", 2);
+		}
+		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "follow_range")) {
+			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "follow_range", 28);
+		}
 	}
 
 	private static final class JaumlApi {

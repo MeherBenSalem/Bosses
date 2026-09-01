@@ -30,6 +30,8 @@ public final class ModTabs {
 					tabData.accept(ModEntities.ARMORED_GRUB_SPAWN_EGG.get());
 					tabData.accept(ModEntities.UMBRAKAR_SPAWN_EGG.get());
 					tabData.accept(ModEntities.KOTSUKAGE_SPAWN_EGG.get());
+					tabData.accept(ModEntities.SKELETON_MELEE_SPAWN_EGG.get());
+					tabData.accept(ModEntities.SKELETON_ARCHER_SPAWN_EGG.get());
 				})
 				.build();
 	}

@@ -9,6 +9,8 @@ import com.nightbeam.remnants.entity.KunaiEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.OssukageRuneEffectEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
@@ -28,6 +30,8 @@ public final class ModEntities {
 	public static final RegistryHolder<EntityType<UmbrakarOrbEntity>> UMBRAKAR_ORB = RegistryHolder.entity("umbrakar_orb");
 	public static final RegistryHolder<EntityType<KotsukageEntity>> KOTSUKAGE = RegistryHolder.entity("kotsukage");
 	public static final RegistryHolder<EntityType<KotsukageTrapEntity>> KOTSUKAGE_TRAP = RegistryHolder.entity("kotsukage_trap");
+	public static final RegistryHolder<EntityType<SkeletonMeleeEntity>> SKELETON_MELEE = RegistryHolder.entity("skeleton_melee");
+	public static final RegistryHolder<EntityType<SkeletonArcherEntity>> SKELETON_ARCHER = RegistryHolder.entity("skeleton_archer");
 
 	public static final RegistryHolder<Item> RAT_SPAWN_EGG = new RegistryHolder<>("rat_spawn_egg");
 	public static final RegistryHolder<Item> SKELETON_MINION_SPAWN_EGG = new RegistryHolder<>("skeleton_minion_spawn_egg");
@@ -36,6 +40,8 @@ public final class ModEntities {
 	public static final RegistryHolder<Item> ARMORED_GRUB_SPAWN_EGG = new RegistryHolder<>("armored_grub_spawn_egg");
 	public static final RegistryHolder<Item> UMBRAKAR_SPAWN_EGG = new RegistryHolder<>("umbrakar_spawn_egg");
 	public static final RegistryHolder<Item> KOTSUKAGE_SPAWN_EGG = new RegistryHolder<>("kotsukage_spawn_egg");
+	public static final RegistryHolder<Item> SKELETON_MELEE_SPAWN_EGG = new RegistryHolder<>("skeleton_melee_spawn_egg");
+	public static final RegistryHolder<Item> SKELETON_ARCHER_SPAWN_EGG = new RegistryHolder<>("skeleton_archer_spawn_egg");
 
 	private ModEntities() {
 	}
@@ -121,6 +127,20 @@ public final class ModEntities {
 				.updateInterval(1);
 	}
 
+	public static EntityType.Builder<SkeletonMeleeEntity> createSkeletonMelee() {
+		return EntityType.Builder.<SkeletonMeleeEntity>of(SkeletonMeleeEntity::new, MobCategory.MONSTER)
+				.sized(0.85f, 1.95f)
+				.clientTrackingRange(64)
+				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<SkeletonArcherEntity> createSkeletonArcher() {
+		return EntityType.Builder.<SkeletonArcherEntity>of(SkeletonArcherEntity::new, MobCategory.MONSTER)
+				.sized(0.7f, 1.9f)
+				.clientTrackingRange(64)
+				.updateInterval(3);
+	}
+
 	public static void initEntities() {
 		RatEntity.init();
 		SkeletonMinionEntity.init();
@@ -131,5 +151,7 @@ public final class ModEntities {
 		UmbrakarOrbEntity.init();
 		KotsukageEntity.init();
 		KotsukageTrapEntity.init();
+		SkeletonMeleeEntity.init();
+		SkeletonArcherEntity.init();
 	}
 }

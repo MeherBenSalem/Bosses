@@ -5,11 +5,6 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-/**
- * Made with Blockbench 5.0.7
- * Exported for Minecraft version 1.19 or later with Mojang mappings
- * @author Author
- */
 public class wraithAnimation {
 	public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(3.0F).looping()
 		.addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,

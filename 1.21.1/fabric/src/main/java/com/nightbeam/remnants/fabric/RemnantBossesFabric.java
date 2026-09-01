@@ -11,6 +11,8 @@ import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.event.BlockInteractionEvents;
@@ -64,6 +66,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherEntity.createAttributes());
 	}
 
 	private static void registerSpawnPlacements() {
@@ -72,6 +76,10 @@ public class RemnantBossesFabric implements ModInitializer {
 		SpawnPlacements.register(ModEntities.SKELETON_MINION.get(), SpawnPlacementTypes.ON_GROUND,
 				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
 		SpawnPlacements.register(ModEntities.WRAITH.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.SKELETON_MELEE.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.SKELETON_ARCHER.get(), SpawnPlacementTypes.ON_GROUND,
 				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
 	}
 

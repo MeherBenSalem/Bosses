@@ -14,6 +14,8 @@ import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RatRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantOssukageRenderer;
 import com.nightbeam.remnants.client.renderer.OssukageRuneEffectRenderer;
+import com.nightbeam.remnants.client.renderer.SkeletonArcherRenderer;
+import com.nightbeam.remnants.client.renderer.SkeletonMeleeRenderer;
 import com.nightbeam.remnants.client.renderer.SkeletonMinionRenderer;
 import com.nightbeam.remnants.client.renderer.WraithRenderer;
 import com.nightbeam.remnants.init.ModEntities;
@@ -43,6 +45,8 @@ public final class ForgeClientSetup {
 			EntityRenderers.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbRenderer::new);
 			EntityRenderers.register(ModEntities.KOTSUKAGE.get(), KotsukageRenderer::new);
 			EntityRenderers.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapRenderer::new);
+			EntityRenderers.register(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeRenderer::new);
+			EntityRenderers.register(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherRenderer::new);
 		});
 	}
 

@@ -11,6 +11,8 @@ import com.nightbeam.remnants.entity.KotsukageEntity;
 import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.event.GameEvents;
@@ -88,6 +90,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerEntity(ModEntities.UMBRAKAR_ORB, ModEntities.createUmbrakarOrb().build(ModEntities.UMBRAKAR_ORB.path()));
 		registerEntity(ModEntities.KOTSUKAGE, ModEntities.createKotsukage().build(ModEntities.KOTSUKAGE.path()));
 		registerEntity(ModEntities.KOTSUKAGE_TRAP, ModEntities.createKotsukageTrap().build(ModEntities.KOTSUKAGE_TRAP.path()));
+		registerEntity(ModEntities.SKELETON_MELEE, ModEntities.createSkeletonMelee().build(ModEntities.SKELETON_MELEE.path()));
+		registerEntity(ModEntities.SKELETON_ARCHER, ModEntities.createSkeletonArcher().build(ModEntities.SKELETON_ARCHER.path()));
 
 		registerItem(ModEntities.RAT_SPAWN_EGG, new SpawnEggItem(ModEntities.RAT.get(), 0xCC666B, 0xFF0000, new Item.Properties()));
 		registerItem(ModEntities.SKELETON_MINION_SPAWN_EGG, new SpawnEggItem(ModEntities.SKELETON_MINION.get(), 0xFF8C8C, 0xFF0000, new Item.Properties()));
@@ -96,6 +100,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerItem(ModEntities.ARMORED_GRUB_SPAWN_EGG, new SpawnEggItem(ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00, new Item.Properties()));
 		registerItem(ModEntities.UMBRAKAR_SPAWN_EGG, new SpawnEggItem(ModEntities.UMBRAKAR.get(), 0x3A1A4A, 0xC48CFF, new Item.Properties()));
 		registerItem(ModEntities.KOTSUKAGE_SPAWN_EGG, new SpawnEggItem(ModEntities.KOTSUKAGE.get(), 0xC4B59A, 0x3A7A3A, new Item.Properties()));
+		registerItem(ModEntities.SKELETON_MELEE_SPAWN_EGG, new SpawnEggItem(ModEntities.SKELETON_MELEE.get(), 0xC8B89A, 0x5A2020, new Item.Properties()));
+		registerItem(ModEntities.SKELETON_ARCHER_SPAWN_EGG, new SpawnEggItem(ModEntities.SKELETON_ARCHER.get(), 0xC8B89A, 0x6B4A2A, new Item.Properties()));
 
 		registerSound(ModSounds.SKELETONFIGHT_THEME, ModSounds.createSkeletonFightTheme());
 		registerSound(ModSounds.DASH_SFX, ModSounds.createDashSfx());
@@ -116,6 +122,8 @@ public class RemnantBossesFabric implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherEntity.createAttributes());
 	}
 
 	private void registerSpawnPlacements() {
@@ -130,6 +138,16 @@ public class RemnantBossesFabric implements ModInitializer {
 								&& Monster.isDarkEnoughToSpawn(world, pos, random)
 								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
 		SpawnPlacements.register(ModEntities.WRAITH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos, random) ->
+						world.getDifficulty() != Difficulty.PEACEFUL
+								&& Monster.isDarkEnoughToSpawn(world, pos, random)
+								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
+		SpawnPlacements.register(ModEntities.SKELETON_MELEE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos, random) ->
+						world.getDifficulty() != Difficulty.PEACEFUL
+								&& Monster.isDarkEnoughToSpawn(world, pos, random)
+								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
+		SpawnPlacements.register(ModEntities.SKELETON_ARCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) ->
 						world.getDifficulty() != Difficulty.PEACEFUL
 								&& Monster.isDarkEnoughToSpawn(world, pos, random)

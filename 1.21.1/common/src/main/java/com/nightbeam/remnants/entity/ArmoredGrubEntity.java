@@ -31,16 +31,8 @@ import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-/**
- * ArmoredGrubEntity â€” a neutral flying armoured insect.
- *
- * Uses GeckoLib 5 for animated rendering.
- * AI: passive aerial wandering, then melee retaliation when hurt.
- * Stats: 40 HP / 6 ATK / 4 ARMOR / 32 follow range.
- */
 public class ArmoredGrubEntity extends PathfinderMob implements GeoEntity {
 
-    // The single looping idle animation â€” wing-flap + body bob + jaw clench (2 s loop)
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
 
     // GeckoLib: one cache instance per entity â€” do NOT use the cache constructor directly

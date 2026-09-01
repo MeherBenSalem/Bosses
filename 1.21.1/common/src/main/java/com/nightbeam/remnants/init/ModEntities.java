@@ -9,6 +9,8 @@ import com.nightbeam.remnants.entity.KunaiEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.OssukageRuneEffectEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
@@ -117,6 +119,25 @@ public final class ModEntities {
 	public static final RegistryHolder<Item> UMBRAKAR_SPAWN_EGG = new RegistryHolder<>("umbrakar_spawn_egg");
 	public static final RegistryHolder<Item> KOTSUKAGE_SPAWN_EGG = new RegistryHolder<>("kotsukage_spawn_egg");
 
+	public static final RegistryHolder<EntityType<SkeletonMeleeEntity>> SKELETON_MELEE = RegistryHolder.entity(
+			"skeleton_melee",
+			() -> EntityType.Builder.<SkeletonMeleeEntity>of(SkeletonMeleeEntity::new, MobCategory.MONSTER)
+					.sized(0.85f, 1.95f)
+					.clientTrackingRange(64)
+					.updateInterval(3)
+					.build("skeleton_melee"));
+
+	public static final RegistryHolder<EntityType<SkeletonArcherEntity>> SKELETON_ARCHER = RegistryHolder.entity(
+			"skeleton_archer",
+			() -> EntityType.Builder.<SkeletonArcherEntity>of(SkeletonArcherEntity::new, MobCategory.MONSTER)
+					.sized(0.7f, 1.9f)
+					.clientTrackingRange(64)
+					.updateInterval(3)
+					.build("skeleton_archer"));
+
+	public static final RegistryHolder<Item> SKELETON_MELEE_SPAWN_EGG = new RegistryHolder<>("skeleton_melee_spawn_egg");
+	public static final RegistryHolder<Item> SKELETON_ARCHER_SPAWN_EGG = new RegistryHolder<>("skeleton_archer_spawn_egg");
+
 	private ModEntities() {
 	}
 
@@ -130,6 +151,8 @@ public final class ModEntities {
 		UmbrakarOrbEntity.init();
 		KotsukageEntity.init();
 		KotsukageTrapEntity.init();
+		SkeletonMeleeEntity.init();
+		SkeletonArcherEntity.init();
 	}
 
 	public static boolean canMonsterSpawn(EntityType<? extends Mob> entityType, ServerLevelAccessor world,

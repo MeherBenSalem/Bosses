@@ -60,12 +60,12 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 
 	private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
 	private static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");
-	private static final RawAnimation ATK_RSWIPE = RawAnimation.begin().thenPlay("atk_rswipe");
-	private static final RawAnimation ATK_LSWIPE = RawAnimation.begin().thenPlay("atk_lswipe");
-	private static final RawAnimation SKL_RSTOMP = RawAnimation.begin().thenPlay("skl_rstomp");
-	private static final RawAnimation SKL_LSTOMP = RawAnimation.begin().thenPlay("skl_lstomp");
-	private static final RawAnimation SKL_POISON = RawAnimation.begin().thenPlay("skl_poisonbreath");
-	private static final RawAnimation SKL_ROAR = RawAnimation.begin().thenPlay("skl_roar");
+	private static final RawAnimation ATK_RSWIPE = RawAnimation.begin().thenPlay("swipe_right");
+	private static final RawAnimation ATK_LSWIPE = RawAnimation.begin().thenPlay("swipe_left");
+	private static final RawAnimation SKL_RSTOMP = RawAnimation.begin().thenPlay("stomp_right");
+	private static final RawAnimation SKL_LSTOMP = RawAnimation.begin().thenPlay("stomp_left");
+	private static final RawAnimation SKL_POISON = RawAnimation.begin().thenPlay("poison_breath");
+	private static final RawAnimation SKL_ROAR = RawAnimation.begin().thenPlay("roar");
 	private static final RawAnimation DEATH = RawAnimation.begin().thenPlayAndHold("death");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -191,7 +191,7 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 			setAttr(Attributes.ATTACK_DAMAGE, cfg("attack_damage_phase_2", 16));
 			if (!phaseRoared) {
 				phaseRoared = true;
-				queueAttack("skl_roar", 90, 24, this.position());
+				queueAttack("roar", 90, 24, this.position());
 			}
 		}
 
@@ -204,13 +204,13 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 		int roll = this.random.nextInt(100);
 		boolean phase = this.entityData.get(DATA_PHASE_TWO);
 		if (dist < 3.6 && roll < 55) {
-			queueAttack(this.random.nextBoolean() ? "atk_rswipe" : "atk_lswipe", 50, 18, target.position());
+			queueAttack(this.random.nextBoolean() ? "swipe_right" : "swipe_left", 50, 18, target.position());
 		} else if (dist < 5.8 && roll < 78) {
-			queueAttack(this.random.nextBoolean() ? "skl_rstomp" : "skl_lstomp", 60, 22, this.position());
+			queueAttack(this.random.nextBoolean() ? "stomp_right" : "stomp_left", 60, 22, this.position());
 		} else if (dist < 10.0 && (phase || roll < 90)) {
-			queueAttack("skl_poisonbreath", 60, 16, this.position().add(this.getLookAngle().scale(3.2)));
+			queueAttack("poison_breath", 60, 16, this.position().add(this.getLookAngle().scale(3.2)));
 		} else {
-			queueAttack("skl_roar", 90, 24, this.position());
+			queueAttack("roar", 90, 24, this.position());
 		}
 	}
 
@@ -234,28 +234,28 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 			return;
 		}
 		switch (this.pendingAttack) {
-			case "atk_rswipe":
-			case "atk_lswipe":
+			case "swipe_right":
+			case "swipe_left":
 				hurtAround(this.pendingCenter, 2.8, cfg("swipe_damage", 14), 0.55);
 				burst(server, this.pendingCenter.add(0, 1.2, 0), this.pendingAttack, true);
 				this.level().playSound(null, this.blockPosition(), SoundEvents.SKELETON_HURT, SoundSource.HOSTILE, 1.4f, 0.6f);
 				break;
-			case "skl_rstomp":
-			case "skl_lstomp":
+			case "stomp_right":
+			case "stomp_left":
 				hurtAround(this.position(), cfg("stomp_radius", 5.0), cfg("stomp_damage", 16), 1.05);
 				burst(server, this.position(), this.pendingAttack, true);
 				this.level().playSound(null, this.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 1.1f, 0.7f);
 				break;
-			case "skl_poisonbreath":
+			case "poison_breath":
 				poisonCone(cfg("poison_range", 8), cfg("poison_damage", 10), (int) cfg("poison_duration", 120));
-				burst(server, this.pendingCenter, "skl_poisonbreath", true);
+				burst(server, this.pendingCenter, "poison_breath", true);
 				this.level().playSound(null, this.blockPosition(), SoundEvents.WITCH_DRINK, SoundSource.HOSTILE, 1.3f, 0.5f);
 				break;
-			case "skl_roar":
+			case "roar":
 				hurtAround(this.position(), cfg("roar_range", 14), cfg("roar_damage", 8), 1.6);
 				spawnTraps();
 				spawnMinions();
-				burst(server, this.position().add(0, 2.0, 0), "skl_roar", true);
+				burst(server, this.position().add(0, 2.0, 0), "roar", true);
 				this.level().playSound(null, this.blockPosition(), SoundEvents.WITHER_AMBIENT, SoundSource.HOSTILE, 1.6f, 0.55f);
 				break;
 			default:
@@ -351,25 +351,25 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 	private void burst(ServerLevel server, Vec3 pos, String attack, boolean impact) {
 		int extra = this.entityData.get(DATA_PHASE_TWO) ? 10 : 0;
 		switch (attack) {
-			case "atk_rswipe":
-			case "atk_lswipe":
+			case "swipe_right":
+			case "swipe_left":
 				server.sendParticles(ParticleTypes.CRIT, pos.x, pos.y, pos.z, 16 + extra, 0.5, 0.4, 0.5, 0.2);
 				server.sendParticles(ParticleTypes.SOUL, pos.x, pos.y, pos.z, 8, 0.3, 0.3, 0.3, 0.02);
 				break;
-			case "skl_rstomp":
-			case "skl_lstomp":
+			case "stomp_right":
+			case "stomp_left":
 				if (impact) {
 					server.sendParticles(ParticleTypes.EXPLOSION, pos.x, pos.y + 0.2, pos.z, 2, 0.6, 0.1, 0.6, 0);
 				}
 				server.sendParticles(ParticleTypes.CLOUD, pos.x, pos.y + 0.15, pos.z, 24 + extra, 1.4, 0.2, 1.4, 0.06);
 				server.sendParticles(ParticleTypes.SOUL, pos.x, pos.y + 0.2, pos.z, 12, 1.0, 0.2, 1.0, 0.03);
 				break;
-			case "skl_poisonbreath":
+			case "poison_breath":
 				server.sendParticles(ParticleTypes.WITCH, pos.x, pos.y + 0.6, pos.z, 28 + extra, 1.2, 0.6, 1.2, 0.04);
 				server.sendParticles(ParticleTypes.ITEM_SLIME, pos.x, pos.y + 0.5, pos.z, 10, 0.8, 0.4, 0.8, 0.02);
 				server.sendParticles(ParticleTypes.SMOKE, pos.x, pos.y + 0.8, pos.z, 16, 0.7, 0.4, 0.7, 0.02);
 				break;
-			case "skl_roar":
+			case "roar":
 				server.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 20 + extra, 1.6, 1.0, 1.6, 0.03);
 				server.sendParticles(ParticleTypes.CLOUD, pos.x, pos.y + 0.4, pos.z, 18, 1.8, 0.6, 1.8, 0.05);
 				break;
@@ -398,7 +398,7 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 					0, 0.01, 0);
 		}
 		String attack = this.getAttackName();
-		if ("skl_poisonbreath".equals(attack) && this.tickCount % 2 == 0) {
+		if ("poison_breath".equals(attack) && this.tickCount % 2 == 0) {
 			Vec3 mouth = pos.add(this.getLookAngle().scale(1.6)).add(0, 2.4, 0);
 			this.level().addParticle(ParticleTypes.WITCH, mouth.x, mouth.y, mouth.z, 0, 0.04, 0);
 			this.level().addParticle(ParticleTypes.SMOKE, mouth.x, mouth.y, mouth.z, 0, 0.02, 0);
@@ -532,12 +532,12 @@ public class KotsukageEntity extends Monster implements GeoEntity {
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "movement", 8, this::movementController));
 		AnimationController<KotsukageEntity> combat = new AnimationController<>(this, "combat", 4, this::combatController);
-		combat.triggerableAnim("atk_rswipe", ATK_RSWIPE);
-		combat.triggerableAnim("atk_lswipe", ATK_LSWIPE);
-		combat.triggerableAnim("skl_rstomp", SKL_RSTOMP);
-		combat.triggerableAnim("skl_lstomp", SKL_LSTOMP);
-		combat.triggerableAnim("skl_poisonbreath", SKL_POISON);
-		combat.triggerableAnim("skl_roar", SKL_ROAR);
+		combat.triggerableAnim("swipe_right", ATK_RSWIPE);
+		combat.triggerableAnim("swipe_left", ATK_LSWIPE);
+		combat.triggerableAnim("stomp_right", SKL_RSTOMP);
+		combat.triggerableAnim("stomp_left", SKL_LSTOMP);
+		combat.triggerableAnim("poison_breath", SKL_POISON);
+		combat.triggerableAnim("roar", SKL_ROAR);
 		controllers.add(combat);
 	}
 

@@ -13,6 +13,8 @@ import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RatRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantOssukageRenderer;
 import com.nightbeam.remnants.client.renderer.OssukageRuneEffectRenderer;
+import com.nightbeam.remnants.client.renderer.SkeletonArcherRenderer;
+import com.nightbeam.remnants.client.renderer.SkeletonMeleeRenderer;
 import com.nightbeam.remnants.client.renderer.SkeletonMinionRenderer;
 import com.nightbeam.remnants.client.renderer.WraithRenderer;
 import com.nightbeam.remnants.fabric.network.FabricNetwork;
@@ -35,6 +37,8 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbRenderer::new);
 		EntityRendererRegistry.register(ModEntities.KOTSUKAGE.get(), KotsukageRenderer::new);
 		EntityRendererRegistry.register(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapRenderer::new);
+		EntityRendererRegistry.register(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeRenderer::new);
+		EntityRendererRegistry.register(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherRenderer::new);
 
 		EntityModelLayerRegistry.registerModelLayer(Modelrat.LAYER_LOCATION, Modelrat::createBodyLayer);
 		EntityModelLayerRegistry.registerModelLayer(Modelshuriken.LAYER_LOCATION, Modelshuriken::createBodyLayer);

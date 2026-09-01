@@ -10,6 +10,8 @@ import com.nightbeam.remnants.entity.KotsukageEntity;
 import com.nightbeam.remnants.entity.KotsukageTrapEntity;
 import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
+import com.nightbeam.remnants.entity.SkeletonArcherEntity;
+import com.nightbeam.remnants.entity.SkeletonMeleeEntity;
 import com.nightbeam.remnants.entity.SkeletonMinionEntity;
 import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.forge.network.ForgeNetwork;
@@ -109,6 +111,8 @@ public class RemnantBossesForge {
 		bindEntity(ModEntities.UMBRAKAR_ORB, () -> ModEntities.createUmbrakarOrb().build(ModEntities.UMBRAKAR_ORB.path()));
 		bindEntity(ModEntities.KOTSUKAGE, () -> ModEntities.createKotsukage().build(ModEntities.KOTSUKAGE.path()));
 		bindEntity(ModEntities.KOTSUKAGE_TRAP, () -> ModEntities.createKotsukageTrap().build(ModEntities.KOTSUKAGE_TRAP.path()));
+		bindEntity(ModEntities.SKELETON_MELEE, () -> ModEntities.createSkeletonMelee().build(ModEntities.SKELETON_MELEE.path()));
+		bindEntity(ModEntities.SKELETON_ARCHER, () -> ModEntities.createSkeletonArcher().build(ModEntities.SKELETON_ARCHER.path()));
 
 		bindSpawnEgg(ModEntities.RAT_SPAWN_EGG, () -> ModEntities.RAT.get(), 0xCC666B, 0xFF0000);
 		bindSpawnEgg(ModEntities.SKELETON_MINION_SPAWN_EGG, () -> ModEntities.SKELETON_MINION.get(), 0xFF8C8C, 0xFF0000);
@@ -117,6 +121,8 @@ public class RemnantBossesForge {
 		bindSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, () -> ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00);
 		bindSpawnEgg(ModEntities.UMBRAKAR_SPAWN_EGG, () -> ModEntities.UMBRAKAR.get(), 0x3A1A4A, 0xC48CFF);
 		bindSpawnEgg(ModEntities.KOTSUKAGE_SPAWN_EGG, () -> ModEntities.KOTSUKAGE.get(), 0xC4B59A, 0x3A7A3A);
+		bindSpawnEgg(ModEntities.SKELETON_MELEE_SPAWN_EGG, () -> ModEntities.SKELETON_MELEE.get(), 0xC8B89A, 0x5A2020);
+		bindSpawnEgg(ModEntities.SKELETON_ARCHER_SPAWN_EGG, () -> ModEntities.SKELETON_ARCHER.get(), 0xC8B89A, 0x6B4A2A);
 
 		bindSound(ModSounds.SKELETONFIGHT_THEME, ModSounds::createSkeletonFightTheme);
 		bindSound(ModSounds.DASH_SFX, ModSounds::createDashSfx);
@@ -149,6 +155,8 @@ public class RemnantBossesForge {
 		event.put(ModEntities.UMBRAKAR_ORB.get(), UmbrakarOrbEntity.createAttributes().build());
 		event.put(ModEntities.KOTSUKAGE.get(), KotsukageEntity.createAttributes().build());
 		event.put(ModEntities.KOTSUKAGE_TRAP.get(), KotsukageTrapEntity.createAttributes().build());
+		event.put(ModEntities.SKELETON_MELEE.get(), SkeletonMeleeEntity.createAttributes().build());
+		event.put(ModEntities.SKELETON_ARCHER.get(), SkeletonArcherEntity.createAttributes().build());
 	}
 
 	private void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
@@ -167,6 +175,20 @@ public class RemnantBossesForge {
 				SpawnPlacementRegisterEvent.Operation.REPLACE);
 
 		event.register(ModEntities.WRAITH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos, random) ->
+						world.getDifficulty() != Difficulty.PEACEFUL
+								&& Monster.isDarkEnoughToSpawn(world, pos, random)
+								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random),
+				SpawnPlacementRegisterEvent.Operation.REPLACE);
+
+		event.register(ModEntities.SKELETON_MELEE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos, random) ->
+						world.getDifficulty() != Difficulty.PEACEFUL
+								&& Monster.isDarkEnoughToSpawn(world, pos, random)
+								&& Mob.checkMobSpawnRules(entityType, world, reason, pos, random),
+				SpawnPlacementRegisterEvent.Operation.REPLACE);
+
+		event.register(ModEntities.SKELETON_ARCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) ->
 						world.getDifficulty() != Difficulty.PEACEFUL
 								&& Monster.isDarkEnoughToSpawn(world, pos, random)
