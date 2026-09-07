@@ -47,6 +47,9 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class UmbrakarEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<String> DATA_ATTACK = SynchedEntityData.defineId(UmbrakarEntity.class, EntityDataSerializers.STRING);
@@ -60,6 +63,7 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	private static final RawAnimation TAILSLAM = RawAnimation.begin().thenPlay("tailslam");
 	private static final RawAnimation ROAR = RawAnimation.begin().thenPlay("roar");
 	private static final RawAnimation TAILORB = RawAnimation.begin().thenPlay("tailorb");
+	private static final RawAnimation RIFTCLAW = RawAnimation.begin().thenPlay("riftclaw");
 	private static final RawAnimation DEATH = RawAnimation.begin().thenPlayAndHold("death");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -75,6 +79,10 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	private Vec3 pendingCenter = Vec3.ZERO;
 	private boolean statsApplied;
 	private boolean phaseRoared;
+	private boolean loadedFromSave;
+	private Vec3 attackForward = Vec3.ZERO;
+	private float attackYaw;
+	private final Set<UUID> waveHits = new HashSet<>();
 
 	public UmbrakarEntity(EntityType<? extends UmbrakarEntity> type, Level level) {
 		super(type, level);
@@ -145,7 +153,15 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 		setAttr(Attributes.MOVEMENT_SPEED, Math.max(0.28, cfg("movement_speed", 0.32)));
 		setAttr(Attributes.ARMOR, cfg("armor", 10));
 		setAttr(Attributes.FOLLOW_RANGE, cfg("follow_range", 48));
-		this.setHealth(this.getMaxHealth());
+		if (!loadedFromSave) {
+			this.setHealth(this.getMaxHealth());
+		} else {
+			this.setHealth(Math.min(this.getHealth(), this.getMaxHealth()));
+		}
+		if (this.entityData.get(DATA_PHASE_TWO)) {
+			setAttr(Attributes.MOVEMENT_SPEED, Math.max(0.34, cfg("movement_speed_phase_2", 0.38)));
+			setAttr(Attributes.ATTACK_DAMAGE, cfg("attack_damage_phase_2", 18));
+		}
 	}
 
 	private void setAttr(net.minecraft.world.entity.ai.attributes.Attribute attribute, double value) {
@@ -156,8 +172,22 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	}
 
 	private void tickCombat() {
+		if (!this.isAlive()) {
+			this.attackTicks = 0;
+			this.entityData.set(DATA_ATTACK, "");
+			return;
+		}
 		if (this.attackTicks > 0) {
 			int elapsed = this.attackDuration - this.attackTicks;
+			this.getNavigation().stop();
+			this.setYRot(this.attackYaw);
+			this.setYBodyRot(this.attackYaw);
+			this.setYHeadRot(this.attackYaw);
+			Vec3 motion = this.getDeltaMovement();
+			this.setDeltaMovement(0, motion.y, 0);
+			if (this.level() instanceof ServerLevel server) {
+				tickAttackPresentation(server, elapsed);
+			}
 			if (!this.impactDone && elapsed >= this.impactAt) {
 				this.impactDone = true;
 				resolveImpact();
@@ -174,7 +204,7 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 
 		float threshold = (float) cfg("hp_threshold_phase_2", 40);
 		boolean phaseTwo = this.getHealth() <= this.getMaxHealth() * (threshold / 100.0f);
-		if (phaseTwo && !this.entityData.get(DATA_PHASE_TWO)) {
+		if (phaseTwo && !this.entityData.get(DATA_PHASE_TWO) && this.attackTicks == 0) {
 			this.entityData.set(DATA_PHASE_TWO, true);
 			setAttr(Attributes.MOVEMENT_SPEED, Math.max(0.34, cfg("movement_speed_phase_2", 0.38)));
 			setAttr(Attributes.ATTACK_DAMAGE, cfg("attack_damage_phase_2", 18));
@@ -185,17 +215,20 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 		}
 
 		LivingEntity target = this.getTarget();
-		if (target == null || !target.isAlive() || this.attackCooldown > 0 || this.attackTicks > 0) {
+		if (target == null || !target.isAlive() || !this.hasLineOfSight(target) || this.attackCooldown > 0 || this.attackTicks > 0) {
 			return;
 		}
 
 		double dist = this.distanceTo(target);
 		int roll = this.random.nextInt(100);
-		if (dist < 4.2 && roll < 50) {
+		if (dist > 6.0 && dist < 18.0 && roll < 45) {
+			queueAttack("riftclaw", 52, 24, this.position());
+		} else if (dist < 4.2 && roll < 50) {
 			queueAttack("bite", 25, 10, target.position());
 		} else if (dist < 6.8 && roll < 70) {
 			queueAttack("frontslam", 50, 22, this.position().add(this.getLookAngle().scale(3.2)));
-		} else if (dist < 8.0 && roll < 82) {
+		} else if (dist < 8.0 && roll < 82
+				&& target.position().subtract(this.position()).normalize().dot(this.getLookAngle()) < -0.15) {
 			queueAttack("tailslam", 40, 18, this.position().add(this.getLookAngle().scale(-4.0)));
 		} else if (dist > 5.5 && (this.entityData.get(DATA_PHASE_TWO) || roll < 90)) {
 			queueAttack("tailorb", 35, 16, this.position().add(this.getLookAngle().scale(-2.8)).add(0, 2.2, 0));
@@ -205,17 +238,36 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	}
 
 	private void queueAttack(String name, int ticks, int impactTick, Vec3 center) {
+		this.getNavigation().stop();
+		LivingEntity target = this.getTarget();
+		Vec3 aim = target == null || "tailslam".equals(name)
+				? this.getLookAngle() : target.position().subtract(this.position());
+		this.attackForward = new Vec3(aim.x, 0, aim.z).normalize();
+		if (this.attackForward.lengthSqr() < 0.001) {
+			this.attackForward = new Vec3(0, 0, 1);
+		}
+		this.attackYaw = (float) (Math.toDegrees(Math.atan2(this.attackForward.z, this.attackForward.x)) - 90);
+		this.setYRot(this.attackYaw);
+		this.setYBodyRot(this.attackYaw);
+		this.setYHeadRot(this.attackYaw);
+		this.waveHits.clear();
 		this.entityData.set(DATA_ATTACK, name);
 		this.attackDuration = ticks;
 		this.attackTicks = ticks;
 		this.impactAt = impactTick;
 		this.impactDone = false;
 		this.pendingAttack = name;
-		this.pendingCenter = center;
+		this.pendingCenter = switch (name) {
+			case "bite" -> this.position().add(this.attackForward.scale(2.8));
+			case "frontslam" -> this.position().add(this.attackForward.scale(3.2));
+			case "tailslam" -> this.position().add(this.attackForward.scale(-3.8));
+			case "tailorb" -> this.position().add(this.attackForward.scale(-2.8)).add(0, 2.2, 0);
+			default -> this.position();
+		};
 		this.attackCooldown = ticks + (this.entityData.get(DATA_PHASE_TWO) ? 16 : 28);
-		this.triggerAnim("combat", name);
 		if (this.level() instanceof ServerLevel server) {
-			burst(server, this.position().add(0, 1.8, 0), name, false);
+			this.level().playSound(null, this.blockPosition(), SoundEvents.RAVAGER_AMBIENT,
+					SoundSource.HOSTILE, 1.1f, "roar".equals(name) ? 0.5f : 0.75f);
 		}
 	}
 
@@ -246,9 +298,9 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 				}
 				burst(server, this.pendingCenter, "tailorb", true);
 			}
+			case "riftclaw" -> burst(server, this.position().add(this.attackForward.scale(3)), "frontslam", true);
 			case "roar" -> {
 				this.level().playSound(null, this.blockPosition(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 2.0f, 0.55f);
-				hurtAround(this.position(), cfg("roar_range", 16), cfg("roar_damage", 8), 1.8);
 				burst(server, this.position().add(0, 2.2, 0), "roar", true);
 			}
 			default -> {
@@ -259,9 +311,68 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	private void hurtAround(Vec3 center, double radius, double damage, double knock) {
 		AABB box = new AABB(center, center).inflate(radius);
 		for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, box, e -> e != this && e.isAlive())) {
-			living.hurt(this.damageSources().mobAttack(this), (float) damage);
+			if (living.position().distanceToSqr(center) > radius * radius || !this.hasLineOfSight(living)
+					|| this.isAlliedTo(living)) {
+				continue;
+			}
+			if (!living.hurt(this.damageSources().mobAttack(this), (float) damage)) {
+				continue;
+			}
 			Vec3 push = living.position().subtract(center).normalize().scale(knock).add(0, 0.25, 0);
 			living.push(push.x, push.y, push.z);
+		}
+	}
+
+	/** Windup markers are fixed in world space once the attack commits. */
+	private void tickAttackPresentation(ServerLevel server, int elapsed) {
+		if (elapsed < this.impactAt && elapsed % 4 == 0) {
+			switch (this.pendingAttack) {
+				case "bite" -> particleRing(server, this.pendingCenter, 3.2, false);
+				case "frontslam" -> particleRing(server, this.pendingCenter, 4.4, false);
+				case "tailslam" -> particleRing(server, this.pendingCenter, 4.6, false);
+				case "roar" -> particleRing(server, this.pendingCenter, cfg("roar_range", 16), false);
+				case "riftclaw" -> {
+					for (int i = 3; i <= 15; i += 3) {
+						particleRing(server, this.pendingCenter.add(this.attackForward.scale(i)), 1.8, false);
+					}
+				}
+				default -> { }
+			}
+		}
+		int sinceImpact = elapsed - this.impactAt;
+		if ("roar".equals(this.pendingAttack) && sinceImpact >= 0 && sinceImpact <= 20) {
+			double radius = cfg("roar_range", 16) * (sinceImpact + 1) / 21.0;
+			if (sinceImpact % 2 == 0) particleRing(server, this.pendingCenter, radius, true);
+			AABB area = new AABB(this.pendingCenter, this.pendingCenter).inflate(radius + 1, 3, radius + 1);
+			for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, area,
+					e -> e != this && e.isAlive() && !this.isAlliedTo(e))) {
+				Vec3 delta = living.position().subtract(this.pendingCenter);
+				double distance = Math.sqrt(delta.horizontalDistanceSqr());
+				if (Math.abs(distance - radius) <= 1.0 && Math.abs(delta.y) < 2.5
+						&& this.hasLineOfSight(living) && this.waveHits.add(living.getUUID())) {
+					if (living.hurt(this.damageSources().mobAttack(this), (float) cfg("roar_damage", 8))) {
+						Vec3 push = delta.normalize().scale(1.4);
+						living.push(push.x, 0.3, push.z);
+					}
+				}
+			}
+		}
+		if ("riftclaw".equals(this.pendingAttack) && sinceImpact >= 0 && sinceImpact <= 16 && sinceImpact % 4 == 0) {
+			Vec3 point = this.pendingCenter.add(this.attackForward.scale(3 + sinceImpact * 0.75));
+			hurtAround(point, 1.8, cfg("slam_damage", 18), 0.8);
+			particleRing(server, point, 1.8, true);
+			server.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, point.x, point.y + .5, point.z, 14, .5, .8, .5, .04);
+			this.level().playSound(null, point.x, point.y, point.z, SoundEvents.RAVAGER_ATTACK, SoundSource.HOSTILE, .8f, .6f + sinceImpact * .025f);
+		}
+	}
+
+	private void particleRing(ServerLevel server, Vec3 center, double radius, boolean impact) {
+		int count = impact ? 36 : 24;
+		for (int i = 0; i < count; i++) {
+			double angle = Math.PI * 2 * i / count;
+			server.sendParticles(impact ? ParticleTypes.SOUL_FIRE_FLAME : ParticleTypes.WITCH,
+					center.x + Math.cos(angle) * radius, center.y + .15,
+					center.z + Math.sin(angle) * radius, 1, 0, 0, 0, 0);
 		}
 	}
 
@@ -321,7 +432,7 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	private void tickClientFx() {
 		Vec3 pos = this.position();
 		boolean phaseTwo = this.entityData.get(DATA_PHASE_TWO);
-		int ambient = phaseTwo ? 6 : 3;
+		int ambient = this.tickCount % 3 == 0 ? (phaseTwo ? 3 : 1) : 0;
 		for (int i = 0; i < ambient; i++) {
 			double x = pos.x + (this.random.nextDouble() - 0.5) * 3.4;
 			double y = pos.y + 0.6 + this.random.nextDouble() * 2.8;
@@ -331,8 +442,8 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 				this.level().addParticle(ParticleTypes.REVERSE_PORTAL, x, y, z, 0, 0.02, 0);
 			}
 		}
-		if (phaseTwo) {
-			for (int i = 0; i < 3; i++) {
+		if (phaseTwo && this.tickCount % 3 == 0) {
+			for (int i = 0; i < 2; i++) {
 				this.level().addParticle(ParticleTypes.DRAGON_BREATH,
 						pos.x + (this.random.nextDouble() - 0.5) * 3.2,
 						pos.y + 1.2 + this.random.nextDouble() * 2.0,
@@ -415,6 +526,21 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
+	protected void tickDeath() {
+		this.deathTime++;
+		this.getNavigation().stop();
+		if (this.level() instanceof ServerLevel server && this.deathTime == 76) {
+			particleRing(server, this.position(), 4.2, true);
+			server.sendParticles(ParticleTypes.REVERSE_PORTAL, this.getX(), this.getY() + 1.2,
+					this.getZ(), 60, 1.5, 0.6, 1.5, 0.12);
+		}
+		if (this.deathTime >= 92 && !this.level().isClientSide) {
+			this.level().broadcastEntityEvent(this, (byte) 60);
+			this.remove(Entity.RemovalReason.KILLED);
+		}
+	}
+
+	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.RAVAGER_DEATH;
 	}
@@ -440,18 +566,14 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 		super.readAdditionalSaveData(tag);
 		this.entityData.set(DATA_PHASE_TWO, tag.getBoolean("PhaseTwo"));
 		this.statsApplied = false;
+		this.loadedFromSave = true;
+		this.phaseRoared = tag.getBoolean("PhaseTwo");
 	}
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(this, "movement", 8, this::movementController));
-		AnimationController<UmbrakarEntity> combat = new AnimationController<>(this, "combat", 4, this::combatController);
-		combat.triggerableAnim("bite", BITE);
-		combat.triggerableAnim("frontslam", FRONTSLAM);
-		combat.triggerableAnim("tailslam", TAILSLAM);
-		combat.triggerableAnim("roar", ROAR);
-		combat.triggerableAnim("tailorb", TAILORB);
-		controllers.add(combat);
+		// A single full-body controller keeps attacks and death from fighting locomotion.
+		controllers.add(new AnimationController<>(this, "movement", 2, this::movementController));
 	}
 
 	private PlayState movementController(AnimationState<UmbrakarEntity> state) {
@@ -459,18 +581,21 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 			return state.setAndContinue(DEATH);
 		}
 		String attack = this.getAttackName();
-		if ("bite".equals(attack) || "frontslam".equals(attack) || "tailslam".equals(attack)) {
-			return PlayState.STOP;
+		if (!attack.isEmpty()) {
+			return state.setAndContinue(switch (attack) {
+				case "bite" -> BITE;
+				case "frontslam" -> FRONTSLAM;
+				case "tailslam" -> TAILSLAM;
+				case "tailorb" -> TAILORB;
+				case "riftclaw" -> RIFTCLAW;
+				default -> ROAR;
+			});
 		}
 		double moving = this.getDeltaMovement().horizontalDistanceSqr();
 		if (moving > 0.004 || state.getLimbSwingAmount() > 0.25) {
 			return state.setAndContinue(this.entityData.get(DATA_PHASE_TWO) ? RUN : WALK);
 		}
 		return state.setAndContinue(IDLE);
-	}
-
-	private PlayState combatController(AnimationState<UmbrakarEntity> state) {
-		return PlayState.CONTINUE;
 	}
 
 	@Override
@@ -498,6 +623,10 @@ public class UmbrakarEntity extends Monster implements GeoEntity {
 		public void tick() {
 			LivingEntity target = UmbrakarEntity.this.getTarget();
 			if (target == null) {
+				return;
+			}
+			if (UmbrakarEntity.this.attackTicks > 0) {
+				UmbrakarEntity.this.getNavigation().stop();
 				return;
 			}
 			UmbrakarEntity.this.getLookControl().setLookAt(target, 40.0f, 40.0f);
