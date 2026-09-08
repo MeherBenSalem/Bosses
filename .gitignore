@@ -36,3 +36,6 @@ releases/
 # OS
 .DS_Store
 Thumbs.db
+
+_tmp_ogg_fix/
+
