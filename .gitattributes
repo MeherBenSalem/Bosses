@@ -1,2 +1,2 @@
 * text=auto
-*.ogg -text -diff -merge
+*.ogg binary
