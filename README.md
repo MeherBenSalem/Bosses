@@ -2,6 +2,35 @@
 
 A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and altar rituals.
 
+## Summoning bosses
+
+Three bosses are summoned through an **Ancient Altar** ritual. Craft **one Ancient Altar** and **four Ancient Pedestals**, arrange the pedestals three blocks out on each cardinal side, place the correct offering block on top of each pedestal, then right-click the altar with the activation item in your main hand.
+
+| Boss | Activation item | Pedestal tops (east → west → south → north) |
+| --- | --- | --- |
+| **Ossukage** | Nether Star | Skeleton Skull ×4 |
+| **Kotsukage** | Wither Skeleton Skull | Bone Block, Soul Sand, Soul Soil, Nether Wart Block |
+| **Umbrakar** | Echo Shard | Amethyst Block, Crying Obsidian, End Stone, Sculk |
+
+```
+        [north offering]
+               |
+[west] — [ Ancient Altar ] — [east]
+               |
+        [south offering]
+```
+
+Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above** each pedestal. The activation item is consumed in survival. Ossukage also spawns skeleton minions (default 2).
+
+**Crafting**
+
+- **Ancient Altar** — top row: 3× Chiseled Deepslate; center: Diamond; bottom corners: Emerald
+- **Ancient Pedestal** — top: Emerald; middle: Chiseled Deepslate; bottom row: 3× Chiseled Deepslate
+
+**Commands:** `/summon remnants:ossukage`, `/summon remnants:kotsukage`, `/summon remnants:umbrakar`
+
+**Configuration:** JAuml files `remnant/bosses/{boss}_summon` — keys `portal_activation_item`, `pedestal_one_activation_block` … `pedestal_four_activation_block`. See [docs/store-listing.md](docs/store-listing.md) for paste-ready Modrinth/CurseForge copy and full registry IDs.
+
 ## Supported versions
 
 | Workspace | Minecraft | Loaders | Java |
