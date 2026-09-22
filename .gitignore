@@ -37,5 +37,9 @@ releases/
 .DS_Store
 Thumbs.db
 
+# Python caches
+__pycache__/
+*.py[cod]
+
 _tmp_ogg_fix/
 

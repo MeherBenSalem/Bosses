@@ -4,13 +4,14 @@ A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and 
 
 ## Summoning bosses
 
-Three bosses are summoned through an **Ancient Altar** ritual. Craft **one Ancient Altar** and **four Ancient Pedestals**, arrange the pedestals three blocks out on each cardinal side, place the correct offering block on top of each pedestal, then right-click the altar with the activation item in your main hand.
+Four bosses are summoned through an **Ancient Altar** ritual. Craft **one Ancient Altar** and **four Ancient Pedestals**, arrange the pedestals three blocks out on each cardinal side, place the correct offering block on top of each pedestal, then right-click the altar with the activation item in your main hand.
 
 | Boss | Activation item | Pedestal tops (east → west → south → north) |
 | --- | --- | --- |
 | **Ossukage** | Nether Star | Skeleton Skull ×4 |
 | **Kotsukage** | Wither Skeleton Skull | Bone Block, Soul Sand, Soul Soil, Nether Wart Block |
 | **Umbrakar** | Echo Shard | Amethyst Block, Crying Obsidian, End Stone, Sculk |
+| **Hollow Sovereign** | Heart of the Sea | Bone Block, Bone Block, Skeleton Skull, Skeleton Skull |
 
 ```
         [north offering]
@@ -27,7 +28,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 - **Ancient Altar** — top row: 3× Chiseled Deepslate; center: Diamond; bottom corners: Emerald
 - **Ancient Pedestal** — top: Emerald; middle: Chiseled Deepslate; bottom row: 3× Chiseled Deepslate
 
-**Commands:** `/summon remnants:ossukage`, `/summon remnants:kotsukage`, `/summon remnants:umbrakar`
+**Commands:** `/summon remnants:ossukage`, `/summon remnants:kotsukage`, `/summon remnants:umbrakar`, `/summon remnants:hollow_sovereign`
 
 **Configuration:** JAuml files `remnant/bosses/{boss}_summon` — keys `portal_activation_item`, `pedestal_one_activation_block` … `pedestal_four_activation_block`. See [docs/store-listing.md](docs/store-listing.md) for paste-ready Modrinth/CurseForge copy and full registry IDs.
 
@@ -40,7 +41,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The published version is `2.5.1` in both workspaces. Keep those `version=` lines identical.
+The published version is `2.6.0` in both workspaces. Keep those `version=` lines identical.
 
 ## Requirements
 

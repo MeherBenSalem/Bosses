@@ -29,6 +29,10 @@ public final class ModTabs {
 					tabData.accept(ModEntities.WRAITH_SPAWN_EGG.get());
 					tabData.accept(ModEntities.ARMORED_GRUB_SPAWN_EGG.get());
 					tabData.accept(ModEntities.UMBRAKAR_SPAWN_EGG.get());
+					tabData.accept(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG.get());
+                    tabData.accept(ModEntities.DIRGE_LANTERN_SPAWN_EGG.get());
+                    tabData.accept(ModEntities.SICKLEGHAST_SPAWN_EGG.get());
+                    tabData.accept(ModEntities.GRAVE_SKITTER_SPAWN_EGG.get());
 					tabData.accept(ModEntities.KOTSUKAGE_SPAWN_EGG.get());
 					tabData.accept(ModEntities.SKELETON_MELEE_SPAWN_EGG.get());
 					tabData.accept(ModEntities.SKELETON_ARCHER_SPAWN_EGG.get());

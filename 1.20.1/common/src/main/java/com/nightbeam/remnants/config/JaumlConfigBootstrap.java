@@ -18,7 +18,25 @@ public final class JaumlConfigBootstrap {
 			return;
 		}
 
-		if (api.createConfigFile("remnant/bosses", "ossukage_summon")) {
+		BoneMonsterConfig.DEFAULTS.forEach((file,defaults) -> {
+            api.createConfigFile("remnant/monsters",file);
+            defaults.forEach((key,value) -> {
+                if(!api.arrayKeyExists("remnant/monsters",file,key)) api.setNumberValue("remnant/monsters",file,key,value);
+            });
+        });
+        api.createConfigFile("remnant/bosses", "hollow_sovereign");
+        SovereignConfig.DEFAULTS.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", "hollow_sovereign", key)) api.setNumberValue("remnant/bosses", "hollow_sovereign", key, value);
+        });
+        api.createConfigFile("remnant/bosses", "hollow_sovereign_summon");
+        SovereignConfig.RITUAL.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", "hollow_sovereign_summon", key)) api.setStringValue("remnant/bosses", "hollow_sovereign_summon", key, value);
+        });
+        api.createConfigFile("remnant/client", "presentation");
+        for (String key : new String[]{"custom_boss_bars", "vfx_density"}) {
+            if (!api.arrayKeyExists("remnant/client", "presentation", key)) api.setNumberValue("remnant/client", "presentation", key, 1);
+        }
+        if (api.createConfigFile("remnant/bosses", "ossukage_summon")) {
 			if (api.createConfigFile("remnant", "main")) {
 				// Populate a couple of safe defaults so main.json is not empty and is
 				// discoverable by users

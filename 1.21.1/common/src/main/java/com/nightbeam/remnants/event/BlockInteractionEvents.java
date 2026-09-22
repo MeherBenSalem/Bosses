@@ -50,6 +50,7 @@ public final class BlockInteractionEvents {
 			return;
 		}
 
+		if (SovereignRitual.tryActivate(player, level, pos)) return;
 		String heldKey = BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString();
 		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon",
 				"portal_activation_item"))) {

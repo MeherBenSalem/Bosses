@@ -38,6 +38,38 @@ legacyForge {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
+// Supply the official -> SRG mapping to Mixin's processor. MDG exposes the
+// reverse map; the processor needs this direction for production refmaps.
+def mixinMappings = layout.buildDirectory.file('generated/mixin/namedToSrg.srg')
+def mixinRefmap = layout.buildDirectory.file("generated/mixinResources/${mod_id}.refmap.json")
+tasks.register('prepareMixinMappings') {
+    dependsOn 'createMinecraftArtifacts'
+    def inputMap = layout.buildDirectory.file('moddev/artifacts/intermediateToNamed.srg')
+    inputs.file(inputMap)
+    outputs.file(mixinMappings)
+    doLast {
+        def output = mixinMappings.get().asFile
+        output.parentFile.mkdirs()
+        output.text = inputMap.get().asFile.readLines().collect { line ->
+            def p = line.split(' ')
+            if (p[0] == 'MD:') return "MD: ${p[3]} ${p[4]} ${p[1]} ${p[2]}"
+            if (p[0] in ['CL:', 'FD:', 'PK:']) return "${p[0]} ${p[2]} ${p[1]}"
+            return line
+        }.join('\n') + '\n'
+    }
+}
+tasks.named('compileJava', JavaCompile) {
+    dependsOn 'prepareMixinMappings'
+    options.compilerArgs.addAll([
+        "-AreobfSrgFile=${mixinMappings.get().asFile}",
+        "-AoutRefMapFile=${mixinRefmap.get().asFile}",
+        '-AdefaultObfuscationEnv=searge'
+    ])
+    doFirst { mixinRefmap.get().asFile.parentFile.mkdirs() }
+}
+sourceSets.main.resources.srcDir layout.buildDirectory.dir('generated/mixinResources')
+tasks.named('processResources') { dependsOn 'compileJava' }
+
 dependencies {
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")

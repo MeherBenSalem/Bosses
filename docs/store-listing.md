@@ -1,6 +1,6 @@
 # Remnant Bosses — store listing copy
 
-Paste-ready text for Modrinth and CurseForge. Summon mechanics verified against `GameEvents.java` / `BlockInteractionEvents.java` and JAuml defaults in `JaumlConfigBootstrap.java` (v2.5.1).
+Paste-ready text for Modrinth and CurseForge. Summon mechanics verified against `GameEvents.java` / `BlockInteractionEvents.java` and JAuml defaults in `JaumlConfigBootstrap.java` (v2.6.0).
 
 ---
 

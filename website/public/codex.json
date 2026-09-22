@@ -1,0 +1,750 @@
+{
+  "version": "2.6.0",
+  "creatures": [
+    {
+      "id": "hollow_sovereign",
+      "name": "Hollow Sovereign",
+      "subtitle": "The crown awakens",
+      "category": "Boss",
+      "description": "A towering bone monarch with a suspended crown and a volatile soul core.",
+      "abilities": [
+        "Claw combo",
+        "Ground slam",
+        "Core blast",
+        "Roar",
+        "Enrage"
+      ],
+      "model": {
+        "url": "models/hollow_sovereign.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "awaken",
+          "roar",
+          "claw_combo",
+          "ground_slam",
+          "core_blast",
+          "enrage",
+          "death"
+        ],
+        "bones": 24,
+        "cubes": 106
+      },
+      "health": 950.0,
+      "config": "remnant/bosses/hollow_sovereign",
+      "playable": true,
+      "thumbnail": "thumbnails/hollow_sovereign.png"
+    },
+    {
+      "id": "ossukage",
+      "name": "Ossukage",
+      "subtitle": "Oni Shogun",
+      "category": "Boss",
+      "description": "A skeletal warrior whose blade swings and dash attacks punish careless approaches.",
+      "abilities": [
+        "Blade swings",
+        "Attack dash",
+        "Skeleton reinforcements"
+      ],
+      "model": {
+        "url": "models/ossukage.glb",
+        "clips": [
+          "spawn",
+          "spot_player",
+          "idle",
+          "walk",
+          "run",
+          "attack_1",
+          "swing_1",
+          "swing_2",
+          "attack_dash",
+          "hit1",
+          "hit2",
+          "hit3",
+          "in_air",
+          "land",
+          "death"
+        ],
+        "bones": 18,
+        "cubes": 80
+      },
+      "health": 800,
+      "config": "remnant/bosses/ossukage",
+      "playable": true,
+      "thumbnail": "thumbnails/ossukage.png"
+    },
+    {
+      "id": "kotsukage",
+      "name": "Kotsukage",
+      "subtitle": "Bone Sovereign",
+      "category": "Boss",
+      "description": "A heavy bone predator mixing alternating swipes, stomps, poison breath, and a roar.",
+      "abilities": [
+        "Right and left swipe",
+        "Alternating stomps",
+        "Poison breath",
+        "Roar"
+      ],
+      "model": {
+        "url": "models/kotsukage.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "swipe_right",
+          "swipe_left",
+          "roar",
+          "stomp_right",
+          "stomp_left",
+          "poison_breath",
+          "death"
+        ],
+        "bones": 19,
+        "cubes": 153
+      },
+      "health": 700,
+      "config": "remnant/bosses/kotsukage",
+      "playable": true,
+      "thumbnail": "thumbnails/kotsukage.png"
+    },
+    {
+      "id": "umbrakar",
+      "name": "Umbrakar",
+      "subtitle": "Riftmaw Colossus",
+      "category": "Boss",
+      "description": "A crowned colossus with a blade mane, crushing limbs, and a tail that casts homing orbs.",
+      "abilities": [
+        "Bite",
+        "Front slam",
+        "Tail slam",
+        "Homing orb",
+        "Roar shockwave",
+        "Rift claw"
+      ],
+      "model": {
+        "url": "models/umbrakar.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "run",
+          "bite",
+          "frontslam",
+          "tailslam",
+          "tailorb",
+          "roar",
+          "riftclaw",
+          "death"
+        ],
+        "bones": 30,
+        "cubes": 218
+      },
+      "health": 750,
+      "config": "remnant/bosses/umbrakar",
+      "playable": true,
+      "thumbnail": "thumbnails/umbrakar.png"
+    },
+    {
+      "id": "grave_skitter",
+      "name": "Grave Skitter",
+      "subtitle": "The cemetery crawls",
+      "category": "Monster",
+      "description": "Six jointed legs carry a low carapace and a skull with hooked mandibles. Watch for the crouch before its pounce.",
+      "abilities": [
+        "Melee bite",
+        "Telegraphed pounce"
+      ],
+      "model": {
+        "url": "models/grave_skitter.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack",
+          "special",
+          "hurt",
+          "death"
+        ],
+        "bones": 10,
+        "cubes": 57
+      },
+      "health": 24.0,
+      "config": "remnant/monsters/grave_skitter",
+      "playable": true,
+      "thumbnail": "thumbnails/grave_skitter.png"
+    },
+    {
+      "id": "sickleghast",
+      "name": "Sickleghast",
+      "subtitle": "A harvest of bone",
+      "category": "Monster",
+      "description": "A reverse-jointed ghoul with enormous scythe forearms. Its frontal cleave rewards stepping out of the attack arc.",
+      "abilities": [
+        "Paired strike",
+        "Frontal cleave"
+      ],
+      "model": {
+        "url": "models/sickleghast.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack",
+          "special",
+          "hurt",
+          "death"
+        ],
+        "bones": 8,
+        "cubes": 54
+      },
+      "health": 40.0,
+      "config": "remnant/monsters/sickleghast",
+      "playable": true,
+      "thumbnail": "thumbnails/sickleghast.png"
+    },
+    {
+      "id": "dirge_lantern",
+      "name": "Dirge Lantern",
+      "subtitle": "A light you should not follow",
+      "category": "Monster",
+      "description": "A flying ribcage carries a trapped soul. It marks a location before releasing a soul burst; move away from the tell.",
+      "abilities": [
+        "Flight",
+        "Marked soul burst"
+      ],
+      "model": {
+        "url": "models/dirge_lantern.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack",
+          "special",
+          "hurt",
+          "death"
+        ],
+        "bones": 12,
+        "cubes": 64
+      },
+      "health": 28.0,
+      "config": "remnant/monsters/dirge_lantern",
+      "playable": true,
+      "thumbnail": "thumbnails/dirge_lantern.png"
+    },
+    {
+      "id": "skeleton_melee",
+      "name": "Skeleton Warrior",
+      "subtitle": "The restless front line",
+      "category": "Monster",
+      "description": "An armored skeleton built for close combat, with a heavier attack alongside its regular strike.",
+      "abilities": [
+        "Melee strike",
+        "Heavy attack"
+      ],
+      "model": {
+        "url": "models/skeleton_melee.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "slash",
+          "smash",
+          "death"
+        ],
+        "bones": 10,
+        "cubes": 45
+      },
+      "health": 28,
+      "config": "remnant/balance/skeleton_melee_stats",
+      "playable": true,
+      "thumbnail": "thumbnails/skeleton_melee.png"
+    },
+    {
+      "id": "skeleton_archer",
+      "name": "Skeleton Archer",
+      "subtitle": "Death at a distance",
+      "category": "Monster",
+      "description": "A skeletal ranged enemy with regular arrows and a charged shot.",
+      "abilities": [
+        "Arrow shot",
+        "Charged shot"
+      ],
+      "model": {
+        "url": "models/skeleton_archer.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "draw",
+          "volley",
+          "death"
+        ],
+        "bones": 11,
+        "cubes": 49
+      },
+      "health": 22,
+      "config": "remnant/balance/skeleton_archer_stats",
+      "playable": true,
+      "thumbnail": "thumbnails/skeleton_archer.png"
+    },
+    {
+      "id": "armored_grub",
+      "name": "Armored Grub",
+      "subtitle": "Small, heavily plated",
+      "category": "Creature",
+      "description": "An armored creature registered in the creature category. Available through its spawn egg.",
+      "abilities": [
+        "Armored body"
+      ],
+      "model": {
+        "url": "models/armored_grub.glb",
+        "clips": [
+          "idle"
+        ],
+        "bones": 20,
+        "cubes": 60
+      },
+      "health": null,
+      "config": "remnant/balance/armored_grub_stats",
+      "playable": true,
+      "thumbnail": "thumbnails/armored_grub.png"
+    },
+    {
+      "id": "wraith",
+      "name": "Wraith",
+      "subtitle": "The lingering dead",
+      "category": "Monster",
+      "description": "A hostile spirit that pursues players with melee attacks and can rise toward targets above it.",
+      "abilities": [
+        "Melee pursuit",
+        "Vertical pursuit"
+      ],
+      "model": {
+        "url": "models/wraith.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack",
+          "death"
+        ],
+        "bones": 19,
+        "cubes": 39
+      },
+      "health": 20.0,
+      "config": "remnant/balance/wraith_stats",
+      "playable": true
+    },
+    {
+      "id": "rat",
+      "name": "Rat",
+      "subtitle": "A bite in the dark",
+      "category": "Monster",
+      "description": "A small hostile mob with configurable natural spawning, found through the mod\u2019s spawn system.",
+      "abilities": [
+        "Melee attack"
+      ],
+      "model": {
+        "url": "models/rat.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack"
+        ],
+        "bones": 34,
+        "cubes": 36
+      },
+      "health": 30.0,
+      "config": "remnant/balance/rat_stats",
+      "playable": true
+    },
+    {
+      "id": "skeleton_minion",
+      "name": "Skeleton Minion",
+      "subtitle": "Called from the grave",
+      "category": "Monster",
+      "description": "A remnant minion that can accompany the Ossukage ritual. Its balance configuration includes leap and trap settings.",
+      "abilities": [
+        "Minion combat"
+      ],
+      "model": {
+        "url": "models/skeleton_minion.glb",
+        "clips": [
+          "idle",
+          "walk",
+          "attack",
+          "death",
+          "spawn"
+        ],
+        "bones": 10,
+        "cubes": 22
+      },
+      "health": null,
+      "config": "remnant/balance/skeleton_minion_stats",
+      "playable": true
+    }
+  ],
+  "configs": {
+    "remnant/main": {
+      "config_version": "1",
+      "generated_by": "Remnant Bosses mod - default config"
+    },
+    "remnant/bosses/ossukage_summon": {
+      "portal_activation_item": "minecraft:nether_star",
+      "pedestal_one_activation_block": "minecraft:skeleton_skull",
+      "pedestal_two_activation_block": "minecraft:skeleton_skull",
+      "pedestal_three_activation_block": "minecraft:skeleton_skull",
+      "pedestal_four_activation_block": "minecraft:skeleton_skull"
+    },
+    "remnant/items/ossukage_sword": {
+      "dash_timer": 100,
+      "dash_distance": 2,
+      "shuriken_timer": 50,
+      "shuriken_damage": 50,
+      "shuriken_knockback": 1,
+      "shuriken_pierce": 0,
+      "speed_amplifier": 1,
+      "life_steal_power": 20
+    },
+    "remnant/bosses/ossukage": {
+      "on_spawn_skeletons": 2,
+      "max_health_phase_1": 800,
+      "attack_damage_phase_1": 7,
+      "movement_speed_phase_1": 0.25,
+      "hp_threshold_phase_2": 50,
+      "transform_delay_phase_2": 60,
+      "skeletons_on_transform_phase_2": 5,
+      "skeletons_on_dash_phase_2": 2,
+      "special_attack_chance_phase_2": 20,
+      "health_boost_timer_phase_2": 200,
+      "attack_damage_phase_2": 9,
+      "movement_speed_phase_2": 0.3,
+      "boss_music_enabled": 1,
+      "boss_music_radius": 64,
+      "armor_phase_1": 6,
+      "armor_phase_2": 8,
+      "follow_range": 64,
+      "knockback_resistance": 0.6
+    },
+    "remnant/spawning/rat_spawns": {
+      "enable_natural_spawning": "true",
+      "spawn_weight": 10,
+      "min_group_size": 1,
+      "max_group_size": 3,
+      "dimension_whitelist": "minecraft:overworld",
+      "dimension_blacklist": "minecraft:the_nether,minecraft:the_end",
+      "biome_blacklist": ""
+    },
+    "remnant/balance/rat_stats": {
+      "rat_health": 30.0,
+      "rat_attack_damage": 4.0,
+      "rat_armor": 2.0
+    },
+    "remnant/spawning/wraith_spawns": {
+      "enable_natural_spawning": "true",
+      "spawn_weight": 5,
+      "min_group_size": 1,
+      "max_group_size": 2,
+      "dimension_whitelist": "minecraft:overworld",
+      "dimension_blacklist": "minecraft:the_nether,minecraft:the_end",
+      "biome_blacklist": ""
+    },
+    "remnant/balance/wraith_stats": {
+      "wraith_health": 20.0,
+      "wraith_attack_damage": 3.0,
+      "wraith_armor": 0.0,
+      "wraith_movement_speed": 0.25,
+      "wraith_follow_range": 16.0
+    },
+    "remnant/bosses/umbrakar_summon": {
+      "portal_activation_item": "minecraft:echo_shard",
+      "pedestal_one_activation_block": "minecraft:amethyst_block",
+      "pedestal_two_activation_block": "minecraft:crying_obsidian",
+      "pedestal_three_activation_block": "minecraft:end_stone",
+      "pedestal_four_activation_block": "minecraft:sculk"
+    },
+    "remnant/bosses/umbrakar": {
+      "max_health": 750,
+      "attack_damage": 14,
+      "movement_speed": 0.32,
+      "armor": 10,
+      "follow_range": 48,
+      "orb_damage": 8,
+      "hp_threshold_phase_2": 40,
+      "attack_damage_phase_2": 18,
+      "movement_speed_phase_2": 0.38,
+      "bite_damage": 16,
+      "slam_damage": 18,
+      "tail_damage": 15,
+      "roar_damage": 8,
+      "roar_range": 16
+    },
+    "remnant/bosses/kotsukage_summon": {
+      "portal_activation_item": "minecraft:wither_skeleton_skull",
+      "pedestal_one_activation_block": "minecraft:bone_block",
+      "pedestal_two_activation_block": "minecraft:soul_sand",
+      "pedestal_three_activation_block": "minecraft:soul_soil",
+      "pedestal_four_activation_block": "minecraft:nether_wart_block"
+    },
+    "remnant/bosses/kotsukage": {
+      "max_health": 700,
+      "attack_damage": 12,
+      "movement_speed": 0.28,
+      "armor": 8,
+      "follow_range": 40,
+      "knockback_resistance": 0.75,
+      "hp_threshold_phase_2": 45,
+      "attack_damage_phase_2": 16,
+      "movement_speed_phase_2": 0.34,
+      "swipe_damage": 14,
+      "stomp_damage": 16,
+      "stomp_radius": 5,
+      "poison_damage": 10,
+      "poison_range": 8,
+      "poison_duration": 120,
+      "roar_damage": 8,
+      "roar_range": 14,
+      "trap_damage": 10,
+      "trap_count": 2,
+      "trap_slow_duration": 80,
+      "minion_count": 2,
+      "boss_music_enabled": 1,
+      "boss_music_radius": 64
+    },
+    "remnant/balance/skeleton_minion_stats": {
+      "minion_health": 24,
+      "minion_attack_damage": 5,
+      "minion_movement_speed": 0.32,
+      "minion_armor": 2,
+      "poison_duration": 60,
+      "leap_cooldown": 80,
+      "trap_chance": 18,
+      "trap_cooldown": 160
+    },
+    "remnant/balance/skeleton_melee_stats": {
+      "max_health": 28,
+      "attack_damage": 6,
+      "heavy_damage": 8,
+      "movement_speed": 0.28,
+      "armor": 4,
+      "follow_range": 24
+    },
+    "remnant/balance/skeleton_archer_stats": {
+      "max_health": 22,
+      "attack_damage": 4,
+      "arrow_damage": 4,
+      "charged_damage": 6,
+      "movement_speed": 0.26,
+      "armor": 2,
+      "follow_range": 28
+    },
+    "remnant/bosses/hollow_sovereign": {
+      "max_health": 950.0,
+      "attack_damage": 16.0,
+      "armor": 8.0,
+      "movement_speed": 0.25,
+      "phase_two_percent": 45.0,
+      "phase_two_damage_multiplier": 1.3,
+      "attack_cooldown_ticks": 35.0,
+      "slam_damage": 20.0,
+      "beam_damage": 24.0,
+      "eruption_damage": 18.0,
+      "spell_range": 24.0,
+      "wave_radius": 12.0,
+      "summoning_enabled": 1.0,
+      "duplicate_radius": 64.0,
+      "xp_reward": 150.0
+    },
+    "remnant/bosses/hollow_sovereign_summon": {
+      "portal_activation_item": "minecraft:heart_of_the_sea",
+      "pedestal_one_activation_block": "minecraft:bone_block",
+      "pedestal_two_activation_block": "minecraft:bone_block",
+      "pedestal_three_activation_block": "minecraft:skeleton_skull",
+      "pedestal_four_activation_block": "minecraft:skeleton_skull"
+    },
+    "remnant/monsters/grave_skitter": {
+      "max_health": 24.0,
+      "attack_damage": 4.0,
+      "armor": 4.0,
+      "movement_speed": 0.29,
+      "attack_cooldown_ticks": 32.0,
+      "special_damage": 7.0,
+      "special_range": 7.0,
+      "xp_reward": 6.0
+    },
+    "remnant/monsters/sickleghast": {
+      "max_health": 40.0,
+      "attack_damage": 6.0,
+      "armor": 5.0,
+      "movement_speed": 0.24,
+      "attack_cooldown_ticks": 38.0,
+      "special_damage": 9.0,
+      "special_range": 4.0,
+      "xp_reward": 10.0
+    },
+    "remnant/monsters/dirge_lantern": {
+      "max_health": 28.0,
+      "attack_damage": 4.0,
+      "armor": 2.0,
+      "movement_speed": 0.23,
+      "attack_cooldown_ticks": 55.0,
+      "special_damage": 7.0,
+      "special_range": 12.0,
+      "xp_reward": 8.0
+    },
+    "remnant/client/presentation": {
+      "custom_boss_bars": 1,
+      "vfx_density": 1
+    }
+  },
+  "items": [
+    {
+      "id": "rat_fang",
+      "name": "Rat Fang",
+      "category": "Item"
+    },
+    {
+      "id": "old_skeleton_bone",
+      "name": "Old Skeleton Bone",
+      "category": "Item"
+    },
+    {
+      "id": "old_skeleton_head",
+      "name": "Old Skeleton Head",
+      "category": "Item"
+    },
+    {
+      "id": "ossukage_sword",
+      "name": "\u00c2\u00a74\u00c2\u00a7lOssukage Blade",
+      "category": "Item"
+    },
+    {
+      "id": "fang_on_a_stick",
+      "name": "Fang On A Stick",
+      "category": "Item"
+    },
+    {
+      "id": "ancient_altar",
+      "name": "Ancient Altar",
+      "category": "Block"
+    },
+    {
+      "id": "ancient_pedestal",
+      "name": "Ancient Pedestal",
+      "category": "Block"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "ancient_altar_recipe",
+      "type": "minecraft:crafting_shaped",
+      "category": "misc",
+      "pattern": [
+        "aaa",
+        " b ",
+        "cac"
+      ],
+      "key": {
+        "a": {
+          "item": "minecraft:chiseled_deepslate"
+        },
+        "b": {
+          "item": "minecraft:diamond"
+        },
+        "c": {
+          "item": "minecraft:emerald"
+        }
+      },
+      "result": {
+        "item": "remnant_bosses:ancient_altar",
+        "count": 1
+      }
+    },
+    {
+      "id": "ancient_pedestal_recipe",
+      "type": "minecraft:crafting_shaped",
+      "category": "misc",
+      "pattern": [
+        " a ",
+        " b ",
+        "bbb"
+      ],
+      "key": {
+        "a": {
+          "item": "minecraft:emerald"
+        },
+        "b": {
+          "item": "minecraft:chiseled_deepslate"
+        }
+      },
+      "result": {
+        "item": "remnant_bosses:ancient_pedestal",
+        "count": 1
+      }
+    },
+    {
+      "id": "fang_on_a_stick_recipe",
+      "type": "minecraft:crafting_shapeless",
+      "category": "misc",
+      "ingredients": [
+        {
+          "item": "minecraft:string"
+        },
+        {
+          "item": "remnant_bosses:rat_fang"
+        },
+        {
+          "item": "minecraft:stick"
+        }
+      ],
+      "result": {
+        "item": "remnant_bosses:fang_on_a_stick",
+        "count": 1
+      }
+    },
+    {
+      "id": "skeleton_skull_2_recipe",
+      "type": "minecraft:crafting_shapeless",
+      "category": "misc",
+      "ingredients": [
+        {
+          "item": "remnant_bosses:old_skeleton_head"
+        }
+      ],
+      "result": {
+        "item": "minecraft:skeleton_skull",
+        "count": 1
+      }
+    },
+    {
+      "id": "skeleton_skull_recipe",
+      "type": "minecraft:crafting_shaped",
+      "category": "misc",
+      "pattern": [
+        "aaa",
+        "a a",
+        "aaa"
+      ],
+      "key": {
+        "a": {
+          "item": "minecraft:bone"
+        }
+      },
+      "result": {
+        "item": "minecraft:skeleton_skull",
+        "count": 1
+      }
+    }
+  ],
+  "entityIds": [
+    "dirge_lantern",
+    "sickleghast",
+    "grave_skitter",
+    "hollow_sovereign",
+    "kunai",
+    "rat",
+    "skeleton_minion",
+    "ossukage",
+    "ossukage_rune_effect",
+    "wraith",
+    "armored_grub",
+    "umbrakar",
+    "umbrakar_orb",
+    "kotsukage",
+    "kotsukage_trap",
+    "skeleton_melee",
+    "skeleton_archer"
+  ]
+}

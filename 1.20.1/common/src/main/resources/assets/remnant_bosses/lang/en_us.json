@@ -86,5 +86,22 @@
   "entity.remnants.skeleton_melee": "Skeleton Warrior",
   "entity.remnants.skeleton_archer": "Skeleton Archer",
   "item.remnant_bosses.skeleton_melee_spawn_egg": "Skeleton Warrior Spawn Egg",
-  "item.remnant_bosses.skeleton_archer_spawn_egg": "Skeleton Archer Spawn Egg"
+  "item.remnant_bosses.skeleton_archer_spawn_egg": "Skeleton Archer Spawn Egg",
+  "entity.remnant_bosses.hollow_sovereign": "Hollow Sovereign",
+  "item.remnant_bosses.hollow_sovereign_spawn_egg": "Hollow Sovereign Spawn Egg",
+  "message.remnant_bosses.sovereign.disabled": "The ritual is dormant (disabled or Peaceful difficulty).",
+  "message.remnant_bosses.sovereign.pattern": "Place four Ancient Pedestals 3 blocks from the altar: bone blocks east/west, skeleton skulls north/south.",
+  "message.remnant_bosses.sovereign.nearby": "A Hollow Sovereign already haunts this area.",
+  "message.remnant_bosses.sovereign.space": "The Sovereign needs clear space above the altar.",
+  "message.remnant_bosses.sovereign.summoned": "The crown awakens. The Hollow Sovereign has risen!",
+  "entity.remnants.hollow_sovereign": "Hollow Sovereign",
+  "entity.remnants.grave_skitter": "Grave Skitter",
+  "entity.remnant_bosses.grave_skitter": "Grave Skitter",
+  "item.remnant_bosses.grave_skitter_spawn_egg": "Grave Skitter Spawn Egg",
+  "entity.remnants.sickleghast": "Sickleghast",
+  "entity.remnant_bosses.sickleghast": "Sickleghast",
+  "item.remnant_bosses.sickleghast_spawn_egg": "Sickleghast Spawn Egg",
+  "entity.remnants.dirge_lantern": "Dirge Lantern",
+  "entity.remnant_bosses.dirge_lantern": "Dirge Lantern",
+  "item.remnant_bosses.dirge_lantern_spawn_egg": "Dirge Lantern Spawn Egg"
 }

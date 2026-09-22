@@ -1,0 +1,38 @@
+{
+  "idle": {
+    "length": 4,
+    "loop": true
+  },
+  "walk": {
+    "length": 1.2,
+    "loop": true
+  },
+  "awaken": {
+    "length": 3,
+    "loop": false
+  },
+  "roar": {
+    "length": 2,
+    "loop": false
+  },
+  "claw_combo": {
+    "length": 1.8,
+    "loop": false
+  },
+  "ground_slam": {
+    "length": 2.2,
+    "loop": false
+  },
+  "core_blast": {
+    "length": 2.6,
+    "loop": false
+  },
+  "enrage": {
+    "length": 3,
+    "loop": false
+  },
+  "death": {
+    "length": 3.5,
+    "loop": false
+  }
+}

@@ -1,6 +1,10 @@
 package com.nightbeam.remnants.init;
 
 import com.nightbeam.remnants.entity.UmbrakarEntity;
+import com.nightbeam.remnants.entity.HollowSovereignEntity;
+import com.nightbeam.remnants.entity.DirgeLanternEntity;
+import com.nightbeam.remnants.entity.SickleghastEntity;
+import com.nightbeam.remnants.entity.GraveSkitterEntity;
 import com.nightbeam.remnants.entity.UmbrakarOrbEntity;
 import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.KotsukageEntity;
@@ -26,6 +30,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.core.BlockPos;
 
 public final class ModEntities {
+    public static final RegistryHolder<EntityType<DirgeLanternEntity>> DIRGE_LANTERN = RegistryHolder.entity("dirge_lantern", () -> EntityType.Builder.<DirgeLanternEntity>of(DirgeLanternEntity::new, MobCategory.MONSTER).sized(0.85f,2.7f).clientTrackingRange(64).updateInterval(2).build("dirge_lantern"));
+    public static final RegistryHolder<Item> DIRGE_LANTERN_SPAWN_EGG = new RegistryHolder<>("dirge_lantern_spawn_egg");
+    public static final RegistryHolder<EntityType<SickleghastEntity>> SICKLEGHAST = RegistryHolder.entity("sickleghast", () -> EntityType.Builder.<SickleghastEntity>of(SickleghastEntity::new, MobCategory.MONSTER).sized(0.9f,2.65f).clientTrackingRange(64).updateInterval(2).build("sickleghast"));
+    public static final RegistryHolder<Item> SICKLEGHAST_SPAWN_EGG = new RegistryHolder<>("sickleghast_spawn_egg");
+    public static final RegistryHolder<EntityType<GraveSkitterEntity>> GRAVE_SKITTER = RegistryHolder.entity("grave_skitter", () -> EntityType.Builder.<GraveSkitterEntity>of(GraveSkitterEntity::new, MobCategory.MONSTER).sized(1.6f,1.15f).clientTrackingRange(64).updateInterval(2).build("grave_skitter"));
+    public static final RegistryHolder<Item> GRAVE_SKITTER_SPAWN_EGG = new RegistryHolder<>("grave_skitter_spawn_egg");
+	public static final RegistryHolder<EntityType<HollowSovereignEntity>> HOLLOW_SOVEREIGN = RegistryHolder.entity("hollow_sovereign", () -> EntityType.Builder.<HollowSovereignEntity>of(HollowSovereignEntity::new, MobCategory.MONSTER).sized(1.8f,4.0f).clientTrackingRange(96).updateInterval(2).build("hollow_sovereign"));
 	public static final RegistryHolder<EntityType<KunaiEntity>> KUNAI = RegistryHolder.entity("kunai",
 			() -> EntityType.Builder.<KunaiEntity>of(KunaiEntity::new, MobCategory.MISC)
 					.sized(0.5f, 0.5f)
@@ -116,6 +127,7 @@ public final class ModEntities {
 					.updateInterval(1)
 					.build("kotsukage_trap"));
 
+	public static final RegistryHolder<Item> HOLLOW_SOVEREIGN_SPAWN_EGG = new RegistryHolder<>("hollow_sovereign_spawn_egg");
 	public static final RegistryHolder<Item> UMBRAKAR_SPAWN_EGG = new RegistryHolder<>("umbrakar_spawn_egg");
 	public static final RegistryHolder<Item> KOTSUKAGE_SPAWN_EGG = new RegistryHolder<>("kotsukage_spawn_egg");
 

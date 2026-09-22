@@ -211,6 +211,7 @@ public final class GameEvents {
 			return;
 		}
 
+		if (SovereignRitual.tryActivate(player, level, pos)) return;
 		String heldKey = String.valueOf(BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()));
 		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item"))) {
 			trySummonBoss(player, pos, level, "kotsukage_summon", "kotsukage",

@@ -82,6 +82,9 @@ public class JaumlConfigLib {
 	 * Provide sensible fallback defaults for config values.
 	 */
 	private static double getDefaultNumber(String category, String file, String key) {
+        if ("remnant/monsters".equals(category) && BoneMonsterConfig.DEFAULTS.containsKey(file)) return BoneMonsterConfig.DEFAULTS.get(file).getOrDefault(key,1.0);
+		if ("hollow_sovereign".equals(file)) return SovereignConfig.DEFAULTS.getOrDefault(key, 1.0);
+		if ("presentation".equals(file)) return 1.0;
 		// Return configuration defaults
 		if ("remnant/items".equals(category) && "ossukage_sword".equals(file)) {
 			return switch (key) {
@@ -171,6 +174,7 @@ public class JaumlConfigLib {
 	 * Provide sensible fallback defaults for string values.
 	 */
 	private static String getDefaultString(String category, String file, String key) {
+		if ("hollow_sovereign_summon".equals(file)) return SovereignConfig.RITUAL.getOrDefault(key, "");
 		if ("remnant/bosses".equals(category) && "ossukage_summon".equals(file)) {
 			return switch (key) {
 				case "portal_activation_item" -> "minecraft:nether_star";

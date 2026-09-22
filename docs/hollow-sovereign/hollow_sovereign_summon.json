@@ -1,0 +1,7 @@
+{
+  "pedestal_two_activation_block": "minecraft:bone_block",
+  "pedestal_four_activation_block": "minecraft:skeleton_skull",
+  "pedestal_three_activation_block": "minecraft:skeleton_skull",
+  "portal_activation_item": "minecraft:heart_of_the_sea",
+  "pedestal_one_activation_block": "minecraft:bone_block"
+}

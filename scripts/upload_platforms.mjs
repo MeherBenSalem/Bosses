@@ -2,7 +2,7 @@
  * Upload build/release-jars to Modrinth + CurseForge.
  * Tokens: Desktop local.env (MODRINTH_TOKEN, CURSEFORGE_TOKEN, CURSEFORGE_API_KEY)
  *
- *   node scripts/upload_platforms.mjs --version 2.5.1
+ *   node scripts/upload_platforms.mjs --version 2.6.0
  */
 import fs from "fs";
 import path from "path";

@@ -40,6 +40,10 @@ public final class FabricModRegistry {
 		registerEntity(ModEntities.WRAITH);
 		registerEntity(ModEntities.ARMORED_GRUB);
 		registerEntity(ModEntities.UMBRAKAR);
+		registerEntity(ModEntities.HOLLOW_SOVEREIGN);
+		registerEntity(ModEntities.DIRGE_LANTERN);
+		registerEntity(ModEntities.SICKLEGHAST);
+		registerEntity(ModEntities.GRAVE_SKITTER);
 		registerEntity(ModEntities.UMBRAKAR_ORB);
 		registerEntity(ModEntities.KOTSUKAGE);
 		registerEntity(ModEntities.KOTSUKAGE_TRAP);
@@ -52,6 +56,10 @@ public final class FabricModRegistry {
 		registerSpawnEgg(ModEntities.WRAITH_SPAWN_EGG, ModEntities.WRAITH.get(), 0x000000, 0xFFFFFF);
 		registerSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00);
 		registerSpawnEgg(ModEntities.UMBRAKAR_SPAWN_EGG, ModEntities.UMBRAKAR.get(), 0x3A1A4A, 0xC48CFF);
+		registerSpawnEgg(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG, ModEntities.HOLLOW_SOVEREIGN.get(), 0x947360, 0x64CE8A);
+		registerSpawnEgg(ModEntities.DIRGE_LANTERN_SPAWN_EGG, ModEntities.DIRGE_LANTERN.get(), 0x947360, 0x64CE8A);
+		registerSpawnEgg(ModEntities.SICKLEGHAST_SPAWN_EGG, ModEntities.SICKLEGHAST.get(), 0x947360, 0x64CE8A);
+		registerSpawnEgg(ModEntities.GRAVE_SKITTER_SPAWN_EGG, ModEntities.GRAVE_SKITTER.get(), 0x947360, 0x64CE8A);
 		registerSpawnEgg(ModEntities.KOTSUKAGE_SPAWN_EGG, ModEntities.KOTSUKAGE.get(), 0xC4B59A, 0x3A7A3A);
 		registerSpawnEgg(ModEntities.SKELETON_MELEE_SPAWN_EGG, ModEntities.SKELETON_MELEE.get(), 0xC8B89A, 0x5A2020);
 		registerSpawnEgg(ModEntities.SKELETON_ARCHER_SPAWN_EGG, ModEntities.SKELETON_ARCHER.get(), 0xC8B89A, 0x6B4A2A);

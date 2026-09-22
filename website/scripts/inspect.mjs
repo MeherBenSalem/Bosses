@@ -1,0 +1,10 @@
+import {chromium} from '@playwright/test';
+const browser=await chromium.launch({headless:true,args:['--enable-webgl','--use-angle=swiftshader']});
+const page=await browser.newPage({viewport:{width:1440,height:1050}});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+await page.goto('http://127.0.0.1:5173/remnants/');
+await page.locator('#stage[data-loaded=true]').waitFor({timeout:30000});
+await page.getByRole('button',{name:'Pause animation',exact:true}).click();
+await page.screenshot({path:'preview-desktop.png',fullPage:false});
+console.log(JSON.stringify({errors,canvas:await page.locator('canvas').count(),title:await page.title(),size:await page.locator('#stage').boundingBox()}));
+await browser.close();

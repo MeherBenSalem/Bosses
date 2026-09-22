@@ -1,0 +1,17 @@
+{
+  "beam_damage": 24.0,
+  "phase_two_percent": 45.0,
+  "phase_two_damage_multiplier": 1.3,
+  "attack_damage": 16.0,
+  "slam_damage": 20.0,
+  "attack_cooldown_ticks": 35.0,
+  "movement_speed": 0.25,
+  "armor": 8.0,
+  "spell_range": 24.0,
+  "xp_reward": 150.0,
+  "max_health": 950.0,
+  "wave_radius": 12.0,
+  "duplicate_radius": 64.0,
+  "summoning_enabled": 1.0,
+  "eruption_damage": 18.0
+}
