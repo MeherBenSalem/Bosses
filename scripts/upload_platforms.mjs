@@ -18,6 +18,7 @@ const MOD_TITLE = "Remnant Bosses";
 
 async function loadEnv() {
   const candidates = [
+    path.join(process.env.USERPROFILE || "", "NightBeam-Knowledge-Base", "secrets", "local.env"),
     path.join(process.env.USERPROFILE || "", "Desktop", "local.env"),
     "C:\\Users\\Meher\\Desktop\\local.env",
   ];

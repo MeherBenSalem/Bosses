@@ -41,7 +41,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The published version is `2.6.0` in both workspaces. Keep those `version=` lines identical.
+The published version is `2.6.1` in both workspaces. Keep those `version=` lines identical.
 
 ## Requirements
 

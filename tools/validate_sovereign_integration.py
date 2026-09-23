@@ -42,9 +42,15 @@ for version,loaders in [('1.20.1',['fabric','forge']),('1.21.1',['fabric','neofo
         with zipfile.ZipFile(jar) as z:
             for suffix in ['entity/HollowSovereignEntity.class','event/SovereignRitual.class','client/RemnantBossBars.class','mixin/BossHealthOverlayMixin.class']:
                 assert 'com/nightbeam/remnants/'+suffix in z.namelist(),(jar,suffix)
-            assert 'BossHealthOverlayMixin' in json.loads(z.read('remnant_bosses.mixins.json'))['client']
+            mixins_cfg=json.loads(z.read('remnant_bosses.mixins.json'))
+            assert 'BossHealthOverlayMixin' in mixins_cfg['client']
             folder='loot_tables' if version=='1.20.1' else 'loot_table'
             assert f'data/remnants/{folder}/entities/hollow_sovereign.json' in z.namelist()
+            if loader=='fabric':
+                assert mixins_cfg.get('refmap')=='remnant_bosses.refmap.json',(jar,mixins_cfg)
+                assert 'remnant_bosses.refmap.json' in z.namelist(),jar
+                ref=json.loads(z.read('remnant_bosses.refmap.json'))['mappings']['com/nightbeam/remnants/mixin/BossHealthOverlayMixin']
+                assert any('method_1796' in v for v in ref.values()),ref
             if loader=='forge':
                 ref=json.loads(z.read('remnant_bosses.refmap.json'))['mappings']['com/nightbeam/remnants/mixin/BossHealthOverlayMixin']
                 assert any('f_93699_' in v for v in ref.values()),ref
