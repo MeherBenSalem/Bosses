@@ -35,3 +35,19 @@ artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
 }
+
+// Exercise Minecraft 1.20.1's own recipe parser and crafting matcher.
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+tasks.register('verifyCrafting', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.RecipeRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args project.findProperty('recipeResources') ?: file('src/main/resources').absolutePath
+    if (project.hasProperty('recipeJar')) args project.property('recipeJar')
+}
+tasks.named('check') { dependsOn 'verifyCrafting' }

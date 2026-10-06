@@ -18,7 +18,7 @@
     }
   },
   "result": {
-    "item": "remnant_bosses:ancient_altar",
-    "count": 1
+    "count": 1,
+    "id": "remnant_bosses:ancient_altar"
   }
 }

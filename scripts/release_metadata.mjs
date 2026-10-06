@@ -45,6 +45,13 @@ export function modrinthDependencies(loader, game) {
   }));
 }
 
+export function curseforgeRelations(loader, game) {
+  const ids = modrinthDependencies(loader, game).map((d) => d.project_id);
+  return { projects: Object.entries(DEPENDENCY_PROJECTS)
+    .filter(([, id]) => ids.includes(id))
+    .map(([slug]) => ({ slug, type: "requiredDependency" })) };
+}
+
 export function parseJar(jar, expectedVersion) {
   const name = path.basename(jar);
   const match = name.match(

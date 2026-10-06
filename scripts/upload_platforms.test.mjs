@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import test from "node:test";
 import { DEPENDENCY_PROJECTS, LOADER_IDS, modrinthDependencies,
   modrinthMetadata, parseJar } from "./release_metadata.mjs";
@@ -84,6 +84,11 @@ test("dry-run emits complete per-target payloads without credentials or network"
     assert.deepEqual(JSON.parse(json).dependencies, modrinthDependencies(release.loader, release.game));
   }
   assert.equal(logs.filter(([label]) => label === "[dry-run] CurseForge").length, 4);
+  for (const [, name, json] of logs.filter(([label]) => label === "[dry-run] CurseForge")) {
+    const release = parseJar(name);
+    const expected = sourceDependencies(release.loader, release.game).sort();
+    assert.deepEqual(JSON.parse(json).metadata.relations.projects.map((p) => p.slug).sort(), expected);
+  }
 });
 
 test("CLI dry-run never reads local.env, jar bytes or calls fetch", (t) => {
@@ -101,7 +106,7 @@ test("CLI dry-run never reads local.env, jar bytes or calls fetch", (t) => {
     globalThis.fetch = () => { throw new Error('Forbidden network'); };`);
   const env = { ...process.env, USERPROFILE: dir };
   for (const key of ["MODRINTH_TOKEN", "CURSEFORGE_TOKEN", "CURSEFORGE_API_KEY"]) delete env[key];
-  const child = spawnSync(process.execPath, ["--import", preload,
+  const child = spawnSync(process.execPath, ["--import", pathToFileURL(preload).href,
     path.join(ROOT, "scripts/upload_platforms.mjs"), "--version", "2.6.1", "--jar-dir", dir, "--require-all-targets", "--dry-run"],
   { encoding: "utf8", env });
   assert.equal(child.status, 0, child.stderr);
@@ -156,6 +161,8 @@ function mockTransport(records, { modrinthFailure = false, modernLookupFails = f
       const release = parseJar(file.name);
       assert.equal(await file.text(), "fixture jar");
       assert.deepEqual(body.gameVersions, [1, 2, LOADER_IDS[release.loader], release.game === "1.20.1" ? 1201 : 1211]);
+      assert.deepEqual(body.relations.projects.map((p) => p.slug).sort(), sourceDependencies(release.loader, release.game).sort());
+      assert.ok(body.relations.projects.every((p) => p.type === "requiredDependency"));
       records.push({ platform: "curseforge", body });
       return Response.json({ id: 42 });
     }

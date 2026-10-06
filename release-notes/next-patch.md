@@ -1,0 +1,11 @@
+## Crafting and resource fixes
+
+- Restore Ancient Altar and Ancient Pedestal crafting on Minecraft 1.21.1 Fabric and NeoForge.
+- Update the existing 1.21.1 crafting recipes to the current recipe directory and item-stack result format.
+- Restore Ancient Altar and Ancient Pedestal self-drops on 1.21.1 with the correct loot-table directory.
+- Update 1.21.1 pack metadata to support its client-resource and server-data formats.
+- Declare GeckoLib and JAuml as required dependencies for new files on both platforms, with Fabric API required for Fabric files.
+
+Crafting patterns, material costs, and output quantities are unchanged. No configuration changes are required.
+
+Compatibility: Minecraft 1.20.1 Fabric/Forge (Java 17+) and Minecraft 1.21.1 Fabric/NeoForge (Java 21+).

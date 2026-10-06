@@ -12,7 +12,7 @@
     }
   },
   "result": {
-    "item": "minecraft:skeleton_skull",
-    "count": 1
+    "count": 1,
+    "id": "minecraft:skeleton_skull"
   }
 }

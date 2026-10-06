@@ -56,7 +56,7 @@ jobs:
           node-version: "20"
 
       - name: Test publisher metadata and transport
-        run: node --test scripts/upload_platforms.test.mjs
+        run: node --test scripts/*.test.mjs
 
       - uses: actions/setup-java@v4
         with:
@@ -71,10 +71,16 @@ jobs:
           ./gradlew buildAll --no-daemon
 
       - name: Preview release metadata
-        if: ${{ inputs.dry_run == 'true' }}
         env:
           VERSION: ${{ steps.ver.outputs.version }}
-        run: node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --dry-run
+        run: |
+          python scripts/verify_release_jars.py --version "$VERSION" --jar-dir releases --output releases/manifest.json
+          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "release-notes/$VERSION.md" --dry-run
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-release
+          path: releases/
 
       - name: Upload Modrinth + CurseForge
         if: ${{ inputs.dry_run != 'true' }}
@@ -89,4 +95,4 @@ jobs:
         run: |
           set -euo pipefail
           test -n "${MODRINTH_ID:-}" && test -n "${CURSEFORGE_ID:-}"
-          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets
+          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "release-notes/$VERSION.md"

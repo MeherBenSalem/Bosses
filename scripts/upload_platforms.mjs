@@ -11,7 +11,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { CURSEFORGE_ID, LOADER_IDS, MOD_TITLE, MODRINTH_ID,
-  assertCompleteRelease, modrinthMetadata, normalizeVersion, parseJar } from "./release_metadata.mjs";
+  assertCompleteRelease, curseforgeRelations, modrinthMetadata, normalizeVersion, parseJar } from "./release_metadata.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -96,7 +96,8 @@ export async function uploadPlatforms(args, {
       if (!args.curseforgeOnly) log("[dry-run] Modrinth", p.name, JSON.stringify(payloads[i]));
       log("[dry-run] CurseForge", p.name, JSON.stringify({
         project_id: curseforgeId,
-        metadata: { changelog, changelogType: "markdown", displayName: p.name, releaseType: "release" },
+        metadata: { changelog, changelogType: "markdown", displayName: p.name, releaseType: "release",
+          relations: curseforgeRelations(p.loader, p.game) },
         gameVersionLookup: { minecraft: p.game, environments: ["Client", "Server"], loaderId: LOADER_IDS[p.loader] },
       }));
     }
@@ -177,6 +178,7 @@ export async function uploadPlatforms(args, {
       displayName: p.name,
       gameVersions: [clientId, serverId, loaderId, gameId],
       releaseType: "release",
+      relations: curseforgeRelations(p.loader, p.game),
     };
     const cfForm = new FormData();
     cfForm.append("metadata", JSON.stringify(meta));
