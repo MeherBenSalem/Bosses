@@ -1,0 +1,40 @@
+name: Publisher checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/publish.yml"
+      - ".github/workflows/publisher-checks.yml"
+      - "**/src/main/resources/fabric.mod.json"
+      - "**/src/main/resources/META-INF/*mods.toml"
+  pull_request:
+    paths:
+      - "scripts/**"
+      - ".github/workflows/publish.yml"
+      - ".github/workflows/publisher-checks.yml"
+      - "**/src/main/resources/fabric.mod.json"
+      - "**/src/main/resources/META-INF/*mods.toml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check publisher syntax
+        run: |
+          node --check scripts/release_metadata.mjs
+          node --check scripts/upload_platforms.mjs
+          node --check scripts/upload_platforms.test.mjs
+      - name: Test metadata, offline preview and mocked upload transport
+        run: node --test scripts/upload_platforms.test.mjs
