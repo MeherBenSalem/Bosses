@@ -1,6 +1,6 @@
 # Boss Hunts 2.7.0 test report
 
-Recorded 2026-10-12. Based on latest GitHub `main`, `3a47ea949e71deef157c47ab88cf8c0c5a44b6e2`; fetched again before preparing the draft PR. Implementation branch: `codex/boss-hunts`. This is an unreleased update; optional rewards are deferred.
+Pre-release validation recorded 2026-10-12. Based on latest GitHub `main`, `3a47ea949e71deef157c47ab88cf8c0c5a44b6e2`; fetched again before preparing the draft PR. Implementation branch: `codex/boss-hunts`. Optional rewards are deferred.
 
 ## Versions
 
@@ -86,11 +86,11 @@ Existing warnings included missing altar/pedestal model parents, unregistered en
 - Forge/NeoForge and Fabric 1.21.1 client UI sessions, other language/resource packs, audible narration and controller/native keyboard input.
 - Full combat AI, music, boss-bar, existing ritual, crafting and ordinary-drop playthroughs. Compilation, native crafting parsing and real boss damage/death are useful evidence, not full gameplay regression coverage.
 
-The implementation and reviewed local artifacts are ready for a **draft PR**, with these runtime gaps explicit. This report does not claim production or merge readiness for every multiplayer scenario.
+The initial implementation and reviewed local artifacts were submitted as a **draft PR**, with these runtime gaps explicit. This report records pre-release validation and does not claim coverage of every multiplayer scenario.
 
 ## Artifacts and screenshots
 
-Four local jars are in `releases/`; file sizes and SHA-256/SHA-512 hashes are recorded in [the manifest](boss-hunts-artifacts.json). The local delivery ZIP includes those jars, this report, the guide, changelog, manifest and representative screenshots. No release, tag, merge or CurseForge/Modrinth publication was performed.
+Four local jars are in `releases/`; file sizes and SHA-256/SHA-512 hashes are recorded in [the manifest](boss-hunts-artifacts.json). The local delivery ZIP includes those jars, this report, the guide, changelog, manifest and representative screenshots. At the time of these validation checks, no release, tag, merge or CurseForge/Modrinth publication had been performed.
 
 ![Journal clues at GUI scale 2](boss-hunts/screenshots/boss-hunts-undiscovered-scale2-hollow_sovereign-top.png)
 
