@@ -32,6 +32,7 @@ elements/
 # Build artifacts
 releases/
 *.log
+*.log.gz
 
 # OS
 .DS_Store

@@ -3,6 +3,7 @@ package com.nightbeam.remnants.event;
 import com.nightbeam.remnants.config.*;
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
 import com.nightbeam.remnants.init.*;
+import com.nightbeam.remnants.journal.RitualInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -18,17 +19,17 @@ import net.minecraft.world.phys.AABB;
 public final class SovereignRitual {
     private SovereignRitual() {}
     public static boolean tryActivate(Player player,Level level,BlockPos altar) {
-        String item=JaumlConfigLib.getStringValue("remnant/bosses","hollow_sovereign_summon","portal_activation_item");
+        RitualInfo ritual=RitualInfo.resolve("hollow_sovereign_summon");
+        String item=ritual.activationItem();
         if(!BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString().equals(item)) return false;
         if(!(level instanceof ServerLevel server)) return true;
         if(player.isSpectator() || SovereignConfig.value("summoning_enabled",0,1)==0 || level.getDifficulty()==Difficulty.PEACEFUL) {
             message(player,"disabled"); return true;
         }
         BlockPos[] pedestals={altar.offset(3,0,0),altar.offset(-3,0,0),altar.offset(0,0,3),altar.offset(0,0,-3)};
-        String[] keys={"one","two","three","four"};
         for(int i=0;i<4;i++) {
-            ResourceLocation id=ResourceLocation.tryParse(JaumlConfigLib.getStringValue("remnant/bosses","hollow_sovereign_summon","pedestal_"+keys[i]+"_activation_block"));
-            if(id==null || !BuiltInRegistries.BLOCK.containsKey(id) || !level.getBlockState(pedestals[i]).is(ModBlocks.ANCIENT_PEDESTAL.get())
+            ResourceLocation id=ResourceLocation.tryParse(ritual.offerings().get(i));
+            if(!ritual.valid() || id==null || !BuiltInRegistries.BLOCK.containsKey(id) || !level.getBlockState(pedestals[i]).is(ModBlocks.ANCIENT_PEDESTAL.get())
                 || !level.getBlockState(pedestals[i].above()).is(BuiltInRegistries.BLOCK.get(id))) { message(player,"pattern"); return true; }
         }
         double radius=SovereignConfig.value("duplicate_radius",16,128);

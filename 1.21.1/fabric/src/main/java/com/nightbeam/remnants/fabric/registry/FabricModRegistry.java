@@ -25,6 +25,7 @@ public final class FabricModRegistry {
 		registerBlock(ModBlocks.ANCIENT_PEDESTAL);
 
 		registerItem(ModItems.RAT_FANG);
+		registerItem(ModItems.BOSS_JOURNAL);
 		registerItem(ModItems.OLD_SKELETON_BONE);
 		registerItem(ModItems.OLD_SKELETON_HEAD);
 		registerItem(ModItems.OSSUKAGE_SWORD);

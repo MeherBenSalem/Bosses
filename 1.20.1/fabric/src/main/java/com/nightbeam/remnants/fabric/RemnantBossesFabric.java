@@ -2,6 +2,7 @@ package com.nightbeam.remnants.fabric;
 
 import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.RemnantBosses;
+import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
@@ -33,6 +34,8 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -58,6 +61,7 @@ public class RemnantBossesFabric implements ModInitializer {
 	public void onInitialize() {
 		GeckoLib.initialize();
 		Services.NETWORK = new FabricNetwork();
+		FabricNetwork.registerServer();
 
 		registerContent();
 		registerAttributes();
@@ -76,6 +80,7 @@ public class RemnantBossesFabric implements ModInitializer {
 		registerBlock(ModBlocks.ANCIENT_PEDESTAL, ModBlocks.createPedestal());
 
 		registerItem(ModItems.OSSUKAGE_SWORD, ModItems.createOssukageSword());
+		registerItem(ModItems.BOSS_JOURNAL, ModItems.createBossJournal());
 		registerItem(ModItems.RAT_FANG, ModItems.createRatFang());
 		registerItem(ModItems.FANG_ON_A_STICK, ModItems.createFangOnAStick());
 		registerItem(ModItems.OLD_SKELETON_BONE, ModItems.createOldSkeletonBone());
@@ -199,7 +204,12 @@ public class RemnantBossesFabric implements ModInitializer {
 	}
 
 	private void registerEvents() {
-		ServerTickEvents.END_SERVER_TICK.register(server -> RemnantBosses.tickWorkQueue());
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
+			RemnantBosses.tickWorkQueue();
+			BossHunts.tick(server);
+		});
+		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> BossHunts.logout(handler.player));
+		ServerLifecycleEvents.SERVER_STOPPED.register(BossHunts::stop);
 
 		ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
 			if (!GameEvents.onEntityJoin(entity, world)) {

@@ -1,0 +1,34 @@
+// Read/write only disposable .gradle fixtures; no release or normal run configuration changes.
+gradle.projectsEvaluated {
+    def root = gradle.rootProject
+    // Init scripts also run for the independent buildSrc build.
+    if (!(root.rootDir.name in ['1.20.1', '1.21.1'])) return
+    def loader = root.findProperty('journalSmokeLoader')
+    if (!(loader in ['fabric', 'forge', 'neoforge'])) {
+        throw new GradleException('Use a supported workspace and -PjournalSmokeLoader=<loader>')
+    }
+    def project = root.project(":${loader}")
+    def runDirectory = new File(root.rootDir.parentFile, ".gradle/boss-hunts-server-smoke/${root.rootDir.name}/${loader}")
+    if (!new File(runDirectory, 'server.properties').isFile()) {
+        throw new GradleException("Prepare the disposable fixture first: ${runDirectory}")
+    }
+    def loom = project.extensions.findByName('loom')
+    if (loom != null) {
+        // Loom rebuilds workingDir as new File(projectDir, runDir) at execution.
+        // An absolute Windows child path produces an invalid concatenated directory.
+        def relativeRunDirectory = project.projectDir.toPath().relativize(runDirectory.toPath()).toString()
+        loom.runs.getByName('server').runDir(relativeRunDirectory)
+        loom.runs.getByName('server').programArgs('--nogui')
+    } else {
+        def extension = project.extensions.findByName('legacyForge') ?: project.extensions.findByName('neoForge')
+        extension.runs.getByName('server').gameDirectory.set(runDirectory)
+        extension.runs.getByName('server').programArgument('--nogui')
+    }
+    project.tasks.named('runServer', JavaExec).configure {
+        workingDir(runDirectory)
+        standardInput = System.in
+        javaLauncher = project.javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(project.java_version.toInteger())
+        }
+    }
+}

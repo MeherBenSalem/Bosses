@@ -2,6 +2,7 @@ package com.nightbeam.remnants.fabric;
 
 import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.RemnantBosses;
+import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
@@ -28,6 +29,8 @@ import com.nightbeam.remnants.fabric.platform.FabricNetwork;
 import com.nightbeam.remnants.fabric.registry.FabricModRegistry;
 import com.nightbeam.remnants.init.ModEntities;
 import com.nightbeam.remnants.network.ClientboundBossMusicPacket;
+import com.nightbeam.remnants.network.ClientboundJournalPacket;
+import com.nightbeam.remnants.network.ServerboundJournalRequestPacket;
 import com.nightbeam.remnants.platform.Services;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -35,8 +38,11 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.MobCategory;
@@ -109,7 +115,12 @@ public class RemnantBossesFabric implements ModInitializer {
 	}
 
 	private static void registerEvents() {
-		ServerTickEvents.END_SERVER_TICK.register(server -> RemnantBosses.tickWorkQueue());
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
+			RemnantBosses.tickWorkQueue();
+			BossHunts.tick(server);
+		});
+		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> BossHunts.logout(handler.player));
+		ServerLifecycleEvents.SERVER_STOPPED.register(BossHunts::stop);
 		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 			if (BlockInteractionEvents.onRightClickBlock(player, world, hitResult.getBlockPos())) {
 				return InteractionResult.SUCCESS;
@@ -121,7 +132,7 @@ public class RemnantBossesFabric implements ModInitializer {
 				entity.discard();
 			}
 		});
-		ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> EntityDeathEvents.onLivingDeath(entity));
+		ServerLivingEntityEvents.AFTER_DEATH.register(EntityDeathEvents::onLivingDeath);
 		ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
 			EntityTickEvents.onLivingHurt(entity);
 			PlayerInteractionEvents.onLivingHurt(entity, source.getEntity());
@@ -131,5 +142,9 @@ public class RemnantBossesFabric implements ModInitializer {
 
 	private static void registerNetworking() {
 		PayloadTypeRegistry.playS2C().register(ClientboundBossMusicPacket.TYPE, ClientboundBossMusicPacket.STREAM_CODEC);
+		PayloadTypeRegistry.playS2C().register(ClientboundJournalPacket.TYPE, ClientboundJournalPacket.STREAM_CODEC);
+		PayloadTypeRegistry.playC2S().register(ServerboundJournalRequestPacket.TYPE, ServerboundJournalRequestPacket.STREAM_CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(ServerboundJournalRequestPacket.TYPE, (packet, context) ->
+				context.server().execute(() -> BossHunts.request(context.player(), packet.schemaVersion())));
 	}
 }

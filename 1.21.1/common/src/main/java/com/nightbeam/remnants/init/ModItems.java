@@ -5,11 +5,13 @@ import com.nightbeam.remnants.item.OldSkeletonBoneItem;
 import com.nightbeam.remnants.item.OldSkeletonHeadItem;
 import com.nightbeam.remnants.item.OssukageSwordItem;
 import com.nightbeam.remnants.item.RatFangItem;
+import com.nightbeam.remnants.item.BossJournalItem;
 import com.nightbeam.remnants.registry.RegistryHolder;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 public final class ModItems {
+	public static final RegistryHolder<Item> BOSS_JOURNAL = new RegistryHolder<>("boss_journal", BossJournalItem::new);
 	public static final RegistryHolder<Item> RAT_FANG = new RegistryHolder<>("rat_fang", RatFangItem::new);
 	public static final RegistryHolder<Item> OLD_SKELETON_BONE = new RegistryHolder<>("old_skeleton_bone", OldSkeletonBoneItem::new);
 	public static final RegistryHolder<Item> OLD_SKELETON_HEAD = new RegistryHolder<>("old_skeleton_head", OldSkeletonHeadItem::new);

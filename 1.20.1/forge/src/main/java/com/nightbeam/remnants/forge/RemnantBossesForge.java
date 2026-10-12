@@ -1,6 +1,7 @@
 package com.nightbeam.remnants.forge;
 
 import com.nightbeam.remnants.Constants;
+import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.RemnantBosses;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.entity.UmbrakarEntity;
@@ -97,6 +98,7 @@ public class RemnantBossesForge {
 		bindBlock(ModBlocks.ANCIENT_PEDESTAL, ModBlocks::createPedestal);
 
 		bindItem(ModItems.OSSUKAGE_SWORD, ModItems::createOssukageSword);
+		bindItem(ModItems.BOSS_JOURNAL, ModItems::createBossJournal);
 		bindItem(ModItems.RAT_FANG, ModItems::createRatFang);
 		bindItem(ModItems.FANG_ON_A_STICK, ModItems::createFangOnAStick);
 		bindItem(ModItems.OLD_SKELETON_BONE, ModItems::createOldSkeletonBone);
@@ -215,6 +217,7 @@ public class RemnantBossesForge {
 	private void onServerTick(TickEvent.ServerTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
 			RemnantBosses.tickWorkQueue();
+			BossHunts.tick(event.getServer());
 		}
 	}
 

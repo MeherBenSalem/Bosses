@@ -2,6 +2,38 @@ plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
 }
+
+// Disposable-world runtime verification only. This source set is never included in a release jar.
+if (providers.gradleProperty('journalRuntimeTest').isPresent()) {
+    sourceSets {
+        journalRuntimeTest {
+            java.srcDir(rootProject.file('../tools/boss-hunts-runtime/src/main/java'))
+            resources.srcDir(rootProject.file('../tools/boss-hunts-runtime/src/main/resources'))
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+        }
+    }
+    loom {
+        mods {
+            remnant_bosses { sourceSet sourceSets.main }
+            boss_hunts_runtime_test { sourceSet sourceSets.journalRuntimeTest }
+        }
+        runs {
+            journalRuntimeTestClient {
+                client()
+                source sourceSets.journalRuntimeTest
+                setConfigName('Boss Hunts Disposable World Runtime Test')
+                ideConfigGenerated(false)
+                runDir('run')
+                programArgs '--quickPlaySingleplayer', 'BossHuntsValidation', '--width', '1280', '--height', '960'
+                programArgs '--username', 'BossHuntsProbe', '--uuid', '8cf1259a-6c08-4ae3-a343-903f54454301'
+                if (providers.gradleProperty('journalRuntimeReload').isPresent()) {
+                    vmArg '-DbossHuntsRuntimeReload=true'
+                }
+            }
+        }
+    }
+}
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {

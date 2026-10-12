@@ -1,6 +1,7 @@
 package com.nightbeam.remnants.fabric;
 
 import com.nightbeam.remnants.client.model.Modelrat;
+import com.nightbeam.remnants.client.journal.BossHuntsClient;
 import com.nightbeam.remnants.client.model.Modelshuriken;
 import com.nightbeam.remnants.client.model.Modelskeleton_minion;
 import com.nightbeam.remnants.client.model.Modelwraith;
@@ -23,7 +24,9 @@ import com.nightbeam.remnants.client.renderer.SkeletonMinionRenderer;
 import com.nightbeam.remnants.client.renderer.WraithRenderer;
 import com.nightbeam.remnants.init.ModEntities;
 import com.nightbeam.remnants.network.ClientboundBossMusicPacket;
+import com.nightbeam.remnants.network.ClientboundJournalPacket;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -31,6 +34,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 public class RemnantBossesFabricClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		ClientTickEvents.END_CLIENT_TICK.register(client -> BossHuntsClient.tick());
 		EntityRendererRegistry.register(ModEntities.RAT.get(), RatRenderer::new);
 		EntityRendererRegistry.register(ModEntities.SKELETON_MINION.get(), SkeletonMinionRenderer::new);
 		EntityRendererRegistry.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);
@@ -56,5 +60,13 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 
 		ClientPlayNetworking.registerGlobalReceiver(ClientboundBossMusicPacket.TYPE,
 				(payload, context) -> context.client().execute(() -> ClientboundBossMusicPacket.handleClient(payload)));
+		ClientPlayNetworking.registerGlobalReceiver(ClientboundJournalPacket.TYPE, (payload, context) -> {
+			var client = context.client();
+			var connection = client.getConnection();
+			var level = client.level;
+			client.execute(() -> {
+				if (client.getConnection() == connection && client.level == level) BossHuntsClient.receive(payload);
+			});
+		});
 	}
 }

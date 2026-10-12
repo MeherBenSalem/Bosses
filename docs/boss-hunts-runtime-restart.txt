@@ -1,0 +1,27 @@
+PASS runtime probe completed: real gameplay hooks, network journal snapshots, owned Arrow/Wolf DamageSources (programmatic hurt), environmental final blow, Fabric death cancellation, GUI scales 2/3/4, keyboard selection, scroll, Escape and repeated item open. PASS actual restarted-world persistence. UNRUN multiplayer, Forge/NeoForge cancellation, dimension/reconnect scenarios.
+Minecraft 1.20.1 Fabric; real integrated server and client framebuffer.
+World folder: BossHuntsValidation (disposable copy only).
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-ossukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-ossukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-kotsukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-kotsukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-umbrakar-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-umbrakar-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-hollow_sovereign-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale2-hollow_sovereign-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-ossukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-ossukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-kotsukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-kotsukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-umbrakar-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-umbrakar-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-hollow_sovereign-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale3-hollow_sovereign-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-ossukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-ossukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-kotsukage-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-kotsukage-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-umbrakar-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-umbrakar-bottom.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-hollow_sovereign-top.png
+CAPTURE 1.20.1\fabric\run\screenshots\boss-hunts-defeated-scale4-hollow_sovereign-bottom.png

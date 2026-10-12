@@ -65,6 +65,7 @@ public final class NeoForgeModRegistry {
 		bindBlock(ModBlocks.ANCIENT_PEDESTAL);
 
 		bindItem(ModItems.RAT_FANG);
+		bindItem(ModItems.BOSS_JOURNAL);
 		bindItem(ModItems.OLD_SKELETON_BONE);
 		bindItem(ModItems.OLD_SKELETON_HEAD);
 		bindItem(ModItems.OSSUKAGE_SWORD);

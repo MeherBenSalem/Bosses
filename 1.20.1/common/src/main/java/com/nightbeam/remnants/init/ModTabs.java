@@ -16,6 +16,7 @@ public final class ModTabs {
 				.title(Component.translatable("item_group.remnant_bosses.remnant_bosses_tab"))
 				.icon(() -> new ItemStack(ModBlocks.ANCIENT_ALTAR.get()))
 				.displayItems((parameters, tabData) -> {
+					tabData.accept(ModItems.BOSS_JOURNAL.get());
 					tabData.accept(ModBlocks.ANCIENT_ALTAR.get().asItem());
 					tabData.accept(ModBlocks.ANCIENT_PEDESTAL.get().asItem());
 					tabData.accept(ModItems.RAT_FANG.get());
