@@ -5,6 +5,8 @@ import com.nightbeam.remnants.block.AncientAltarBlock;
 import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModEntities;
+import com.nightbeam.remnants.journal.BossHunts;
+import com.nightbeam.remnants.journal.RitualInfo;
 import com.nightbeam.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -49,6 +51,10 @@ public final class BlockInteractionEvents {
 		if (level.isClientSide()) {
 			return;
 		}
+		if (player.isShiftKeyDown() && player.getMainHandItem().isEmpty() && player instanceof ServerPlayer serverPlayer) {
+			BossHunts.open(serverPlayer);
+			return;
+		}
 
 		if (SovereignRitual.tryActivate(player, level, pos)) return;
 		String heldKey = BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString();
@@ -78,36 +84,7 @@ public final class BlockInteractionEvents {
 			return;
 		}
 
-		boolean topsValid = true;
-		Locale locale = Locale.ENGLISH;
-		ResourceLocation cfgOne = ResourceLocation.parse(JaumlConfigLib
-				.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_one_activation_block")
-				.toLowerCase(locale));
-		ResourceLocation cfgTwo = ResourceLocation.parse(JaumlConfigLib
-				.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_two_activation_block")
-				.toLowerCase(locale));
-		ResourceLocation cfgThree = ResourceLocation.parse(JaumlConfigLib
-				.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_three_activation_block")
-				.toLowerCase(locale));
-		ResourceLocation cfgFour = ResourceLocation.parse(JaumlConfigLib
-				.getStringValue("remnant/bosses", "ossukage_summon", "pedestal_four_activation_block")
-				.toLowerCase(locale));
-
-		if (BuiltInRegistries.BLOCK.get(cfgOne) != level.getBlockState(pos.offset(3, 1, 0)).getBlock()) {
-			topsValid = false;
-		}
-		if (BuiltInRegistries.BLOCK.get(cfgTwo) != level.getBlockState(pos.offset(-3, 1, 0)).getBlock()) {
-			topsValid = false;
-		}
-		if (BuiltInRegistries.BLOCK.get(cfgThree) != level.getBlockState(pos.offset(0, 1, 3)).getBlock()) {
-			topsValid = false;
-		}
-		if (BuiltInRegistries.BLOCK.get(cfgFour) != level.getBlockState(pos.offset(0, 1, -3)).getBlock()) {
-			topsValid = false;
-		}
-		if (!topsValid) {
-			return;
-		}
+		if (!RitualInfo.resolve("ossukage_summon").matchesTops(level, pos)) return;
 
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(0);
@@ -162,17 +139,7 @@ public final class BlockInteractionEvents {
 				|| level.getBlockState(pos.offset(0, 0, -3)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()) {
 			return;
 		}
-		Locale locale = Locale.ENGLISH;
-		ResourceLocation cfgOne = ResourceLocation.parse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_one_activation_block").toLowerCase(locale));
-		ResourceLocation cfgTwo = ResourceLocation.parse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_two_activation_block").toLowerCase(locale));
-		ResourceLocation cfgThree = ResourceLocation.parse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_three_activation_block").toLowerCase(locale));
-		ResourceLocation cfgFour = ResourceLocation.parse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_four_activation_block").toLowerCase(locale));
-		if (BuiltInRegistries.BLOCK.get(cfgOne) != level.getBlockState(pos.offset(3, 1, 0)).getBlock()
-				|| BuiltInRegistries.BLOCK.get(cfgTwo) != level.getBlockState(pos.offset(-3, 1, 0)).getBlock()
-				|| BuiltInRegistries.BLOCK.get(cfgThree) != level.getBlockState(pos.offset(0, 1, 3)).getBlock()
-				|| BuiltInRegistries.BLOCK.get(cfgFour) != level.getBlockState(pos.offset(0, 1, -3)).getBlock()) {
-			return;
-		}
+		if (!RitualInfo.resolve(summonFile).matchesTops(level, pos)) return;
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(18000);
 			for (BlockPos bp : List.of(pos.offset(3, 1, 0), pos.offset(-3, 1, 0), pos.offset(0, 1, 3), pos.offset(0, 1, -3))) {

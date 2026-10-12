@@ -10,6 +10,8 @@ import com.nightbeam.remnants.entity.WraithEntity;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModEntities;
 import com.nightbeam.remnants.item.OssukageSwordItem;
+import com.nightbeam.remnants.journal.BossHunts;
+import com.nightbeam.remnants.journal.RitualInfo;
 import com.nightbeam.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
 import com.nightbeam.remnants.procedures.ThrowKunaisProcedureProcedure;
 
@@ -210,6 +212,10 @@ public final class GameEvents {
 		if (level.isClientSide()) {
 			return;
 		}
+		if (player.isShiftKeyDown() && player.getMainHandItem().isEmpty() && player instanceof ServerPlayer serverPlayer) {
+			BossHunts.open(serverPlayer);
+			return;
+		}
 
 		if (SovereignRitual.tryActivate(player, level, pos)) return;
 		String heldKey = String.valueOf(BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()));
@@ -249,14 +255,7 @@ public final class GameEvents {
 	}
 
 	private static boolean pedestalTopsMatch(Level level, BlockPos pos, String summonFile) {
-		ResourceLocation cfgOne = ResourceLocation.tryParse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_one_activation_block").toLowerCase(Locale.ENGLISH));
-		ResourceLocation cfgTwo = ResourceLocation.tryParse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_two_activation_block").toLowerCase(Locale.ENGLISH));
-		ResourceLocation cfgThree = ResourceLocation.tryParse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_three_activation_block").toLowerCase(Locale.ENGLISH));
-		ResourceLocation cfgFour = ResourceLocation.tryParse(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_four_activation_block").toLowerCase(Locale.ENGLISH));
-		return cfgOne != null && BuiltInRegistries.BLOCK.get(cfgOne) == level.getBlockState(pos.offset(3, 1, 0)).getBlock()
-				&& cfgTwo != null && BuiltInRegistries.BLOCK.get(cfgTwo) == level.getBlockState(pos.offset(-3, 1, 0)).getBlock()
-				&& cfgThree != null && BuiltInRegistries.BLOCK.get(cfgThree) == level.getBlockState(pos.offset(0, 1, 3)).getBlock()
-				&& cfgFour != null && BuiltInRegistries.BLOCK.get(cfgFour) == level.getBlockState(pos.offset(0, 1, -3)).getBlock();
+		return RitualInfo.resolve(summonFile).matchesTops(level, pos);
 	}
 
 	private static void playRitualEffects(Level level, BlockPos pos) {

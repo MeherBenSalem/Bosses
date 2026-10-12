@@ -2,6 +2,12 @@
 
 A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and altar rituals.
 
+## Boss Hunts
+
+Craft a **Boss Hunts Journal** with a Book, Bone and Ink Sac, then use it to open your personal journal. You can also sneak and interact with an Ancient Altar with an empty main hand. Witness bosses to uncover their rites, and defeat them to complete their entries. The journal displays the server's effective ritual configuration.
+
+Progress belongs to your player in that world. Trading or losing the journal does not transfer or erase it. See [the Boss Hunts guide](docs/boss-hunts.md) for discovery, multiplayer credit and persistence rules.
+
 ## Summoning bosses
 
 Four bosses are summoned through an **Ancient Altar** ritual. Craft **one Ancient Altar** and **four Ancient Pedestals**, arrange the pedestals three blocks out on each cardinal side, place the correct offering block on top of each pedestal, then right-click the altar with the activation item in your main hand.
@@ -41,7 +47,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The release version is `2.6.2` in both workspaces. Keep those `version=` lines identical.
+The development version is `2.7.0` in both workspaces. Keep those `version=` lines identical.
 
 ## Requirements
 
@@ -65,10 +71,10 @@ cd ../1.21.1
 From the repository root:
 
 ```
-./gradlew buildAll
+./1.20.1/gradlew -p . buildAll
 ```
 
-That builds both workspaces and copies the four loader jars into `releases/`.
+Run Gradle with JDK 21. The workspace wrapper selects Gradle 8.11, which can run on that JVM; the older root wrapper is Gradle 8.2.1. Java toolchains compile 1.20.1 with Java 17 and 1.21.1 with Java 21. On Windows use `1.20.1\gradlew.bat -p . buildAll`. The task builds both workspaces and copies the four loader jars into `releases/`.
 
 ## Run clients
 

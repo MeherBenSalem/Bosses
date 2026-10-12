@@ -65,7 +65,7 @@ public final class BossHuntsClient {
 **Consumes:** RitualInfo.resolve, packet Entry constructor and INetworkHelper.sendJournal.
 **Produces:** BossHunt, HuntState and BossHunts APIs above; lifecycle calls consumed by loader task.
 
-- [ ] Write regressions before implementation for NBT round-trip/unknown/future data, monotonic states and repeated completion, distance/time/dimension/disconnected credit, spectator/discovery eligibility and request version/cooldown.
+- [x] Write regressions before implementation for NBT round-trip/unknown/future data, monotonic states and repeated completion, distance/time/dimension/disconnected credit, spectator/discovery eligibility and request version/cooldown.
 
 ```java
 // Independently derived boundary fixtures: 1,200 ticks qualifies, 1,201 does not;
@@ -74,10 +74,10 @@ public final class BossHuntsClient {
 // Save -> load with identical UUID: all four states remain unchanged.
 ```
 
-- [ ] Run the new JavaExec regression task and record expected failure before feature code exists.
-- [ ] Implement bounded encounter bookkeeping, positive accepted damage with owner resolution, periodic sight discovery and accepted-death guard using the real dead flag.
-- [ ] Add schema-aware SavedData, processed entity NBT and request limits; preserve attribution adapters.
-- [ ] Run `:common:verifyJournal` in both workspaces and address failures. Do not run concurrent Gradle builds against another worker's workspace.
+- [x] Run the new JavaExec regression task and record expected failure before feature code exists.
+- [x] Implement bounded encounter bookkeeping, positive accepted damage with owner resolution, periodic sight discovery and accepted-death guard using the real dead flag.
+- [x] Add schema-aware SavedData, processed entity NBT and request limits; preserve attribution adapters.
+- [x] Run `:common:verifyJournal` in both workspaces and address failures. Do not run concurrent Gradle builds against another worker's workspace.
 
 ### Task 2: Loader networking and lifecycle adapters
 
@@ -86,11 +86,11 @@ public final class BossHuntsClient {
 **Consumes:** Task 1 BossHunts lifecycle; Task 3 BossHuntsClient.receive/tick.
 **Produces:** Bounded S2C snapshot and version-only C2S request plus interface methods above.
 
-- [ ] Write packet regressions for excessive entry count/string length, unknown state/ID, malformed request and schema mismatch, without trusting client target identity.
-- [ ] Run regressions to establish expected missing-code failure.
-- [ ] Extend existing network abstraction and transports, retaining boss-music behavior. Use server-context player and enqueue work on server/client threads.
-- [ ] Register tick/logout/stop lifecycle and client reset tick, with physical-side guards preventing dedicated UI loading. Preserve DamageSource through 1.21.1 loader death events.
-- [ ] Compile all four loaders and execute packet regressions after integration.
+- [x] Write packet regressions for excessive entry count/string length, unknown state/ID, malformed request and schema mismatch, without trusting client target identity.
+- [x] Run regressions to establish expected missing-code failure.
+- [x] Extend existing network abstraction and transports, retaining boss-music behavior. Use server-context player and enqueue work on server/client threads.
+- [x] Register tick/logout/stop lifecycle and client reset tick, with physical-side guards preventing dedicated UI loading. Preserve DamageSource through 1.21.1 loader death events.
+- [x] Compile all four loaders and execute packet regressions after integration.
 
 ### Task 3: Journal screen, item, configuration and delivery
 
@@ -99,11 +99,13 @@ public final class BossHuntsClient {
 **Consumes:** Packet Entry, BossHunt/HuntState and server open; requestJournal for refresh.
 **Produces:** Client receiver API above, ritual resolver and discoverable journal access.
 
-- [ ] Write a failing regression for layout bounds and scroll behavior at small/large GUI sizes; validate ritual IDs through actual registries in the common regression harness.
-- [ ] Implement translated screen, entry buttons, bounded text scrolling, item icons, state badges, keyboard selection/focus, narration, Escape/back and repeated opening/cache clear behavior.
-- [ ] Resolve effective ritual values and share safe validity checks with altar activation without changing valid recipes.
-- [ ] Register journal item, recipe/model and alternate sneak-empty-main-hand altar access. Progress remains in SavedData.
-- [ ] Run root `buildAll`, both `:common:verifyCrafting` and `:common:verifyJournal`, Node publisher/recipe tests and release JAR checks.
-- [ ] Launch disposable clients/servers where feasible, capture actual game UI screenshots and iterate. Document every failed or unrun runtime scenario explicitly.
-- [ ] Independent whole-branch review; fix significant findings and rerun affected checks.
-- [ ] Add changelog/user docs/exact-version test report, collect four JARs, commit and prepare a draft PR without merging or publishing.
+- [x] Write a failing regression for layout bounds and scroll behavior at small/large GUI sizes; validate ritual IDs through actual registries in the common regression harness.
+- [x] Implement translated screen, entry buttons, bounded text scrolling, item icons, state badges, keyboard selection/focus, narration, Escape/back and repeated opening/cache clear behavior.
+- [x] Resolve effective ritual values and share safe validity checks with altar activation without changing valid recipes.
+- [x] Register journal item, recipe/model and alternate sneak-empty-main-hand altar access. Progress remains in SavedData.
+- [x] Run root `buildAll`, both `:common:verifyCrafting` and `:common:verifyJournal`, Node publisher/recipe tests and release JAR checks.
+- [x] Launch disposable clients/servers where feasible, capture actual game UI screenshots and iterate. Document every failed or unrun runtime scenario explicitly.
+- [x] Independent whole-branch review; fix significant findings and rerun affected checks.
+- [x] Add changelog/user docs/exact-version test report, collect four JARs, commit and prepare a draft PR without merging or publishing.
+
+Completed implementation and recorded actual verification on 2026-10-12. Unrun runtime scenarios are explicitly listed in docs/boss-hunts-test-report.md; checked verification steps include documenting those limits, not claiming all scenarios passed.

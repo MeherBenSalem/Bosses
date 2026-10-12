@@ -1,6 +1,7 @@
 package com.nightbeam.remnants.fabric;
 
 import com.nightbeam.remnants.client.model.Modelrat;
+import com.nightbeam.remnants.client.journal.BossHuntsClient;
 import com.nightbeam.remnants.client.model.Modelshuriken;
 import com.nightbeam.remnants.client.model.Modelskeleton_minion;
 import com.nightbeam.remnants.client.model.Modelwraith;
@@ -24,12 +25,14 @@ import com.nightbeam.remnants.client.renderer.WraithRenderer;
 import com.nightbeam.remnants.fabric.network.FabricNetwork;
 import com.nightbeam.remnants.init.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 public class RemnantBossesFabricClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		ClientTickEvents.END_CLIENT_TICK.register(client -> BossHuntsClient.tick());
 		EntityRendererRegistry.register(ModEntities.RAT.get(), RatRenderer::new);
 		EntityRendererRegistry.register(ModEntities.SKELETON_MINION.get(), SkeletonMinionRenderer::new);
 		EntityRendererRegistry.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);

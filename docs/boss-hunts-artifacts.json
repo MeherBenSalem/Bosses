@@ -1,0 +1,60 @@
+[
+  {
+    "file": "remnant_bosses-fabric-1.20.1-2.7.0.jar",
+    "loader": "fabric",
+    "game": "1.20.1",
+    "version": "2.7.0",
+    "bytes": 3191331,
+    "sha1": "3b29fa7520a3411d00d7c930f0e88913da9bea5f",
+    "sha256": "42acc79304764e4f419fefa1d70327e765c951c0416cc9e21b1d52946cd9cac2",
+    "sha512": "2e7742d6ee9fa352f8897f880aae975f46f6b7409b1cc9063036f16349abb44f7f7e07667fe6614c765d632032cfbc01d2c514131b23a8b00ac2c1e53e445e04",
+    "required_dependencies": [
+      "fabric-api",
+      "geckolib",
+      "jauml"
+    ]
+  },
+  {
+    "file": "remnant_bosses-forge-1.20.1-2.7.0.jar",
+    "loader": "forge",
+    "game": "1.20.1",
+    "version": "2.7.0",
+    "bytes": 3205568,
+    "sha1": "2fa6c2044b3b33b66cdd34e010890534f93d0c2b",
+    "sha256": "85f9677f58d273619b4438514a95b9a606620f35b70935193103a0bebe020229",
+    "sha512": "500c069fd64972e5ce03a6923a8b2b9c9636dbd5b53644a0b0ee9c0e03d77fe9b06e19a4ec9445a4e8e6a567614fc0311cfff419b382b7536ae5e5aae9ee122d",
+    "required_dependencies": [
+      "geckolib",
+      "jauml"
+    ]
+  },
+  {
+    "file": "remnant_bosses-fabric-1.21.1-2.7.0.jar",
+    "loader": "fabric",
+    "game": "1.21.1",
+    "version": "2.7.0",
+    "bytes": 3197395,
+    "sha1": "fab7a65130b341b5e39bc5e4ded85822b881d3ff",
+    "sha256": "5724380777c29f62fad22df5aa059d0b2c991e0beff56478ef0b17aba2b1d461",
+    "sha512": "d8b7e0110ca0490a8bc11ed8543c57d614f02815091b88c0315f4c77f19dcb8dd3bd176dc5166249918d551a9211567e17e5d2019de82ae91668aaa8c93894f5",
+    "required_dependencies": [
+      "fabric-api",
+      "geckolib",
+      "jauml"
+    ]
+  },
+  {
+    "file": "remnant_bosses-neoforge-1.21.1-2.7.0.jar",
+    "loader": "neoforge",
+    "game": "1.21.1",
+    "version": "2.7.0",
+    "bytes": 3207290,
+    "sha1": "501e879187dfbdc1e24539362d3728d1b1c88ebb",
+    "sha256": "db153190802bb9b9665801521a0e5dc10bc9ee94d61e1a653030429206d2207a",
+    "sha512": "7021e2684140e40cd74ad4606f18b37bebe40d6f9e525c38b77f131b0c1c95ba61f1be78bf0d3c631f2966f29619e5adf62db0353fcc9e8a12f024ad03a42672",
+    "required_dependencies": [
+      "geckolib",
+      "jauml"
+    ]
+  }
+]

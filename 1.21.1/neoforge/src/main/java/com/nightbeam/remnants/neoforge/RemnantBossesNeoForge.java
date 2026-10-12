@@ -2,6 +2,7 @@ package com.nightbeam.remnants.neoforge;
 
 import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.RemnantBosses;
+import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.neoforge.network.PacketHandler;
 import com.nightbeam.remnants.neoforge.platform.NeoForgeNetwork;
@@ -37,5 +38,6 @@ public class RemnantBossesNeoForge {
 
 	private void onServerTick(ServerTickEvent.Post event) {
 		RemnantBosses.tickWorkQueue();
+		BossHunts.tick(event.getServer());
 	}
 }

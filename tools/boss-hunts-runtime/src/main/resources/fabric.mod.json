@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "boss_hunts_runtime_test",
+  "version": "1.0.0-dev",
+  "name": "Boss Hunts Disposable World Runtime Test",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.nightbeam.runtime.BossHuntsRuntimeProbe"],
+    "client": ["com.nightbeam.runtime.BossHuntsRuntimeClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "1.20.1",
+    "remnant_bosses": "*"
+  }
+}
