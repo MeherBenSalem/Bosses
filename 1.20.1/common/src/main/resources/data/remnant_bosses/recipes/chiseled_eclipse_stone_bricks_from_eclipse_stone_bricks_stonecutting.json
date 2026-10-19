@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "remnant_bosses:eclipse_stone_bricks"
+  },
+  "result": "remnant_bosses:chiseled_eclipse_stone_bricks",
+  "count": 1
+}

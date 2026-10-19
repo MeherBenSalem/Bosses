@@ -43,6 +43,36 @@ public final class RecipeRegression {
                 ItemStack.EMPTY, stack(Items.EMERALD), ItemStack.EMPTY,
                 ItemStack.EMPTY, stack(Items.CHISELED_DEEPSLATE), ItemStack.EMPTY,
                 stack(Items.CHISELED_DEEPSLATE), stack(Items.CHISELED_DEEPSLATE), stack(Items.CHISELED_DEEPSLATE)));
+        // Mod items stand in as paper, so the raw keys are checked too.
+        ItemStack paper = stack(Items.PAPER);
+        verifyShaped(recipeDir, "sovereigns_seal", "remnant_bosses:sovereigns_seal", List.of("RGR", "GEG", "RGR"),
+                java.util.Map.of('R', "remnant_bosses:tarnished_regalia", 'G', "minecraft:gold_ingot", 'E', "minecraft:echo_shard"),
+                List.of(paper, stack(Items.GOLD_INGOT), paper, stack(Items.GOLD_INGOT), stack(Items.ECHO_SHARD),
+                        stack(Items.GOLD_INGOT), paper, stack(Items.GOLD_INGOT), paper));
+        for (var piece : List.of(java.util.Map.entry("regalia_cuirass", Items.DIAMOND_CHESTPLATE),
+                java.util.Map.entry("regalia_greaves", Items.DIAMOND_LEGGINGS), java.util.Map.entry("regalia_sabatons", Items.DIAMOND_BOOTS))) {
+            verifyShaped(recipeDir, piece.getKey(), "remnant_bosses:" + piece.getKey(), List.of("RFR", "RDR", "RRR"),
+                    java.util.Map.of('R', "remnant_bosses:tarnished_regalia", 'F', "remnant_bosses:royal_soul_fragment",
+                            'D', net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(piece.getValue()).toString()),
+                    List.of(paper, paper, paper, paper, stack(piece.getValue()), paper, paper, paper, paper));
+        }
+        // G G / GIG / G G: grave iron around an iron block.
+        verifyShaped(recipeDir, "crypt_key", "remnant_bosses:crypt_key", List.of("G G", "GIG", "G G"),
+                java.util.Map.of('G', "remnant_bosses:grave_iron", 'I', "minecraft:iron_block"),
+                List.of(paper, ItemStack.EMPTY, paper, paper, stack(Items.IRON_BLOCK), paper, paper, ItemStack.EMPTY, paper));
+        // MAM / ASA / MAM, and the Archivist pieces around diamond armor.
+        verifyShaped(recipeDir, "memory_lens", "remnant_bosses:memory_lens", List.of("MAM", "ASA", "MAM"),
+                java.util.Map.of('M', "remnant_bosses:memory_shard", 'A', "minecraft:amethyst_shard", 'S', "minecraft:spyglass"),
+                List.of(paper, stack(Items.AMETHYST_SHARD), paper, stack(Items.AMETHYST_SHARD), stack(Items.SPYGLASS),
+                        stack(Items.AMETHYST_SHARD), paper, stack(Items.AMETHYST_SHARD), paper));
+        for (var piece : List.of(java.util.Map.entry("archivist_hood", Items.DIAMOND_HELMET),
+                java.util.Map.entry("archivist_robe", Items.DIAMOND_CHESTPLATE), java.util.Map.entry("archivist_leggings", Items.DIAMOND_LEGGINGS),
+                java.util.Map.entry("archivist_boots", Items.DIAMOND_BOOTS))) {
+            verifyShaped(recipeDir, piece.getKey(), "remnant_bosses:" + piece.getKey(), List.of("MFM", "MDM", "MMM"),
+                    java.util.Map.of('M', "remnant_bosses:memory_shard", 'F', "remnant_bosses:knowledge_fragment",
+                            'D', net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(piece.getValue()).toString()),
+                    List.of(paper, paper, paper, paper, stack(piece.getValue()), paper, paper, paper, paper));
+        }
         for (String name : List.of("ancient_altar", "ancient_pedestal")) {
             Path loot = root.resolve("data/remnant_bosses/loot_table/blocks/" + name + ".json");
             require(Files.isRegularFile(loot), "Missing discoverable block loot for " + name);
@@ -63,7 +93,7 @@ public final class RecipeRegression {
                 }
             }
         }
-        System.out.println("Minecraft 1.21.1: all recipes parse; altar/pedestal craft one item; wrong ingredients rejected");
+        System.out.println("Minecraft 1.21.1: all recipes parse; altar/pedestal, Sovereign's Seal, Regalia, Crypt Key, Lens of Memory and Archivist armor craft one item; wrong ingredients rejected");
     }
 
     private static void parseLoot(JsonObject json) {
@@ -89,6 +119,26 @@ public final class RecipeRegression {
         JsonObject oldResult = legacy.getAsJsonObject("result");
         oldResult.add("item", oldResult.remove("id"));
         require(Recipe.CODEC.parse(JsonOps.INSTANCE, vanillaItems(legacy)).error().isPresent(), "Obsolete result.item unexpectedly accepted");
+    }
+
+    private static void verifyShaped(Path recipeDir, String file, String output, List<String> pattern,
+            java.util.Map<Character, String> keys, List<ItemStack> grid) throws Exception {
+        JsonObject json = JsonParser.parseString(Files.readString(recipeDir.resolve(file + ".json"))).getAsJsonObject();
+        require(json.getAsJsonObject("result").get("id").getAsString().equals(output), "Wrong output ID " + file);
+        require(json.getAsJsonObject("result").get("count").getAsInt() == 1, "Wrong output count " + file);
+        var rows = json.getAsJsonArray("pattern");
+        require(rows.size() == pattern.size(), "Wrong pattern height " + file);
+        for (int i = 0; i < pattern.size(); i++) require(rows.get(i).getAsString().equals(pattern.get(i)), "Wrong pattern row " + i + " in " + file);
+        JsonObject key = json.getAsJsonObject("key");
+        require(key.size() == keys.size(), "Unexpected key count in " + file);
+        keys.forEach((symbol, item) -> require(key.getAsJsonObject(String.valueOf(symbol)).get("item").getAsString().equals(item),
+                "Key " + symbol + " is not " + item + " in " + file));
+        ShapedRecipe recipe = (ShapedRecipe) parse(json);
+        require(recipe.matches(CraftingInput.of(3, 3, grid), null), "Crafting grid does not match " + file);
+        require(recipe.assemble(CraftingInput.of(3, 3, grid), RegistryAccess.EMPTY).is(Items.PAPER), "Wrong output " + file);
+        var wrong = new java.util.ArrayList<>(grid);
+        wrong.set(4, stack(Items.DIRT));
+        require(!recipe.matches(CraftingInput.of(3, 3, wrong), null), "Wrong ingredient accepted for " + file);
     }
 
     // Bootstrap freezes vanilla registries. Alias only mod item IDs to a real vanilla

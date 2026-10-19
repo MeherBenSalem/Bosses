@@ -1,0 +1,3282 @@
+{
+  "type": "remnant_bosses:eclipsed_realm",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "remnant_bosses:eclipsed_realm",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              -2.0,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              -2.0,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:lantern_heights",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -2.0,
+              -0.375
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:stilled_sea",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              2.0
+            ],
+            "continentalness": [
+              -2.0,
+              -0.11
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              -2.0,
+              0.2
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              -2.0,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              -2.0,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              -0.45
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gravefield_barrows",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              -2.0,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -2.0,
+              -0.35
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              -0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              -0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              0.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              0.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:tarnished_fields",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              0.55
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ashen_wastes",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              0.55,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:gracewood",
+          "parameters": {
+            "temperature": [
+              0.55,
+              2.0
+            ],
+            "humidity": [
+              0.3,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -0.375,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:lantern_heights",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              2.0
+            ],
+            "continentalness": [
+              0.03,
+              2.0
+            ],
+            "erosion": [
+              -2.0,
+              -0.375
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:stilled_sea",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              2.0
+            ],
+            "continentalness": [
+              -2.0,
+              -0.11
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.9,
+              2.0
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "remnant_bosses:ossuary_depths",
+          "parameters": {
+            "temperature": [
+              -2.0,
+              2.0
+            ],
+            "humidity": [
+              -2.0,
+              2.0
+            ],
+            "continentalness": [
+              -2.0,
+              2.0
+            ],
+            "erosion": [
+              -2.0,
+              2.0
+            ],
+            "weirdness": [
+              -2.0,
+              2.0
+            ],
+            "depth": [
+              0.2,
+              0.9
+            ],
+            "offset": 0.0
+          }
+        }
+      ]
+    }
+  }
+}

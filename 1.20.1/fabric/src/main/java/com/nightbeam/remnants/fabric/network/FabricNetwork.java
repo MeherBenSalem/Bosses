@@ -4,7 +4,10 @@ import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.client.journal.BossHuntsClient;
 import com.nightbeam.remnants.network.ClientboundBossMusicPacket;
+import com.nightbeam.remnants.network.ClientboundGraceMenuPacket;
 import com.nightbeam.remnants.network.ClientboundJournalPacket;
+import com.nightbeam.remnants.network.ClientboundRealmFxPacket;
+import com.nightbeam.remnants.network.ServerboundGraceActionPacket;
 import com.nightbeam.remnants.network.ServerboundJournalRequestPacket;
 import com.nightbeam.remnants.platform.services.INetworkHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -18,12 +21,38 @@ public class FabricNetwork implements INetworkHelper {
 	public static final ResourceLocation BOSS_MUSIC = new ResourceLocation(Constants.MOD_ID, "boss_music");
 	public static final ResourceLocation BOSS_JOURNAL = new ResourceLocation(Constants.MOD_ID, "boss_journal");
 	public static final ResourceLocation JOURNAL_REQUEST = new ResourceLocation(Constants.MOD_ID, "boss_journal_request");
+	public static final ResourceLocation REALM_FX = new ResourceLocation(Constants.MOD_ID, "realm_fx");
+	public static final ResourceLocation GRACE_MENU = new ResourceLocation(Constants.MOD_ID, "grace_menu");
+	public static final ResourceLocation GRACE_ACTION = new ResourceLocation(Constants.MOD_ID, "grace_action");
 
 	public static void registerServer() {
 		ServerPlayNetworking.registerGlobalReceiver(JOURNAL_REQUEST, (server, player, handler, buf, responseSender) -> {
 			ServerboundJournalRequestPacket packet = ServerboundJournalRequestPacket.decode(buf);
 			server.execute(() -> BossHunts.request(player, packet.schemaVersion()));
 		});
+		ServerPlayNetworking.registerGlobalReceiver(GRACE_ACTION, (server, player, handler, buf, responseSender) -> {
+			ServerboundGraceActionPacket packet = ServerboundGraceActionPacket.decode(buf);
+			server.execute(() -> ServerboundGraceActionPacket.handleServer(packet, player));
+		});
+	}
+
+	@Override
+	public void sendRealmFx(ServerPlayer player, ClientboundRealmFxPacket packet) {
+		FriendlyByteBuf buf = PacketByteBufs.create();
+		ClientboundRealmFxPacket.encode(packet, buf);
+		ServerPlayNetworking.send(player, REALM_FX, buf);
+	}
+
+	@Override
+	public void sendGraceMenu(ServerPlayer player, ClientboundGraceMenuPacket packet) {
+		FriendlyByteBuf buf = PacketByteBufs.create();
+		ClientboundGraceMenuPacket.encode(packet, buf);
+		ServerPlayNetworking.send(player, GRACE_MENU, buf);
+	}
+
+	@Override
+	public void sendGraceAction(ServerboundGraceActionPacket packet) {
+		Client.graceAction(packet);
 	}
 
 	@Override
@@ -56,7 +85,21 @@ public class FabricNetwork implements INetworkHelper {
 			ClientPlayNetworking.send(JOURNAL_REQUEST, buf);
 		}
 
+		private static void graceAction(ServerboundGraceActionPacket packet) {
+			FriendlyByteBuf buf = PacketByteBufs.create();
+			ServerboundGraceActionPacket.encode(packet, buf);
+			ClientPlayNetworking.send(GRACE_ACTION, buf);
+		}
+
 		private static void register() {
+			ClientPlayNetworking.registerGlobalReceiver(REALM_FX, (client, handler, buf, responseSender) -> {
+				ClientboundRealmFxPacket packet = ClientboundRealmFxPacket.decode(buf);
+				client.execute(() -> ClientboundRealmFxPacket.handleClient(packet));
+			});
+			ClientPlayNetworking.registerGlobalReceiver(GRACE_MENU, (client, handler, buf, responseSender) -> {
+				ClientboundGraceMenuPacket packet = ClientboundGraceMenuPacket.decode(buf);
+				client.execute(() -> ClientboundGraceMenuPacket.handleClient(packet));
+			});
 			ClientPlayNetworking.registerGlobalReceiver(BOSS_JOURNAL, (client, handler, buf, responseSender) -> {
 				ClientboundJournalPacket packet = ClientboundJournalPacket.decode(buf);
 				var level = client.level;

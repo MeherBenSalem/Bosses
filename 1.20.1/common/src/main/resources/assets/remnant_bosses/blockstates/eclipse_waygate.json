@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "facing=north,phase=dormant": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=north,phase=kindling": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=north,phase=open": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=south,phase=dormant": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=south,phase=kindling": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=south,phase=open": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=west,phase=dormant": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=west,phase=kindling": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=west,phase=open": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=east,phase=dormant": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=east,phase=kindling": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    },
+    "facing=east,phase=open": {
+      "model": "remnant_bosses:block/eclipse_waygate"
+    }
+  }
+}

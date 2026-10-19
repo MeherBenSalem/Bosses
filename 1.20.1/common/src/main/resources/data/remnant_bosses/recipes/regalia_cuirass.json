@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "RFR",
+    "RDR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "remnant_bosses:tarnished_regalia"
+    },
+    "F": {
+      "item": "remnant_bosses:royal_soul_fragment"
+    },
+    "D": {
+      "item": "minecraft:diamond_chestplate"
+    }
+  },
+  "result": {
+    "item": "remnant_bosses:regalia_cuirass",
+    "count": 1
+  }
+}

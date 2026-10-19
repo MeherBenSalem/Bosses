@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "remnant_bosses:tarnished_fields",
+    "remnant_bosses:gracewood",
+    "remnant_bosses:gravefield_barrows",
+    "remnant_bosses:ashen_wastes",
+    "remnant_bosses:lantern_heights",
+    "remnant_bosses:ossuary_depths"
+  ]
+}

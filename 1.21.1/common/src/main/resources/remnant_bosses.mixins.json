@@ -3,9 +3,18 @@
   "minVersion": "0.8",
   "package": "com.nightbeam.remnants.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["JournalLivingEntityMixin"],
+  "mixins": [
+    "EntityTypeAliasMixin",
+    "ItemStackAliasMixin",
+    "JournalLivingEntityMixin",
+    "PlayerSweepMixin",
+    "RelicDamageMixin"
+  ],
   "client": [
-    "BossHealthOverlayMixin"
+    "BossHealthOverlayMixin",
+    "GuiRealmOverlayMixin",
+    "CameraShakeMixin",
+    "LevelRendererSkyMixin"
   ],
   "injectors": {
     "defaultRequire": 1

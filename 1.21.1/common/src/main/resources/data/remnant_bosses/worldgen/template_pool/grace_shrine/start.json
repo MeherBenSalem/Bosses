@@ -1,0 +1,14 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "remnant_bosses:grace_shrine/shrine",
+        "processors": "remnant_bosses:grace_shrine_weathering",
+        "projection": "rigid"
+      }
+    }
+  ]
+}

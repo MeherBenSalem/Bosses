@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "remnant_bosses:eclipse_stone_bricks"
+    }
+  },
+  "result": {
+    "item": "remnant_bosses:eclipse_stone_brick_wall",
+    "count": 6
+  }
+}

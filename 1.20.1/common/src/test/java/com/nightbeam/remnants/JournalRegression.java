@@ -11,9 +11,11 @@ public final class JournalRegression {
 
     public static void main(String[] args) {
         persistence();
+        JournalMigrationRegression.run();
         JournalPolicyRegression.run();
         JournalDamageRegression.run();
         RitualRegression.run();
+        ConfigMigrationRegression.run();
         JournalLayoutRegression.run();
         JournalPacketRegression.run();
         System.out.println("Journal regressions passed");
@@ -41,7 +43,7 @@ public final class JournalRegression {
         check(HuntSavedData.load(saved).state(PLAYER, BossHunt.OSSUKAGE) == HuntState.UNDISCOVERED, "invalid state bounded");
         saved.putInt("SchemaVersion", 999);
         HuntSavedData future = HuntSavedData.load(saved);
-        check(!future.advance(PLAYER, BossHunt.KOTSUKAGE, HuntState.DEFEATED), "future schema read only");
+        check(!future.advance(PLAYER, BossHunt.GRAVEBOUND_WARDEN, HuntState.DEFEATED), "future schema read only");
         check(future.snapshot().equals(saved), "future schema lossless");
         check(BossHunt.fromId("remnant_bosses:ossukage") == null, "wrong namespace not canonical");
         CompoundTag corrupt = new CompoundTag();

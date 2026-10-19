@@ -1,7 +1,10 @@
 package com.nightbeam.remnants.fabric.platform;
 
 import com.nightbeam.remnants.network.ClientboundBossMusicPacket;
+import com.nightbeam.remnants.network.ClientboundGraceMenuPacket;
 import com.nightbeam.remnants.network.ClientboundJournalPacket;
+import com.nightbeam.remnants.network.ClientboundRealmFxPacket;
+import com.nightbeam.remnants.network.ServerboundGraceActionPacket;
 import com.nightbeam.remnants.network.ServerboundJournalRequestPacket;
 import com.nightbeam.remnants.platform.services.INetworkHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -23,6 +26,25 @@ public class FabricNetwork implements INetworkHelper {
 		private static void request(ServerboundJournalRequestPacket packet) {
 			ClientPlayNetworking.send(packet);
 		}
+
+		private static void graceAction(ServerboundGraceActionPacket packet) {
+			ClientPlayNetworking.send(packet);
+		}
+	}
+
+	@Override
+	public void sendRealmFx(ServerPlayer player, ClientboundRealmFxPacket packet) {
+		ServerPlayNetworking.send(player, packet);
+	}
+
+	@Override
+	public void sendGraceMenu(ServerPlayer player, ClientboundGraceMenuPacket packet) {
+		ServerPlayNetworking.send(player, packet);
+	}
+
+	@Override
+	public void sendGraceAction(ServerboundGraceActionPacket packet) {
+		Client.graceAction(packet);
 	}
 
 	@Override

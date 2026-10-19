@@ -2,6 +2,33 @@ plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
 }
+// Eclipsed Realm walkthrough in a disposable world (tools/realm-runtime). Never part of a release jar.
+if (providers.gradleProperty('realmRuntimeTest').isPresent()) {
+    sourceSets {
+        realmRuntimeTest {
+            java.srcDir(rootProject.file('../tools/realm-runtime/src/v1211/java'))
+            resources.srcDir(rootProject.file('../tools/realm-runtime/src/v1211/resources'))
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+        }
+    }
+    loom {
+        mods {
+            remnant_bosses { sourceSet sourceSets.main }
+            realm_runtime_test { sourceSet sourceSets.realmRuntimeTest }
+        }
+        runs {
+            realmRuntimeTestClient {
+                client()
+                source sourceSets.realmRuntimeTest
+                setConfigName('Eclipsed Realm Disposable World Runtime Test')
+                ideConfigGenerated(false)
+                runDir('run')
+                programArgs '--width', '1280', '--height', '800', '--username', 'RealmProbe'
+            }
+        }
+    }
+}
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {

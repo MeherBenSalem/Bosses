@@ -1,0 +1,87 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 10,
+    "xz_spread": 5,
+    "y_spread": 1,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "remnant_bosses:weathered_gravestone",
+                  "Properties": {
+                    "facing": "north"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "remnant_bosses:weathered_gravestone",
+                  "Properties": {
+                    "facing": "south"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "remnant_bosses:weathered_gravestone",
+                  "Properties": {
+                    "facing": "east"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "remnant_bosses:weathered_gravestone",
+                  "Properties": {
+                    "facing": "west"
+                  }
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:air"
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:podzol",
+                  "minecraft:dirt",
+                  "minecraft:coarse_dirt",
+                  "minecraft:rooted_dirt"
+                ],
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

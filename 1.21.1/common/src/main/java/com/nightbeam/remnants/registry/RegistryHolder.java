@@ -1,6 +1,7 @@
 package com.nightbeam.remnants.registry;
 
 import com.nightbeam.remnants.Constants;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Objects;
@@ -11,6 +12,7 @@ public final class RegistryHolder<T> {
 	private final String path;
 	private final Supplier<T> factory;
 	private T value;
+	private Holder<T> holder;
 
 	public RegistryHolder(String path) {
 		this(Constants.MOD_ID, path, null);
@@ -47,6 +49,9 @@ public final class RegistryHolder<T> {
 	}
 
 	public T get() {
+		if (value == null && holder != null && holder.isBound()) {
+			value = holder.value();
+		}
 		if (value == null && factory != null) {
 			value = factory.get();
 		}
@@ -63,5 +68,18 @@ public final class RegistryHolder<T> {
 
 	public boolean isBound() {
 		return value != null;
+	}
+
+	/**
+	 * Registries whose consumers take a {@link Holder} (1.21 armor materials) bind the registry's own
+	 * holder here: Fabric's {@code Registry.registerForHolder} result or a NeoForge {@code DeferredHolder},
+	 * which may still be unbound when items are constructed.
+	 */
+	public void bindHolder(Holder<T> holder) {
+		this.holder = holder;
+	}
+
+	public Holder<T> holder() {
+		return Objects.requireNonNull(holder, () -> "No registry holder bound for " + id());
 	}
 }

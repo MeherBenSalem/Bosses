@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "remnant_bosses:graceroot_log"
+    }
+  ],
+  "result": {
+    "id": "remnant_bosses:graceroot_planks",
+    "count": 4
+  },
+  "group": "planks"
+}

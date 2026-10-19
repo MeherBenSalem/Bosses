@@ -67,3 +67,27 @@ tasks.register('verifyJournal', JavaExec) {
     workingDir = rootProject.projectDir
 }
 tasks.named('check') { dependsOn 'verifyJournal' }
+
+// Alias table integrity, guard semantics and entity loot coverage (docs/remnants/migration.md).
+tasks.register('verifyAliases', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.AliasRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/resources').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyAliases' }
+
+// Animation clip names and lengths the entities play, checked against the animation JSON (slice 2).
+tasks.register('verifyClips', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.nightbeam.remnants.ClipContractRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/resources').absolutePath, file('src/main/java/com/nightbeam/remnants/entity').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyClips' }

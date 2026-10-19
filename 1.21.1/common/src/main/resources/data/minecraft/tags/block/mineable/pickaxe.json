@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "remnant_bosses:eclipse_stone",
+    "remnant_bosses:cobbled_eclipse_stone",
+    "remnant_bosses:eclipse_stone_bricks",
+    "remnant_bosses:cracked_eclipse_stone_bricks",
+    "remnant_bosses:chiseled_eclipse_stone_bricks",
+    "remnant_bosses:eclipse_stone_brick_stairs",
+    "remnant_bosses:eclipse_stone_brick_slab",
+    "remnant_bosses:eclipse_stone_brick_wall",
+    "remnant_bosses:eclipse_waygate",
+    "remnant_bosses:waygate_frame",
+    "remnant_bosses:weathered_gravestone"
+  ]
+}

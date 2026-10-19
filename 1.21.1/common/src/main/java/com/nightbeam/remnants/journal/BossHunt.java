@@ -1,7 +1,7 @@
 package com.nightbeam.remnants.journal;
 
 public enum BossHunt {
-    OSSUKAGE("ossukage"), KOTSUKAGE("kotsukage"), UMBRAKAR("umbrakar"), HOLLOW_SOVEREIGN("hollow_sovereign");
+    OSSUKAGE("ossukage"), GRAVEBOUND_WARDEN("gravebound_warden"), FORGOTTEN_WATCHER("forgotten_watcher"), HOLLOW_SOVEREIGN("hollow_sovereign");
     private final String key;
     BossHunt(String key) { this.key = key; }
     public String id() { return "remnants:" + key; }

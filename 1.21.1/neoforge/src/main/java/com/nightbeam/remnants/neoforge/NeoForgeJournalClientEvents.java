@@ -15,5 +15,6 @@ public final class NeoForgeJournalClientEvents {
 	@SubscribeEvent
 	public static void onClientTick(ClientTickEvent.Post event) {
 		BossHuntsClient.tick();
+		com.nightbeam.remnants.client.realm.RealmClient.tick();
 	}
 }

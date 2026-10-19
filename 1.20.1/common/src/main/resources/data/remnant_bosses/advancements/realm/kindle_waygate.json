@@ -1,0 +1,52 @@
+{
+  "parent": "remnant_bosses:realm/root",
+  "display": {
+    "icon": {
+      "item": "remnant_bosses:eclipse_waygate"
+    },
+    "title": {
+      "translate": "advancements.remnant_bosses.realm.kindle_waygate.title"
+    },
+    "description": {
+      "translate": "advancements.remnant_bosses.realm.kindle_waygate.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kindle": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "remnant_bosses:eclipse_waygate",
+                  "remnant_bosses:waygate_frame",
+                  "remnant_bosses:waygate_veil"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "remnant_bosses:eclipse_shard"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "kindle"
+    ]
+  ]
+}

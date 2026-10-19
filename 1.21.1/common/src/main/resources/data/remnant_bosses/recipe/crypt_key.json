@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "G G",
+    "GIG",
+    "G G"
+  ],
+  "key": {
+    "G": {
+      "item": "remnant_bosses:grave_iron"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "remnant_bosses:crypt_key"
+  }
+}

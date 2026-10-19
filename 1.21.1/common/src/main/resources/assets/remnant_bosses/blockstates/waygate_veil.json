@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "remnant_bosses:block/waygate_veil"
+    },
+    "open=true": {
+      "model": "remnant_bosses:block/waygate_veil"
+    }
+  }
+}

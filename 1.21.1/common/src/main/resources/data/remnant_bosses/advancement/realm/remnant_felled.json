@@ -1,0 +1,39 @@
+{
+  "parent": "remnant_bosses:realm/enter_realm",
+  "display": {
+    "icon": {
+      "id": "remnant_bosses:sovereigns_sigil"
+    },
+    "title": {
+      "translate": "advancements.remnant_bosses.realm.remnant_felled.title"
+    },
+    "description": {
+      "translate": "advancements.remnant_bosses.realm.remnant_felled.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sovereign": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "remnants:hollow_sovereign"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sovereign"
+    ]
+  ]
+}
