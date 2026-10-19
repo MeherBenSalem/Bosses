@@ -4,14 +4,14 @@ A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and 
 
 ## The Eclipsed Realm
 
-The Remnants live in a dimension of their own: **the Eclipsed Realm**, an open world under a black sun ringed with gold, with the Gracetree burning on the horizon. Its biomes (the Tarnished Fields, the Gracewood, the Gravefield Barrows, the Ashen Wastes, the Stilled Sea and the Ossuary Depths) hold the Hollow Legion, the Cryptborn and the boss arenas.
+The Remnants live in a dimension of their own: **the Eclipsed Realm**, an open world under a black sun ringed with gold, with the Gracetree burning on the horizon. Its seven biomes (the Tarnished Fields, the Gracewood, the Gravefield Barrows, the Ashen Wastes, the Lantern Heights, the Stilled Sea and the Ossuary Depths) hold the Hollow Legion, the Cryptborn, the Forgotten Souls and the boss arenas.
 
 1. Craft an **Eclipse Shard** (Amethyst Shard + Ender Pearl + Gold Ingot) and a **Waygate** (6 Polished Deepslate around an Eclipse Shard, Gold Ingot at the bottom centre).
 2. Place the Waygate. It raises a 3-wide, 4-tall arch; keep the space clear.
 3. Use an Eclipse Shard on it. The arch kindles for six seconds, then opens onto the eclipse.
 4. Walk through. You arrive at an Arrival Shrine with a Waygate home and a **Grace Ember**.
 
-Resting at a Grace Ember heals you, sets your respawn point and shows a trail toward the nearest arena. From any grace you can travel to every grace you have discovered, or depart the Realm. Arena doorways are sealed by fog gates that players can walk through but bosses cannot. See [docs/remnants/realm.md](docs/remnants/realm.md) for the full design.
+Resting at a Grace Ember heals you, sets your respawn point and shows a trail toward the nearest arena. From any grace you can travel to every grace you have discovered, or depart the Realm. Arena doorways are sealed by fog gates that players can walk through but bosses cannot. See [the Eclipsed Realm guide](docs/curseforge/remnant-bosses.md) for the biomes, bosses and rewards.
 
 ## Boss Hunts
 
@@ -26,7 +26,7 @@ Bosses are summoned through an **Ancient Altar** ritual. Craft **one Ancient Alt
 | Boss | Activation item | Pedestal tops (east → west → south → north) |
 | --- | --- | --- |
 | **Ossukage** | Nether Star | Skeleton Skull ×4 |
-| **Umbrakar** | Echo Shard | Amethyst Block, Crying Obsidian, End Stone, Sculk |
+| **Forgotten Watcher** | Lens of Memory | Amethyst Block, Calcite, Chiseled Sandstone, Lectern |
 | **Hollow Sovereign** | Sovereign's Seal | Gold Block, Gold Block, Soul Lantern, Soul Lantern |
 | **Gravebound Warden** | Crypt Key | Bone Block, Soul Soil, Chain, Iron Bars |
 
@@ -47,7 +47,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 - **Ancient Altar** — top row: 3× Chiseled Deepslate; center: Diamond; bottom corners: Emerald
 - **Ancient Pedestal** — top: Emerald; middle: Chiseled Deepslate; bottom row: 3× Chiseled Deepslate
 
-**Commands:** `/summon remnants:ossukage`, `/summon remnants:umbrakar`, `/summon remnants:hollow_sovereign`, `/summon remnants:gravebound_warden`
+**Commands:** `/summon remnants:ossukage`, `/summon remnants:forgotten_watcher`, `/summon remnants:hollow_sovereign`, `/summon remnants:gravebound_warden`
 
 **Configuration:** JAuml files `remnant/bosses/{boss}_summon` — keys `portal_activation_item`, `pedestal_one_activation_block` … `pedestal_four_activation_block`. See [docs/store-listing.md](docs/store-listing.md) for paste-ready Modrinth/CurseForge copy and full registry IDs.
 
@@ -60,7 +60,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The development version is `2.7.0` in both workspaces. Keep those `version=` lines identical.
+The release version is `3.0.0` in both workspaces. Keep those `version=` lines identical. See [the release notes](release-notes/3.0.0.md).
 
 ## Requirements
 

@@ -29,8 +29,8 @@ public enum ModArmorMaterials implements ArmorMaterial {
 	WARDEN(Constants.MOD_ID + ":warden", /* durability multiplier */ 24, Map.of(ArmorItem.Type.HELMET, 2, ArmorItem.Type.CHESTPLATE, 6,
 			ArmorItem.Type.LEGGINGS, 5, ArmorItem.Type.BOOTS, 2), 12, SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f),
 	/**
-	 * A scholar's robe over verdigris plates: defense 3 / 7 / 6 / 3, toughness 2, enchantability 20, durability
-	 * multiplier between diamond and netherite. Texture layers: textures/models/armor/archivist_layer_1.png and _layer_2.png.
+	 * A scholar's robe over verdigris plates: defense 3 / 7 / 6 / 3, toughness 2, enchantability 20, the same
+	 * durability multiplier as diamond. Texture layers: textures/models/armor/archivist_layer_1.png and _layer_2.png.
 	 */
 	ARCHIVIST(Constants.MOD_ID + ":archivist", /* durability multiplier */ 33, Map.of(ArmorItem.Type.HELMET, 3, ArmorItem.Type.CHESTPLATE, 7,
 			ArmorItem.Type.LEGGINGS, 6, ArmorItem.Type.BOOTS, 3), 20, SoundEvents.ARMOR_EQUIP_CHAIN, 2.0f, 0.0f);

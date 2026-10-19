@@ -44,3 +44,13 @@ __pycache__/
 
 _tmp_ogg_fix/
 
+# Local AI workspaces and analysis
+/.codex/
+/.superpowers/
+/.local-art/
+/graphify-out/
+
+# Generated validation output
+*.class
+/tools/remnants/structures/out/
+

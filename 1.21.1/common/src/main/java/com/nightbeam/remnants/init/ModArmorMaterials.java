@@ -24,7 +24,7 @@ public final class ModArmorMaterials {
 	public static final int WARDEN_DURABILITY_MULTIPLIER = 24;
 	/** Texture layers: assets/remnant_bosses/textures/models/armor/warden_layer_1.png and _layer_2.png. */
 	public static final RegistryHolder<ArmorMaterial> WARDEN = new RegistryHolder<>("warden", ModArmorMaterials::warden);
-	/** Durability multiplier between diamond and netherite. */
+	/** Diamond's durability multiplier. */
 	public static final int ARCHIVIST_DURABILITY_MULTIPLIER = 33;
 	/** Texture layers: assets/remnant_bosses/textures/models/armor/archivist_layer_1.png and _layer_2.png. */
 	public static final RegistryHolder<ArmorMaterial> ARCHIVIST = new RegistryHolder<>("archivist", ModArmorMaterials::archivist);
