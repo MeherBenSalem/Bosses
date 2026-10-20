@@ -75,7 +75,6 @@ public class CryptLurkerEntity extends CryptbornEntity {
 
 	public void setBuried(boolean buried) {
 		entityData.set(BURIED, buried);
-		setInvisible(buried);
 		if (buried) {
 			setTarget(null);
 			cancelAction();
@@ -229,6 +228,15 @@ public class CryptLurkerEntity extends CryptbornEntity {
 	public boolean hurt(DamageSource source, float amount) {
 		if (isBuried() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
 		return super.hurt(source, amount);
+	}
+
+	/**
+	 * Buried means unseen, on every client. The synced flag decides it: vanilla recomputes the shared invisible flag from
+	 * potion effects (on the first tick, and whenever effects change), which would reveal a lurker buried at spawn.
+	 */
+	@Override
+	public boolean isInvisible() {
+		return isBuried() || super.isInvisible();
 	}
 
 	@Override

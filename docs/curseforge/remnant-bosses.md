@@ -42,9 +42,11 @@ Touch the grace at the shrine. Resting at a grace:
 
 - heals you, clears harmful effects and sets your respawn point there (beds don't work in the Realm);
 - sends a trail of golden motes toward the nearest boss arena;
-- opens the grace menu, where you can travel to any grace you have discovered or depart the Realm.
+- opens the grace menu, where you can travel to any grace you have discovered (nearest first, with the distance in meters) or depart the Realm.
 
-Grace shrines are scattered across every land biome. Name tags rename them.
+Grace shrines are scattered across every land biome, and their golden beam shows from afar. Name tags rename them.
+
+The Realm itself does not change: outside creative mode you cannot build, break, pour buckets or blast the terrain there. Graces, Waygates, doors and chests still work.
 
 ![The grace menu](images/grace-menu.jpg)
 
@@ -147,6 +149,8 @@ A felled boss is announced to everyone nearby and written into your Boss Hunts j
 | **Hollow Legion** | Hollow Citadel | **Hollow Sentinel** (tower shield; axes break it), **Hollow Arbalist** (crossbow, keeps its distance), **Fallen Standard Bearer** (buffs nearby Legion), **Soulbound Knight** (elite duelist with counters and lunges) |
 | **Cryptborn** | Catacombs and Realm biomes | **Catacomb Rat** (swarms when one is hit, flees bright light), **Crypt Lurker** (buried ambusher), **Gravebound Soldier** (group fighter with a hooking guisarme), **Burial Guardian** (miniboss with its own boss bar, guarding the vault) |
 | **Forgotten Souls** | Lantern Heights, Gracewood and the Observatory | **Lost Pilgrim** (neutral; its bell turns every pilgrim nearby against you), **Memory Wraith** (flying caster that blinks away), **Soul Collector** (elite: marks the ground, summons soul wisps and heals from every death around it) |
+| **Ashbound Constructs** | Ashen Wastes, Ossuary Depths and Tarnished Fields | **Ashbound Crawler** (breathes a short flame cone; bursts in embers on death), **Ember Servitor** (hovering drone: burning bolts, welds damaged constructs), **Rusted Guardian** (slow-turning hulk: jumpable ground smash and a wide sweep) |
+| **Corrupted Relics** | Gracewood, Tarnished Fields, Gravefield Barrows and Ossuary Depths | **Shardling** (floating crystals that fire in turns), **Ancient Vessel** (heavy urn: slowing pulse up close, bursts when broken), **Relic Stalker** (hidden and invisible until you come within 7 blocks, then ambushes) |
 
 ---
 

@@ -9,19 +9,19 @@ import com.nightbeam.remnants.client.renderer.SoulWispRenderer;
 import com.nightbeam.remnants.client.renderer.WatcherIllusionRenderer;
 import com.nightbeam.remnants.client.model.Modelshuriken;
 import com.nightbeam.remnants.client.renderer.HollowSovereignRenderer;
-import com.nightbeam.remnants.client.renderer.SickleghastRenderer;
 import com.nightbeam.remnants.client.renderer.ChainAnchorRenderer;
-import com.nightbeam.remnants.client.renderer.ArmoredGrubRenderer;
 import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantOssukageRenderer;
 import com.nightbeam.remnants.client.renderer.OssukageRuneEffectRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantGeoRenderer;
+import com.nightbeam.remnants.client.renderer.RemnantBoltRenderer;
 import com.nightbeam.remnants.client.renderer.SpectralCrescentRenderer;
 import com.nightbeam.remnants.client.renderer.SpectralRoyalGuardRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import com.nightbeam.remnants.client.renderer.WardenChainRenderer;
 import com.nightbeam.remnants.client.realm.RealmClient;
 import com.nightbeam.remnants.client.realm.RealmParticles;
+import com.nightbeam.remnants.client.realm.GraceEmberRenderer;
 import com.nightbeam.remnants.client.realm.WaygateRenderer;
 import com.nightbeam.remnants.init.ModBlockEntities;
 import com.nightbeam.remnants.init.ModEntities;
@@ -47,9 +47,7 @@ public final class ForgeClientSetup {
 			EntityRenderers.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);
 			EntityRenderers.register(ModEntities.OSSUKAGE_RUNE_EFFECT.get(), OssukageRuneEffectRenderer::new);
 			EntityRenderers.register(ModEntities.KUNAI.get(), KunaiRenderer::new);
-			EntityRenderers.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubRenderer::new);
 			EntityRenderers.register(ModEntities.HOLLOW_SOVEREIGN.get(), HollowSovereignRenderer::new);
-			EntityRenderers.register(ModEntities.SICKLEGHAST.get(), SickleghastRenderer::new);
 			EntityRenderers.register(ModEntities.SOVEREIGN_PAULDRON.get(), context -> new RemnantGeoRenderer<>(context, "sovereign_pauldron", 0.4f));
 			EntityRenderers.register(ModEntities.SPECTRAL_CRESCENT.get(), SpectralCrescentRenderer::new);
 			EntityRenderers.register(ModEntities.ROYAL_BLADE_MARK.get(), NoopRenderer::new);
@@ -74,12 +72,22 @@ public final class ForgeClientSetup {
 			EntityRenderers.register(ModEntities.MEMORY_WRAITH.get(), context -> new RemnantGeoRenderer<>(context, "memory_wraith", 0.4f));
 			EntityRenderers.register(ModEntities.SOUL_COLLECTOR.get(), context -> new RemnantGeoRenderer<>(context, "soul_collector", 0.6f));
 			EntityRenderers.register(ModEntities.SOUL_WISP.get(), SoulWispRenderer::new);
+			// The Ashbound Constructs and the Corrupted Relics.
+			EntityRenderers.register(ModEntities.ASHBOUND_CRAWLER.get(), context -> new RemnantGeoRenderer<>(context, "ashbound_crawler", 0.45f));
+			EntityRenderers.register(ModEntities.EMBER_SERVITOR.get(), context -> new RemnantGeoRenderer<>(context, "ember_servitor", 0.4f));
+			EntityRenderers.register(ModEntities.RUSTED_GUARDIAN.get(), context -> new RemnantGeoRenderer<>(context, "rusted_guardian", 0.8f));
+			EntityRenderers.register(ModEntities.SHARDLING.get(), context -> new RemnantGeoRenderer<>(context, "shardling", 0.3f));
+			EntityRenderers.register(ModEntities.ANCIENT_VESSEL.get(), context -> new RemnantGeoRenderer<>(context, "ancient_vessel", 0.4f));
+			EntityRenderers.register(ModEntities.RELIC_STALKER.get(), context -> new RemnantGeoRenderer<>(context, "relic_stalker", 0.6f));
+			EntityRenderers.register(ModEntities.EMBER_BOLT.get(), context -> new RemnantBoltRenderer<>(context, "ember_bolt"));
+			EntityRenderers.register(ModEntities.CRYSTAL_BOLT.get(), context -> new RemnantBoltRenderer<>(context, "crystal_bolt"));
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(ModBlockEntities.ECLIPSE_WAYGATE.get(), WaygateRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntities.GRACE_EMBER.get(), GraceEmberRenderer::new);
 	}
 
 	@SubscribeEvent

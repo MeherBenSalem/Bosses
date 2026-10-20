@@ -1,0 +1,26 @@
+{
+  "idle": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 0.7,
+    "loop": "loop"
+  },
+  "ambush": {
+    "length": 1.6,
+    "loop": "once"
+  },
+  "slash": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.3,
+    "loop": "once"
+  },
+  "death": {
+    "length": 1.8,
+    "loop": "hold"
+  }
+}

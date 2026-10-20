@@ -46,8 +46,8 @@ public final class ModItems {
 	public static final RegistryHolder<Item> REGALIA_SABATONS = new RegistryHolder<>("regalia_sabatons");
 
 	/**
-	 * An item and its factory; loaders register {@link #SOVEREIGN_ITEMS}, {@link #WARDEN_ITEMS}, {@link #WATCHER_ITEMS}
-	 * and {@link #REALM_ITEMS} in order.
+	 * An item and its factory; loaders register {@link #SOVEREIGN_ITEMS}, {@link #WARDEN_ITEMS}, {@link #WATCHER_ITEMS},
+	 * {@link #FAMILY_ITEMS} and {@link #REALM_ITEMS} in order.
 	 */
 	public record Entry(RegistryHolder<Item> holder, Supplier<Item> factory) {
 	}
@@ -109,6 +109,15 @@ public final class ModItems {
 			new Entry(ARCHIVIST_ROBE, () -> new ArchivistArmorItem(ArmorItem.Type.CHESTPLATE, Rarity.RARE)),
 			new Entry(ARCHIVIST_LEGGINGS, () -> new ArchivistArmorItem(ArmorItem.Type.LEGGINGS, Rarity.RARE)),
 			new Entry(ARCHIVIST_BOOTS, () -> new ArchivistArmorItem(ArmorItem.Type.BOOTS, Rarity.RARE)));
+
+	// Family materials of the Ashbound Constructs and the Corrupted Relics (their bosses arrive in later slices).
+	public static final RegistryHolder<Item> ASHEN_COG = new RegistryHolder<>("ashen_cog");
+	public static final RegistryHolder<Item> RELIC_SHARD = new RegistryHolder<>("relic_shard");
+
+	/** Family materials in registration (and creative tab) order. */
+	public static final List<Entry> FAMILY_ITEMS = List.of(
+			new Entry(ASHEN_COG, () -> new LoreItem(new Item.Properties(), 1)),
+			new Entry(RELIC_SHARD, () -> new LoreItem(new Item.Properties(), 1)));
 
 	// The Eclipsed Realm: the shard that kindles a Waygate, and the Realm's block items.
 	public static final RegistryHolder<Item> ECLIPSE_SHARD = new RegistryHolder<>("eclipse_shard");

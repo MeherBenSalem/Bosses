@@ -8,7 +8,11 @@
     "ItemStackAliasMixin",
     "JournalLivingEntityMixin",
     "PlayerSweepMixin",
-    "RelicDamageMixin"
+    "RelicDamageMixin",
+    "RealmBuildMixin",
+    "RealmItemUseMixin",
+    "RealmBucketMixin",
+    "RealmExplosionMixin"
   ],
   "client": [
     "BossHealthOverlayMixin",

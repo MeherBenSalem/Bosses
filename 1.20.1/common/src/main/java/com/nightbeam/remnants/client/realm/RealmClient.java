@@ -1,5 +1,6 @@
 package com.nightbeam.remnants.client.realm;
 
+import com.nightbeam.remnants.block.realm.GraceEmberBlock;
 import com.nightbeam.remnants.config.RealmConfig;
 import com.nightbeam.remnants.network.ClientboundGraceMenuPacket;
 import com.nightbeam.remnants.network.ClientboundRealmFxPacket;
@@ -98,7 +99,9 @@ public final class RealmClient {
 	}
 
 	public static void openGraceMenu(ClientboundGraceMenuPacket packet) {
-		Minecraft.getInstance().setScreen(new GraceScreen(packet));
+		Minecraft minecraft = Minecraft.getInstance();
+		if (minecraft.level != null) GraceEmberBlock.ensureBlockEntity(minecraft.level, packet.grace());
+		minecraft.setScreen(new GraceScreen(packet));
 	}
 
 	/** "@biome.key#2" names a grace by its biome (numbered past the first); anything else is a custom name. */

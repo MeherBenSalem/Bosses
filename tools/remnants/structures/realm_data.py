@@ -81,6 +81,9 @@ REALM_ITEMS = [E, CE, BR, CBR, CH, STAIRS, SLAB, WALL, LOG, PLANKS, LEAVES, GRAV
 LEGION = [ent("hollow_sentinel"), ent("hollow_arbalist"), ent("fallen_standard_bearer"), ent("soulbound_knight")]
 CRYPTBORN = [ent("gravebound_soldier"), ent("crypt_lurker"), ent("catacomb_rat")]
 SOULS = [ent("lost_pilgrim"), ent("memory_wraith"), ent("soul_collector")]
+# They roam the Realm ahead of their boss slices (docs/remnants/families/ashbound-and-relics.md).
+ASHBOUND = [ent("ashbound_crawler"), ent("ember_servitor"), ent("rusted_guardian")]
+RELICS = [ent("shardling"), ent("ancient_vessel"), ent("relic_stalker")]
 
 
 def is120(version):
@@ -647,7 +650,9 @@ RAT_COST = {"energy_budget": 0.2, "charge": 0.5}
 COSTS = {ent("hollow_sentinel"): LEGION_COST, ent("hollow_arbalist"): LEGION_COST,
          ent("fallen_standard_bearer"): ELITE_COST, ent("soulbound_knight"): ELITE_COST,
          ent("gravebound_soldier"): LEGION_COST, ent("crypt_lurker"): LEGION_COST, ent("catacomb_rat"): RAT_COST,
-         ent("lost_pilgrim"): LEGION_COST, ent("memory_wraith"): LEGION_COST, ent("soul_collector"): ELITE_COST}
+         ent("lost_pilgrim"): LEGION_COST, ent("memory_wraith"): LEGION_COST, ent("soul_collector"): ELITE_COST,
+         ent("ashbound_crawler"): LEGION_COST, ent("ember_servitor"): LEGION_COST, ent("rusted_guardian"): ELITE_COST,
+         ent("shardling"): RAT_COST, ent("ancient_vessel"): ELITE_COST, ent("relic_stalker"): ELITE_COST}
 
 MOOD = {"sound": mc("ambient.cave"), "tick_delay": 6000, "block_search_extent": 8, "offset": 2.0}
 
@@ -659,7 +664,8 @@ BIOMES = {
         music=mc("music.overworld.old_growth_taiga"),
         spawners={"monster": [spawn(ent("hollow_sentinel"), 30, 1, 3), spawn(ent("hollow_arbalist"), 18, 1, 2),
                               spawn(ent("fallen_standard_bearer"), 4, 1, 1), spawn(ent("soulbound_knight"), 2, 1, 1),
-                              spawn(ent("catacomb_rat"), 8, 2, 4)],
+                              spawn(ent("catacomb_rat"), 8, 2, 4), spawn(ent("shardling"), 6, 2, 3),
+                              spawn(ent("ancient_vessel"), 4, 1, 1), spawn(ent("rusted_guardian"), 2, 1, 1)],
                   "creature": [spawn(mc("rabbit"), 4, 2, 3), spawn(mc("sheep"), 6, 2, 4)]},
         features={rb("tarnished_fields_pillars"), rb("tarnished_fields_gravestones"), rb("tarnished_fields_trees"),
                   mc("patch_tall_grass_2"), mc("patch_grass_plain"), mc("flower_default"), mc("brown_mushroom_normal"),
@@ -672,7 +678,8 @@ BIOMES = {
         particle=(GRACE_MOTE, 0.004),
         additions=(mc("block.amethyst_block.chime"), 0.004),
         spawners={"monster": [spawn(ent("catacomb_rat"), 12, 2, 4), spawn(ent("crypt_lurker"), 6, 1, 1),
-                              spawn(ent("hollow_sentinel"), 6, 1, 2), spawn(ent("lost_pilgrim"), 10, 1, 2)],
+                              spawn(ent("hollow_sentinel"), 6, 1, 2), spawn(ent("lost_pilgrim"), 10, 1, 2),
+                              spawn(ent("shardling"), 12, 3, 4)],
                   "creature": [spawn(mc("sheep"), 8, 2, 4), spawn(mc("rabbit"), 6, 2, 3), spawn(mc("fox"), 3, 2, 4)],
                   "ambient": [spawn(mc("bat"), 4, 8, 8)]},
         features={rb("gracewood_giant_trees"), rb("gracewood_trees"), mc("patch_grass_forest"), mc("patch_tall_grass_2"),
@@ -685,7 +692,8 @@ BIOMES = {
         particle=(mc("white_ash"), 0.012),
         additions=(mc("ambient.soul_sand_valley.additions"), 0.0055),
         spawners={"monster": [spawn(ent("gravebound_soldier"), 30, 2, 3), spawn(ent("crypt_lurker"), 20, 1, 2),
-                              spawn(ent("catacomb_rat"), 20, 3, 5), spawn(ent("hollow_arbalist"), 6, 1, 1)]},
+                              spawn(ent("catacomb_rat"), 20, 3, 5), spawn(ent("hollow_arbalist"), 6, 1, 1),
+                              spawn(ent("relic_stalker"), 5, 1, 1), spawn(ent("ancient_vessel"), 6, 1, 1)]},
         features={rb("gravefield_barrows_ash"), rb("gravefield_barrows_gravestones"), rb("gravefield_barrows_bones"),
                   rb("gravefield_barrows_withered_trees"), mc("patch_grass_taiga_2"), mc("patch_dead_bush"),
                   mc("brown_mushroom_normal"), mc("red_mushroom_normal")}),
@@ -699,7 +707,9 @@ BIOMES = {
         additions=(mc("ambient.soul_sand_valley.additions"), 0.0111),
         mood=mc("ambient.soul_sand_valley.mood"),
         spawners={"monster": [spawn(ent("hollow_sentinel"), 20, 1, 2), spawn(ent("gravebound_soldier"), 15, 1, 3),
-                              spawn(ent("soulbound_knight"), 8, 1, 1), spawn(ent("crypt_lurker"), 10, 1, 1)]},
+                              spawn(ent("soulbound_knight"), 8, 1, 1), spawn(ent("crypt_lurker"), 10, 1, 1),
+                              spawn(ent("ashbound_crawler"), 25, 2, 4), spawn(ent("ember_servitor"), 12, 1, 2),
+                              spawn(ent("rusted_guardian"), 4, 1, 1)]},
         features={rb("lake_lava_surface"), rb("ashen_wastes_boulders"), rb("ashen_wastes_ash"), rb("ashen_wastes_pillars"),
                   rb("ashen_wastes_bones"), rb("ashen_wastes_withered_trees"), mc("patch_grass_badlands"),
                   mc("patch_dead_bush_2")}),
@@ -728,7 +738,8 @@ BIOMES = {
         music=mc("music.overworld.deep_dark"),
         additions=(mc("ambient.soul_sand_valley.additions"), 0.004),
         spawners={"monster": [spawn(ent("crypt_lurker"), 25, 1, 2), spawn(ent("catacomb_rat"), 25, 3, 5),
-                              spawn(ent("gravebound_soldier"), 10, 1, 2)],
+                              spawn(ent("gravebound_soldier"), 10, 1, 2), spawn(ent("ashbound_crawler"), 10, 1, 3),
+                              spawn(ent("relic_stalker"), 6, 1, 1), spawn(ent("ancient_vessel"), 6, 1, 1)],
                   "ambient": [spawn(mc("bat"), 10, 8, 8)]},
         features={mc("fossil_upper"), mc("fossil_lower"), rb("ossuary_bones"), rb("ossuary_cobwebs")}),
 }

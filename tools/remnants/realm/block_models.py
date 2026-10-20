@@ -1,7 +1,7 @@
 """Blockstates, block models and item models for the Eclipsed Realm blocks.
 
 Vanilla parents are used wherever vanilla has a shape (cube_all, cube_column, stairs, slab, wall).
-Custom element models (gravestone, grace ember) are written as Java block-model elements.
+Custom element models (gravestone) are written as Java block-model elements; the grace ember lives in grace.py.
 Forge / NeoForge read `render_type` from the model; Fabric registers render layers in code.
 """
 from common import rl, save_json
@@ -205,77 +205,6 @@ def gravestone():
     item('weathered_gravestone')
 
 
-RING_STONES = [
-    # (centre x, centre z, width, depth, height, y-rotation)
-    (13.3, 9.4, 2.5, 2.0, 5.0, 22.5),
-    (9.4, 13.3, 2.0, 2.0, 3.0, -22.5),
-    (4.1, 11.9, 3.0, 2.0, 6.0, 45),
-    (2.7, 6.6, 2.0, 2.0, 3.5, 22.5),
-    (6.6, 2.7, 2.5, 2.0, 5.0, -45),
-    (11.9, 4.1, 2.0, 2.5, 2.5, 0),
-]
-
-
-def grace_ember_elements():
-    S, W, G = '#stone', '#sword', '#glow'
-    els = [
-        element((4, 0, 4), (12, 1, 12), {'north': face((0, 8, 8, 9), S), 'south': face((4, 8, 12, 9), S),
-                                         'east': face((2, 8, 10, 9), S), 'west': face((6, 8, 14, 9), S),
-                                         'up': face((0, 8, 8, 16), S), 'down': face((8, 8, 16, 16), S, 'down')}),
-        element((5, 1, 5), (11, 2, 11), {'north': face((1, 8, 7, 9), S), 'south': face((5, 8, 11, 9), S),
-                                         'east': face((3, 8, 9, 9), S), 'west': face((7, 8, 13, 9), S),
-                                         'up': face((5, 9, 11, 15), S)}),
-    ]
-    for i, (cx, cz, w, d, h, ry) in enumerate(RING_STONES):
-        frm = (cx - w / 2, 0, cz - d / 2)
-        to = (cx + w / 2, h, cz + d / 2)
-        u = (i * 5) % 12
-        faces = {
-            'north': face((u, 0, u + w, h), S), 'south': face((u + 2, 0, u + 2 + w, h), S),
-            'east': face((u + 1, 0, u + 1 + d, h), S), 'west': face((u + 3, 0, u + 3 + d, h), S),
-            'up': face((u, 0, u + w, d), S),
-        }
-        rot = {'origin': [cx, 0, cz], 'axis': 'y', 'angle': ry} if ry else None
-        els.append(element(frm, to, faces, rotation=rot))
-    for frm, to in (((10.5, 0, 11.5), (11.5, 1, 12.5)), ((3.5, 0, 9), (4.5, 0.75, 10))):
-        els.append(element(frm, to, box_faces(frm, to, (6, 1), (6, 0), tex=S, skip=('down',))))
-    # the sword, driven point-down, turned 45 degrees so both flats catch the light
-    rot = {'origin': [8, 8, 8], 'axis': 'y', 'angle': 45}
-    sword = [
-        # blade: 2 wide (x), 1 thick (z)
-        ((7, 1, 7.5), (9, 10, 8.5), {'north': face((0, 2, 2, 11), W), 'south': face((0, 4, 2, 13), W),
-                                     'east': face((2, 2, 3, 11), W), 'west': face((3, 2, 4, 11), W)}),
-        ((5.5, 10, 7.25), (10.5, 11, 8.75), {'north': face((4, 0, 9, 1), W), 'south': face((4, 1, 9, 2), W),
-                                             'east': face((4, 2, 5.5, 3), W), 'west': face((7, 2, 8.5, 3), W),
-                                             'up': face((4, 0, 9, 1.5), W), 'down': face((4, 1.5, 9, 3), W)}),
-        ((7.5, 11, 7.5), (8.5, 13.5, 8.5), {'north': face((10, 0, 11, 2.5), W), 'south': face((10, 2, 11, 4.5), W),
-                                            'east': face((11, 0, 12, 2.5), W), 'west': face((10, 3, 11, 5.5), W)}),
-        ((7.25, 13.5, 7.25), (8.75, 14.5, 8.75), {'north': face((12, 0, 13.5, 1), W), 'south': face((12, 1, 13.5, 2), W),
-                                                  'east': face((13, 0, 14.5, 1), W), 'west': face((12, 2, 13.5, 3), W),
-                                                  'up': face((12, 0, 13.5, 1.5), W)}),
-    ]
-    for frm, to, faces in sword:
-        els.append(element(frm, to, faces, rotation=rot))
-    # the ember: crossed flame planes around the hilt plus a burning collar on the guard (fullbright)
-    glow = {'forge_data': GLOW_DATA, 'neoforge_data': GLOW_DATA}
-    flame_rot = {'origin': [8, 8, 8], 'axis': 'y', 'angle': 45}
-    els.append(element((5, 9.5, 8), (11, 16.5, 8), {'north': face((0, 0, 6, 7), G), 'south': face((0, 0, 6, 7), G)},
-                       rotation=flame_rot, shade=False, extra=glow))
-    els.append(element((8, 9.5, 5), (8, 16.5, 11), {'east': face((8, 0, 14, 7), G), 'west': face((8, 0, 14, 7), G)},
-                       rotation=flame_rot, shade=False, extra=glow))
-    els.append(element((7, 10.5, 7), (9, 12, 9), {
-        'north': face((4, 10, 6, 11.5), G), 'south': face((6, 10, 8, 11.5), G), 'east': face((8, 10, 10, 11.5), G),
-        'west': face((10, 10, 12, 11.5), G), 'up': face((12, 10, 14, 12), G)}, rotation=rot, shade=False, extra=glow))
-    return els
-
-
-def grace_ember():
-    tex = {'stone': rl('block/grace_ember_stone'), 'sword': rl('block/grace_ember_sword'),
-           'glow': rl('block/grace_ember_glow'), 'particle': rl('block/grace_ember_stone')}
-    model('grace_ember', {'parent': 'minecraft:block/block', 'render_type': 'minecraft:cutout', 'textures': tex,
-                          'elements': grace_ember_elements()})
-    blockstate('grace_ember', {'': {'model': rl('block/grace_ember')}})
-    item('grace_ember', layer='grace_ember')
 
 
 def fog_gate():
@@ -319,6 +248,5 @@ def build():
     wall('eclipse_stone_brick_wall', 'eclipse_stone_bricks')
     graceroot()
     gravestone()
-    grace_ember()
     fog_gate()
     waygate()

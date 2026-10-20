@@ -116,6 +116,7 @@ public class CatacombRatEntity extends CryptbornEntity {
 	/** Light level 10 or more: scurry to the nearest darker spot found, unless already fighting. */
 	private final class FleeLightGoal extends Goal {
 		private Vec3 refuge;
+		private int search;
 
 		FleeLightGoal() {
 			setFlags(EnumSet.of(Flag.MOVE));
@@ -127,7 +128,12 @@ public class CatacombRatEntity extends CryptbornEntity {
 
 		@Override
 		public boolean canUse() {
-			if (getTarget() != null || !action().isEmpty() || tickCount % 10 != 0 || !bright(blockPosition())) return false;
+			if (getTarget() != null || !action().isEmpty()) return false;
+			// Check the light every few tries. Vanilla tries canUse on every other tick with a fixed parity per mob,
+			// so a tickCount modulus here could never line up for half of all rats.
+			if (search-- > 0) return false;
+			search = 4;
+			if (!bright(blockPosition())) return false;
 			for (int i = 0; i < 10; i++) {
 				Vec3 spot = DefaultRandomPos.getPos(CatacombRatEntity.this, 10, 4);
 				if (spot != null && !bright(BlockPos.containing(spot))) {

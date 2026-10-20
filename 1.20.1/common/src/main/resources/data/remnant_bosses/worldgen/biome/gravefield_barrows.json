@@ -57,6 +57,18 @@
         "weight": 6,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "remnants:relic_stalker",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "remnants:ancient_vessel",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
       }
     ],
     "creature": [],
@@ -83,6 +95,14 @@
     "remnants:hollow_arbalist": {
       "energy_budget": 0.15,
       "charge": 0.7
+    },
+    "remnants:relic_stalker": {
+      "energy_budget": 0.12,
+      "charge": 1.0
+    },
+    "remnants:ancient_vessel": {
+      "energy_budget": 0.12,
+      "charge": 1.0
     }
   },
   "carvers": {

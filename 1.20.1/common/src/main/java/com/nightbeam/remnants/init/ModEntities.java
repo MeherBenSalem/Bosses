@@ -1,8 +1,6 @@
 package com.nightbeam.remnants.init;
 
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
-import com.nightbeam.remnants.entity.SickleghastEntity;
-import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.KunaiEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.OssukageRuneEffectEntity;
@@ -28,6 +26,14 @@ import com.nightbeam.remnants.entity.MemoryWraithEntity;
 import com.nightbeam.remnants.entity.SoulCollectorEntity;
 import com.nightbeam.remnants.entity.SoulWispEntity;
 import com.nightbeam.remnants.entity.WatcherIllusionEntity;
+import com.nightbeam.remnants.entity.AncientVesselEntity;
+import com.nightbeam.remnants.entity.AshboundCrawlerEntity;
+import com.nightbeam.remnants.entity.CrystalBoltEntity;
+import com.nightbeam.remnants.entity.EmberBoltEntity;
+import com.nightbeam.remnants.entity.EmberServitorEntity;
+import com.nightbeam.remnants.entity.RelicStalkerEntity;
+import com.nightbeam.remnants.entity.RustedGuardianEntity;
+import com.nightbeam.remnants.entity.ShardlingEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -42,16 +48,12 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import com.nightbeam.remnants.realm.RealmEvents;
 
 public final class ModEntities {
-    public static final RegistryHolder<EntityType<SickleghastEntity>> SICKLEGHAST = RegistryHolder.entity("sickleghast");
-    public static EntityType.Builder<SickleghastEntity> createSickleghast() { return EntityType.Builder.<SickleghastEntity>of(SickleghastEntity::new, MobCategory.MONSTER).sized(0.9f,2.65f).clientTrackingRange(64).updateInterval(2); }
-    public static final RegistryHolder<Item> SICKLEGHAST_SPAWN_EGG = new RegistryHolder<>("sickleghast_spawn_egg");
 	public static final RegistryHolder<EntityType<HollowSovereignEntity>> HOLLOW_SOVEREIGN = RegistryHolder.entity("hollow_sovereign");
 	/** Eye height 3.5 comes from HollowSovereignEntity#getStandingEyeHeight (the 1.20.1 builder has no eyeHeight). */
 	public static EntityType.Builder<HollowSovereignEntity> createHollowSovereign() { return EntityType.Builder.<HollowSovereignEntity>of(HollowSovereignEntity::new, MobCategory.MONSTER).sized(1.8f,4.0f).clientTrackingRange(96).updateInterval(2); }
 	public static final RegistryHolder<EntityType<KunaiEntity>> KUNAI = RegistryHolder.entity("kunai");
 	public static final RegistryHolder<EntityType<RemnantOssukageEntity>> REMNANT_OSSUKAGE = RegistryHolder.entity("ossukage");
 	public static final RegistryHolder<EntityType<OssukageRuneEffectEntity>> OSSUKAGE_RUNE_EFFECT = RegistryHolder.entity("ossukage_rune_effect");
-	public static final RegistryHolder<EntityType<ArmoredGrubEntity>> ARMORED_GRUB = RegistryHolder.entity("armored_grub");
 	// The Hollow Sovereign's helpers and the Hollow Legion.
 	public static final RegistryHolder<EntityType<SovereignPauldronEntity>> SOVEREIGN_PAULDRON = RegistryHolder.entity("sovereign_pauldron");
 	public static final RegistryHolder<EntityType<SpectralCrescentEntity>> SPECTRAL_CRESCENT = RegistryHolder.entity("spectral_crescent");
@@ -82,9 +84,19 @@ public final class ModEntities {
 	public static final RegistryHolder<EntityType<SoulCollectorEntity>> SOUL_COLLECTOR = RegistryHolder.entity("soul_collector");
 	/** The Soul Collector's wisps; never saved. */
 	public static final RegistryHolder<EntityType<SoulWispEntity>> SOUL_WISP = RegistryHolder.entity("soul_wisp");
+	// The Ashbound Constructs and the Corrupted Relics: they roam the Eclipsed Realm ahead of their boss slices.
+	public static final RegistryHolder<EntityType<AshboundCrawlerEntity>> ASHBOUND_CRAWLER = RegistryHolder.entity("ashbound_crawler");
+	public static final RegistryHolder<EntityType<EmberServitorEntity>> EMBER_SERVITOR = RegistryHolder.entity("ember_servitor");
+	public static final RegistryHolder<EntityType<RustedGuardianEntity>> RUSTED_GUARDIAN = RegistryHolder.entity("rusted_guardian");
+	/** The Ember Servitor's shot; never saved. */
+	public static final RegistryHolder<EntityType<EmberBoltEntity>> EMBER_BOLT = RegistryHolder.entity("ember_bolt");
+	public static final RegistryHolder<EntityType<ShardlingEntity>> SHARDLING = RegistryHolder.entity("shardling");
+	public static final RegistryHolder<EntityType<AncientVesselEntity>> ANCIENT_VESSEL = RegistryHolder.entity("ancient_vessel");
+	public static final RegistryHolder<EntityType<RelicStalkerEntity>> RELIC_STALKER = RegistryHolder.entity("relic_stalker");
+	/** The Shardling's shot; never saved. */
+	public static final RegistryHolder<EntityType<CrystalBoltEntity>> CRYSTAL_BOLT = RegistryHolder.entity("crystal_bolt");
 
 	public static final RegistryHolder<Item> REMNANT_OSSUKAGE_SPAWN_EGG = new RegistryHolder<>("remnant_ossukage_spawn_egg");
-	public static final RegistryHolder<Item> ARMORED_GRUB_SPAWN_EGG = new RegistryHolder<>("armored_grub_spawn_egg");
 	public static final RegistryHolder<Item> HOLLOW_SOVEREIGN_SPAWN_EGG = new RegistryHolder<>("hollow_sovereign_spawn_egg");
 	public static final RegistryHolder<Item> HOLLOW_SENTINEL_SPAWN_EGG = new RegistryHolder<>("hollow_sentinel_spawn_egg");
 	public static final RegistryHolder<Item> HOLLOW_ARBALIST_SPAWN_EGG = new RegistryHolder<>("hollow_arbalist_spawn_egg");
@@ -99,6 +111,12 @@ public final class ModEntities {
 	public static final RegistryHolder<Item> LOST_PILGRIM_SPAWN_EGG = new RegistryHolder<>("lost_pilgrim_spawn_egg");
 	public static final RegistryHolder<Item> MEMORY_WRAITH_SPAWN_EGG = new RegistryHolder<>("memory_wraith_spawn_egg");
 	public static final RegistryHolder<Item> SOUL_COLLECTOR_SPAWN_EGG = new RegistryHolder<>("soul_collector_spawn_egg");
+	public static final RegistryHolder<Item> ASHBOUND_CRAWLER_SPAWN_EGG = new RegistryHolder<>("ashbound_crawler_spawn_egg");
+	public static final RegistryHolder<Item> EMBER_SERVITOR_SPAWN_EGG = new RegistryHolder<>("ember_servitor_spawn_egg");
+	public static final RegistryHolder<Item> RUSTED_GUARDIAN_SPAWN_EGG = new RegistryHolder<>("rusted_guardian_spawn_egg");
+	public static final RegistryHolder<Item> SHARDLING_SPAWN_EGG = new RegistryHolder<>("shardling_spawn_egg");
+	public static final RegistryHolder<Item> ANCIENT_VESSEL_SPAWN_EGG = new RegistryHolder<>("ancient_vessel_spawn_egg");
+	public static final RegistryHolder<Item> RELIC_STALKER_SPAWN_EGG = new RegistryHolder<>("relic_stalker_spawn_egg");
 
 	/** Spawn-egg colours: Legion base and spots, and the Sovereign's. */
 	public static final int LEGION_EGG_BASE = 0x22242C, LEGION_EGG_SPOTS = 0xB8913F;
@@ -107,6 +125,8 @@ public final class ModEntities {
 	public static final int CRYPTBORN_EGG_BASE = 0x271C17, CRYPTBORN_EGG_SPOTS = 0xC3B99F, WARDEN_EGG_SPOTS = 0x4FC9C1;
 	/** Spawn-egg colours: Forgotten Souls base and spots; the Watcher's sandstone and violet crystal. */
 	public static final int SOULS_EGG_BASE = 0x22344A, SOULS_EGG_SPOTS = 0xA3C4D6, WATCHER_EGG_BASE = 0x4A4336, WATCHER_EGG_SPOTS = 0x9E86E0;
+	/** Spawn-egg colours: Ashbound weathered bronze and ember; Relics chalk marble and Oracle rose. */
+	public static final int ASHBOUND_EGG_BASE = 0x2A1C12, ASHBOUND_EGG_SPOTS = 0xE0661C, RELICS_EGG_BASE = 0x5F5A63, RELICS_EGG_SPOTS = 0xD77BC0;
 
 	private ModEntities() {
 	}
@@ -132,13 +152,6 @@ public final class ModEntities {
 				.updateInterval(1)
 				.noSave()
 				.noSummon();
-	}
-
-	public static EntityType.Builder<ArmoredGrubEntity> createArmoredGrub() {
-		return EntityType.Builder.<ArmoredGrubEntity>of(ArmoredGrubEntity::new, MobCategory.CREATURE)
-				.sized(0.85f, 0.95f)
-				.clientTrackingRange(64)
-				.updateInterval(3);
 	}
 
 	public static EntityType.Builder<SovereignPauldronEntity> createSovereignPauldron() {
@@ -319,6 +332,70 @@ public final class ModEntities {
 				.updateInterval(2);
 	}
 
+	public static EntityType.Builder<AshboundCrawlerEntity> createAshboundCrawler() {
+		return EntityType.Builder.<AshboundCrawlerEntity>of(AshboundCrawlerEntity::new, MobCategory.MONSTER)
+				.sized(0.9f, 0.8f)
+				.fireImmune()
+				.clientTrackingRange(10)
+				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<EmberServitorEntity> createEmberServitor() {
+		return EntityType.Builder.<EmberServitorEntity>of(EmberServitorEntity::new, MobCategory.MONSTER)
+				.sized(0.8f, 1.3f)
+				.fireImmune()
+				.clientTrackingRange(10)
+				.updateInterval(2);
+	}
+
+	public static EntityType.Builder<RustedGuardianEntity> createRustedGuardian() {
+		return EntityType.Builder.<RustedGuardianEntity>of(RustedGuardianEntity::new, MobCategory.MONSTER)
+				.sized(1.4f, 2.8f)
+				.fireImmune()
+				.clientTrackingRange(10)
+				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<EmberBoltEntity> createEmberBolt() {
+		return EntityType.Builder.<EmberBoltEntity>of(EmberBoltEntity::new, MobCategory.MISC)
+				.sized(0.5f, 0.5f)
+				.fireImmune()
+				.noSave()
+				.noSummon()
+				.clientTrackingRange(8)
+				.updateInterval(1);
+	}
+
+	public static EntityType.Builder<ShardlingEntity> createShardling() {
+		return EntityType.Builder.<ShardlingEntity>of(ShardlingEntity::new, MobCategory.MONSTER)
+				.sized(0.8f, 1.0f)
+				.clientTrackingRange(10)
+				.updateInterval(2);
+	}
+
+	public static EntityType.Builder<AncientVesselEntity> createAncientVessel() {
+		return EntityType.Builder.<AncientVesselEntity>of(AncientVesselEntity::new, MobCategory.MONSTER)
+				.sized(0.7f, 1.3f)
+				.clientTrackingRange(10)
+				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<RelicStalkerEntity> createRelicStalker() {
+		return EntityType.Builder.<RelicStalkerEntity>of(RelicStalkerEntity::new, MobCategory.MONSTER)
+				.sized(1.2f, 2.6f)
+				.clientTrackingRange(10)
+				.updateInterval(3);
+	}
+
+	public static EntityType.Builder<CrystalBoltEntity> createCrystalBolt() {
+		return EntityType.Builder.<CrystalBoltEntity>of(CrystalBoltEntity::new, MobCategory.MISC)
+				.sized(0.5f, 0.5f)
+				.noSave()
+				.noSummon()
+				.clientTrackingRange(8)
+				.updateInterval(1);
+	}
+
 	/** Ground spawn rule shared by natural spawns and the Hollow Citadel's spawn_overrides. */
 	public static boolean canMonsterSpawn(EntityType<? extends Mob> entityType, ServerLevelAccessor world, MobSpawnType reason,
 			BlockPos pos, RandomSource random) {
@@ -331,6 +408,5 @@ public final class ModEntities {
 
 	public static void initEntities() {
 		RemnantOssukageEntity.init();
-		ArmoredGrubEntity.init();
 	}
 }

@@ -4,14 +4,14 @@ A Minecraft boss content mod featuring deadly bosses, custom mobs, weapons, and 
 
 ## The Eclipsed Realm
 
-The Remnants live in a dimension of their own: **the Eclipsed Realm**, an open world under a black sun ringed with gold, with the Gracetree burning on the horizon. Its seven biomes (the Tarnished Fields, the Gracewood, the Gravefield Barrows, the Ashen Wastes, the Lantern Heights, the Stilled Sea and the Ossuary Depths) hold the Hollow Legion, the Cryptborn, the Forgotten Souls and the boss arenas.
+The Remnants live in a dimension of their own: **the Eclipsed Realm**, an open world under a black sun ringed with gold, with the Gracetree burning on the horizon. Its seven biomes (the Tarnished Fields, the Gracewood, the Gravefield Barrows, the Ashen Wastes, the Lantern Heights, the Stilled Sea and the Ossuary Depths) hold the Hollow Legion, the Cryptborn, the Forgotten Souls, the Ashbound Constructs, the Corrupted Relics and the boss arenas.
 
 1. Craft an **Eclipse Shard** (Amethyst Shard + Ender Pearl + Gold Ingot) and a **Waygate** (6 Polished Deepslate around an Eclipse Shard, Gold Ingot at the bottom centre).
 2. Place the Waygate. It raises a 3-wide, 4-tall arch; keep the space clear.
 3. Use an Eclipse Shard on it. The arch kindles for six seconds, then opens onto the eclipse.
 4. Walk through. You arrive at an Arrival Shrine with a Waygate home and a **Grace Ember**.
 
-Resting at a Grace Ember heals you, sets your respawn point and shows a trail toward the nearest arena. From any grace you can travel to every grace you have discovered, or depart the Realm. Arena doorways are sealed by fog gates that players can walk through but bosses cannot. See [the Eclipsed Realm guide](docs/curseforge/remnant-bosses.md) for the biomes, bosses and rewards.
+Resting at a Grace Ember heals you, sets your respawn point and shows a trail toward the nearest arena. From any grace you can travel to every grace you have discovered, listed nearest first with the distance in meters, or depart the Realm. The Realm itself does not change: outside creative mode nothing can be built or broken there, buckets do not pour and explosions leave the terrain whole (config `remnant/realm/realm` → `build_protection`). Arena doorways are sealed by fog gates that players can walk through but bosses cannot. See [the Eclipsed Realm guide](docs/curseforge/remnant-bosses.md) for the biomes, bosses and rewards.
 
 ## Boss Hunts
 
@@ -60,7 +60,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The release version is `3.0.0` in both workspaces. Keep those `version=` lines identical. See [the release notes](release-notes/3.0.0.md).
+The release version is `3.1.0` in both workspaces. Keep those `version=` lines identical. See [the release notes](release-notes/3.1.0.md).
 
 ## Requirements
 

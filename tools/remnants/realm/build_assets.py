@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import block_models  # noqa: E402
 import blocks  # noqa: E402
 import contact_sheet  # noqa: E402
+import grace  # noqa: E402
 import icons  # noqa: E402
 import particles  # noqa: E402
 import preview  # noqa: E402
@@ -30,6 +31,7 @@ def main(argv):
     blocks.build()
     block_models.build()
     icons.build()
+    grace.build()
     particles.build()
     sky.build()
     model, geo, base, glow = waygate.build()

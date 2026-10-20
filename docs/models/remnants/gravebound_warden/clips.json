@@ -1,0 +1,46 @@
+{
+  "idle": {
+    "length": 4.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "sweep": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "chop": {
+    "length": 2.6,
+    "loop": "once"
+  },
+  "chain_grab": {
+    "length": 2.2,
+    "loop": "once"
+  },
+  "eruption": {
+    "length": 2.8,
+    "loop": "once"
+  },
+  "summon": {
+    "length": 2.5,
+    "loop": "once"
+  },
+  "chain_wall": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "cell_break": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "stagger": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "death": {
+    "length": 5.0,
+    "loop": "hold"
+  }
+}

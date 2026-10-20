@@ -1,6 +1,7 @@
 package com.nightbeam.realmprobe;
 
 import com.nightbeam.remnants.block.realm.EclipseWaygateBlock;
+import com.nightbeam.remnants.block.realm.GraceEmberBlockEntity;
 import com.nightbeam.remnants.block.realm.WaygatePhase;
 import com.nightbeam.remnants.block.realm.WaygateShape;
 import com.nightbeam.remnants.block.realm.WaygateVeilBlock;
@@ -27,13 +28,17 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.phys.AABB;
@@ -71,6 +76,7 @@ public final class RealmRuntimeProbe implements ClientModInitializer {
 	private volatile String serverFailure;
 	private volatile BlockPos core;
 	private volatile BlockPos realmGrace;
+	private volatile BlockPos freshGrace;
 	private volatile boolean serverDone;
 	private int biome;
 
@@ -174,50 +180,95 @@ public final class RealmRuntimeProbe implements ClientModInitializer {
 			}
 			case 8 -> {
 				capture(client, "realm-07-gracetree");
-				look(client, 0, 10);
-				onServer(server, () -> {
-					actor.teleportTo(EclipsedRealm.level(server), realmGrace.getX() + 0.5, realmGrace.getY(), realmGrace.getZ() + 1.5, 180, 10);
-					useGrace(server, actor);
-				});
-				next(40);
+				// Close on the redesigned grace before resting at it.
+				onServer(server, () -> actor.teleportTo(EclipsedRealm.level(server), realmGrace.getX() + 0.5, realmGrace.getY() + 0.6,
+						realmGrace.getZ() + 4.5, 180, 20));
+				look(client, 180, 20);
+				next(60);
 			}
 			case 9 -> {
+				capture(client, "realm-07b-grace-ember");
+				onServer(server, () -> discoverGraces(server, actor));
+				next(50);
+			}
+			case 10 -> {
+				require(serverDone, "extra graces discovered on the server");
 				require(client.screen instanceof GraceScreen, "grace menu opened from the real packet");
 				require(EclipsedRealm.LEVEL.equals(actor.getRespawnDimension()) && actor.getRespawnPosition() != null,
 						"resting set the respawn point in the Realm");
-				pass("rested: respawn " + actor.getRespawnPosition() + ", grace menu shown");
+				pass("rested: respawn " + actor.getRespawnPosition() + ", grace menu shown with distances");
 				capture(client, "realm-08-grace-menu");
 				next(10);
 			}
-			case 10 -> {
+			case 11 -> {
+				client.setScreen(null);
+				onServer(server, () -> protect(server, actor));
+				look(client, 180, 30);
+				next(15);
+			}
+			case 12 -> {
+				require(serverDone, "Realm protection checks finished on the server");
+				require(client.gameMode.getPlayerMode() == GameType.SURVIVAL
+						&& client.player.blockActionRestricted(client.level, realmGrace.below(), GameType.SURVIVAL),
+						"the client refuses breaking for a survival player too");
+				pass("Realm protection: survival break, place, bucket and explosion refused; creative still builds");
+				capture(client, "realm-08b-protected");
+				onServer(server, () -> {
+					actor.setGameMode(GameType.CREATIVE);
+					actor.getAbilities().flying = true;
+					actor.onUpdateAbilities();
+					actor.teleportTo(EclipsedRealm.level(server), realmGrace.getX() + 0.5, realmGrace.getY() + 0.6, realmGrace.getZ() + 4.5, 180, 20);
+				});
+				look(client, 180, 20);
+				next(40);
+			}
+			case 13 -> {
+				// Resting added the renderer's block entity on the client even for a grace saved before it existed.
+				require(client.level.getChunkAt(realmGrace).getBlockEntity(realmGrace, LevelChunk.EntityCreationType.CHECK)
+						instanceof GraceEmberBlockEntity, "the arrival grace has its glow block entity on the client");
+				pass("arrival grace renders its glow (block entity present on the client)");
+				capture(client, "realm-08c-grace-glow");
+				onServer(server, () -> actor.teleportTo(EclipsedRealm.level(server), freshGrace.getX() + 0.5, freshGrace.getY() + 5,
+						freshGrace.getZ() + 16.5, 180, 14));
+				look(client, 180, 14);
+				next(100);
+			}
+			case 14 -> {
+				require(client.level.getChunkAt(freshGrace).getBlockEntity(freshGrace, LevelChunk.EntityCreationType.CHECK)
+						instanceof GraceEmberBlockEntity, "a newly placed grace arrives on the client with its block entity");
+				pass("newly placed grace at " + freshGrace + " arrived with its glow block entity");
+				capture(client, "realm-08d-grace-afar");
+				next(1);
+			}
+			case 15 -> {
 				client.setScreen(null);
 				if (biome >= BIOMES.length) {
 					next(1);
-					step = 12;
+					step = 17;
 					return;
 				}
 				serverDone = false;
 				String id = BIOMES[biome];
 				onServer(server, () -> visitBiome(server, actor, id));
 				next(140);
-				step = 11;
+				step = 16;
 			}
-			case 11 -> {
+			case 16 -> {
 				capture(client, "realm-09-" + BIOMES[biome]);
 				biome++;
-				step = 10;
+				step = 15;
 				waitUntil = ticks + 2;
 			}
-			case 12 -> {
+			case 17 -> {
 				onServer(server, () -> visitCitadel(server, actor));
 				next(160);
 			}
-			case 13 -> {
+			case 18 -> {
 				capture(client, "realm-10-hollow-citadel");
 				onServer(server, () -> visitObservatory(server, actor));
 				next(160);
 			}
-			case 14 -> {
+			case 19 -> {
 				capture(client, "realm-10b-forgotten-observatory");
 				onServer(server, () -> {
 					ServerLevel realm = EclipsedRealm.level(server);
@@ -225,13 +276,13 @@ public final class RealmRuntimeProbe implements ClientModInitializer {
 				});
 				next(40);
 			}
-			case 15 -> {
+			case 20 -> {
 				onServer(server, () -> GraceRegistry.handleAction(actor, new ServerboundGraceActionPacket(realmGrace,
 						ServerboundGraceActionPacket.DEPART, new ResourceLocation("minecraft", "overworld"), realmGrace)));
 				stepStart = ticks;
 				next(1);
 			}
-			case 16 -> {
+			case 21 -> {
 				if (EclipsedRealm.isRealm(actor.level())) {
 					require(ticks - stepStart < 400, "Depart returns the player to the overworld");
 					return;
@@ -240,7 +291,7 @@ public final class RealmRuntimeProbe implements ClientModInitializer {
 						+ " (Waygate at " + core + ")");
 				next(60);
 			}
-			case 17 -> {
+			case 22 -> {
 				capture(client, "realm-11-returned");
 				finish("PASS realm runtime walkthrough");
 			}
@@ -306,6 +357,99 @@ public final class RealmRuntimeProbe implements ClientModInitializer {
 					new BlockHitResult(Vec3.atCenterOf(realmGrace), Direction.UP, realmGrace, false));
 		} catch (Throwable e) {
 			serverFailure = "grace: " + e;
+		}
+	}
+
+	/**
+	 * Two more Realm graces and one in the overworld, so the menu shows meters and "another world"; the arrival grace
+	 * is clicked last, through the real block-use path, so its menu is the one on screen.
+	 */
+	private void discoverGraces(MinecraftServer server, ServerPlayer actor) {
+		try {
+			ServerLevel realm = EclipsedRealm.level(server);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			for (int[] offset : new int[][] {{64, -90}, {-150, 260}}) {
+				BlockPos grace = surfaceGrace(realm, realmGrace.getX() + offset[0], realmGrace.getZ() + offset[1]);
+				GraceRegistry.use(actor, realm, grace, InteractionHand.MAIN_HAND);
+				if (freshGrace == null) freshGrace = grace;
+			}
+			BlockPos home = new BlockPos(4, 200, 3);
+			server.overworld().setBlock(home, ModBlocks.GRACE_EMBER.get().defaultBlockState(), 3);
+			GraceRegistry.use(actor, server.overworld(), home, InteractionHand.MAIN_HAND);
+			useGrace(server, actor);
+			serverDone = serverFailure == null;
+		} catch (Throwable e) {
+			serverFailure = "graces: " + e;
+		}
+	}
+
+	private static BlockPos surfaceGrace(ServerLevel level, int x, int z) {
+		level.getChunk(x >> 4, z >> 4);
+		BlockPos pos = new BlockPos(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z), z);
+		level.setBlock(pos, ModBlocks.GRACE_EMBER.get().defaultBlockState(), 3);
+		return pos;
+	}
+
+	/**
+	 * The Realm does not change for a survival player: breaking, placing, buckets and explosions all leave it whole.
+	 * The same placement then succeeds in creative, so the refusal comes from the protection and nothing else.
+	 */
+	private void protect(MinecraftServer server, ServerPlayer actor) {
+		try {
+			ServerLevel realm = EclipsedRealm.level(server);
+			BlockPos spot = GraceRegistry.standSpot(realm, realmGrace);
+			actor.teleportTo(realm, spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 180, 30);
+			actor.setGameMode(GameType.SURVIVAL);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+
+			BlockPos floor = spot.below();
+			BlockState ground = realm.getBlockState(floor);
+			require(!actor.gameMode.destroyBlock(floor) && realm.getBlockState(floor).equals(ground),
+					"survival breaking is refused (" + ground + " at " + floor + ")");
+
+			BlockPos free = null;
+			for (BlockPos pos : BlockPos.betweenClosed(spot.offset(-3, -1, -3), spot.offset(3, 1, 3))) {
+				if (!pos.equals(spot) && !pos.equals(spot.above()) && realm.getBlockState(pos).isAir()
+						&& realm.getBlockState(pos.below()).isSolidRender(realm, pos.below())) {
+					free = pos.immutable();
+					break;
+				}
+			}
+			require(free != null, "an open floor tile near the grace to try building on");
+			BlockHitResult face = new BlockHitResult(Vec3.atCenterOf(free.below()).add(0, 0.5, 0), Direction.UP, free.below(), false);
+			ItemStack stone = new ItemStack(Items.COBBLESTONE, 8);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, stone);
+			InteractionResult placed = stone.useOn(new UseOnContext(actor, InteractionHand.MAIN_HAND, face));
+			require(!placed.consumesAction() && realm.getBlockState(free).isAir(), "survival placing is refused (" + placed + ")");
+
+			ItemStack bucket = new ItemStack(Items.WATER_BUCKET);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, bucket);
+			require(!bucket.use(realm, actor, InteractionHand.MAIN_HAND).getResult().consumesAction(), "survival buckets are refused");
+
+			BlockPos blast = realm.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spot.offset(12, 0, 0)).below();
+			List<BlockState> before = new ArrayList<>();
+			for (BlockPos pos : BlockPos.betweenClosed(blast.offset(-3, -3, -3), blast.offset(3, 3, 3))) before.add(realm.getBlockState(pos));
+			realm.explode(null, blast.getX() + 0.5, blast.getY() + 1.0, blast.getZ() + 0.5, 3.0f, Level.ExplosionInteraction.TNT);
+			List<BlockState> after = new ArrayList<>();
+			for (BlockPos pos : BlockPos.betweenClosed(blast.offset(-3, -3, -3), blast.offset(3, 3, 3))) after.add(realm.getBlockState(pos));
+			require(before.equals(after), "a TNT-strength explosion at " + blast + " leaves the terrain whole");
+
+			actor.setGameMode(GameType.CREATIVE);
+			ItemStack control = new ItemStack(Items.COBBLESTONE);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, control);
+			require(control.useOn(new UseOnContext(actor, InteractionHand.MAIN_HAND, face)).consumesAction()
+					&& realm.getBlockState(free).is(Blocks.COBBLESTONE), "creative players can still build at " + free);
+			require(actor.gameMode.destroyBlock(free) && realm.getBlockState(free).isAir(), "creative players can still break");
+			report.add("PROTECTION floor " + floor + ", build tile " + free + ", blast " + blast);
+
+			actor.setGameMode(GameType.SURVIVAL);
+			actor.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			actor.teleportTo(realm, spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 180, 30);
+			// One more refused break so the action-bar warning is fresh for the capture.
+			actor.gameMode.destroyBlock(floor);
+			serverDone = true;
+		} catch (Throwable e) {
+			serverFailure = "protection: " + e;
 		}
 	}
 

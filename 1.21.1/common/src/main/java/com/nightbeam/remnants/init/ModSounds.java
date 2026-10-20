@@ -10,8 +10,6 @@ import java.util.List;
 public final class ModSounds {
 	public static final RegistryHolder<SoundEvent> SKELETONFIGHT_THEME = sound("skeletonfight_theme");
 	public static final RegistryHolder<SoundEvent> DASH_SFX = sound("dash_sfx");
-	public static final RegistryHolder<SoundEvent> ARMORED_GRUB_AMBIENT = sound("armored_grub_ambient");
-	public static final RegistryHolder<SoundEvent> ARMORED_GRUB_DEATH = sound("armored_grub_death");
 	// Hollow Sovereign and the Hollow Legion.
 	public static final RegistryHolder<SoundEvent> SOVEREIGN_TOLL = sound("sovereign_toll");
 	public static final RegistryHolder<SoundEvent> SOVEREIGN_GUARD = sound("sovereign_guard");
@@ -32,7 +30,7 @@ public final class ModSounds {
 
 	/** Every sound above, in registration order; loaders register this list. */
 	public static final List<RegistryHolder<SoundEvent>> ALL = List.of(SKELETONFIGHT_THEME, DASH_SFX,
-			ARMORED_GRUB_AMBIENT, ARMORED_GRUB_DEATH, SOVEREIGN_TOLL, SOVEREIGN_GUARD, SPECTRAL_SLASH,
+			SOVEREIGN_TOLL, SOVEREIGN_GUARD, SPECTRAL_SLASH,
 			PAULDRON_HUM, LEGION_HORN, SOUL_RELEASE,
 			WAYGATE_KINDLE, WAYGATE_OPEN, WAYGATE_HUM, WAYGATE_CROSS, GRACE_DISCOVER, GRACE_REST, REMNANT_FELLED, FOG_GATE_PASS);
 

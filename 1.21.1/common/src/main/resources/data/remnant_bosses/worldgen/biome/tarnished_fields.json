@@ -53,6 +53,24 @@
         "weight": 8,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "remnants:shardling",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 3
+      },
+      {
+        "type": "remnants:ancient_vessel",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "remnants:rusted_guardian",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
       }
     ],
     "creature": [
@@ -96,6 +114,18 @@
     "remnants:catacomb_rat": {
       "energy_budget": 0.2,
       "charge": 0.5
+    },
+    "remnants:shardling": {
+      "energy_budget": 0.2,
+      "charge": 0.5
+    },
+    "remnants:ancient_vessel": {
+      "energy_budget": 0.12,
+      "charge": 1.0
+    },
+    "remnants:rusted_guardian": {
+      "energy_budget": 0.12,
+      "charge": 1.0
     }
   },
   "carvers": {

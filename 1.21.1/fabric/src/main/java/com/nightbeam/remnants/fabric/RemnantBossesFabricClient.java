@@ -9,19 +9,19 @@ import com.nightbeam.remnants.client.renderer.WatcherIllusionRenderer;
 import com.nightbeam.remnants.client.journal.BossHuntsClient;
 import com.nightbeam.remnants.client.model.Modelshuriken;
 import com.nightbeam.remnants.client.renderer.HollowSovereignRenderer;
-import com.nightbeam.remnants.client.renderer.SickleghastRenderer;
 import com.nightbeam.remnants.client.renderer.ChainAnchorRenderer;
-import com.nightbeam.remnants.client.renderer.ArmoredGrubRenderer;
 import com.nightbeam.remnants.client.renderer.KunaiRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantOssukageRenderer;
 import com.nightbeam.remnants.client.renderer.OssukageRuneEffectRenderer;
 import com.nightbeam.remnants.client.renderer.RemnantGeoRenderer;
+import com.nightbeam.remnants.client.renderer.RemnantBoltRenderer;
 import com.nightbeam.remnants.client.renderer.SpectralCrescentRenderer;
 import com.nightbeam.remnants.client.renderer.SpectralRoyalGuardRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import com.nightbeam.remnants.client.renderer.WardenChainRenderer;
 import com.nightbeam.remnants.client.realm.RealmClient;
 import com.nightbeam.remnants.client.realm.RealmParticles;
+import com.nightbeam.remnants.client.realm.GraceEmberRenderer;
 import com.nightbeam.remnants.client.realm.WaygateRenderer;
 import com.nightbeam.remnants.init.ModBlockEntities;
 import com.nightbeam.remnants.init.ModBlocks;
@@ -51,6 +51,7 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 			RealmClient.tick();
 		});
 		BlockEntityRenderers.register(ModBlockEntities.ECLIPSE_WAYGATE.get(), WaygateRenderer::new);
+		BlockEntityRenderers.register(ModBlockEntities.GRACE_EMBER.get(), GraceEmberRenderer::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticles.GRACE_MOTE.get(), RealmParticles.GraceMoteProvider::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticles.ECLIPSE_SPARK.get(), RealmParticles.EclipseSparkProvider::new);
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GILDED_LEAVES.get(), RenderType.cutoutMipped());
@@ -65,9 +66,7 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageRenderer::new);
 		EntityRendererRegistry.register(ModEntities.OSSUKAGE_RUNE_EFFECT.get(), OssukageRuneEffectRenderer::new);
 		EntityRendererRegistry.register(ModEntities.KUNAI.get(), KunaiRenderer::new);
-		EntityRendererRegistry.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubRenderer::new);
 		EntityRendererRegistry.register(ModEntities.HOLLOW_SOVEREIGN.get(), HollowSovereignRenderer::new);
-		EntityRendererRegistry.register(ModEntities.SICKLEGHAST.get(), SickleghastRenderer::new);
 		EntityRendererRegistry.register(ModEntities.SOVEREIGN_PAULDRON.get(), context -> new RemnantGeoRenderer<>(context, "sovereign_pauldron", 0.4f));
 		EntityRendererRegistry.register(ModEntities.SPECTRAL_CRESCENT.get(), SpectralCrescentRenderer::new);
 		EntityRendererRegistry.register(ModEntities.ROYAL_BLADE_MARK.get(), NoopRenderer::new);
@@ -92,6 +91,15 @@ public class RemnantBossesFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.MEMORY_WRAITH.get(), context -> new RemnantGeoRenderer<>(context, "memory_wraith", 0.4f));
 		EntityRendererRegistry.register(ModEntities.SOUL_COLLECTOR.get(), context -> new RemnantGeoRenderer<>(context, "soul_collector", 0.6f));
 		EntityRendererRegistry.register(ModEntities.SOUL_WISP.get(), SoulWispRenderer::new);
+		// The Ashbound Constructs and the Corrupted Relics.
+		EntityRendererRegistry.register(ModEntities.ASHBOUND_CRAWLER.get(), context -> new RemnantGeoRenderer<>(context, "ashbound_crawler", 0.45f));
+		EntityRendererRegistry.register(ModEntities.EMBER_SERVITOR.get(), context -> new RemnantGeoRenderer<>(context, "ember_servitor", 0.4f));
+		EntityRendererRegistry.register(ModEntities.RUSTED_GUARDIAN.get(), context -> new RemnantGeoRenderer<>(context, "rusted_guardian", 0.8f));
+		EntityRendererRegistry.register(ModEntities.EMBER_BOLT.get(), context -> new RemnantBoltRenderer<>(context, "ember_bolt"));
+		EntityRendererRegistry.register(ModEntities.SHARDLING.get(), context -> new RemnantGeoRenderer<>(context, "shardling", 0.3f));
+		EntityRendererRegistry.register(ModEntities.ANCIENT_VESSEL.get(), context -> new RemnantGeoRenderer<>(context, "ancient_vessel", 0.4f));
+		EntityRendererRegistry.register(ModEntities.RELIC_STALKER.get(), context -> new RemnantGeoRenderer<>(context, "relic_stalker", 0.6f));
+		EntityRendererRegistry.register(ModEntities.CRYSTAL_BOLT.get(), context -> new RemnantBoltRenderer<>(context, "crystal_bolt"));
 
 		EntityModelLayerRegistry.registerModelLayer(Modelshuriken.LAYER_LOCATION, Modelshuriken::createBodyLayer);
 

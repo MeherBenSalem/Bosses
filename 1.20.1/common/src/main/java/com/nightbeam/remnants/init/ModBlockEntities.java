@@ -1,6 +1,7 @@
 package com.nightbeam.remnants.init;
 
 import com.nightbeam.remnants.block.realm.EclipseWaygateBlockEntity;
+import com.nightbeam.remnants.block.realm.GraceEmberBlockEntity;
 import com.nightbeam.remnants.registry.RegistryHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -10,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
  */
 public final class ModBlockEntities {
 	public static final RegistryHolder<BlockEntityType<EclipseWaygateBlockEntity>> ECLIPSE_WAYGATE = new RegistryHolder<>("eclipse_waygate");
+	public static final RegistryHolder<BlockEntityType<GraceEmberBlockEntity>> GRACE_EMBER = new RegistryHolder<>("grace_ember");
 
 	private ModBlockEntities() {
 	}

@@ -5,8 +5,6 @@ import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.RemnantBosses;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
-import com.nightbeam.remnants.entity.SickleghastEntity;
-import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.FallenStandardBearerEntity;
 import com.nightbeam.remnants.entity.HollowArbalistEntity;
@@ -22,6 +20,12 @@ import com.nightbeam.remnants.entity.MemoryWraithEntity;
 import com.nightbeam.remnants.entity.SoulCollectorEntity;
 import com.nightbeam.remnants.entity.SoulWispEntity;
 import com.nightbeam.remnants.entity.WatcherIllusionEntity;
+import com.nightbeam.remnants.entity.AncientVesselEntity;
+import com.nightbeam.remnants.entity.AshboundCrawlerEntity;
+import com.nightbeam.remnants.entity.EmberServitorEntity;
+import com.nightbeam.remnants.entity.RelicStalkerEntity;
+import com.nightbeam.remnants.entity.RustedGuardianEntity;
+import com.nightbeam.remnants.entity.ShardlingEntity;
 import com.nightbeam.remnants.event.WatcherRelics;
 import com.nightbeam.remnants.entity.BurialGuardianEntity;
 import com.nightbeam.remnants.entity.CatacombRatEntity;
@@ -31,6 +35,7 @@ import com.nightbeam.remnants.entity.GraveboundSoldierEntity;
 import com.nightbeam.remnants.entity.GraveboundWardenEntity;
 import com.nightbeam.remnants.forge.network.ForgeNetwork;
 import com.nightbeam.remnants.block.realm.EclipseWaygateBlockEntity;
+import com.nightbeam.remnants.block.realm.GraceEmberBlockEntity;
 import com.nightbeam.remnants.init.ModBlockEntities;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModParticles;
@@ -118,6 +123,12 @@ public class RemnantBossesForge {
 			ModBlockEntities.ECLIPSE_WAYGATE.bind(type);
 			return type;
 		});
+		BLOCK_ENTITIES.register(ModBlockEntities.GRACE_EMBER.path(), () -> {
+			BlockEntityType<GraceEmberBlockEntity> type = BlockEntityType.Builder.of(GraceEmberBlockEntity::new,
+					ModBlocks.GRACE_EMBER.get()).build(null);
+			ModBlockEntities.GRACE_EMBER.bind(type);
+			return type;
+		});
 		for (RegistryHolder<SimpleParticleType> particle : ModParticles.ALL) {
 			PARTICLES.register(particle.path(), () -> {
 				SimpleParticleType type = ModParticles.create();
@@ -133,14 +144,13 @@ public class RemnantBossesForge {
 		for (ModItems.Entry entry : ModItems.SOVEREIGN_ITEMS) bindItem(entry.holder(), entry.factory());
 		for (ModItems.Entry entry : ModItems.WARDEN_ITEMS) bindItem(entry.holder(), entry.factory());
 		for (ModItems.Entry entry : ModItems.WATCHER_ITEMS) bindItem(entry.holder(), entry.factory());
+		for (ModItems.Entry entry : ModItems.FAMILY_ITEMS) bindItem(entry.holder(), entry.factory());
 		for (ModItems.Entry entry : ModItems.REALM_ITEMS) bindItem(entry.holder(), entry.factory());
 
 		bindEntity(ModEntities.KUNAI, () -> ModEntities.createKunai().build(ModEntities.KUNAI.path()));
 		bindEntity(ModEntities.REMNANT_OSSUKAGE, () -> ModEntities.createRemnantOssukage().build(ModEntities.REMNANT_OSSUKAGE.path()));
 		bindEntity(ModEntities.OSSUKAGE_RUNE_EFFECT, () -> ModEntities.createOssukageRuneEffect().build(ModEntities.OSSUKAGE_RUNE_EFFECT.path()));
-		bindEntity(ModEntities.ARMORED_GRUB, () -> ModEntities.createArmoredGrub().build(ModEntities.ARMORED_GRUB.path()));
 		bindEntity(ModEntities.HOLLOW_SOVEREIGN, () -> ModEntities.createHollowSovereign().build(ModEntities.HOLLOW_SOVEREIGN.path()));
-		bindEntity(ModEntities.SICKLEGHAST, () -> ModEntities.createSickleghast().build(ModEntities.SICKLEGHAST.path()));
 		bindEntity(ModEntities.SOVEREIGN_PAULDRON, () -> ModEntities.createSovereignPauldron().build(ModEntities.SOVEREIGN_PAULDRON.path()));
 		bindEntity(ModEntities.SPECTRAL_CRESCENT, () -> ModEntities.createSpectralCrescent().build(ModEntities.SPECTRAL_CRESCENT.path()));
 		bindEntity(ModEntities.ROYAL_BLADE_MARK, () -> ModEntities.createRoyalBladeMark().build(ModEntities.ROYAL_BLADE_MARK.path()));
@@ -163,11 +173,17 @@ public class RemnantBossesForge {
 		bindEntity(ModEntities.MEMORY_WRAITH, () -> ModEntities.createMemoryWraith().build(ModEntities.MEMORY_WRAITH.path()));
 		bindEntity(ModEntities.SOUL_COLLECTOR, () -> ModEntities.createSoulCollector().build(ModEntities.SOUL_COLLECTOR.path()));
 		bindEntity(ModEntities.SOUL_WISP, () -> ModEntities.createSoulWisp().build(ModEntities.SOUL_WISP.path()));
+		bindEntity(ModEntities.ASHBOUND_CRAWLER, () -> ModEntities.createAshboundCrawler().build(ModEntities.ASHBOUND_CRAWLER.path()));
+		bindEntity(ModEntities.EMBER_SERVITOR, () -> ModEntities.createEmberServitor().build(ModEntities.EMBER_SERVITOR.path()));
+		bindEntity(ModEntities.RUSTED_GUARDIAN, () -> ModEntities.createRustedGuardian().build(ModEntities.RUSTED_GUARDIAN.path()));
+		bindEntity(ModEntities.EMBER_BOLT, () -> ModEntities.createEmberBolt().build(ModEntities.EMBER_BOLT.path()));
+		bindEntity(ModEntities.SHARDLING, () -> ModEntities.createShardling().build(ModEntities.SHARDLING.path()));
+		bindEntity(ModEntities.ANCIENT_VESSEL, () -> ModEntities.createAncientVessel().build(ModEntities.ANCIENT_VESSEL.path()));
+		bindEntity(ModEntities.RELIC_STALKER, () -> ModEntities.createRelicStalker().build(ModEntities.RELIC_STALKER.path()));
+		bindEntity(ModEntities.CRYSTAL_BOLT, () -> ModEntities.createCrystalBolt().build(ModEntities.CRYSTAL_BOLT.path()));
 
 		bindSpawnEgg(ModEntities.REMNANT_OSSUKAGE_SPAWN_EGG, () -> ModEntities.REMNANT_OSSUKAGE.get(), 0xCC0000, 0xFF0000);
-		bindSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, () -> ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00);
 		bindSpawnEgg(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG, () -> ModEntities.HOLLOW_SOVEREIGN.get(), ModEntities.SOVEREIGN_EGG_BASE, ModEntities.SOVEREIGN_EGG_SPOTS);
-		bindSpawnEgg(ModEntities.SICKLEGHAST_SPAWN_EGG, () -> ModEntities.SICKLEGHAST.get(), 0x947360, 0x64CE8A);
 		bindSpawnEgg(ModEntities.HOLLOW_SENTINEL_SPAWN_EGG, () -> ModEntities.HOLLOW_SENTINEL.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
 		bindSpawnEgg(ModEntities.HOLLOW_ARBALIST_SPAWN_EGG, () -> ModEntities.HOLLOW_ARBALIST.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
 		bindSpawnEgg(ModEntities.FALLEN_STANDARD_BEARER_SPAWN_EGG, () -> ModEntities.FALLEN_STANDARD_BEARER.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
@@ -181,11 +197,15 @@ public class RemnantBossesForge {
 		bindSpawnEgg(ModEntities.LOST_PILGRIM_SPAWN_EGG, () -> ModEntities.LOST_PILGRIM.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
 		bindSpawnEgg(ModEntities.MEMORY_WRAITH_SPAWN_EGG, () -> ModEntities.MEMORY_WRAITH.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
 		bindSpawnEgg(ModEntities.SOUL_COLLECTOR_SPAWN_EGG, () -> ModEntities.SOUL_COLLECTOR.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.ASHBOUND_CRAWLER_SPAWN_EGG, () -> ModEntities.ASHBOUND_CRAWLER.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.EMBER_SERVITOR_SPAWN_EGG, () -> ModEntities.EMBER_SERVITOR.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.RUSTED_GUARDIAN_SPAWN_EGG, () -> ModEntities.RUSTED_GUARDIAN.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.SHARDLING_SPAWN_EGG, () -> ModEntities.SHARDLING.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.ANCIENT_VESSEL_SPAWN_EGG, () -> ModEntities.ANCIENT_VESSEL.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
+		bindSpawnEgg(ModEntities.RELIC_STALKER_SPAWN_EGG, () -> ModEntities.RELIC_STALKER.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
 
 		bindSound(ModSounds.SKELETONFIGHT_THEME, ModSounds::createSkeletonFightTheme);
 		bindSound(ModSounds.DASH_SFX, ModSounds::createDashSfx);
-		bindSound(ModSounds.ARMORED_GRUB_AMBIENT, ModSounds::createArmoredGrubAmbient);
-		bindSound(ModSounds.ARMORED_GRUB_DEATH, ModSounds::createArmoredGrubDeath);
 		for (RegistryHolder<SoundEvent> sound : ModSounds.SOVEREIGN_SOUNDS) bindSound(sound, () -> ModSounds.create(sound));
 		for (RegistryHolder<SoundEvent> sound : ModSounds.REALM_SOUNDS) bindSound(sound, () -> ModSounds.create(sound));
 
@@ -205,9 +225,7 @@ public class RemnantBossesForge {
 
 	private void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageEntity.createAttributes().build());
-		event.put(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes().build());
 		event.put(ModEntities.HOLLOW_SOVEREIGN.get(), HollowSovereignEntity.createAttributes().build());
-		event.put(ModEntities.SICKLEGHAST.get(), SickleghastEntity.createAttributes().build());
 		event.put(ModEntities.SOVEREIGN_PAULDRON.get(), SovereignPauldronEntity.createAttributes().build());
 		event.put(ModEntities.HOLLOW_SENTINEL.get(), HollowSentinelEntity.createAttributes().build());
 		event.put(ModEntities.SPECTRAL_ROYAL_GUARD.get(), SpectralRoyalGuardEntity.createAttributes().build());
@@ -226,6 +244,12 @@ public class RemnantBossesForge {
 		event.put(ModEntities.MEMORY_WRAITH.get(), MemoryWraithEntity.createAttributes().build());
 		event.put(ModEntities.SOUL_COLLECTOR.get(), SoulCollectorEntity.createAttributes().build());
 		event.put(ModEntities.SOUL_WISP.get(), SoulWispEntity.createAttributes().build());
+		event.put(ModEntities.ASHBOUND_CRAWLER.get(), AshboundCrawlerEntity.createAttributes().build());
+		event.put(ModEntities.EMBER_SERVITOR.get(), EmberServitorEntity.createAttributes().build());
+		event.put(ModEntities.RUSTED_GUARDIAN.get(), RustedGuardianEntity.createAttributes().build());
+		event.put(ModEntities.SHARDLING.get(), ShardlingEntity.createAttributes().build());
+		event.put(ModEntities.ANCIENT_VESSEL.get(), AncientVesselEntity.createAttributes().build());
+		event.put(ModEntities.RELIC_STALKER.get(), RelicStalkerEntity.createAttributes().build());
 	}
 
 	private void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
@@ -254,6 +278,19 @@ public class RemnantBossesForge {
 		event.register(ModEntities.MEMORY_WRAITH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(ModEntities.SOUL_COLLECTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		// The Ashbound Constructs and the Corrupted Relics: the Eclipsed Realm's biome spawners only.
+		event.register(ModEntities.ASHBOUND_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ModEntities.EMBER_SERVITOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ModEntities.RUSTED_GUARDIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ModEntities.SHARDLING.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ModEntities.ANCIENT_VESSEL.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ModEntities.RELIC_STALKER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
 	}
 

@@ -84,7 +84,7 @@ class Flow:
 
 BLOCKS = ['eclipse_stone', 'cobbled_eclipse_stone', 'eclipse_stone_bricks', 'cracked_eclipse_stone_bricks',
           'chiseled_eclipse_stone_bricks', 'graceroot_log', 'graceroot_log_top', 'graceroot_planks', 'gilded_leaves',
-          'weathered_gravestone', 'grace_ember_stone', 'grace_ember_sword', 'grace_ember_glow', 'eclipse_waygate_particle']
+          'weathered_gravestone', 'grace_ember_stone', 'grace_ember_bed', 'eclipse_waygate_particle']
 
 
 def build():

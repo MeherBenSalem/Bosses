@@ -105,13 +105,30 @@ public final class RemnantClips {
 			.loop("idle", 60).loop("drift", 24).once("cast", 24).once("blink", 12).once("hurt", 8).hold("death", 32);
 	public static final Sheet SOUL_COLLECTOR = new Sheet("soul_collector")
 			.loop("idle", 60).once("mark", 32).once("harvest", 32).once("summon", 40).once("hurt", 8).hold("death", 40);
+	/** Also spun by the ember and crystal bolts, which render this model in their own colours. */
 	public static final Sheet MEMORY_BOLT = new Sheet("memory_bolt").loop("spin", 10);
 	public static final Sheet SOUL_WISP = new Sheet("soul_wisp").loop("float", 20);
+
+	// The Ashbound Constructs (docs/remnants/families/ashbound-and-relics.md).
+	public static final Sheet ASHBOUND_CRAWLER = new Sheet("ashbound_crawler")
+			.loop("idle", 40).loop("walk", 8).once("scorch", 24).once("hurt", 6).hold("death", 20);
+	public static final Sheet EMBER_SERVITOR = new Sheet("ember_servitor")
+			.loop("idle", 40).loop("fly", 20).once("shoot", 20).loop("repair", 32).once("hurt", 6).hold("death", 28);
+	public static final Sheet RUSTED_GUARDIAN = new Sheet("rusted_guardian")
+			.loop("idle", 60).loop("walk", 36).once("smash", 52).once("sweep", 40).once("hurt", 8).hold("death", 48);
+	// The Corrupted Relics. The Shardling floats: idle also plays while it drifts.
+	public static final Sheet SHARDLING = new Sheet("shardling")
+			.loop("idle", 40).once("shoot", 16).once("hurt", 6).hold("death", 12);
+	public static final Sheet ANCIENT_VESSEL = new Sheet("ancient_vessel")
+			.loop("idle", 60).loop("walk", 16).once("pulse", 28).once("hurt", 6).hold("death", 24);
+	public static final Sheet RELIC_STALKER = new Sheet("relic_stalker")
+			.loop("idle", 60).loop("walk", 14).once("ambush", 32).once("slash", 20).once("hurt", 6).hold("death", 36);
 
 	public static final List<Sheet> ALL = List.of(HOLLOW_SOVEREIGN, HOLLOW_SENTINEL, HOLLOW_ARBALIST,
 			FALLEN_STANDARD_BEARER, SOULBOUND_KNIGHT, SOVEREIGN_PAULDRON, SPECTRAL_CRESCENT,
 			GRAVEBOUND_WARDEN, GRAVEBOUND_SOLDIER, CRYPT_LURKER, BURIAL_GUARDIAN, CATACOMB_RAT,
-			FORGOTTEN_WATCHER, LOST_PILGRIM, MEMORY_WRAITH, SOUL_COLLECTOR, MEMORY_BOLT, SOUL_WISP);
+			FORGOTTEN_WATCHER, LOST_PILGRIM, MEMORY_WRAITH, SOUL_COLLECTOR, MEMORY_BOLT, SOUL_WISP,
+			ASHBOUND_CRAWLER, EMBER_SERVITOR, RUSTED_GUARDIAN, SHARDLING, ANCIENT_VESSEL, RELIC_STALKER);
 
 	private RemnantClips() {
 	}

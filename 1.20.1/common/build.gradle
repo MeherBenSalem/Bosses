@@ -86,3 +86,15 @@ tasks.register('verifyClips', JavaExec) {
     args file('src/main/resources').absolutePath, file('src/main/java/com/nightbeam/remnants/entity').absolutePath
 }
 tasks.named('check') { dependsOn 'verifyClips' }
+
+// Mixins may only use refmap-mapped members (production Forge 1.20.1 does not rename @Shadow members).
+tasks.register('verifyMixinPolicy', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.nightbeam.remnants.MixinPolicyRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/java').absolutePath, rootProject.file('fabric/src/main/java').absolutePath,
+            rootProject.file('forge/src/main/java').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyMixinPolicy' }

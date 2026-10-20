@@ -2,6 +2,7 @@ package com.nightbeam.remnants.fabric.registry;
 
 import com.nightbeam.remnants.init.ModArmorMaterials;
 import com.nightbeam.remnants.block.realm.EclipseWaygateBlockEntity;
+import com.nightbeam.remnants.block.realm.GraceEmberBlockEntity;
 import com.nightbeam.remnants.init.ModBlockEntities;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModParticles;
@@ -34,6 +35,8 @@ public final class FabricModRegistry {
 		for (ModBlocks.Entry entry : ModBlocks.REALM_BLOCKS) registerBlock(entry.holder());
 		ModBlockEntities.ECLIPSE_WAYGATE.bind(Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ModBlockEntities.ECLIPSE_WAYGATE.id(),
 				FabricBlockEntityTypeBuilder.create(EclipseWaygateBlockEntity::new, ModBlocks.ECLIPSE_WAYGATE.get()).build()));
+		ModBlockEntities.GRACE_EMBER.bind(Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ModBlockEntities.GRACE_EMBER.id(),
+				FabricBlockEntityTypeBuilder.create(GraceEmberBlockEntity::new, ModBlocks.GRACE_EMBER.get()).build()));
 		for (RegistryHolder<SimpleParticleType> particle : ModParticles.ALL) {
 			particle.bind(Registry.register(BuiltInRegistries.PARTICLE_TYPE, particle.id(), ModParticles.create()));
 		}
@@ -55,9 +58,7 @@ public final class FabricModRegistry {
 		registerEntity(ModEntities.KUNAI);
 		registerEntity(ModEntities.REMNANT_OSSUKAGE);
 		registerEntity(ModEntities.OSSUKAGE_RUNE_EFFECT);
-		registerEntity(ModEntities.ARMORED_GRUB);
 		registerEntity(ModEntities.HOLLOW_SOVEREIGN);
-		registerEntity(ModEntities.SICKLEGHAST);
 		registerEntity(ModEntities.SOVEREIGN_PAULDRON);
 		registerEntity(ModEntities.SPECTRAL_CRESCENT);
 		registerEntity(ModEntities.ROYAL_BLADE_MARK);
@@ -80,11 +81,17 @@ public final class FabricModRegistry {
 		registerEntity(ModEntities.MEMORY_WRAITH);
 		registerEntity(ModEntities.SOUL_COLLECTOR);
 		registerEntity(ModEntities.SOUL_WISP);
+		registerEntity(ModEntities.ASHBOUND_CRAWLER);
+		registerEntity(ModEntities.EMBER_SERVITOR);
+		registerEntity(ModEntities.RUSTED_GUARDIAN);
+		registerEntity(ModEntities.EMBER_BOLT);
+		registerEntity(ModEntities.SHARDLING);
+		registerEntity(ModEntities.ANCIENT_VESSEL);
+		registerEntity(ModEntities.RELIC_STALKER);
+		registerEntity(ModEntities.CRYSTAL_BOLT);
 
 		registerSpawnEgg(ModEntities.REMNANT_OSSUKAGE_SPAWN_EGG, ModEntities.REMNANT_OSSUKAGE.get(), 0xCC0000, 0xFF0000);
-		registerSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, ModEntities.ARMORED_GRUB.get(), 0x4A7C00, 0x8B5E00);
 		registerSpawnEgg(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG, ModEntities.HOLLOW_SOVEREIGN.get(), ModEntities.SOVEREIGN_EGG_BASE, ModEntities.SOVEREIGN_EGG_SPOTS);
-		registerSpawnEgg(ModEntities.SICKLEGHAST_SPAWN_EGG, ModEntities.SICKLEGHAST.get(), 0x947360, 0x64CE8A);
 		registerSpawnEgg(ModEntities.HOLLOW_SENTINEL_SPAWN_EGG, ModEntities.HOLLOW_SENTINEL.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
 		registerSpawnEgg(ModEntities.HOLLOW_ARBALIST_SPAWN_EGG, ModEntities.HOLLOW_ARBALIST.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
 		registerSpawnEgg(ModEntities.FALLEN_STANDARD_BEARER_SPAWN_EGG, ModEntities.FALLEN_STANDARD_BEARER.get(), ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS);
@@ -98,6 +105,12 @@ public final class FabricModRegistry {
 		registerSpawnEgg(ModEntities.LOST_PILGRIM_SPAWN_EGG, ModEntities.LOST_PILGRIM.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
 		registerSpawnEgg(ModEntities.MEMORY_WRAITH_SPAWN_EGG, ModEntities.MEMORY_WRAITH.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
 		registerSpawnEgg(ModEntities.SOUL_COLLECTOR_SPAWN_EGG, ModEntities.SOUL_COLLECTOR.get(), ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.ASHBOUND_CRAWLER_SPAWN_EGG, ModEntities.ASHBOUND_CRAWLER.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.EMBER_SERVITOR_SPAWN_EGG, ModEntities.EMBER_SERVITOR.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.RUSTED_GUARDIAN_SPAWN_EGG, ModEntities.RUSTED_GUARDIAN.get(), ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.SHARDLING_SPAWN_EGG, ModEntities.SHARDLING.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.ANCIENT_VESSEL_SPAWN_EGG, ModEntities.ANCIENT_VESSEL.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
+		registerSpawnEgg(ModEntities.RELIC_STALKER_SPAWN_EGG, ModEntities.RELIC_STALKER.get(), ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS);
 
 		for (RegistryHolder<SoundEvent> sound : ModSounds.ALL) registerSound(sound);
 

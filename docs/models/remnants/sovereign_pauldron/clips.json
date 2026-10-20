@@ -1,0 +1,14 @@
+{
+  "idle": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "telegraph": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "dive": {
+    "length": 0.5,
+    "loop": "loop"
+  }
+}

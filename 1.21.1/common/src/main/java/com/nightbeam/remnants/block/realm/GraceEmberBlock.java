@@ -18,8 +18,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -28,10 +31,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /** A site of grace: rest, respawn, guidance and travel. Unbreakable outside creative. */
-public class GraceEmberBlock extends Block {
+public class GraceEmberBlock extends Block implements EntityBlock {
 	public static final MapCodec<GraceEmberBlock> CODEC = simpleCodec(properties -> new GraceEmberBlock());
-	private static final VoxelShape OUTLINE = Shapes.or(Block.box(2, 0, 2, 14, 4, 14), Block.box(6.5, 0, 6.5, 9.5, 15, 9.5));
-	private static final VoxelShape COLLISION = Block.box(2, 0, 2, 14, 3, 14);
+	private static final VoxelShape OUTLINE = Block.box(2, 0, 2, 14, 5, 14);
+	private static final VoxelShape COLLISION = Block.box(2, 0, 2, 14, 1, 14);
 
 	public GraceEmberBlock() {
 		super(Properties.of().mapColor(MapColor.GOLD).strength(-1.0f, 3600000.0f).noLootTable()
@@ -63,10 +66,35 @@ public class GraceEmberBlock extends Block {
 		return CODEC;
 	}
 
+	/**
+	 * A grace saved before the glow renderer has no block entity, and a client only builds one when the block changes.
+	 * Add it on the client and redraw the section so the renderer picks it up. Called from animateTick and on rest.
+	 */
+	public static void ensureBlockEntity(Level level, BlockPos pos) {
+		BlockState state = level.getBlockState(pos);
+		if (!(state.getBlock() instanceof GraceEmberBlock)) return;
+		if (level.getChunkAt(pos).getBlockEntity(pos, LevelChunk.EntityCreationType.CHECK) instanceof GraceEmberBlockEntity) return;
+		level.getBlockEntity(pos);
+		level.sendBlockUpdated(pos, state, state, Block.UPDATE_IMMEDIATE);
+	}
+
+	@Override
+	public boolean isRandomlyTicking(BlockState state) {
+		return true;
+	}
+
+	/** Gives graces saved before the glow renderer their block entity on the server, so it is saved and sent with the chunk. */
+	@SuppressWarnings("deprecation")
+	@Override
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		level.getBlockEntity(pos);
+	}
+
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		ensureBlockEntity(level, pos);
 		double x = pos.getX() + 0.5, y = pos.getY() + 0.75, z = pos.getZ() + 0.5;
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 1; i++) {
 			level.addParticle(ModParticles.GRACE_MOTE.get(), x + (random.nextDouble() - 0.5) * 0.35, y + random.nextDouble() * 0.3,
 					z + (random.nextDouble() - 0.5) * 0.35, (random.nextDouble() - 0.5) * 0.01, 0.015 + random.nextDouble() * 0.02,
 					(random.nextDouble() - 0.5) * 0.01);
@@ -101,5 +129,10 @@ public class GraceEmberBlock extends Block {
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
 		return true;
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new GraceEmberBlockEntity(pos, state);
 	}
 }

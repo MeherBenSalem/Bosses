@@ -1,0 +1,18 @@
+{
+  "idle": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "shoot": {
+    "length": 0.8,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.3,
+    "loop": "once"
+  },
+  "death": {
+    "length": 0.6,
+    "loop": "hold"
+  }
+}

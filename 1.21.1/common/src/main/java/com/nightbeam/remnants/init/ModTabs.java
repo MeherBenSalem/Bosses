@@ -50,10 +50,12 @@ public final class ModTabs {
 					tabData.accept(ModItems.ARCHIVIST_ROBE.get());
 					tabData.accept(ModItems.ARCHIVIST_LEGGINGS.get());
 					tabData.accept(ModItems.ARCHIVIST_BOOTS.get());
+					// Family materials: the Ashbound Constructs and the Corrupted Relics.
+					tabData.accept(ModItems.ASHEN_COG.get());
+					tabData.accept(ModItems.RELIC_SHARD.get());
 					// The Eclipsed Realm: the way in, then its blocks.
 					for (RegistryHolder<net.minecraft.world.item.Item> item : ModItems.REALM_ITEMS) tabData.accept(item.get());
 					tabData.accept(ModEntities.REMNANT_OSSUKAGE_SPAWN_EGG.get());
-					tabData.accept(ModEntities.ARMORED_GRUB_SPAWN_EGG.get());
 					tabData.accept(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG.get());
 					tabData.accept(ModEntities.HOLLOW_SENTINEL_SPAWN_EGG.get());
 					tabData.accept(ModEntities.HOLLOW_ARBALIST_SPAWN_EGG.get());
@@ -68,7 +70,12 @@ public final class ModTabs {
 					tabData.accept(ModEntities.LOST_PILGRIM_SPAWN_EGG.get());
 					tabData.accept(ModEntities.MEMORY_WRAITH_SPAWN_EGG.get());
 					tabData.accept(ModEntities.SOUL_COLLECTOR_SPAWN_EGG.get());
-					tabData.accept(ModEntities.SICKLEGHAST_SPAWN_EGG.get());
+					tabData.accept(ModEntities.ASHBOUND_CRAWLER_SPAWN_EGG.get());
+					tabData.accept(ModEntities.EMBER_SERVITOR_SPAWN_EGG.get());
+					tabData.accept(ModEntities.RUSTED_GUARDIAN_SPAWN_EGG.get());
+					tabData.accept(ModEntities.SHARDLING_SPAWN_EGG.get());
+					tabData.accept(ModEntities.ANCIENT_VESSEL_SPAWN_EGG.get());
+					tabData.accept(ModEntities.RELIC_STALKER_SPAWN_EGG.get());
 				})
 				.build();
 	}

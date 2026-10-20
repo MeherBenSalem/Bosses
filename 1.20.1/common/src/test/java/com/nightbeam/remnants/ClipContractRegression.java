@@ -21,13 +21,17 @@ import java.util.stream.Stream;
 public final class ClipContractRegression {
     private static final Pattern LITERAL_CLIP = Pattern.compile("\"animation\\.[a-z_]+\\.[a-z_]+\"");
     /** LegionEntity's controller plays movementClip (walk/idle), hurt and death for every subclass. */
-    private static final Pattern LEGION_BODY = Pattern.compile("extends (LegionEntity|CryptbornEntity|ForgottenSoulEntity|FloatingSoulEntity)\\b");
+    private static final Pattern LEGION_BODY = Pattern.compile("extends (LegionEntity|CryptbornEntity|ForgottenSoulEntity|FloatingSoulEntity"
+            + "|AshboundEntity|CorruptedRelicEntity|HoveringRemnantEntity)\\b");
     private static final Pattern SHEET_OF = Pattern.compile("return RemnantClips\\.([A-Z_]+);");
     private static final List<String> TABLE_ONLY = List.of("HollowSovereignEntity", "SovereignPauldronEntity",
             "SpectralCrescentEntity", "LegionEntity", "HollowSentinelEntity", "SpectralRoyalGuardEntity",
             "HollowArbalistEntity", "FallenStandardBearerEntity", "SoulboundKnightEntity",
             "ForgottenWatcherEntity", "WatcherIllusionEntity", "MemoryBoltEntity", "LostPilgrimEntity", "MemoryWraithEntity",
-            "SoulCollectorEntity", "SoulWispEntity");
+            "SoulCollectorEntity", "SoulWispEntity",
+            "AshboundEntity", "CorruptedRelicEntity", "HoveringRemnantEntity", "AshboundCrawlerEntity", "EmberServitorEntity",
+            "RustedGuardianEntity", "ShardlingEntity", "AncientVesselEntity", "RelicStalkerEntity",
+            "RemnantBoltEntity", "EmberBoltEntity", "CrystalBoltEntity");
 
     public static void main(String[] args) throws Exception {
         Path resources = Path.of(args[0]);
@@ -67,6 +71,12 @@ public final class ClipContractRegression {
         }
         if (!Files.isRegularFile(assets.resolve("textures/entities/forgotten_watcher_illusion.png"))) {
             failures.add("missing watcher illusion texture");
+        }
+        // The ember and crystal bolts draw the Memory Bolt model in their own colours (same UVs).
+        for (String bolt : List.of("ember_bolt", "crystal_bolt")) {
+            for (String suffix : List.of(".png", "_glowmask.png")) {
+                if (!Files.isRegularFile(assets.resolve("textures/entities/" + bolt + suffix))) failures.add("missing bolt texture " + bolt + suffix);
+            }
         }
         // Java hides and turns the aegis, and hides plate aegis_0 (the open segment).
         Path watcherGeo = assets.resolve("geo/entity/forgotten_watcher.geo.json");

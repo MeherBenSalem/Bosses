@@ -1,0 +1,30 @@
+{
+  "idle": {
+    "length": 2.4,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 0.6,
+    "loop": "loop"
+  },
+  "pounce": {
+    "length": 1.6,
+    "loop": "once"
+  },
+  "bite": {
+    "length": 0.8,
+    "loop": "once"
+  },
+  "emerge": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.3,
+    "loop": "once"
+  },
+  "death": {
+    "length": 1.5,
+    "loop": "hold"
+  }
+}

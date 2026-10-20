@@ -386,22 +386,30 @@ def check_noise_settings(c: Ctx):
 EXPECTED_SPAWNS = {  # (category, type) -> (weight, min, max)
     rd.FIELDS: {("monster", "remnants:hollow_sentinel"): (30, 1, 3), ("monster", "remnants:hollow_arbalist"): (18, 1, 2),
                 ("monster", "remnants:fallen_standard_bearer"): (4, 1, 1), ("monster", "remnants:soulbound_knight"): (2, 1, 1),
-                ("monster", "remnants:catacomb_rat"): (8, 2, 4), ("creature", "minecraft:rabbit"): (4, None, None),
+                ("monster", "remnants:catacomb_rat"): (8, 2, 4), ("monster", "remnants:shardling"): (6, 2, 3),
+                ("monster", "remnants:ancient_vessel"): (4, 1, 1), ("monster", "remnants:rusted_guardian"): (2, 1, 1),
+                ("creature", "minecraft:rabbit"): (4, None, None),
                 ("creature", "minecraft:sheep"): (6, None, None)},
     rd.GRACEWOOD: {("monster", "remnants:catacomb_rat"): (12, 2, 4), ("monster", "remnants:crypt_lurker"): (6, 1, 1),
                    ("monster", "remnants:hollow_sentinel"): (6, 1, 2), ("monster", "remnants:lost_pilgrim"): (10, 1, 2),
+                   ("monster", "remnants:shardling"): (12, 3, 4),
                    ("creature", "minecraft:sheep"): (8, None, None),
                    ("creature", "minecraft:rabbit"): (6, None, None), ("creature", "minecraft:fox"): (3, None, None),
                    ("ambient", "minecraft:bat"): (4, None, None)},
     rd.BARROWS: {("monster", "remnants:gravebound_soldier"): (30, 2, 3), ("monster", "remnants:crypt_lurker"): (20, 1, 2),
-                 ("monster", "remnants:catacomb_rat"): (20, 3, 5), ("monster", "remnants:hollow_arbalist"): (6, 1, 1)},
+                 ("monster", "remnants:catacomb_rat"): (20, 3, 5), ("monster", "remnants:hollow_arbalist"): (6, 1, 1),
+                 ("monster", "remnants:relic_stalker"): (5, 1, 1), ("monster", "remnants:ancient_vessel"): (6, 1, 1)},
     rd.WASTES: {("monster", "remnants:hollow_sentinel"): (20, 1, 2), ("monster", "remnants:gravebound_soldier"): (15, 1, 3),
-                ("monster", "remnants:soulbound_knight"): (8, 1, 1), ("monster", "remnants:crypt_lurker"): (10, 1, 1)},
+                ("monster", "remnants:soulbound_knight"): (8, 1, 1), ("monster", "remnants:crypt_lurker"): (10, 1, 1),
+                ("monster", "remnants:ashbound_crawler"): (25, 2, 4), ("monster", "remnants:ember_servitor"): (12, 1, 2),
+                ("monster", "remnants:rusted_guardian"): (4, 1, 1)},
     rd.HEIGHTS: {("monster", "remnants:lost_pilgrim"): (30, 1, 3), ("monster", "remnants:memory_wraith"): (12, 1, 2),
                  ("monster", "remnants:soul_collector"): (2, 1, 1), ("creature", "minecraft:rabbit"): (4, None, None)},
     rd.SEA: {("water_creature", "minecraft:squid"): (2, None, None), ("water_ambient", "minecraft:cod"): (10, None, None)},
     rd.OSSUARY: {("monster", "remnants:crypt_lurker"): (25, 1, 2), ("monster", "remnants:catacomb_rat"): (25, 3, 5),
-                 ("monster", "remnants:gravebound_soldier"): (10, 1, 2), ("ambient", "minecraft:bat"): (10, None, None)},
+                 ("monster", "remnants:gravebound_soldier"): (10, 1, 2), ("monster", "remnants:ashbound_crawler"): (10, 1, 3),
+                 ("monster", "remnants:relic_stalker"): (6, 1, 1), ("monster", "remnants:ancient_vessel"): (6, 1, 1),
+                 ("ambient", "minecraft:bat"): (10, None, None)},
 }
 COLOR_KEYS = {"fog_color", "water_color", "water_fog_color", "sky_color", "grass_color", "foliage_color"}
 EFFECT_KEYS = COLOR_KEYS | {"mood_sound", "music", "particle", "ambient_sound", "additions_sound", "grass_color_modifier"}
@@ -476,7 +484,7 @@ def check_biomes(c: Ctx):
             if set(cost) != {"energy_budget", "charge"}:
                 R.err(f"{w}: spawn cost {t} {cost}")
         for t in spawned:
-            if t in rd.LEGION + rd.CRYPTBORN + rd.SOULS and t not in j["spawn_costs"]:
+            if t in rd.LEGION + rd.CRYPTBORN + rd.SOULS + rd.ASHBOUND + rd.RELICS and t not in j["spawn_costs"]:
                 R.err(f"{w}: {t} has no spawn cost (patrols must stay sparse)")
         feats = j["features"]
         if len(feats) != 11:

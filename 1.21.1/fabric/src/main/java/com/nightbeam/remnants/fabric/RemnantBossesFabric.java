@@ -5,8 +5,6 @@ import com.nightbeam.remnants.RemnantBosses;
 import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.config.JaumlConfigBootstrap;
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
-import com.nightbeam.remnants.entity.SickleghastEntity;
-import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.FallenStandardBearerEntity;
 import com.nightbeam.remnants.entity.HollowArbalistEntity;
@@ -26,6 +24,12 @@ import com.nightbeam.remnants.entity.MemoryWraithEntity;
 import com.nightbeam.remnants.entity.SoulCollectorEntity;
 import com.nightbeam.remnants.entity.SoulWispEntity;
 import com.nightbeam.remnants.entity.WatcherIllusionEntity;
+import com.nightbeam.remnants.entity.AncientVesselEntity;
+import com.nightbeam.remnants.entity.AshboundCrawlerEntity;
+import com.nightbeam.remnants.entity.EmberServitorEntity;
+import com.nightbeam.remnants.entity.RelicStalkerEntity;
+import com.nightbeam.remnants.entity.RustedGuardianEntity;
+import com.nightbeam.remnants.entity.ShardlingEntity;
 import com.nightbeam.remnants.event.WatcherRelics;
 import com.nightbeam.remnants.event.BlockInteractionEvents;
 import com.nightbeam.remnants.event.EntityDeathEvents;
@@ -78,9 +82,7 @@ public class RemnantBossesFabric implements ModInitializer {
 
 	private static void registerAttributes() {
 		FabricDefaultAttributeRegistry.register(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageEntity.createAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.HOLLOW_SOVEREIGN.get(), HollowSovereignEntity.createAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.SICKLEGHAST.get(), SickleghastEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SOVEREIGN_PAULDRON.get(), SovereignPauldronEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.HOLLOW_SENTINEL.get(), HollowSentinelEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SPECTRAL_ROYAL_GUARD.get(), SpectralRoyalGuardEntity.createAttributes());
@@ -99,6 +101,12 @@ public class RemnantBossesFabric implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.MEMORY_WRAITH.get(), MemoryWraithEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SOUL_COLLECTOR.get(), SoulCollectorEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SOUL_WISP.get(), SoulWispEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ASHBOUND_CRAWLER.get(), AshboundCrawlerEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.EMBER_SERVITOR.get(), EmberServitorEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.RUSTED_GUARDIAN.get(), RustedGuardianEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SHARDLING.get(), ShardlingEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ANCIENT_VESSEL.get(), AncientVesselEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.RELIC_STALKER.get(), RelicStalkerEntity.createAttributes());
 	}
 
 	private static void registerSpawnPlacements() {
@@ -127,6 +135,19 @@ public class RemnantBossesFabric implements ModInitializer {
 		SpawnPlacements.register(ModEntities.MEMORY_WRAITH.get(), SpawnPlacementTypes.ON_GROUND,
 				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
 		SpawnPlacements.register(ModEntities.SOUL_COLLECTOR.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		// The Ashbound Constructs and the Corrupted Relics: the Eclipsed Realm's biome spawners only.
+		SpawnPlacements.register(ModEntities.ASHBOUND_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.EMBER_SERVITOR.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.RUSTED_GUARDIAN.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.SHARDLING.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.ANCIENT_VESSEL.get(), SpawnPlacementTypes.ON_GROUND,
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
+		SpawnPlacements.register(ModEntities.RELIC_STALKER.get(), SpawnPlacementTypes.ON_GROUND,
 				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEntities::canMonsterSpawn);
 	}
 

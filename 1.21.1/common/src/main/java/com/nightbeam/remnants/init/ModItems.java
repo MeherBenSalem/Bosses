@@ -88,6 +88,12 @@ public final class ModItems {
 	public static final RegistryHolder<Item> ARCHIVIST_BOOTS = new RegistryHolder<>("archivist_boots",
 			() -> new ArchivistArmorItem(ArmorItem.Type.BOOTS, Rarity.RARE));
 
+	// Family materials of the Ashbound Constructs and the Corrupted Relics (their bosses arrive in later slices).
+	public static final RegistryHolder<Item> ASHEN_COG = new RegistryHolder<>("ashen_cog",
+			() -> new LoreItem(new Item.Properties(), 1));
+	public static final RegistryHolder<Item> RELIC_SHARD = new RegistryHolder<>("relic_shard",
+			() -> new LoreItem(new Item.Properties(), 1));
+
 	/** Every plain item above, in registration (and creative tab) order; spawn eggs live in ModEntities. */
 	public static final List<RegistryHolder<Item>> ALL = List.of(BOSS_JOURNAL, OSSUKAGE_SWORD, ANCIENT_ALTAR, ANCIENT_PEDESTAL,
 			TARNISHED_REGALIA, ROYAL_SOUL_FRAGMENT, SOVEREIGNS_SEAL, SOVEREIGNS_RUIN, SOVEREIGNS_SIGIL,
@@ -95,7 +101,8 @@ public final class ModItems {
 			GRAVE_IRON, CRYPT_KEY, WARDENS_GRASP, GRAVEBOUND_EXECUTIONER, CRYPT_SIGIL,
 			WARDEN_HELM, WARDEN_HAUBERK, WARDEN_TASSETS, WARDEN_BOOTS,
 			MEMORY_SHARD, KNOWLEDGE_FRAGMENT, MEMORY_LENS, MEMORY_STAFF, WATCHERS_EYE,
-			ARCHIVIST_HOOD, ARCHIVIST_ROBE, ARCHIVIST_LEGGINGS, ARCHIVIST_BOOTS);
+			ARCHIVIST_HOOD, ARCHIVIST_ROBE, ARCHIVIST_LEGGINGS, ARCHIVIST_BOOTS,
+			ASHEN_COG, RELIC_SHARD);
 
 	// The Eclipsed Realm: the shard that kindles a Waygate, and the Realm's block items.
 	public static final RegistryHolder<Item> ECLIPSE_SHARD = new RegistryHolder<>("eclipse_shard",

@@ -421,85 +421,6 @@ def weathered_gravestone():
     return c.image()
 
 
-def grace_ember_stone():
-    """Broken ring stones (rows 0-7, lit top row) and the ash mound (rows 8-16)."""
-    c = Canvas(S, S)
-    for y in range(8):
-        for x in range(S):
-            tone = 3
-            if y == 0:
-                tone = 4
-            elif y >= 5:
-                tone = 2
-            if x % 4 == 0 and y > 0:
-                tone -= 1            # edges between faces read as worn arrises
-            c.put(x, y, STONE_LIGHT[max(0, tone)])
-    for x, y in ((2, 3), (6, 5), (10, 2), (13, 6), (5, 2), (9, 6)):
-        c.put(x, y, STONE_LIGHT[1])
-        c.put(x + 1, y - 1, STONE_LIGHT[4])
-    for x, y in ((1, 1), (7, 1), (12, 3), (14, 1)):    # gold dust settled in the carving
-        c.put(x, y, GOLD[3])
-    for x, y in ((3, 6), (11, 7)):
-        c.put(x, y, LICHEN[1])
-    for y in range(8, 16):
-        for x in range(S):
-            tone = 2 if (x * 2 + y * 3) % 5 else 1
-            if y == 8:
-                tone = 3
-            c.put(x, y, ASH[tone])
-    for x, y in ((3, 10), (9, 12), (13, 9), (6, 14), (11, 15)):
-        c.put(x, y, GRACE[1])                          # cooled embers in the ash
-    for x, y in ((7, 11), (8, 10)):
-        c.put(x, y, GRACE[2])
-    return c.image()
-
-
-def grace_ember_sword():
-    """u0-2 blade faces (2 wide), u2-3 blade edge, u4-9 guard, u10-11 grip, u12-14 pommel."""
-    c = Canvas(S, S)
-    for y in range(S):
-        c.put(0, y, STEEL[4] if y % 5 else STEEL[5])
-        c.put(1, y, STEEL[2] if y % 6 else STEEL[3])
-        c.put(2, y, STEEL[3])
-        c.put(3, y, STEEL[1])
-    for y in (3, 9, 12):                               # nicks and rust
-        c.put(0, y, STEEL[2])
-        c.put(1, y + 1, hexc('#5A3420'))
-    for x in range(4, 10):
-        for y in range(0, 3):
-            c.put(x, y, GOLD[4] if y == 0 else (GOLD[3] if y == 1 else GOLD[2]))
-    c.put(4, 1, GOLD[5])
-    c.put(9, 2, GOLD[1])
-    for y in range(0, 6):
-        c.put(10, y, hexc('#3A2A1E') if y % 2 else hexc('#5A4430'))
-        c.put(11, y, hexc('#2A1E16'))
-    for x in range(12, 15):
-        for y in range(0, 3):
-            c.put(x, y, GOLD[3 if y else 4])
-    c.put(13, 1, GRACE[4])
-    return c.image()
-
-
-def grace_ember_glow():
-    """Ember flame sprites (cutout): two 8x8 flames (u0-8, u8-16) with the bright core at the bottom
-    where the hilt burns, and a burning collar strip (rows 10-12) for the cube around the guard."""
-    G = GRACE
-    flames = [
-        ['..2...', '..3.2.', '.232..', '.2432.', '.3453.', '23553.', '.3443.'],
-        ['...2..', '.2.3..', '..232.', '.2342.', '.3543.', '.35532', '.3443.'],
-    ]
-    c = Canvas(S, S)
-    for k, rows in enumerate(flames):
-        for y, row in enumerate(rows):
-            for x, ch in enumerate(row):
-                if ch.isdigit():
-                    c.put(k * 8 + x, y, G[int(ch)])
-    for x in range(S):
-        c.put(x, 10, G[4] if x % 3 else G[5])
-        c.put(x, 11, G[3] if x % 2 else G[4])
-    return c.image()
-
-
 def fog_gate_frames(frames=32):
     """Slowly swirling gold-white fog, alpha 35-60 %. Periodic in x, y and time; 4 tone bands."""
     ys, xs = np.mgrid[0:S, 0:S] / S
@@ -563,9 +484,6 @@ def build():
     save_png(graceroot_planks(), 'textures/block/graceroot_planks.png')
     save_png(gilded_leaves(), 'textures/block/gilded_leaves.png')
     save_png(weathered_gravestone(), 'textures/block/weathered_gravestone.png')
-    save_png(grace_ember_stone(), 'textures/block/grace_ember_stone.png')
-    save_png(grace_ember_sword(), 'textures/block/grace_ember_sword.png')
-    save_png(grace_ember_glow(), 'textures/block/grace_ember_glow.png')
     strip, frames = fog_gate_frames()
     save_png(strip, 'textures/block/fog_gate.png')
     save_json({'animation': {'interpolate': True, 'frametime': 3}}, 'textures/block/fog_gate.png.mcmeta')

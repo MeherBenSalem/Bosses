@@ -16,7 +16,8 @@ public final class RealmConfig {
 			Map.entry("spawn_block_light_max", 7.0),
 			Map.entry("rituals_realm_only", 1.0),
 			Map.entry("guidance_radius_chunks", 48.0),
-			Map.entry("felled_banner_radius", 64.0));
+			Map.entry("felled_banner_radius", 64.0),
+			Map.entry("build_protection", 1.0));
 	public static final String[] CLIENT_SWITCHES = {"realm_titles", "camera_shake"};
 
 	private RealmConfig() {
@@ -38,6 +39,11 @@ public final class RealmConfig {
 
 	public static int crossingCooldown() {
 		return (int) value("crossing_cooldown_ticks", 20, 1200);
+	}
+
+	/** Whether survival players are kept from building, breaking and terraforming in the Realm. */
+	public static boolean buildProtection() {
+		return value("build_protection", 0, 1) > 0;
 	}
 
 	public static boolean ritualsRealmOnly() {

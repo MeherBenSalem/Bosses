@@ -57,6 +57,12 @@
         "weight": 10,
         "minCount": 1,
         "maxCount": 2
+      },
+      {
+        "type": "remnants:shardling",
+        "weight": 12,
+        "minCount": 3,
+        "maxCount": 4
       }
     ],
     "creature": [
@@ -109,6 +115,10 @@
     "remnants:lost_pilgrim": {
       "energy_budget": 0.15,
       "charge": 0.7
+    },
+    "remnants:shardling": {
+      "energy_budget": 0.2,
+      "charge": 0.5
     }
   },
   "carvers": {

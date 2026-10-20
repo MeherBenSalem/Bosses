@@ -63,28 +63,6 @@ def eclipse_waygate():
     return grid_image(rows, INK, OUT)
 
 
-def grace_ember():
-    rows = [
-        '.......2........',
-        '......3K3.......',
-        '.....2KJK2......',
-        '....2.3y3.2.....',
-        '...GHIIJIIHG....',
-        '....2.oq3.2.....',
-        '......oq........',
-        '......oq........',
-        '......oq........',
-        '......or........',
-        '..NM..oq...MN...',
-        '..ND..oq...ND...',
-        '.MND.1xxx1.NDM..',
-        'MNDE.xyyyx.EDNM.',
-        '.DE.xxxxxxx.ED..',
-        '................',
-    ]
-    return grid_image(rows, INK, OUT)
-
-
 def fog_gate():
     """A curl of gold-white fog: a spiral of soft translucent bands with a few bright motes."""
     c = Canvas(16, 16)
@@ -118,5 +96,4 @@ def fog_gate():
 def build():
     save_png(eclipse_shard(), 'textures/item/eclipse_shard.png')
     save_png(eclipse_waygate(), 'textures/item/eclipse_waygate.png')
-    save_png(grace_ember(), 'textures/item/grace_ember.png')
     save_png(fog_gate(), 'textures/item/fog_gate.png')

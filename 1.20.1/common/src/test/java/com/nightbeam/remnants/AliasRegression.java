@@ -39,13 +39,15 @@ public final class AliasRegression {
      * Registered entities that intentionally drop nothing. Remove an entry when the entity gains a
      * loot table or is unregistered: both directions fail this check so the list cannot go stale.
      */
-    private static final Set<String> NO_LOOT = Set.of("ossukage", "armored_grub",
+    private static final Set<String> NO_LOOT = Set.of("ossukage",
             // Hollow Sovereign helpers and summons.
             "sovereign_pauldron", "spectral_crescent", "royal_blade_mark", "spectral_royal_guard",
             // Gravebound Warden helpers: the thrown chain and the Chain Wall anchors.
             "warden_chain", "chain_anchor",
             // Forgotten Watcher helpers and summons: illusion decoys, bolts and wisps.
-            "watcher_illusion", "memory_bolt", "soul_wisp");
+            "watcher_illusion", "memory_bolt", "soul_wisp",
+            // The Ember Servitor's and the Shardling's bolts.
+            "ember_bolt", "crystal_bolt");
     private static final Predicate<ResourceLocation> NONE = id -> false, ALL = id -> true;
 
     public static void main(String[] args) throws Exception {
@@ -60,6 +62,7 @@ public final class AliasRegression {
         vanillaSuccessors();
         sliceThree();
         sliceFour();
+        constructsAndRelics();
         int tables = lootCoverage(resources);
         System.out.println("Alias regressions passed: " + RegistryAliases.ENTITIES.size() + " entity and "
                 + RegistryAliases.ITEMS.size() + " item aliases, " + tables + " entity loot tables in " + LOOT);
@@ -270,6 +273,37 @@ public final class AliasRegression {
         for (String kept : List.of("memory_shard", "knowledge_fragment", "memory_lens", "memory_staff", "watchers_eye", "archivist_hood",
                 "archivist_robe", "archivist_leggings", "archivist_boots", "lost_pilgrim_spawn_egg")) {
             check(items.contains(rl("remnant_bosses:" + kept)), "slice 4 item is not registered: " + kept);
+        }
+    }
+
+    /**
+     * The Ashbound Constructs and the Corrupted Relics roam the Realm ahead of their boss slices: the armored grub
+     * and the sickleghast are retired, each old ID (and the pre-2.4.1 grub) resolves to its successor, the eggs
+     * follow, and both family materials are registered.
+     */
+    private static void constructsAndRelics() {
+        Set<ResourceLocation> entities = registeredEntities();
+        Map.of("armored_grub", "ashbound_crawler", "sickleghast", "relic_stalker").forEach((old, successor) -> {
+            ResourceLocation from = rl("remnants:" + old), to = rl("remnants:" + successor);
+            check(!entities.contains(from), "retired family predecessor is still registered: " + from);
+            check(entities.contains(to), "family successor is not registered: " + to);
+            check(RegistryAliases.resolveEntity(from, entities::contains).equals(Optional.of(to)), "predecessor does not resolve: " + from);
+        });
+        check(RegistryAliases.resolveEntity(rl("remnant_bosses:armored_grub"), entities::contains).equals(Optional.of(rl("remnants:ashbound_crawler"))),
+                "pre-2.4.1 armored grub chains to the Ashbound Crawler");
+        check(entities.containsAll(Set.of(rl("remnants:ember_servitor"), rl("remnants:rusted_guardian"), rl("remnants:shardling"),
+                rl("remnants:ancient_vessel"), rl("remnants:ember_bolt"), rl("remnants:crystal_bolt"))), "new family members are registered");
+
+        Set<ResourceLocation> items = registeredItems();
+        Map.of("armored_grub_spawn_egg", "ashbound_crawler_spawn_egg", "sickleghast_spawn_egg", "relic_stalker_spawn_egg").forEach((old, successor) -> {
+            ResourceLocation from = rl("remnant_bosses:" + old), to = rl("remnant_bosses:" + successor);
+            check(!items.contains(from), "retired family egg is still registered: " + from);
+            check(items.contains(to), "family successor egg is not registered: " + to);
+            check(RegistryAliases.resolveItem(from, items::contains).equals(Optional.of(to)), "predecessor egg does not resolve: " + from);
+        });
+        for (String kept : List.of("ashen_cog", "relic_shard", "ember_servitor_spawn_egg", "rusted_guardian_spawn_egg",
+                "shardling_spawn_egg", "ancient_vessel_spawn_egg")) {
+            check(items.contains(rl("remnant_bosses:" + kept)), "family item is not registered: " + kept);
         }
     }
 

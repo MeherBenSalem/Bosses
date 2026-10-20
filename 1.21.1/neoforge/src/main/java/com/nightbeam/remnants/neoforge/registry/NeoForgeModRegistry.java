@@ -2,8 +2,6 @@ package com.nightbeam.remnants.neoforge.registry;
 
 import com.nightbeam.remnants.Constants;
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
-import com.nightbeam.remnants.entity.SickleghastEntity;
-import com.nightbeam.remnants.entity.ArmoredGrubEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
 import com.nightbeam.remnants.entity.FallenStandardBearerEntity;
 import com.nightbeam.remnants.entity.HollowArbalistEntity;
@@ -24,7 +22,14 @@ import com.nightbeam.remnants.entity.MemoryWraithEntity;
 import com.nightbeam.remnants.entity.SoulCollectorEntity;
 import com.nightbeam.remnants.entity.SoulWispEntity;
 import com.nightbeam.remnants.entity.WatcherIllusionEntity;
+import com.nightbeam.remnants.entity.AncientVesselEntity;
+import com.nightbeam.remnants.entity.AshboundCrawlerEntity;
+import com.nightbeam.remnants.entity.EmberServitorEntity;
+import com.nightbeam.remnants.entity.RelicStalkerEntity;
+import com.nightbeam.remnants.entity.RustedGuardianEntity;
+import com.nightbeam.remnants.entity.ShardlingEntity;
 import com.nightbeam.remnants.block.realm.EclipseWaygateBlockEntity;
+import com.nightbeam.remnants.block.realm.GraceEmberBlockEntity;
 import com.nightbeam.remnants.init.ModBlockEntities;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModParticles;
@@ -85,6 +90,12 @@ public final class NeoForgeModRegistry {
 			ModBlockEntities.ECLIPSE_WAYGATE.bind(type);
 			return type;
 		});
+		BLOCK_ENTITIES.register(ModBlockEntities.GRACE_EMBER.path(), () -> {
+			BlockEntityType<GraceEmberBlockEntity> type = BlockEntityType.Builder.of(GraceEmberBlockEntity::new,
+					ModBlocks.GRACE_EMBER.get()).build(null);
+			ModBlockEntities.GRACE_EMBER.bind(type);
+			return type;
+		});
 		for (RegistryHolder<SimpleParticleType> particle : ModParticles.ALL) {
 			PARTICLES.register(particle.path(), () -> {
 				SimpleParticleType type = ModParticles.create();
@@ -107,9 +118,7 @@ public final class NeoForgeModRegistry {
 		bindEntity(ModEntities.KUNAI);
 		bindEntity(ModEntities.REMNANT_OSSUKAGE);
 		bindEntity(ModEntities.OSSUKAGE_RUNE_EFFECT);
-		bindEntity(ModEntities.ARMORED_GRUB);
 		bindEntity(ModEntities.HOLLOW_SOVEREIGN);
-		bindEntity(ModEntities.SICKLEGHAST);
 		bindEntity(ModEntities.SOVEREIGN_PAULDRON);
 		bindEntity(ModEntities.SPECTRAL_CRESCENT);
 		bindEntity(ModEntities.ROYAL_BLADE_MARK);
@@ -132,11 +141,17 @@ public final class NeoForgeModRegistry {
 		bindEntity(ModEntities.MEMORY_WRAITH);
 		bindEntity(ModEntities.SOUL_COLLECTOR);
 		bindEntity(ModEntities.SOUL_WISP);
+		bindEntity(ModEntities.ASHBOUND_CRAWLER);
+		bindEntity(ModEntities.EMBER_SERVITOR);
+		bindEntity(ModEntities.RUSTED_GUARDIAN);
+		bindEntity(ModEntities.EMBER_BOLT);
+		bindEntity(ModEntities.SHARDLING);
+		bindEntity(ModEntities.ANCIENT_VESSEL);
+		bindEntity(ModEntities.RELIC_STALKER);
+		bindEntity(ModEntities.CRYSTAL_BOLT);
 
 		bindSpawnEgg(ModEntities.REMNANT_OSSUKAGE_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.REMNANT_OSSUKAGE::get, 0xCC0000, 0xFF0000, new Item.Properties()));
-		bindSpawnEgg(ModEntities.ARMORED_GRUB_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.ARMORED_GRUB::get, 0x4A7C00, 0x8B5E00, new Item.Properties()));
 		bindSpawnEgg(ModEntities.HOLLOW_SOVEREIGN_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.HOLLOW_SOVEREIGN::get, ModEntities.SOVEREIGN_EGG_BASE, ModEntities.SOVEREIGN_EGG_SPOTS, new Item.Properties()));
-		bindSpawnEgg(ModEntities.SICKLEGHAST_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SICKLEGHAST::get, 0x947360, 0x64CE8A, new Item.Properties()));
 		bindSpawnEgg(ModEntities.HOLLOW_SENTINEL_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.HOLLOW_SENTINEL::get, ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS, new Item.Properties()));
 		bindSpawnEgg(ModEntities.HOLLOW_ARBALIST_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.HOLLOW_ARBALIST::get, ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS, new Item.Properties()));
 		bindSpawnEgg(ModEntities.FALLEN_STANDARD_BEARER_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.FALLEN_STANDARD_BEARER::get, ModEntities.LEGION_EGG_BASE, ModEntities.LEGION_EGG_SPOTS, new Item.Properties()));
@@ -150,6 +165,12 @@ public final class NeoForgeModRegistry {
 		bindSpawnEgg(ModEntities.LOST_PILGRIM_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.LOST_PILGRIM::get, ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS, new Item.Properties()));
 		bindSpawnEgg(ModEntities.MEMORY_WRAITH_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.MEMORY_WRAITH::get, ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS, new Item.Properties()));
 		bindSpawnEgg(ModEntities.SOUL_COLLECTOR_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SOUL_COLLECTOR::get, ModEntities.SOULS_EGG_BASE, ModEntities.SOULS_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.ASHBOUND_CRAWLER_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.ASHBOUND_CRAWLER::get, ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.EMBER_SERVITOR_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.EMBER_SERVITOR::get, ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.RUSTED_GUARDIAN_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.RUSTED_GUARDIAN::get, ModEntities.ASHBOUND_EGG_BASE, ModEntities.ASHBOUND_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.SHARDLING_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.SHARDLING::get, ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.ANCIENT_VESSEL_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.ANCIENT_VESSEL::get, ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS, new Item.Properties()));
+		bindSpawnEgg(ModEntities.RELIC_STALKER_SPAWN_EGG, () -> new DeferredSpawnEggItem(ModEntities.RELIC_STALKER::get, ModEntities.RELICS_EGG_BASE, ModEntities.RELICS_EGG_SPOTS, new Item.Properties()));
 
 		for (RegistryHolder<SoundEvent> sound : ModSounds.ALL) bindSound(sound);
 
@@ -162,9 +183,7 @@ public final class NeoForgeModRegistry {
 
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(ModEntities.REMNANT_OSSUKAGE.get(), RemnantOssukageEntity.createAttributes().build());
-		event.put(ModEntities.ARMORED_GRUB.get(), ArmoredGrubEntity.createAttributes().build());
 		event.put(ModEntities.HOLLOW_SOVEREIGN.get(), HollowSovereignEntity.createAttributes().build());
-		event.put(ModEntities.SICKLEGHAST.get(), SickleghastEntity.createAttributes().build());
 		event.put(ModEntities.SOVEREIGN_PAULDRON.get(), SovereignPauldronEntity.createAttributes().build());
 		event.put(ModEntities.HOLLOW_SENTINEL.get(), HollowSentinelEntity.createAttributes().build());
 		event.put(ModEntities.SPECTRAL_ROYAL_GUARD.get(), SpectralRoyalGuardEntity.createAttributes().build());
@@ -183,6 +202,12 @@ public final class NeoForgeModRegistry {
 		event.put(ModEntities.MEMORY_WRAITH.get(), MemoryWraithEntity.createAttributes().build());
 		event.put(ModEntities.SOUL_COLLECTOR.get(), SoulCollectorEntity.createAttributes().build());
 		event.put(ModEntities.SOUL_WISP.get(), SoulWispEntity.createAttributes().build());
+		event.put(ModEntities.ASHBOUND_CRAWLER.get(), AshboundCrawlerEntity.createAttributes().build());
+		event.put(ModEntities.EMBER_SERVITOR.get(), EmberServitorEntity.createAttributes().build());
+		event.put(ModEntities.RUSTED_GUARDIAN.get(), RustedGuardianEntity.createAttributes().build());
+		event.put(ModEntities.SHARDLING.get(), ShardlingEntity.createAttributes().build());
+		event.put(ModEntities.ANCIENT_VESSEL.get(), AncientVesselEntity.createAttributes().build());
+		event.put(ModEntities.RELIC_STALKER.get(), RelicStalkerEntity.createAttributes().build());
 	}
 
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
@@ -211,6 +236,19 @@ public final class NeoForgeModRegistry {
 		event.register(ModEntities.MEMORY_WRAITH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
 		event.register(ModEntities.SOUL_COLLECTOR.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		// The Ashbound Constructs and the Corrupted Relics: the Eclipsed Realm's biome spawners only.
+		event.register(ModEntities.ASHBOUND_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.EMBER_SERVITOR.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.RUSTED_GUARDIAN.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.SHARDLING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.ANCIENT_VESSEL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(ModEntities.RELIC_STALKER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				ModEntities::canMonsterSpawn, RegisterSpawnPlacementsEvent.Operation.AND);
 	}
 

@@ -1,0 +1,26 @@
+{
+  "idle": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "fly": {
+    "length": 1.0,
+    "loop": "loop"
+  },
+  "shoot": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "repair": {
+    "length": 1.6,
+    "loop": "loop"
+  },
+  "hurt": {
+    "length": 0.3,
+    "loop": "once"
+  },
+  "death": {
+    "length": 1.4,
+    "loop": "hold"
+  }
+}
