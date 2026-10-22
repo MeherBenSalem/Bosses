@@ -1,0 +1,22 @@
+{
+  "idle": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 0.4,
+    "loop": "loop"
+  },
+  "scorch": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.3,
+    "loop": "once"
+  },
+  "death": {
+    "length": 1.0,
+    "loop": "hold"
+  }
+}

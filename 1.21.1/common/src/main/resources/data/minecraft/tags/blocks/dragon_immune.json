@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "remnant_bosses:grace_ember",
+    "remnant_bosses:fog_gate",
+    "remnant_bosses:eclipse_waygate",
+    "remnant_bosses:waygate_frame",
+    "remnant_bosses:waygate_veil"
+  ]
+}

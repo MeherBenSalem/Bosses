@@ -1,0 +1,36 @@
+# Ashbound Constructs and Corrupted Relics in a production boot: summon each new creature in the Realm, count the
+# family tags, roll each loot table, then kill them so their death clips, bursts and loot run.
+execute in remnant_bosses:eclipsed_realm run forceload add -16 -16 31 31
+execute in remnant_bosses:eclipsed_realm run fill -14 119 -4 14 119 10 minecraft:stone
+execute in remnant_bosses:eclipsed_realm run summon remnants:ashbound_crawler 0 120 0
+execute in remnant_bosses:eclipsed_realm run summon remnants:ember_servitor 6 120 0
+execute in remnant_bosses:eclipsed_realm run summon remnants:rusted_guardian 12 120 0
+execute in remnant_bosses:eclipsed_realm run summon remnants:shardling -6 120 0
+execute in remnant_bosses:eclipsed_realm run summon remnants:ancient_vessel -12 120 0
+execute in remnant_bosses:eclipsed_realm run summon remnants:relic_stalker 0 120 6
+scoreboard objectives add rb dummy
+execute store result score #ashbound rb if entity @e[type=#remnants:ashbound]
+execute store result score #relics rb if entity @e[type=#remnants:corrupted_relics]
+scoreboard players get #ashbound rb
+scoreboard players get #relics rb
+execute if entity @e[type=remnants:ashbound_crawler] run say FAMILY_CHECK ashbound_crawler alive
+execute if entity @e[type=remnants:ember_servitor] run say FAMILY_CHECK ember_servitor alive
+execute if entity @e[type=remnants:rusted_guardian] run say FAMILY_CHECK rusted_guardian alive
+execute if entity @e[type=remnants:shardling] run say FAMILY_CHECK shardling alive
+execute if entity @e[type=remnants:ancient_vessel] run say FAMILY_CHECK ancient_vessel alive
+execute if entity @e[type=remnants:relic_stalker] run say FAMILY_CHECK relic_stalker alive
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/ashbound_crawler
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/ember_servitor
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/rusted_guardian
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/shardling
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/ancient_vessel
+execute in remnant_bosses:eclipsed_realm run loot spawn 0 121 3 loot remnants:entities/relic_stalker
+kill @e[type=item]
+kill @e[type=#remnants:ashbound]
+kill @e[type=#remnants:corrupted_relics]
+execute if entity @e[type=item,nbt={Item:{id:"remnant_bosses:ashen_cog"}}] run say FAMILY_CHECK ashen_cog dropped
+execute if entity @e[type=item,nbt={Item:{id:"remnant_bosses:relic_shard"}}] run say FAMILY_CHECK relic_shard dropped
+execute store result score #left rb if entity @e[type=#remnants:ashbound]
+execute store result score #leftRelics rb if entity @e[type=#remnants:corrupted_relics]
+scoreboard players get #left rb
+scoreboard players get #leftRelics rb

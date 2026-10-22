@@ -2,6 +2,8 @@ package com.nightbeam.remnants.journal;
 
 import com.nightbeam.remnants.config.JaumlConfigLib;
 import com.nightbeam.remnants.config.SovereignConfig;
+import com.nightbeam.remnants.config.WardenConfig;
+import com.nightbeam.remnants.config.WatcherConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +32,12 @@ public record RitualInfo(String activationItem, List<String> offerings, boolean 
                         JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_three_activation_block"),
                         JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "pedestal_four_activation_block")));
         if (summonFile.equals("hollow_sovereign_summon") && SovereignConfig.value("summoning_enabled", 0, 1) == 0) {
+            return new RitualInfo(info.activationItem, info.offerings, false);
+        }
+        if (summonFile.equals(WardenConfig.SUMMON) && WardenConfig.value("summoning_enabled", 0, 1) == 0) {
+            return new RitualInfo(info.activationItem, info.offerings, false);
+        }
+        if (summonFile.equals(WatcherConfig.SUMMON) && WatcherConfig.value("summoning_enabled", 0, 1) == 0) {
             return new RitualInfo(info.activationItem, info.offerings, false);
         }
         return info;

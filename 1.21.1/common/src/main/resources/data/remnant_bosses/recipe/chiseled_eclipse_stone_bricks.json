@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "remnant_bosses:eclipse_stone_brick_slab"
+    }
+  },
+  "result": {
+    "id": "remnant_bosses:chiseled_eclipse_stone_bricks",
+    "count": 1
+  }
+}

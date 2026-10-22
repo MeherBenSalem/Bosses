@@ -26,17 +26,52 @@ public final class JaumlConfigBootstrap {
             });
         });
         api.createConfigFile("remnant/bosses", "hollow_sovereign");
+        api.createConfigFile("remnant/bosses", "hollow_sovereign_summon");
+        api.createConfigFile("remnant/bosses", WardenConfig.FILE);
+        api.createConfigFile("remnant/bosses", WardenConfig.SUMMON);
+        api.createConfigFile("remnant/bosses", WatcherConfig.FILE);
+        api.createConfigFile("remnant/bosses", WatcherConfig.SUMMON);
+        // Rewrite values still at their 2.x default once per file, then add new keys.
+        ConfigMigration.Store store = api.store();
+        if (store == null) {
+            LOGGER.warn("JaumlConfigLib cannot read values; 2.x defaults were not updated or carried over.");
+        } else {
+            java.util.List<String> migrated = ConfigMigration.migrate(store);
+            if (!migrated.isEmpty()) LOGGER.info("Updated untouched 2.x config defaults to 3.0: {}", String.join(", ", migrated));
+        }
         SovereignConfig.DEFAULTS.forEach((key, value) -> {
             if (!api.arrayKeyExists("remnant/bosses", "hollow_sovereign", key)) api.setNumberValue("remnant/bosses", "hollow_sovereign", key, value);
         });
-        api.createConfigFile("remnant/bosses", "hollow_sovereign_summon");
         SovereignConfig.RITUAL.forEach((key, value) -> {
             if (!api.arrayKeyExists("remnant/bosses", "hollow_sovereign_summon", key)) api.setStringValue("remnant/bosses", "hollow_sovereign_summon", key, value);
+        });
+        // The 2.x kotsukage, kotsukage_summon, rat_spawns, rat_stats and skeleton_minion_stats files are no
+        // longer written; existing copies stay on disk.
+        WardenConfig.DEFAULTS.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", WardenConfig.FILE, key)) api.setNumberValue("remnant/bosses", WardenConfig.FILE, key, value);
+        });
+        WardenConfig.RITUAL.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", WardenConfig.SUMMON, key)) api.setStringValue("remnant/bosses", WardenConfig.SUMMON, key, value);
+        });
+        // The 2.x umbrakar, umbrakar_summon, wraith_spawns and wraith_stats files are no longer written;
+        // existing copies stay on disk.
+        WatcherConfig.DEFAULTS.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", WatcherConfig.FILE, key)) api.setNumberValue("remnant/bosses", WatcherConfig.FILE, key, value);
+        });
+        WatcherConfig.RITUAL.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/bosses", WatcherConfig.SUMMON, key)) api.setStringValue("remnant/bosses", WatcherConfig.SUMMON, key, value);
         });
         api.createConfigFile("remnant/client", "presentation");
         for (String key : new String[]{"custom_boss_bars", "vfx_density"}) {
             if (!api.arrayKeyExists("remnant/client", "presentation", key)) api.setNumberValue("remnant/client", "presentation", key, 1);
         }
+        for (String key : RealmConfig.CLIENT_SWITCHES) {
+            if (!api.arrayKeyExists("remnant/client", "presentation", key)) api.setNumberValue("remnant/client", "presentation", key, 1);
+        }
+        api.createConfigFile("remnant/realm", "realm");
+        RealmConfig.DEFAULTS.forEach((key, value) -> {
+            if (!api.arrayKeyExists("remnant/realm", "realm", key)) api.setNumberValue("remnant/realm", "realm", key, value);
+        });
         if (api.createConfigFile("remnant/bosses", "ossukage_summon")) {
 			if (api.createConfigFile("remnant", "main")) {
 				// Populate a couple of safe defaults so main.json is not empty and is
@@ -154,309 +189,6 @@ public final class JaumlConfigBootstrap {
 			api.setNumberValue("remnant/bosses", "ossukage", "knockback_resistance", 0.6);
 		}
 
-		// Spawning Settings
-		if (api.createConfigFile("remnant/spawning", "rat_spawns")) {
-			api.createConfigFile("remnant/spawning", "rat_spawns");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "enable_natural_spawning")) {
-			api.setStringValue("remnant/spawning", "rat_spawns", "enable_natural_spawning", "true");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "spawn_weight")) {
-			api.setNumberValue("remnant/spawning", "rat_spawns", "spawn_weight", 10);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "min_group_size")) {
-			api.setNumberValue("remnant/spawning", "rat_spawns", "min_group_size", 1);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "max_group_size")) {
-			api.setNumberValue("remnant/spawning", "rat_spawns", "max_group_size", 3);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "dimension_whitelist")) {
-			api.setStringValue("remnant/spawning", "rat_spawns", "dimension_whitelist", "minecraft:overworld");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "dimension_blacklist")) {
-			api.setStringValue("remnant/spawning", "rat_spawns", "dimension_blacklist",
-					"minecraft:the_nether,minecraft:the_end");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "rat_spawns", "biome_blacklist")) {
-			api.setStringValue("remnant/spawning", "rat_spawns", "biome_blacklist", "");
-		}
-
-		// Balance Settings
-		if (api.createConfigFile("remnant/balance", "rat_stats")) {
-			api.createConfigFile("remnant/balance", "rat_stats");
-		}
-		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_health")) {
-			api.setNumberValue("remnant/balance", "rat_stats", "rat_health", 30.0);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_attack_damage")) {
-			api.setNumberValue("remnant/balance", "rat_stats", "rat_attack_damage", 4.0);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "rat_stats", "rat_armor")) {
-			api.setNumberValue("remnant/balance", "rat_stats", "rat_armor", 2.0);
-		}
-
-		// Wraith Spawning Settings
-		if (api.createConfigFile("remnant/spawning", "wraith_spawns")) {
-			api.createConfigFile("remnant/spawning", "wraith_spawns");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "enable_natural_spawning")) {
-			api.setStringValue("remnant/spawning", "wraith_spawns", "enable_natural_spawning", "true");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "spawn_weight")) {
-			api.setNumberValue("remnant/spawning", "wraith_spawns", "spawn_weight", 5);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "min_group_size")) {
-			api.setNumberValue("remnant/spawning", "wraith_spawns", "min_group_size", 1);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "max_group_size")) {
-			api.setNumberValue("remnant/spawning", "wraith_spawns", "max_group_size", 2);
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "dimension_whitelist")) {
-			api.setStringValue("remnant/spawning", "wraith_spawns", "dimension_whitelist", "minecraft:overworld");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "dimension_blacklist")) {
-			api.setStringValue("remnant/spawning", "wraith_spawns", "dimension_blacklist", "minecraft:the_nether,minecraft:the_end");
-		}
-		if (!api.arrayKeyExists("remnant/spawning", "wraith_spawns", "biome_blacklist")) {
-			api.setStringValue("remnant/spawning", "wraith_spawns", "biome_blacklist", "");
-		}
-
-		// Wraith Balance Settings
-		if (api.createConfigFile("remnant/balance", "wraith_stats")) {
-			api.createConfigFile("remnant/balance", "wraith_stats");
-		}
-		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_health")) {
-			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_health", 20.0);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_attack_damage")) {
-			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_attack_damage", 3.0);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_armor")) {
-			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_armor", 0.0);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_movement_speed")) {
-			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_movement_speed", 0.25);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "wraith_stats", "wraith_follow_range")) {
-			api.setNumberValue("remnant/balance", "wraith_stats", "wraith_follow_range", 16.0);
-		}
-
-		api.createConfigFile("remnant/bosses", "umbrakar_summon");
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar_summon", "portal_activation_item")) {
-			api.setStringValue("remnant/bosses", "umbrakar_summon", "portal_activation_item", "minecraft:echo_shard");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar_summon", "pedestal_one_activation_block")) {
-			api.setStringValue("remnant/bosses", "umbrakar_summon", "pedestal_one_activation_block", "minecraft:amethyst_block");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar_summon", "pedestal_two_activation_block")) {
-			api.setStringValue("remnant/bosses", "umbrakar_summon", "pedestal_two_activation_block", "minecraft:crying_obsidian");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar_summon", "pedestal_three_activation_block")) {
-			api.setStringValue("remnant/bosses", "umbrakar_summon", "pedestal_three_activation_block", "minecraft:end_stone");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar_summon", "pedestal_four_activation_block")) {
-			api.setStringValue("remnant/bosses", "umbrakar_summon", "pedestal_four_activation_block", "minecraft:sculk");
-		}
-		api.createConfigFile("remnant/bosses", "umbrakar");
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "max_health")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "max_health", 750);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "attack_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "attack_damage", 14);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "movement_speed")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "movement_speed", 0.32);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "armor")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "armor", 10);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "follow_range")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "follow_range", 48);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "orb_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "orb_damage", 8);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "hp_threshold_phase_2")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "hp_threshold_phase_2", 40);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "attack_damage_phase_2")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "attack_damage_phase_2", 18);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "movement_speed_phase_2")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "movement_speed_phase_2", 0.38);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "bite_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "bite_damage", 16);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "slam_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "slam_damage", 18);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "tail_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "tail_damage", 15);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "roar_damage")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "roar_damage", 8);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "umbrakar", "roar_range")) {
-			api.setNumberValue("remnant/bosses", "umbrakar", "roar_range", 16);
-		}
-
-		api.createConfigFile("remnant/bosses", "kotsukage_summon");
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "portal_activation_item")) {
-			api.setStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item", "minecraft:wither_skeleton_skull");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block")) {
-			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_one_activation_block", "minecraft:bone_block");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block")) {
-			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_two_activation_block", "minecraft:soul_sand");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block")) {
-			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_three_activation_block", "minecraft:soul_soil");
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block")) {
-			api.setStringValue("remnant/bosses", "kotsukage_summon", "pedestal_four_activation_block", "minecraft:nether_wart_block");
-		}
-
-		api.createConfigFile("remnant/bosses", "kotsukage");
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "max_health")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "max_health", 700);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "attack_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "attack_damage", 12);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "movement_speed")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "movement_speed", 0.28);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "armor")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "armor", 8);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "follow_range")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "follow_range", 40);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "knockback_resistance")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "knockback_resistance", 0.75);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "hp_threshold_phase_2")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "hp_threshold_phase_2", 45);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "attack_damage_phase_2")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "attack_damage_phase_2", 16);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "movement_speed_phase_2")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "movement_speed_phase_2", 0.34);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "swipe_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "swipe_damage", 14);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "stomp_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "stomp_damage", 16);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "stomp_radius")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "stomp_radius", 5);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "poison_damage", 10);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_range")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "poison_range", 8);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "poison_duration")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "poison_duration", 120);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "roar_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "roar_damage", 8);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "roar_range")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "roar_range", 14);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_damage")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "trap_damage", 10);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_count")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "trap_count", 2);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "trap_slow_duration")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "trap_slow_duration", 80);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "minion_count")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "minion_count", 2);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "boss_music_enabled")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "boss_music_enabled", 1);
-		}
-		if (!api.arrayKeyExists("remnant/bosses", "kotsukage", "boss_music_radius")) {
-			api.setNumberValue("remnant/bosses", "kotsukage", "boss_music_radius", 64);
-		}
-
-		api.createConfigFile("remnant/balance", "skeleton_minion_stats");
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_health")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_health", 24);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_attack_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_attack_damage", 5);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_movement_speed")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_movement_speed", 0.32);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "minion_armor")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "minion_armor", 2);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "poison_duration")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "poison_duration", 60);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "leap_cooldown")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "leap_cooldown", 80);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "trap_chance")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "trap_chance", 18);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_minion_stats", "trap_cooldown")) {
-			api.setNumberValue("remnant/balance", "skeleton_minion_stats", "trap_cooldown", 160);
-		}
-
-		api.createConfigFile("remnant/balance", "skeleton_melee_stats");
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "max_health")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "max_health", 28);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "attack_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "attack_damage", 6);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "heavy_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "heavy_damage", 8);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "movement_speed")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "movement_speed", 0.28);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "armor")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "armor", 4);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_melee_stats", "follow_range")) {
-			api.setNumberValue("remnant/balance", "skeleton_melee_stats", "follow_range", 24);
-		}
-
-		api.createConfigFile("remnant/balance", "skeleton_archer_stats");
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "max_health")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "max_health", 22);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "attack_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "attack_damage", 4);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "arrow_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "arrow_damage", 4);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "charged_damage")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "charged_damage", 6);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "movement_speed")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "movement_speed", 0.26);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "armor")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "armor", 2);
-		}
-		if (!api.arrayKeyExists("remnant/balance", "skeleton_archer_stats", "follow_range")) {
-			api.setNumberValue("remnant/balance", "skeleton_archer_stats", "follow_range", 28);
-		}
 	}
 
 	private static final class JaumlApi {
@@ -465,14 +197,19 @@ public final class JaumlConfigBootstrap {
 		private final Method setStringValue;
 		private final Method setNumberValue;
 		private final Class<?> numberParamType;
+		/** Optional (ConfigMigration): absent getters disable the default migration, not the bootstrap. */
+		private final Method getNumberValue, getStringValue, setIntValue;
 
 		private JaumlApi(Method createConfigFile, Method arrayKeyExists, Method setStringValue, Method setNumberValue,
-				Class<?> numberParamType) {
+				Class<?> numberParamType, Method getNumberValue, Method getStringValue, Method setIntValue) {
 			this.createConfigFile = createConfigFile;
 			this.arrayKeyExists = arrayKeyExists;
 			this.setStringValue = setStringValue;
 			this.setNumberValue = setNumberValue;
 			this.numberParamType = numberParamType;
+			this.getNumberValue = getNumberValue;
+			this.getStringValue = getStringValue;
+			this.setIntValue = setIntValue;
 		}
 
 		static JaumlApi load() {
@@ -484,7 +221,8 @@ public final class JaumlConfigBootstrap {
 						String.class);
 				Method setNumberValue = findSetNumberValue(clazz);
 				return new JaumlApi(createConfigFile, arrayKeyExists, setStringValue, setNumberValue,
-						setNumberValue.getParameterTypes()[3]);
+						setNumberValue.getParameterTypes()[3], optional(clazz, "getNumberValue"),
+						optional(clazz, "getStringValue"), optional(clazz, "setIntValue", int.class));
 			} catch (ClassNotFoundException e) {
 				return null;
 			} catch (ReflectiveOperationException e) {
@@ -507,6 +245,71 @@ public final class JaumlConfigBootstrap {
 				}
 			}
 			throw new NoSuchMethodException("setNumberValue(String,String,String,Number|primitive)");
+		}
+
+		private static Method optional(Class<?> clazz, String name, Class<?>... extra) {
+			Class<?>[] parameters = new Class<?>[3 + extra.length];
+			java.util.Arrays.fill(parameters, 0, 3, String.class);
+			System.arraycopy(extra, 0, parameters, 3, extra.length);
+			try {
+				return clazz.getMethod(name, parameters);
+			} catch (NoSuchMethodException e) {
+				return null;
+			}
+		}
+
+		/** Read/write view for {@link ConfigMigration}; null when this Jauml build cannot read values. */
+		ConfigMigration.Store store() {
+			if (getNumberValue == null || getStringValue == null) return null;
+			return new ConfigMigration.Store() {
+				@Override
+				public boolean exists(String path, String file, String key) {
+					return arrayKeyExists(path, file, key);
+				}
+
+				@Override
+				public double number(String path, String file, String key) {
+					try {
+						return getNumberValue.invoke(null, path, file, key) instanceof Number n ? n.doubleValue() : Double.NaN;
+					} catch (ReflectiveOperationException e) {
+						LOGGER.warn("JaumlConfigLib.getNumberValue failed for {}/{}/{}", path, file, key, e);
+						return Double.NaN;
+					}
+				}
+
+				@Override
+				public String string(String path, String file, String key) {
+					try {
+						return getStringValue.invoke(null, path, file, key) instanceof String value ? value : null;
+					} catch (ReflectiveOperationException e) {
+						LOGGER.warn("JaumlConfigLib.getStringValue failed for {}/{}/{}", path, file, key, e);
+						return null;
+					}
+				}
+
+				@Override
+				public void setNumber(String path, String file, String key, double value) {
+					setNumberValue(path, file, key, value);
+				}
+
+				@Override
+				public void setString(String path, String file, String key, String value) {
+					setStringValue(path, file, key, value);
+				}
+
+				@Override
+				public void setVersion(String path, String file, int version) {
+					if (setIntValue == null) {
+						setNumberValue(path, file, ConfigMigration.MARKER, version);
+						return;
+					}
+					try {
+						setIntValue.invoke(null, path, file, ConfigMigration.MARKER, version);
+					} catch (ReflectiveOperationException e) {
+						LOGGER.warn("JaumlConfigLib.setIntValue failed for {}/{}", path, file, e);
+					}
+				}
+			};
 		}
 
 		private static Method tryGetMethod(Class<?> clazz, String name, Class<?> numberType) {

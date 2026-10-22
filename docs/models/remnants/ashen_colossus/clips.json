@@ -1,0 +1,50 @@
+{
+  "idle": {
+    "length": 4.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 2.6,
+    "loop": "loop"
+  },
+  "crush": {
+    "length": 2.8,
+    "loop": "once"
+  },
+  "sweep": {
+    "length": 2.0,
+    "loop": "once"
+  },
+  "volley": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "vent": {
+    "length": 2.0,
+    "loop": "once"
+  },
+  "overheat": {
+    "length": 1.4,
+    "loop": "once"
+  },
+  "overheated": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "recover": {
+    "length": 1.6,
+    "loop": "once"
+  },
+  "enrage": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "stagger": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "death": {
+    "length": 5.0,
+    "loop": "hold"
+  }
+}

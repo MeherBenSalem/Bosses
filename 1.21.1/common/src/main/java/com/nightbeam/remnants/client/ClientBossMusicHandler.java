@@ -18,9 +18,13 @@ public final class ClientBossMusicHandler {
     public static void handle(ClientboundBossMusicPacket msg) {
         boolean ossukage = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
                 "boss_music_enabled") > 0;
-        boolean kotsukage = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "kotsukage",
+        boolean warden = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "gravebound_warden",
                 "boss_music_enabled") > 0;
-        if (!ossukage && !kotsukage) {
+        boolean sovereign = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "hollow_sovereign",
+                "boss_music_enabled") > 0;
+        boolean watcher = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "forgotten_watcher",
+                "boss_music_enabled") > 0;
+        if (!ossukage && !warden && !sovereign && !watcher) {
             return;
         }
 

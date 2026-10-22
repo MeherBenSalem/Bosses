@@ -26,6 +26,7 @@ public final class SovereignRitual {
         if(player.isSpectator() || SovereignConfig.value("summoning_enabled",0,1)==0 || level.getDifficulty()==Difficulty.PEACEFUL) {
             message(player,"disabled"); return true;
         }
+        if(RealmConfig.ritualsRealmOnly() && !com.nightbeam.remnants.realm.EclipsedRealm.isRealm(level)) { message(player,"realm"); return true; }
         BlockPos[] pedestals={altar.offset(3,0,0),altar.offset(-3,0,0),altar.offset(0,0,3),altar.offset(0,0,-3)};
         for(int i=0;i<4;i++) {
             ResourceLocation id=ResourceLocation.tryParse(ritual.offerings().get(i));

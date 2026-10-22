@@ -1,0 +1,54 @@
+{
+  "idle": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 1.2,
+    "loop": "loop"
+  },
+  "run": {
+    "length": 0.7,
+    "loop": "loop"
+  },
+  "combo": {
+    "length": 1.5,
+    "loop": "once"
+  },
+  "lunge": {
+    "length": 1.3,
+    "loop": "once"
+  },
+  "parry": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "riposte": {
+    "length": 0.6,
+    "loop": "once"
+  },
+  "sidestep_left": {
+    "length": 0.6,
+    "loop": "once"
+  },
+  "sidestep_right": {
+    "length": 0.6,
+    "loop": "once"
+  },
+  "eclipse": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "stagger": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "death": {
+    "length": 4.0,
+    "loop": "hold"
+  }
+}

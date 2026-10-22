@@ -1,11 +1,21 @@
 {
   "replace": false,
   "values": [
-    "remnants:skeleton_minion",
     "remnants:ossukage",
-    "remnants:umbrakar",
-    "remnants:kotsukage",
-    "remnants:skeleton_melee",
-    "remnants:skeleton_archer"
+    "remnants:hollow_sentinel",
+    "remnants:spectral_royal_guard",
+    "remnants:hollow_arbalist",
+    "remnants:fallen_standard_bearer",
+    "remnants:soulbound_knight",
+    "remnants:gravebound_warden",
+    "remnants:gravebound_soldier",
+    "remnants:crypt_lurker",
+    "remnants:catacomb_rat",
+    "remnants:burial_guardian",
+    "remnants:forgotten_watcher",
+    "remnants:lost_pilgrim",
+    "remnants:memory_wraith",
+    "remnants:soul_collector",
+    "remnants:soul_wisp"
   ]
 }

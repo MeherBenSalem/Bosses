@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "features": [
+      {
+        "chance": 0.35,
+        "feature": {
+          "feature": {
+            "type": "minecraft:forest_rock",
+            "config": {
+              "state": {
+                "Name": "remnant_bosses:cobbled_eclipse_stone"
+              }
+            }
+          },
+          "placement": []
+        }
+      }
+    ],
+    "default": {
+      "feature": {
+        "type": "minecraft:forest_rock",
+        "config": {
+          "state": {
+            "Name": "remnant_bosses:eclipse_stone"
+          }
+        }
+      },
+      "placement": []
+    }
+  }
+}

@@ -1,0 +1,173 @@
+package com.nightbeam.remnants.realm;
+
+import com.nightbeam.remnants.block.realm.EclipseWaygateBlock;
+import com.nightbeam.remnants.config.RealmConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.SavedData;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * Pairs Waygates across the eclipse: every Waygate outside the Realm leads to one
+ * inside it, and each Realm Waygate remembers the gate it was opened from. Saved on the overworld.
+ */
+public final class RealmLinks extends SavedData {
+	private static final String SAVE_ID = "remnant_bosses_realm_links";
+
+	private final Map<GlobalPos, BlockPos> outsideToRealm = new HashMap<>();
+	private final Map<BlockPos, GlobalPos> realmToOutside = new HashMap<>();
+	private final Map<UUID, GlobalPos> lastWaygate = new HashMap<>();
+
+	public static RealmLinks get(MinecraftServer server) {
+		return server.overworld().getDataStorage().computeIfAbsent(RealmLinks::load, RealmLinks::new, SAVE_ID);
+	}
+
+	/** The Realm Waygate that {@code outside} opens onto, raising an Arrival Shrine the first time. */
+	public BlockPos realmSideFor(ServerLevel realm, GlobalPos outside) {
+		BlockPos linked = outsideToRealm.get(outside);
+		if (linked != null && isCore(realm, linked)) return linked;
+		int radius = (int) RealmConfig.value("arrival_search_radius", 0, 512);
+		BlockPos target = outside.pos();
+		BlockPos best = null;
+		long bestDistance = Long.MAX_VALUE;
+		for (BlockPos candidate : realmToOutside.keySet().toArray(new BlockPos[0])) {
+			long dx = candidate.getX() - target.getX(), dz = candidate.getZ() - target.getZ();
+			long distance = dx * dx + dz * dz;
+			if (distance > (long) radius * radius || distance >= bestDistance) continue;
+			if (isCore(realm, candidate)) {
+				best = candidate;
+				bestDistance = distance;
+			} else {
+				forgetRealm(candidate);
+			}
+		}
+		if (best == null) best = ArrivalShrine.build(realm, target.getX(), target.getZ());
+		link(outside, best);
+		return best;
+	}
+
+	/** The gate a Realm Waygate was opened from, if it still stands. */
+	@Nullable
+	public GlobalPos outsideFor(MinecraftServer server, BlockPos realmCore) {
+		GlobalPos outside = realmToOutside.get(realmCore);
+		if (outside == null) return null;
+		ServerLevel level = server.getLevel(outside.dimension());
+		return level != null && isCore(level, outside.pos()) ? outside : null;
+	}
+
+	public void link(GlobalPos outside, BlockPos realmCore) {
+		outsideToRealm.put(outside, realmCore.immutable());
+		realmToOutside.put(realmCore.immutable(), outside);
+		setDirty();
+	}
+
+	public void setLast(UUID player, GlobalPos waygate) {
+		lastWaygate.put(player, waygate);
+		setDirty();
+	}
+
+	@Nullable
+	public GlobalPos last(MinecraftServer server, UUID player) {
+		GlobalPos gate = lastWaygate.get(player);
+		if (gate == null) return null;
+		ServerLevel level = server.getLevel(gate.dimension());
+		return level != null && isCore(level, gate.pos()) ? gate : null;
+	}
+
+	/** A Waygate core was removed: drop every link through it. */
+	public void forget(ServerLevel level, BlockPos core) {
+		if (EclipsedRealm.isRealm(level)) {
+			forgetRealm(core);
+		} else {
+			GlobalPos outside = GlobalPos.of(level.dimension(), core);
+			BlockPos realm = outsideToRealm.remove(outside);
+			if (realm != null && outside.equals(realmToOutside.get(realm))) realmToOutside.remove(realm);
+			lastWaygate.values().removeIf(outside::equals);
+			setDirty();
+		}
+	}
+
+	private void forgetRealm(BlockPos core) {
+		realmToOutside.remove(core);
+		outsideToRealm.values().removeIf(core::equals);
+		setDirty();
+	}
+
+	public static boolean isCore(ServerLevel level, BlockPos pos) {
+		return level.getBlockState(pos).getBlock() instanceof EclipseWaygateBlock;
+	}
+
+	@Override
+	public CompoundTag save(CompoundTag tag) {
+		ListTag links = new ListTag();
+		outsideToRealm.forEach((outside, realm) -> {
+			CompoundTag entry = writeGlobal(outside);
+			entry.putLong("Realm", realm.asLong());
+			links.add(entry);
+		});
+		tag.put("Links", links);
+		ListTag reverse = new ListTag();
+		realmToOutside.forEach((realm, outside) -> {
+			CompoundTag entry = writeGlobal(outside);
+			entry.putLong("Realm", realm.asLong());
+			reverse.add(entry);
+		});
+		tag.put("Returns", reverse);
+		ListTag last = new ListTag();
+		lastWaygate.forEach((player, gate) -> {
+			CompoundTag entry = writeGlobal(gate);
+			entry.putUUID("Player", player);
+			last.add(entry);
+		});
+		tag.put("Last", last);
+		return tag;
+	}
+
+	public static RealmLinks load(CompoundTag tag) {
+		RealmLinks links = new RealmLinks();
+		for (Tag t : tag.getList("Links", Tag.TAG_COMPOUND)) {
+			CompoundTag entry = (CompoundTag) t;
+			GlobalPos outside = readGlobal(entry);
+			if (outside != null) links.outsideToRealm.put(outside, BlockPos.of(entry.getLong("Realm")));
+		}
+		for (Tag t : tag.getList("Returns", Tag.TAG_COMPOUND)) {
+			CompoundTag entry = (CompoundTag) t;
+			GlobalPos outside = readGlobal(entry);
+			if (outside != null) links.realmToOutside.put(BlockPos.of(entry.getLong("Realm")), outside);
+		}
+		for (Tag t : tag.getList("Last", Tag.TAG_COMPOUND)) {
+			CompoundTag entry = (CompoundTag) t;
+			GlobalPos gate = readGlobal(entry);
+			if (gate != null && entry.hasUUID("Player")) links.lastWaygate.put(entry.getUUID("Player"), gate);
+		}
+		return links;
+	}
+
+	static CompoundTag writeGlobal(GlobalPos pos) {
+		CompoundTag tag = new CompoundTag();
+		tag.putString("Dimension", pos.dimension().location().toString());
+		tag.putLong("Pos", pos.pos().asLong());
+		return tag;
+	}
+
+	@Nullable
+	static GlobalPos readGlobal(CompoundTag tag) {
+		ResourceLocation dimension = ResourceLocation.tryParse(tag.getString("Dimension"));
+		if (dimension == null) return null;
+		ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, dimension);
+		return GlobalPos.of(key, BlockPos.of(tag.getLong("Pos")));
+	}
+}

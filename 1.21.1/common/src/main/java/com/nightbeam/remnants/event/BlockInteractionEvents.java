@@ -3,6 +3,7 @@ package com.nightbeam.remnants.event;
 import com.nightbeam.remnants.RemnantBosses;
 import com.nightbeam.remnants.block.AncientAltarBlock;
 import com.nightbeam.remnants.config.JaumlConfigLib;
+import com.nightbeam.remnants.entity.GraveboundSoldierEntity;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModEntities;
 import com.nightbeam.remnants.journal.BossHunts;
@@ -21,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +32,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
-import java.util.Locale;
 
 public final class BlockInteractionEvents {
 	private BlockInteractionEvents() {
@@ -57,21 +58,9 @@ public final class BlockInteractionEvents {
 		}
 
 		if (SovereignRitual.tryActivate(player, level, pos)) return;
+		if (WardenRitual.tryActivate(player, level, pos)) return;
+		if (WatcherRitual.tryActivate(player, level, pos)) return;
 		String heldKey = BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString();
-		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon",
-				"portal_activation_item"))) {
-			trySummon(player, pos, level, "kotsukage_summon",
-					"\u00A76The \u00A7eBone Sovereign \u00A76rises from the \u00A78grave!",
-					ModEntities.KOTSUKAGE.get(), 0, SoundEvents.WITHER_SPAWN);
-			return;
-		}
-		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "umbrakar_summon",
-				"portal_activation_item"))) {
-			trySummon(player, pos, level, "umbrakar_summon",
-					"\u00A75The \u00A7dRiftmaw Colossus \u00A75tears through the altar!",
-					ModEntities.UMBRAKAR.get(), 0, SoundEvents.WARDEN_SONIC_BOOM);
-			return;
-		}
 		if (!heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon",
 				"portal_activation_item"))) {
 			return;
@@ -131,44 +120,6 @@ public final class BlockInteractionEvents {
 				(int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "on_spawn_skeletons"), true);
 	}
 
-	private static void trySummon(Player player, BlockPos pos, Level level, String summonFile, String message,
-			EntityType<?> bossType, int minions, SoundEvent sound) {
-		if (level.getBlockState(pos.offset(3, 0, 0)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
-				|| level.getBlockState(pos.offset(-3, 0, 0)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
-				|| level.getBlockState(pos.offset(0, 0, 3)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
-				|| level.getBlockState(pos.offset(0, 0, -3)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()) {
-			return;
-		}
-		if (!RitualInfo.resolve(summonFile).matchesTops(level, pos)) return;
-		if (level instanceof ServerLevel serverLevel) {
-			serverLevel.setDayTime(18000);
-			for (BlockPos bp : List.of(pos.offset(3, 1, 0), pos.offset(-3, 1, 0), pos.offset(0, 1, 3), pos.offset(0, 1, -3))) {
-				LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(serverLevel);
-				if (bolt != null) {
-					bolt.moveTo(Vec3.atBottomCenterOf(bp));
-					bolt.setVisualOnly(true);
-					serverLevel.addFreshEntity(bolt);
-				}
-				serverLevel.setBlock(bp, Blocks.AIR.defaultBlockState(), 3);
-			}
-			serverLevel.playSound(null, pos, sound, SoundSource.NEUTRAL, 1f, 0.65f);
-		}
-		for (Entity entity : level.getEntitiesOfClass(Entity.class, new AABB(Vec3.atCenterOf(pos), Vec3.atCenterOf(pos)).inflate(35d), e -> true)) {
-			if (entity instanceof ServerPlayer serverPlayer) {
-				if (!serverPlayer.getAbilities().instabuild && heldMatches(player, summonFile)) {
-					player.getMainHandItem().shrink(1);
-				}
-				serverPlayer.displayClientMessage(Component.literal(message), false);
-			}
-		}
-		queueBossSpawn(level, pos, bossType, minions, false);
-	}
-
-	private static boolean heldMatches(Player player, String summonFile) {
-		return BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString()
-				.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", summonFile, "portal_activation_item"));
-	}
-
 	private static void queueBossSpawn(Level level, BlockPos pos, EntityType<?> bossType, int minions, boolean ossukageInit) {
 		RemnantBosses.queueServerWork(80, () -> {
 			if (!(level instanceof ServerLevel serverLevel)) {
@@ -187,14 +138,10 @@ public final class BlockInteractionEvents {
 					OssukageOnInitialEntitySpawnProcedure.execute(serverLevel, boss);
 				}
 			}
+			Mob owner = boss instanceof Mob mob ? mob : null;
 			for (int i = 0; i < minions; i++) {
-				Entity minion = ModEntities.SKELETON_MINION.get().spawn(serverLevel,
-						pos.offset(Mth.nextInt(RandomSource.create(), -1, 1), 1,
-								Mth.nextInt(RandomSource.create(), -1, 1)),
-						MobSpawnType.MOB_SUMMONED);
-				if (minion != null) {
-					minion.setDeltaMovement(0, 0, 0);
-				}
+				BlockPos spot = pos.offset(Mth.nextInt(RandomSource.create(), -1, 1), 1, Mth.nextInt(RandomSource.create(), -1, 1));
+				GraveboundSoldierEntity.raise(serverLevel, owner, Vec3.atBottomCenterOf(spot));
 			}
 		});
 	}

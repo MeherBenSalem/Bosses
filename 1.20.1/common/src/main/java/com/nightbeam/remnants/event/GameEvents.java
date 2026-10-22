@@ -3,15 +3,13 @@ package com.nightbeam.remnants.event;
 import com.nightbeam.remnants.RemnantBosses;
 import com.nightbeam.remnants.block.AncientAltarBlock;
 import com.nightbeam.remnants.config.JaumlConfigLib;
-import com.nightbeam.remnants.entity.RatEntity;
 import com.nightbeam.remnants.entity.RemnantOssukageEntity;
-import com.nightbeam.remnants.entity.SkeletonMinionEntity;
-import com.nightbeam.remnants.entity.WraithEntity;
+import com.nightbeam.remnants.entity.GraveboundSoldierEntity;
 import com.nightbeam.remnants.init.ModBlocks;
 import com.nightbeam.remnants.init.ModEntities;
-import com.nightbeam.remnants.item.OssukageSwordItem;
 import com.nightbeam.remnants.journal.BossHunts;
 import com.nightbeam.remnants.journal.RitualInfo;
+import com.nightbeam.remnants.realm.RealmEvents;
 import com.nightbeam.remnants.procedures.OssukageOnInitialEntitySpawnProcedure;
 import com.nightbeam.remnants.procedures.ThrowKunaisProcedureProcedure;
 
@@ -31,6 +29,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -48,85 +47,9 @@ public final class GameEvents {
 	private GameEvents() {
 	}
 
-	public static void updateRatAnimations(RatEntity entity) {
-		int tickCount = entity.tickCount;
-		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
-
-		if (isAttacking) {
-			entity.animationState2.startIfStopped(tickCount);
-			entity.animationState0.stop();
-		} else {
-			entity.animationState0.startIfStopped(tickCount);
-			entity.animationState2.stop();
-		}
-	}
-
-	public static void updateOssukageAnimations(RemnantOssukageEntity entity) {
-		// GeckoLib reads the synchronized combat state directly from the entity.
-	}
-
-	public static void updateSkeletonMinionAnimations(SkeletonMinionEntity entity) {
-		int tickCount = entity.tickCount;
-		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
-		boolean isSpawning = tickCount < 120;
-
-		if (isSpawning) {
-			entity.animationState3.startIfStopped(tickCount);
-		} else {
-			entity.animationState3.stop();
-		}
-
-		if (isAttacking) {
-			entity.animationState2.startIfStopped(tickCount);
-			entity.animationState0.stop();
-		} else {
-			entity.animationState0.startIfStopped(tickCount);
-			entity.animationState2.stop();
-		}
-	}
-
-	public static void updateWraithAnimations(WraithEntity entity) {
-		int tickCount = entity.tickCount;
-		boolean isDead = entity.isDeadOrDying();
-		boolean isAttacking = entity.swinging || entity.getAttackAnim(0.0f) > 0.0f;
-
-		if (isDead) {
-			entity.animationState3.startIfStopped(tickCount);
-			entity.animationState0.stop();
-			entity.animationState2.stop();
-		} else {
-			entity.animationState3.stop();
-			if (isAttacking) {
-				entity.animationState2.startIfStopped(tickCount);
-				entity.animationState0.stop();
-			} else {
-				entity.animationState0.startIfStopped(tickCount);
-				entity.animationState2.stop();
-			}
-		}
-	}
-
-	public static void updateOssukageServerTick(RemnantOssukageEntity entity) {
-		// Ossukage owns its server-authoritative combat tick.
-	}
-
 	public static void onLivingHurt(LivingEntity entity, DamageSource source, float amount) {
 		if (entity instanceof RemnantOssukageEntity ossukage) {
 			ossukage.onIncomingDamage();
-		}
-
-		if (entity.level().isClientSide) {
-			return;
-		}
-
-		Entity attacker = source.getEntity();
-		if (!(attacker instanceof Player player)) {
-			return;
-		}
-
-		ItemStack itemStack = player.getMainHandItem();
-		if (itemStack.getItem() instanceof OssukageSwordItem) {
-			handleOssukageSwordHit(entity, player, itemStack, entity.level());
 		}
 	}
 
@@ -135,26 +58,8 @@ public final class GameEvents {
 			return true;
 		}
 
-		// Natural-spawn dimension limits apply only to rats/wraiths.
-		// Bosses and ritual minions must spawn from commands, eggs, altars, and
-		// other mods (e.g. Craft to Exile 2) in any dimension.
-		if (entity instanceof RatEntity || entity instanceof WraithEntity) {
-			if (!isDimensionAllowed(level)) {
-				return false;
-			}
-		}
-
 		if (entity instanceof RemnantOssukageEntity ossukage) {
 			OssukageOnInitialEntitySpawnProcedure.execute((LevelAccessor) ossukage.level(), ossukage);
-		}
-
-		if (entity instanceof RatEntity rat) {
-			int skinVariant = rat.getRandom().nextInt(4);
-			rat.setSkinVariant(skinVariant);
-		}
-
-		if (entity instanceof SkeletonMinionEntity skeleton) {
-			skeleton.setSpawned(true);
 		}
 
 		return true;
@@ -169,6 +74,9 @@ public final class GameEvents {
 		if (entity instanceof RemnantOssukageEntity ossukage) {
 			handleOssukageDeath(ossukage, level);
 		}
+		RealmEvents.onLivingDeath(entity);
+		// Nearby Soul Collectors draw the soul in.
+		com.nightbeam.remnants.entity.SoulCollectorEntity.onCreatureDied(entity);
 	}
 
 	public static boolean onRightClickBlock(Player player, Level level, BlockPos pos, Block block) {
@@ -183,18 +91,6 @@ public final class GameEvents {
 		return false;
 	}
 
-	private static boolean isDimensionAllowed(Level level) {
-		String dimensionKey = level.dimension().location().toString();
-
-		List<String> whitelist = JaumlConfigLib.getStringListValue("remnant/spawning", "rat_spawns", "dimension_whitelist");
-		if (!whitelist.isEmpty() && !whitelist.contains(dimensionKey)) {
-			return false;
-		}
-
-		List<String> blacklist = JaumlConfigLib.getStringListValue("remnant/spawning", "rat_spawns", "dimension_blacklist");
-		return !blacklist.contains(dimensionKey);
-	}
-
 	private static void handleOssukageDeath(RemnantOssukageEntity entity, Level level) {
 		if (!level.isClientSide() && level.getServer() != null) {
 			level.getServer().getCommands().performPrefixedCommand(
@@ -203,9 +99,6 @@ public final class GameEvents {
 							entity.getDisplayName(), level.getServer(), entity),
 					"stopsound @p music remnant_bosses:skeletonfight_theme");
 		}
-	}
-
-	private static void handleOssukageSwordHit(LivingEntity target, Player attacker, ItemStack itemStack, Level level) {
 	}
 
 	private static void handleAncientAltarClick(Player player, BlockPos pos, Level level) {
@@ -218,29 +111,19 @@ public final class GameEvents {
 		}
 
 		if (SovereignRitual.tryActivate(player, level, pos)) return;
+		if (WardenRitual.tryActivate(player, level, pos)) return;
+		if (WatcherRitual.tryActivate(player, level, pos)) return;
 		String heldKey = String.valueOf(BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()));
-		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "kotsukage_summon", "portal_activation_item"))) {
-			trySummonBoss(player, pos, level, "kotsukage_summon", "kotsukage",
-					"\u00A76The \u00A7eBone Sovereign \u00A76rises from the \u00A78grave!",
-					ModEntities.KOTSUKAGE.get(), 0);
-			return;
-		}
-		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "umbrakar_summon", "portal_activation_item"))) {
-			trySummonBoss(player, pos, level, "umbrakar_summon", "umbrakar",
-					"\u00A75The \u00A7dRiftmaw Colossus \u00A75tears through the altar!",
-					ModEntities.UMBRAKAR.get(), 0);
-			return;
-		}
 		if (heldKey.equalsIgnoreCase(JaumlConfigLib.getStringValue("remnant/bosses", "ossukage_summon", "portal_activation_item"))) {
-			trySummonBoss(player, pos, level, "ossukage_summon", "ossukage",
+			trySummonBoss(player, pos, level, "ossukage_summon",
 					"\u00A76The \u00A7cRemnant Warriors \u00A76rise from the \u00A78shadows\u00A76!",
 					ModEntities.REMNANT_OSSUKAGE.get(),
 					(int) JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage", "on_spawn_skeletons"));
 		}
 	}
 
-	private static void trySummonBoss(Player player, BlockPos pos, Level level, String summonFile, String unused,
-			String message, EntityType<?> bossType, int minions) {
+	private static void trySummonBoss(Player player, BlockPos pos, Level level, String summonFile, String message,
+			EntityType<?> bossType, int minions) {
 		if (level.getBlockState(pos.offset(3, 0, 0)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
 				|| level.getBlockState(pos.offset(-3, 0, 0)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
 				|| level.getBlockState(pos.offset(0, 0, 3)).getBlock() != ModBlocks.ANCIENT_PEDESTAL.get()
@@ -303,13 +186,10 @@ public final class GameEvents {
 			if (boss != null) {
 				boss.setDeltaMovement(0, 0, 0);
 			}
+			Mob owner = boss instanceof Mob mob ? mob : null;
 			for (int i = 0; i < minions; i++) {
-				Entity minion = ModEntities.SKELETON_MINION.get().spawn(serverLevel,
-						pos.offset(Mth.nextInt(RandomSource.create(), -1, 1), 1, Mth.nextInt(RandomSource.create(), -1, 1)),
-						MobSpawnType.MOB_SUMMONED);
-				if (minion != null) {
-					minion.setDeltaMovement(0, 0, 0);
-				}
+				BlockPos spot = pos.offset(Mth.nextInt(RandomSource.create(), -1, 1), 1, Mth.nextInt(RandomSource.create(), -1, 1));
+				GraveboundSoldierEntity.raise(serverLevel, owner, Vec3.atBottomCenterOf(spot));
 			}
 		});
 	}

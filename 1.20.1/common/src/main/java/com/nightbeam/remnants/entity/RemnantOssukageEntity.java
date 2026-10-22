@@ -23,7 +23,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -325,7 +324,7 @@ public class RemnantOssukageEntity extends Monster implements GeoEntity {
 	private void strikeArc(double range, double minimumDot, float multiplier) {
 		Vec3 look = this.getLookAngle().normalize();
 		for (LivingEntity victim : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(range),
-				entity -> entity.isAlive() && entity != this && !(entity instanceof SkeletonMinionEntity))) {
+				entity -> entity.isAlive() && entity != this && !(entity instanceof GraveboundSoldierEntity))) {
 			Vec3 direction = victim.position().subtract(this.position());
 			if (direction.lengthSqr() > range * range || direction.lengthSqr() < 0.001) continue;
 			if (look.dot(direction.normalize()) < minimumDot) continue;
@@ -361,10 +360,18 @@ public class RemnantOssukageEntity extends Monster implements GeoEntity {
 	}
 
 	private void spawnMinions(ServerLevel server, int count, BlockPos center) {
+		var type = ModEntities.GRAVEBOUND_SOLDIER.get();
 		for (int i = 0; i < Math.max(0, count); i++) {
 			BlockPos pos = center.offset(this.random.nextInt(11) - 5, 0, this.random.nextInt(11) - 5);
-			Entity minion = ModEntities.SKELETON_MINION.get().spawn(server, pos, MobSpawnType.MOB_SUMMONED);
-			if (minion != null) minion.setDeltaMovement(Vec3.ZERO);
+			Vec3 spot = null;
+			for (int dy = 2; dy >= -3 && spot == null; dy--) {
+				BlockPos at = pos.above(dy);
+				if (!server.getBlockState(at.below()).getCollisionShape(server, at.below()).isEmpty()
+						&& server.noCollision(type.getAABB(at.getX() + 0.5, at.getY(), at.getZ() + 0.5))) {
+					spot = Vec3.atBottomCenterOf(at);
+				}
+			}
+			if (spot != null) GraveboundSoldierEntity.raise(server, this, spot);
 		}
 	}
 

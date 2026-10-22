@@ -1,0 +1,34 @@
+# Realm checks for a production boot: locate the Realm biomes and arenas, place the Arrival Shrine, summon mobs.
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:tarnished_fields
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:gracewood
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:gravefield_barrows
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:ashen_wastes
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:stilled_sea
+execute in remnant_bosses:eclipsed_realm run locate biome remnant_bosses:ossuary_depths
+execute in remnant_bosses:eclipsed_realm run locate structure remnant_bosses:hollow_citadel
+execute in remnant_bosses:eclipsed_realm run locate structure remnant_bosses:gravebound_catacombs
+execute in remnant_bosses:eclipsed_realm run locate structure remnant_bosses:grace_shrine
+locate structure remnant_bosses:hollow_citadel
+execute in remnant_bosses:eclipsed_realm run forceload add 0 0 16 16
+execute in remnant_bosses:eclipsed_realm run place template remnant_bosses:realm/arrival_shrine 0 120 0
+execute in remnant_bosses:eclipsed_realm if block 5 121 2 remnant_bosses:eclipse_waygate[phase=open] run say ARRIVAL_SHRINE_OK
+execute in remnant_bosses:eclipsed_realm if block 5 121 7 remnant_bosses:grace_ember run say GRACE_OK
+execute in remnant_bosses:eclipsed_realm if block 5 122 2 remnant_bosses:waygate_veil[open=true] run say VEIL_OK
+execute in remnant_bosses:eclipsed_realm run summon remnants:hollow_sentinel 3 121 3
+execute in remnant_bosses:eclipsed_realm run summon remnants:catacomb_rat 3 121 4
+execute in remnant_bosses:eclipsed_realm run setblock 0 125 0 remnant_bosses:fog_gate
+execute in remnant_bosses:eclipsed_realm run setblock 1 125 0 remnant_bosses:gilded_leaves
+execute in remnant_bosses:eclipsed_realm run setblock 2 125 0 remnant_bosses:eclipse_stone_brick_stairs
+# The roaming Ashbound and Relic creatures: summon each, then confirm it exists.
+execute in remnant_bosses:eclipsed_realm run summon remnants:ashbound_crawler -2 121 9
+execute in remnant_bosses:eclipsed_realm run summon remnants:ember_servitor -1 121 9
+execute in remnant_bosses:eclipsed_realm run summon remnants:rusted_guardian 0 121 9
+execute in remnant_bosses:eclipsed_realm run summon remnants:shardling 1 121 9
+execute in remnant_bosses:eclipsed_realm run summon remnants:ancient_vessel 2 121 9
+execute in remnant_bosses:eclipsed_realm run summon remnants:relic_stalker 3 121 9
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:ashbound_crawler] run say CREATURE_OK ashbound_crawler
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:ember_servitor] run say CREATURE_OK ember_servitor
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:rusted_guardian] run say CREATURE_OK rusted_guardian
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:shardling] run say CREATURE_OK shardling
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:ancient_vessel] run say CREATURE_OK ancient_vessel
+execute in remnant_bosses:eclipsed_realm if entity @e[type=remnants:relic_stalker] run say CREATURE_OK relic_stalker

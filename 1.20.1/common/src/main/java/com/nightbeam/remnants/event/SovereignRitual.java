@@ -4,6 +4,7 @@ import com.nightbeam.remnants.config.*;
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
 import com.nightbeam.remnants.init.*;
 import com.nightbeam.remnants.journal.RitualInfo;
+import com.nightbeam.remnants.realm.EclipsedRealm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -26,6 +27,7 @@ public final class SovereignRitual {
         if(player.isSpectator() || SovereignConfig.value("summoning_enabled",0,1)==0 || level.getDifficulty()==Difficulty.PEACEFUL) {
             message(player,"disabled"); return true;
         }
+        if(RealmConfig.ritualsRealmOnly() && !EclipsedRealm.isRealm(level)) { message(player,"realm"); return true; }
         BlockPos[] pedestals={altar.offset(3,0,0),altar.offset(-3,0,0),altar.offset(0,0,3),altar.offset(0,0,-3)};
         for(int i=0;i<4;i++) {
             ResourceLocation id=ResourceLocation.tryParse(ritual.offerings().get(i));

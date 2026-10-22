@@ -28,14 +28,13 @@ public abstract class BoneMonsterEntity extends Monster implements GeoEntity {
     private static final EntityDataAccessor<Float> AIM_Y = SynchedEntityData.defineId(BoneMonsterEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> AIM_Z = SynchedEntityData.defineId(BoneMonsterEntity.class, EntityDataSerializers.FLOAT);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private boolean configured, loaded, pounceHit;
+    private boolean configured, loaded;
     private int cooldown = 30;
     private Vec3 castOrigin = Vec3.ZERO;
 
     protected BoneMonsterEntity(EntityType<? extends BoneMonsterEntity> type, Level level) { super(type, level); xpReward=8; }
     public abstract String monsterId();
     public boolean floating() { return false; }
-    private boolean skitter() { return monsterId().equals("grave_skitter"); }
     private double config(String key,double min,double max) { return BoneMonsterConfig.value(monsterId(),key,min,max); }
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH,30).add(Attributes.ATTACK_DAMAGE,5)
@@ -98,17 +97,16 @@ public abstract class BoneMonsterEntity extends Monster implements GeoEntity {
         if(target==null || !target.isAlive() || !hasLineOfSight(target)) return;
         double distance=distanceTo(target);
         if(distance>config("special_range",3,16)) return;
-        if(!floating() && distance>3 && !skitter()) return;
-        if(skitter() && !onGround()) return;
+        if(!floating() && distance>3) return;
         boolean special=floating() || distance>3 || random.nextInt(3)==0;
         begin(special?"special":"attack",target);
     }
     private void begin(String action,LivingEntity target) {
-        castOrigin=position();pounceHit=false;
+        castOrigin=position();
         entityData.set(AIM_X,(float)target.getX());entityData.set(AIM_Y,(float)target.getY());entityData.set(AIM_Z,(float)target.getZ());
         entityData.set(AGE,0);entityData.set(ACTION,action);
         getNavigation().stop();
-        playSound(floating()?SoundEvents.SOUL_ESCAPE:SoundEvents.SKELETON_AMBIENT,.8f,skitter()?1.4f:.65f);
+        playSound(floating()?SoundEvents.SOUL_ESCAPE:SoundEvents.SKELETON_AMBIENT,.8f,.65f);
     }
     private boolean victim(LivingEntity e) {
         return e!=this && e.isAlive() && !(e instanceof BoneMonsterEntity) && !isAlliedTo(e)
@@ -121,17 +119,6 @@ public abstract class BoneMonsterEntity extends Monster implements GeoEntity {
     }
     private void resolve(int age) {
         boolean special=action().equals("special");
-        if(skitter() && special) {
-            if(age==12) {
-                Vec3 d=aim().subtract(position()).multiply(1,0,1).normalize();
-                setDeltaMovement(d.scale(.65).add(0,.34,0));hasImpulse=true;
-            }
-            LivingEntity t=getTarget();
-            if(age>=17 && age<=25 && !pounceHit && t!=null && victim(t) && distanceTo(t)<2.4 && hasLineOfSight(t)) {
-                hit(t,(float)config("special_damage",0,100));pounceHit=true;
-            }
-            return;
-        }
         if(age!=(special?17:10)) return;
         float damage=special?(float)config("special_damage",0,100):(float)getAttributeValue(Attributes.ATTACK_DAMAGE);
         if(floating() && special) {
@@ -159,7 +146,7 @@ public abstract class BoneMonsterEntity extends Monster implements GeoEntity {
         int age=entityData.get(AGE);
         if(age>22 || tickCount%2!=0) return;
         Vec3 center=floating()?aim():position();
-        double radius=floating()?2.25:(skitter()?1.1:2.8);
+        double radius=floating()?2.25:2.8;
         int count=Math.max(1,(int)(12*density));
         for(int i=0;i<count;i++) {
             double angle=i*Math.PI*2/count+age*.08;

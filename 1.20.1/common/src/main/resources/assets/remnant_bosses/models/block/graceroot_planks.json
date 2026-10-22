@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "remnant_bosses:block/graceroot_planks"
+  }
+}

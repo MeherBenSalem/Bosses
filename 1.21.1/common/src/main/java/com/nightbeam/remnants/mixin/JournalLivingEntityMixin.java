@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class JournalLivingEntityMixin {
-    @Shadow protected boolean dead;
+    // Accessors resolve through the refmap; Forge 1.20.1 jars keep shadowed names unmapped (MixinPolicyRegression).
+    @Accessor("dead") protected abstract boolean remnant$dead();
     @Unique private boolean remnant$huntProcessed;
     @Unique private HealthWriteTracker remnant$healthWrites;
     @Unique private static final String REMNANT_HUNT_PROCESSED = "RemnantBossHuntProcessed";
@@ -42,7 +43,7 @@ public abstract class JournalLivingEntityMixin {
         LivingEntity entity = (LivingEntity) (Object) this;
         // isDeadOrDying() is also true at zero health after a Forge/NeoForge cancellation.
         if (!entity.level().isClientSide && BossHunts.boss(entity) != null
-                && EncounterCredits.acceptedDeath(dead, remnant$huntProcessed)) {
+                && EncounterCredits.acceptedDeath(remnant$dead(), remnant$huntProcessed)) {
             remnant$huntProcessed = true;
             BossHunts.died(entity);
         }

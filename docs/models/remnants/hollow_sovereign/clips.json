@@ -1,0 +1,70 @@
+{
+  "idle": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 1.6,
+    "loop": "loop"
+  },
+  "run": {
+    "length": 1.0,
+    "loop": "loop"
+  },
+  "combo": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "throne_slam": {
+    "length": 2.2,
+    "loop": "once"
+  },
+  "guard": {
+    "length": 2.0,
+    "loop": "once"
+  },
+  "riposte": {
+    "length": 0.9,
+    "loop": "once"
+  },
+  "rift_cleave": {
+    "length": 2.0,
+    "loop": "once"
+  },
+  "spectral_slash": {
+    "length": 1.6,
+    "loop": "once"
+  },
+  "soul_lunge": {
+    "length": 1.5,
+    "loop": "once"
+  },
+  "summon": {
+    "length": 2.0,
+    "loop": "once"
+  },
+  "phase_shatter": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "phase_soul": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "last_command": {
+    "length": 6.0,
+    "loop": "once"
+  },
+  "stagger": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "awaken": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "death": {
+    "length": 4.0,
+    "loop": "hold"
+  }
+}

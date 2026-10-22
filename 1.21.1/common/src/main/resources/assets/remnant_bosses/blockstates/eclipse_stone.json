@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "remnant_bosses:block/eclipse_stone"
+      },
+      {
+        "model": "remnant_bosses:block/eclipse_stone_mirrored"
+      },
+      {
+        "model": "remnant_bosses:block/eclipse_stone",
+        "y": 180
+      },
+      {
+        "model": "remnant_bosses:block/eclipse_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

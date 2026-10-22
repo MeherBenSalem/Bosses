@@ -1,0 +1,117 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 8,
+    "xz_spread": 3,
+    "y_spread": 2,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "minecraft:bone_block",
+                  "Properties": {
+                    "axis": "y"
+                  }
+                },
+                "weight": 4
+              },
+              {
+                "data": {
+                  "Name": "minecraft:bone_block",
+                  "Properties": {
+                    "axis": "x"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "minecraft:bone_block",
+                  "Properties": {
+                    "axis": "z"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "minecraft:skeleton_skull",
+                  "Properties": {
+                    "rotation": "0"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "minecraft:skeleton_skull",
+                  "Properties": {
+                    "rotation": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "minecraft:skeleton_skull",
+                  "Properties": {
+                    "rotation": "6"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "minecraft:skeleton_skull",
+                  "Properties": {
+                    "rotation": "9"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "minecraft:skeleton_skull",
+                  "Properties": {
+                    "rotation": "12"
+                  }
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:air"
+                ]
+              },
+              {
+                "type": "minecraft:has_sturdy_face",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "direction": "up"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

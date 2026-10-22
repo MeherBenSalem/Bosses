@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "remnant_bosses:eclipse_shard"
+    },
+    "title": {
+      "translate": "advancements.remnant_bosses.realm.root.title"
+    },
+    "description": {
+      "translate": "advancements.remnant_bosses.realm.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "remnant_bosses:textures/block/eclipse_stone_bricks.png"
+  },
+  "criteria": {
+    "shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "remnant_bosses:eclipse_shard"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "shard"
+    ]
+  ]
+}

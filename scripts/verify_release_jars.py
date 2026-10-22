@@ -13,8 +13,15 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 TARGETS = [('fabric', '1.20.1'), ('forge', '1.20.1'),
            ('fabric', '1.21.1'), ('neoforge', '1.21.1')]
-RECIPES = ['ancient_altar', 'ancient_pedestal', 'fang_on_a_stick',
-           'skeleton_skull', 'skeleton_skull_2']
+RECIPES = {
+    'ancient_altar_recipe': 'remnant_bosses:ancient_altar',
+    'ancient_pedestal_recipe': 'remnant_bosses:ancient_pedestal',
+    'skeleton_skull_recipe': 'minecraft:skeleton_skull',
+    **{name: f'remnant_bosses:{name}' for name in [
+        'boss_journal', 'eclipse_shard', 'eclipse_waygate', 'sovereigns_seal',
+        'regalia_cuirass', 'regalia_greaves', 'regalia_sabatons', 'crypt_key',
+        'memory_lens', 'archivist_hood', 'archivist_robe', 'archivist_leggings', 'archivist_boots']},
+}
 
 
 def verify(jar, loader, game, version):
@@ -25,12 +32,11 @@ def verify(jar, loader, game, version):
     with zipfile.ZipFile(jar) as z:
         names = z.namelist()
         assert len(names) == len(set(names)), f'{jar}: duplicate entries'
-        for name in RECIPES:
-            entry = f'data/remnant_bosses/{recipe_dir}/{name}_recipe.json'
+        for name, output in RECIPES.items():
+            entry = f'data/remnant_bosses/{recipe_dir}/{name}.json'
             raw = z.read(entry)
             assert raw == (resources / entry).read_bytes(), f'{jar}: stale recipe {entry}'
             recipe = json.loads(raw)
-            output = 'minecraft:skeleton_skull' if name.startswith('skeleton_skull') else f'remnant_bosses:{name}'
             assert recipe['result']['id' if modern else 'item'] == output
             assert recipe['result']['count'] == 1
         for name in ['ancient_altar', 'ancient_pedestal']:

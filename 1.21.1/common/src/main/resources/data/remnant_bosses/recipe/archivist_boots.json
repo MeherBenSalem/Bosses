@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "MFM",
+    "MDM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "remnant_bosses:memory_shard"
+    },
+    "F": {
+      "item": "remnant_bosses:knowledge_fragment"
+    },
+    "D": {
+      "item": "minecraft:diamond_boots"
+    }
+  },
+  "result": {
+    "id": "remnant_bosses:archivist_boots",
+    "count": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "MAM",
+    "ASA",
+    "MAM"
+  ],
+  "key": {
+    "M": {
+      "item": "remnant_bosses:memory_shard"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "S": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "result": {
+    "item": "remnant_bosses:memory_lens",
+    "count": 1
+  }
+}

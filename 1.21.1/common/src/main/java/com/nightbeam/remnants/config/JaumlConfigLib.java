@@ -64,25 +64,16 @@ public class JaumlConfigLib {
 		}
 	}
 
-	public static java.util.List<String> getStringListValue(String category, String file, String key) {
-		String val = getStringValue(category, file, key);
-		if (val.isEmpty())
-			return java.util.Collections.emptyList();
-		String[] split = val.split(",");
-		java.util.List<String> list = new java.util.ArrayList<>();
-		for (String s : split) {
-			list.add(s.trim());
-		}
-		return list;
-	}
-
 	/**
 	 * Provide sensible fallback defaults for config values.
 	 */
 	private static double getDefaultNumber(String category, String file, String key) {
         if ("remnant/monsters".equals(category) && BoneMonsterConfig.DEFAULTS.containsKey(file)) return BoneMonsterConfig.DEFAULTS.get(file).getOrDefault(key,1.0);
 		if ("hollow_sovereign".equals(file)) return SovereignConfig.DEFAULTS.getOrDefault(key, 1.0);
+		if (WardenConfig.FILE.equals(file)) return WardenConfig.DEFAULTS.getOrDefault(key, 1.0);
+		if (WatcherConfig.FILE.equals(file)) return WatcherConfig.DEFAULTS.getOrDefault(key, 1.0);
 		if ("presentation".equals(file)) return 1.0;
+		if ("remnant/realm".equals(category)) return RealmConfig.DEFAULTS.getOrDefault(key, 1.0);
 		// Return configuration defaults
 		if ("remnant/items".equals(category) && "ossukage_sword".equals(file)) {
 			return switch (key) {
@@ -114,39 +105,6 @@ public class JaumlConfigLib {
 				case "boss_music_radius" -> 64.0;
 				default -> 1.0;
 			};
-		} else if ("remnant/bosses".equals(category) && "umbrakar".equals(file)) {
-			return switch (key) {
-				case "max_health" -> 750.0;
-				case "attack_damage" -> 14.0;
-				case "movement_speed" -> 0.26;
-				case "armor" -> 10.0;
-				case "follow_range" -> 48.0;
-				case "hp_threshold_phase_2" -> 40.0;
-				case "attack_damage_phase_2" -> 18.0;
-				case "movement_speed_phase_2" -> 0.32;
-				case "bite_damage" -> 16.0;
-				case "slam_damage" -> 18.0;
-				case "tail_damage" -> 15.0;
-				case "roar_damage" -> 8.0;
-				case "roar_range" -> 16.0;
-				case "orb_damage" -> 8.0;
-				default -> 1.0;
-			};
-		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
-			return switch (key) {
-				case "enable_natural_spawning" -> 1.0;
-				case "spawn_weight" -> 10.0;
-				case "min_group_size" -> 1.0;
-				case "max_group_size" -> 3.0;
-				default -> 1.0;
-			};
-		} else if ("remnant/balance".equals(category) && "rat_stats".equals(file)) {
-			return switch (key) {
-				case "rat_health" -> 30.0;
-				case "rat_attack_damage" -> 4.0;
-				case "rat_armor" -> 2.0;
-				default -> 1.0;
-			};
 		}
 		return 1.0;
 	}
@@ -156,29 +114,15 @@ public class JaumlConfigLib {
 	 */
 	private static String getDefaultString(String category, String file, String key) {
 		if ("hollow_sovereign_summon".equals(file)) return SovereignConfig.RITUAL.getOrDefault(key, "");
+		if (WardenConfig.SUMMON.equals(file)) return WardenConfig.RITUAL.getOrDefault(key, "");
+		if (WatcherConfig.SUMMON.equals(file)) return WatcherConfig.RITUAL.getOrDefault(key, "");
 		if ("remnant/bosses".equals(category) && "ossukage_summon".equals(file)) {
 			return switch (key) {
-				case "portal_activation_item" -> "remnant_bosses:old_skeleton_head";
+				case "portal_activation_item" -> "minecraft:nether_star";
 				case "pedestal_one_activation_block" -> "minecraft:skeleton_skull";
 				case "pedestal_two_activation_block" -> "minecraft:skeleton_skull";
 				case "pedestal_three_activation_block" -> "minecraft:skeleton_skull";
 				case "pedestal_four_activation_block" -> "minecraft:skeleton_skull";
-				default -> "";
-			};
-		} else if ("remnant/bosses".equals(category) && "umbrakar_summon".equals(file)) {
-			return switch (key) {
-				case "portal_activation_item" -> "minecraft:echo_shard";
-				case "pedestal_one_activation_block" -> "minecraft:amethyst_block";
-				case "pedestal_two_activation_block" -> "minecraft:crying_obsidian";
-				case "pedestal_three_activation_block" -> "minecraft:end_stone";
-				case "pedestal_four_activation_block" -> "minecraft:sculk";
-				default -> "";
-			};
-		} else if ("remnant/spawning".equals(category) && "rat_spawns".equals(file)) {
-			return switch (key) {
-				case "dimension_whitelist" -> "minecraft:overworld";
-				case "dimension_blacklist" -> "minecraft:the_nether,minecraft:the_end";
-				case "biome_blacklist" -> "";
 				default -> "";
 			};
 		}

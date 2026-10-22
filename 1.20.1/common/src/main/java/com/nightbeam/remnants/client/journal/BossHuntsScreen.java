@@ -128,6 +128,9 @@ public final class BossHuntsScreen extends Screen {
         } else {
             if (state(selected) == HuntState.DEFEATED) {
                 paragraph(tr("completed"), GOLD, 12);
+                // Lore is optional per boss.
+                String lore = "gui.remnant_bosses.journal.lore." + selected.key();
+                if (net.minecraft.locale.Language.getInstance().has(lore)) paragraph(Component.translatable(lore), MUTED, 12);
             }
             ClientboundJournalPacket.Entry entry = entries.get(selected);
             RitualInfo ritual = entry == null ? null : entry.ritual();

@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "remnant_bosses:item/fang_on_a_stick"
-  }
-}
