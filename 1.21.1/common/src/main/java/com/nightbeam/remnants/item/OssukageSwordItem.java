@@ -41,7 +41,7 @@ public class OssukageSwordItem extends SwordItem {
 			}
 
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(ModItems.OLD_SKELETON_BONE.get()));
+				return Ingredient.of(new ItemStack(ModItems.GRAVE_IRON.get()));
 			}
 		}, new Item.Properties().fireResistant().attributes(SwordItem.createAttributes(new Tier() {
 			public int getUses() {
@@ -65,7 +65,7 @@ public class OssukageSwordItem extends SwordItem {
 			}
 
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(ModItems.OLD_SKELETON_BONE.get()));
+				return Ingredient.of(new ItemStack(ModItems.GRAVE_IRON.get()));
 			}
 		}, 3, -2f)));
 	}

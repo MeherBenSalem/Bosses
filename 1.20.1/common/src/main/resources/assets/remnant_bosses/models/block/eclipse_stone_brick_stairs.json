@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "remnant_bosses:block/eclipse_stone_bricks",
+    "top": "remnant_bosses:block/eclipse_stone_bricks",
+    "side": "remnant_bosses:block/eclipse_stone_bricks"
+  }
+}

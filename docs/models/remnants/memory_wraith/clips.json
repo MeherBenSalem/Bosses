@@ -1,0 +1,26 @@
+{
+  "idle": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "drift": {
+    "length": 1.2,
+    "loop": "loop"
+  },
+  "cast": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "blink": {
+    "length": 0.6,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 1.6,
+    "loop": "hold"
+  }
+}

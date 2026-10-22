@@ -1,19 +1,20 @@
 package com.nightbeam.remnants.client.model;
 
 import com.nightbeam.remnants.entity.HollowSovereignEntity;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+import software.bernie.geckolib.core.animation.AnimationState;
 
-public class HollowSovereignModel extends DefaultedEntityGeoModel<HollowSovereignEntity> {
-	private static final ResourceLocation BASE_ID = new ResourceLocation("remnant_bosses", "hollow_sovereign");
-	private static final ResourceLocation TEXTURE_ID = new ResourceLocation("remnant_bosses", "textures/entities/hollow_sovereign.png");
-
+/** Hides the pauldrons once they fly off (phase 2) and the breastplate once the soul bursts out (phase 3). */
+public class HollowSovereignModel extends RemnantGeoModel<HollowSovereignEntity> {
 	public HollowSovereignModel() {
-		super(BASE_ID);
+		super("hollow_sovereign");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(HollowSovereignEntity animatable) {
-		return TEXTURE_ID;
+	public void setCustomAnimations(HollowSovereignEntity animatable, long instanceId, AnimationState<HollowSovereignEntity> animationState) {
+		super.setCustomAnimations(animatable, instanceId, animationState);
+		boolean pauldrons = animatable.showsPauldrons();
+		getBone("pauldron_left").ifPresent(bone -> bone.setHidden(!pauldrons));
+		getBone("pauldron_right").ifPresent(bone -> bone.setHidden(!pauldrons));
+		getBone("breastplate").ifPresent(bone -> bone.setHidden(!animatable.showsBreastplate()));
 	}
 }

@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "direction": "up",
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:air"
+      ]
+    },
+    "prioritize_tip": false,
+    "layers": [
+      {
+        "height": {
+          "type": "minecraft:uniform",
+          "value": {
+            "min_inclusive": 1,
+            "max_inclusive": 4
+          }
+        },
+        "provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "remnant_bosses:eclipse_stone_bricks"
+              },
+              "weight": 3
+            },
+            {
+              "data": {
+                "Name": "remnant_bosses:cracked_eclipse_stone_bricks"
+              },
+              "weight": 2
+            }
+          ]
+        }
+      },
+      {
+        "height": {
+          "type": "minecraft:weighted_list",
+          "distribution": [
+            {
+              "data": 0,
+              "weight": 3
+            },
+            {
+              "data": 1,
+              "weight": 1
+            }
+          ]
+        },
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "remnant_bosses:chiseled_eclipse_stone_bricks"
+          }
+        }
+      }
+    ]
+  }
+}

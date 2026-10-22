@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "remnant_bosses:block/eclipse_stone_brick_slab"
+    },
+    "type=double": {
+      "model": "remnant_bosses:block/eclipse_stone_bricks"
+    },
+    "type=top": {
+      "model": "remnant_bosses:block/eclipse_stone_brick_slab_top"
+    }
+  }
+}

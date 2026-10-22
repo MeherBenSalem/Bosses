@@ -1,0 +1,42 @@
+{
+  "idle": {
+    "length": 5.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "slam": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "sweep": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "root_snare": {
+    "length": 2.8,
+    "loop": "once"
+  },
+  "bramble_wall": {
+    "length": 3.0,
+    "loop": "once"
+  },
+  "sprout": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "expose": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "stagger": {
+    "length": 1.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 5.0,
+    "loop": "hold"
+  }
+}

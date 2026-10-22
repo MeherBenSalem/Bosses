@@ -80,7 +80,6 @@ for version in ['1.21.1','1.20.1']:
     }); lang.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n')
     p=common/'resources/assets/remnant_bosses/models/item/hollow_sovereign_spawn_egg.json';p.write_text('{"parent":"minecraft:item/template_spawn_egg"}\n')
     folder='loot_table' if version=='1.21.1' else 'loot_tables'
-    p=common/f'resources/data/remnant_bosses/{folder}/entities/hollow_sovereign.json';p.parent.mkdir(parents=True,exist_ok=True)
+    p=common/f'resources/data/remnants/{folder}/entities/hollow_sovereign.json';p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps({'type':'minecraft:entity','pools':[{'rolls':1,'entries':[{'type':'minecraft:item','name':'minecraft:echo_shard','functions':[{'function':'minecraft:set_count','count':{'type':'minecraft:uniform','min':4,'max':8}}]}]},{'rolls':1,'entries':[{'type':'minecraft:item','name':'minecraft:bone','functions':[{'function':'minecraft:set_count','count':{'type':'minecraft:uniform','min':12,'max':24}}]}]}]},indent=2))
-    canonical=common/f'resources/data/remnants/{folder}/entities/hollow_sovereign.json';canonical.parent.mkdir(parents=True,exist_ok=True);canonical.write_text(p.read_text())
 print('Integrated both versions')

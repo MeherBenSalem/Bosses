@@ -193,7 +193,7 @@ public final class BossHuntsRuntimeProbe implements ModInitializer {
                     arrow.setOwner(actor);
                     source = actor.damageSources().arrow(arrow, actor);
                     LOG.info("SOURCE real owned Arrow object / vanilla arrow DamageSource; programmatic hurt, physics impact UNRUN");
-                } else if (boss == BossHunt.UMBRAKAR) {
+                } else if (boss == BossHunt.FORGOTTEN_WATCHER) {
                     Wolf wolf = EntityType.WOLF.create(actor.level());
                     require(wolf != null, "real Wolf factory");
                     wolf.tame(actor);

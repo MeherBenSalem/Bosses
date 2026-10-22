@@ -1,0 +1,26 @@
+{
+  "idle": {
+    "length": 4.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 2.0,
+    "loop": "loop"
+  },
+  "disturbed": {
+    "length": 1.5,
+    "loop": "once"
+  },
+  "strike": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 2.0,
+    "loop": "hold"
+  }
+}

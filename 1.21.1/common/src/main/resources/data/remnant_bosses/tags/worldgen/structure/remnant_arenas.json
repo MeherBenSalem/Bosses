@@ -1,0 +1,13 @@
+{
+  "values": [
+    "remnant_bosses:hollow_citadel",
+    {
+      "id": "remnant_bosses:gravebound_catacombs",
+      "required": false
+    },
+    {
+      "id": "remnant_bosses:forgotten_observatory",
+      "required": false
+    }
+  ]
+}

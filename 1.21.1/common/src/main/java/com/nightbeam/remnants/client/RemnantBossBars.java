@@ -13,9 +13,9 @@ public final class RemnantBossBars {
         if(name.getContents() instanceof TranslatableContents translated) {
             String key=translated.getKey();
             if(key.equals("entity.remnant_bosses.ossukage")||key.equals("entity.remnants.ossukage")) return 0;
-            if(key.equals("entity.remnant_bosses.kotsukage")||key.equals("entity.remnants.kotsukage")) return 1;
-            if(key.equals("entity.remnant_bosses.umbrakar")||key.equals("entity.remnants.umbrakar")) return 2;
-            if(key.equals("entity.remnant_bosses.hollow_sovereign")) return 3;
+            if(key.equals("entity.remnants.gravebound_warden")) return 1;
+            if(key.equals("entity.remnants.forgotten_watcher")) return 2;
+            if(key.equals("entity.remnant_bosses.hollow_sovereign")||key.equals("entity.remnants.hollow_sovereign")) return 3;
         }
         for(Component sibling:name.getSiblings()) { int t=theme(sibling); if(t>=0)return t; }
         return -1;
@@ -24,8 +24,8 @@ public final class RemnantBossBars {
     private static void rect(GuiGraphics g,int x,int y,int w,int h,int color) { g.fill(x,y,x+w,y+h,color); }
     public static boolean draw(GuiGraphics g,int x,int y,BossEvent event) {
         int theme=theme(event.getName()); if(theme<0||!enabled())return false;
-        int[] colors={0xFFE55169,0xFFE6BB74,0xFFBD66FF,0xFF70E6B0};
-        int[] shadows={0xFF692B40,0xFF75503D,0xFF503260,0xFF375B4C};
+        int[] colors={0xFFE55169,0xFFA6623B,0xFF9E86E0,0xFFD9B860};
+        int[] shadows={0xFF692B40,0xFF20231B,0xFF2A1F4A,0xFF2A3560};
         int glow=colors[theme],shade=shadows[theme],ink=0xFF16121F,bone=0xFFAD9181,light=0xFFE2C9AB;
         // The frame leaves the vanilla name row intact. All ornaments fit the 36px row.
         rect(g,x-3,y-2,188,13,ink); rect(g,x-1,y,184,9,bone); rect(g,x,y+1,182,7,shade);
@@ -51,9 +51,12 @@ public final class RemnantBossBars {
         y+=6;
         rect(g,c-10,y-3,20,16,ink); rect(g,c-8,y-4,16,16,bone);
         rect(g,c-6,y-5,12,3,light); rect(g,c-6,y+10,12,6,ink); rect(g,c-4,y+10,8,5,bone);
-        if(theme==2) { // Riftmaw: horned single eye.
+        if(theme==2) { // Forgotten Watcher: a single crystal eye ringed by rune arcs.
             rect(g,c-7,y,14,7,shade); rect(g,c-5,y+2,10,3,glow); rect(g,c-1,y,2,7,ink);
-            for(int s:new int[]{-1,1}) { rect(g,c+s*10-1,y-6,3,8,ink); rect(g,c+s*12-1,y-5,3,3,bone); }
+            for(int s:new int[]{-1,1}) {
+                rect(g,c+s*10-1,y-3,2,10,ink); rect(g,c+s*12-1,y-1,2,6,ink);
+                rect(g,c+s*10-1,y+1,2,2,glow);
+            }
         } else {
             rect(g,c-6,y+1,5,5,ink); rect(g,c+1,y+1,5,5,ink);
             rect(g,c-5,y+2,3,2,glow); rect(g,c+2,y+2,3,2,glow); rect(g,c-1,y+6,2,3,ink);

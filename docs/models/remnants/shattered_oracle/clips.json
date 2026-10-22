@@ -1,0 +1,42 @@
+{
+  "idle": {
+    "length": 6.0,
+    "loop": "loop"
+  },
+  "volley": {
+    "length": 2.2,
+    "loop": "once"
+  },
+  "shield": {
+    "length": 1.4,
+    "loop": "once"
+  },
+  "absorb": {
+    "length": 3.6,
+    "loop": "once"
+  },
+  "smite": {
+    "length": 2.6,
+    "loop": "once"
+  },
+  "illusion": {
+    "length": 1.2,
+    "loop": "once"
+  },
+  "fracture": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "reconstruct": {
+    "length": 4.0,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 5.0,
+    "loop": "hold"
+  }
+}

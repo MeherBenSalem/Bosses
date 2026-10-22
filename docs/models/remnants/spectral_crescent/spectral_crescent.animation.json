@@ -1,0 +1,66 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.spectral_crescent.spin": {
+      "loop": true,
+      "animation_length": 0.5,
+      "bones": {
+        "arc": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                -6
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.25": {
+              "vector": [
+                0,
+                0,
+                6
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.5": {
+              "vector": [
+                0,
+                0,
+                -6
+              ],
+              "easing": "easeInOutSine"
+            }
+          },
+          "scale": {
+            "0.0": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.25": {
+              "vector": [
+                1.06,
+                1.2,
+                1.06
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.5": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            }
+          }
+        }
+      }
+    }
+  },
+  "geckolib_format_version": 2
+}

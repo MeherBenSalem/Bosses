@@ -1,0 +1,214 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.shardling.idle": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "cluster": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "linear"
+            },
+            "1.0": {
+              "vector": [
+                0,
+                -20,
+                0
+              ],
+              "easing": "linear"
+            },
+            "2.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "linear"
+            }
+          },
+          "position": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "linear"
+            },
+            "1.0": {
+              "vector": [
+                0,
+                1,
+                0
+              ],
+              "easing": "linear"
+            },
+            "2.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "linear"
+            }
+          }
+        },
+        "chips": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "linear"
+            },
+            "1.0": {
+              "vector": [
+                0,
+                -180,
+                0
+              ],
+              "easing": "linear"
+            },
+            "2.0": {
+              "vector": [
+                0,
+                -360,
+                0
+              ],
+              "easing": "linear"
+            }
+          }
+        }
+      }
+    },
+    "animation.shardling.shoot": {
+      "animation_length": 0.8,
+      "bones": {
+        "cluster": {
+          "scale": {
+            "0.0": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.3333": {
+              "vector": [
+                0.8,
+                1.2,
+                0.8
+              ],
+              "easing": "easeInCubic"
+            },
+            "0.4167": {
+              "vector": [
+                1.2,
+                0.9,
+                1.2
+              ],
+              "easing": "easeOutExpo"
+            },
+            "0.7917": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            }
+          }
+        }
+      }
+    },
+    "animation.shardling.hurt": {
+      "animation_length": 0.3,
+      "bones": {
+        "cluster": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.0833": {
+              "vector": [
+                20,
+                0,
+                16
+              ],
+              "easing": "easeOutExpo"
+            },
+            "0.2917": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "easeInOutSine"
+            }
+          }
+        }
+      }
+    },
+    "animation.shardling.death": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.6,
+      "bones": {
+        "cluster": {
+          "scale": {
+            "0.0": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.5833": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "easeOutExpo"
+            }
+          }
+        },
+        "chips": {
+          "scale": {
+            "0.0": {
+              "vector": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            },
+            "0.5833": {
+              "vector": [
+                2.5,
+                2.5,
+                2.5
+              ],
+              "easing": "easeOutExpo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "geckolib_format_version": 2
+}

@@ -1,0 +1,34 @@
+{
+  "idle": {
+    "length": 3.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 1.5,
+    "loop": "loop"
+  },
+  "block": {
+    "length": 1.0,
+    "loop": "loop"
+  },
+  "bash": {
+    "length": 1.0,
+    "loop": "once"
+  },
+  "strike": {
+    "length": 1.8,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 2.0,
+    "loop": "hold"
+  },
+  "rise": {
+    "length": 1.5,
+    "loop": "once"
+  }
+}

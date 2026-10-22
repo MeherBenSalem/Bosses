@@ -1,0 +1,283 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "stone": "remnant_bosses:block/weathered_gravestone",
+    "particle": "remnant_bosses:block/weathered_gravestone"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        5.5
+      ],
+      "to": [
+        13,
+        2,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            14,
+            10,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            0,
+            14,
+            10,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            10,
+            11,
+            15,
+            13
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            10,
+            11,
+            15,
+            13
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            0,
+            11,
+            10,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            0,
+            11,
+            10,
+            16
+          ],
+          "texture": "#stone",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        2,
+        7
+      ],
+      "to": [
+        12,
+        11,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            2,
+            8,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            8,
+            2,
+            16,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            8,
+            2,
+            10,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            14,
+            2,
+            16,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            16,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            8,
+            9,
+            16,
+            11
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        11,
+        7
+      ],
+      "to": [
+        11,
+        12,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            1,
+            7,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            9,
+            1,
+            15,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            8,
+            1,
+            10,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            14,
+            1,
+            16,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            14,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            8,
+            9,
+            14,
+            11
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        12,
+        7
+      ],
+      "to": [
+        10,
+        13,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            0,
+            6,
+            1
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            10,
+            0,
+            14,
+            1
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            10,
+            1
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            14,
+            0,
+            16,
+            1
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            12,
+            2
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            8,
+            9,
+            12,
+            11
+          ],
+          "texture": "#stone"
+        }
+      }
+    }
+  ]
+}

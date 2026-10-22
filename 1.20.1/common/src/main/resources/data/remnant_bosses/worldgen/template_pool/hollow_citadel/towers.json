@@ -1,0 +1,14 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "remnant_bosses:hollow_citadel/east_tower",
+        "processors": "remnant_bosses:hollow_citadel_weathering",
+        "projection": "rigid"
+      }
+    }
+  ]
+}

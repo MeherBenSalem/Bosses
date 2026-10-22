@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:block",
+  "pools": [],
+  "random_sequence": "remnant_bosses:blocks/waygate_frame"
+}

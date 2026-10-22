@@ -8,7 +8,7 @@ Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the 
 | --- | --- |
 | [`curseforge/description.md`](curseforge/description.md) | Full project description (Markdown; also works on Modrinth) |
 | [`curseforge/summary.txt`](curseforge/summary.txt) | Short project summary (216 characters) |
-| [`../release-notes/2.7.0.md`](../release-notes/2.7.0.md) | File changelog for 2.7.0 |
+| [`../patchnotes/2.7.0.md`](../patchnotes/2.7.0.md) | File changelog for 2.7.0 |
 
 Image links in the description point at `raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/...`, so they work once this folder is on `main`. To host on CurseForge instead, upload the images to the project gallery and replace each URL.
 

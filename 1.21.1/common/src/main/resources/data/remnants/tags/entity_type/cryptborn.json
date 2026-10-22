@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "remnants:gravebound_soldier",
+    "remnants:crypt_lurker",
+    "remnants:catacomb_rat",
+    "remnants:burial_guardian"
+  ]
+}

@@ -17,22 +17,116 @@
       }
     ]
   },
-  "armored_grub_ambient": {
-    "subtitle": "subtitles.armored_grub_ambient",
+  "sovereign_toll": {
     "sounds": [
       {
-        "name": "remnant_bosses:armored_grub_ambient",
-        "stream": false
+        "name": "remnant_bosses:sovereign_toll"
       }
-    ]
+    ],
+    "subtitle": "subtitles.remnant_bosses.sovereign_toll"
   },
-  "armored_grub_death": {
-    "subtitle": "subtitles.armored_grub_death",
+  "sovereign_guard": {
     "sounds": [
       {
-        "name": "remnant_bosses:armored_grub_death",
-        "stream": false
+        "name": "remnant_bosses:sovereign_guard"
       }
-    ]
+    ],
+    "subtitle": "subtitles.remnant_bosses.sovereign_guard"
+  },
+  "spectral_slash": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:spectral_slash"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.spectral_slash"
+  },
+  "pauldron_hum": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:pauldron_hum"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.pauldron_hum"
+  },
+  "legion_horn": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:legion_horn"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.legion_horn"
+  },
+  "soul_release": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:soul_release"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.soul_release"
+  },
+  "waygate_kindle": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/waygate_kindle"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.waygate_kindle"
+  },
+  "waygate_open": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/waygate_open"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.waygate_open"
+  },
+  "waygate_hum": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/waygate_hum"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.waygate_hum"
+  },
+  "waygate_cross": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/waygate_cross"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.waygate_cross"
+  },
+  "grace_discover": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/grace_discover"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.grace_discover"
+  },
+  "grace_rest": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/grace_rest"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.grace_rest"
+  },
+  "remnant_felled": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/remnant_felled"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.remnant_felled"
+  },
+  "fog_gate_pass": {
+    "sounds": [
+      {
+        "name": "remnant_bosses:realm/fog_gate_pass"
+      }
+    ],
+    "subtitle": "subtitles.remnant_bosses.fog_gate_pass"
   }
 }

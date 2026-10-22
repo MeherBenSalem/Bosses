@@ -1,0 +1,30 @@
+{
+  "idle": {
+    "length": 4.0,
+    "loop": "loop"
+  },
+  "walk": {
+    "length": 2.4,
+    "loop": "loop"
+  },
+  "slam": {
+    "length": 2.4,
+    "loop": "once"
+  },
+  "sweep": {
+    "length": 1.8,
+    "loop": "once"
+  },
+  "unseal": {
+    "length": 2.6,
+    "loop": "once"
+  },
+  "hurt": {
+    "length": 0.4,
+    "loop": "once"
+  },
+  "death": {
+    "length": 2.4,
+    "loop": "hold"
+  }
+}

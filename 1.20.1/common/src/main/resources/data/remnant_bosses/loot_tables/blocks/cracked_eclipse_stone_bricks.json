@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "remnant_bosses:cracked_eclipse_stone_bricks"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "remnant_bosses:blocks/cracked_eclipse_stone_bricks"
+}
