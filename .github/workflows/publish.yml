@@ -75,7 +75,7 @@ jobs:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
           python scripts/verify_release_jars.py --version "$VERSION" --jar-dir releases --output releases/manifest.json
-          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "release-notes/$VERSION.md" --dry-run
+          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "patchnotes/$VERSION.md" --dry-run
 
       - uses: actions/upload-artifact@v4
         with:
@@ -95,4 +95,4 @@ jobs:
         run: |
           set -euo pipefail
           test -n "${MODRINTH_ID:-}" && test -n "${CURSEFORGE_ID:-}"
-          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "release-notes/$VERSION.md"
+          node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "patchnotes/$VERSION.md"
