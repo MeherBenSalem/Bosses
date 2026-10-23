@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "remnant_bosses:archivist"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "remnant_bosses:archivist"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": {
+          "id": "minecraft:bone_block",
+          "properties": {
+            "axis": "y"
+          }
+        },
+        "weight": 4
+      },
+      {
+        "data": {
+          "id": "minecraft:bone_block",
+          "properties": {
+            "axis": "x"
+          }
+        },
+        "weight": 2
+      },
+      {
+        "data": {
+          "id": "minecraft:bone_block",
+          "properties": {
+            "axis": "z"
+          }
+        },
+        "weight": 2
+      },
+      {
+        "data": {
+          "id": "minecraft:skeleton_skull",
+          "properties": {
+            "rotation": "0"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:skeleton_skull",
+          "properties": {
+            "rotation": "3"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:skeleton_skull",
+          "properties": {
+            "rotation": "6"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:skeleton_skull",
+          "properties": {
+            "rotation": "9"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:skeleton_skull",
+          "properties": {
+            "rotation": "12"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

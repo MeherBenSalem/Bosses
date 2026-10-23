@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": {
+          "id": "remnant_bosses:weathered_gravestone",
+          "properties": {
+            "facing": "north"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "remnant_bosses:weathered_gravestone",
+          "properties": {
+            "facing": "south"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "remnant_bosses:weathered_gravestone",
+          "properties": {
+            "facing": "east"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "remnant_bosses:weathered_gravestone",
+          "properties": {
+            "facing": "west"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

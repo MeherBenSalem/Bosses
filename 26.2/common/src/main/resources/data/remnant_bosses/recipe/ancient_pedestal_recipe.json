@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    " b ",
+    "bbb"
+  ],
+  "key": {
+    "a": "minecraft:emerald",
+    "b": "minecraft:chiseled_deepslate"
+  },
+  "result": {
+    "count": 1,
+    "id": "remnant_bosses:ancient_pedestal"
+  }
+}

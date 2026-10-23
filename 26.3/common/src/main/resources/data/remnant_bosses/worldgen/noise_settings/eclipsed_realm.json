@@ -1,0 +1,1114 @@
+{
+  "aquifers": {
+    "barrier": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_barrier",
+      "xz_scale": 1.0,
+      "y_scale": 0.5
+    },
+    "exclusion": {
+      "type": "minecraft:min",
+      "left": {
+        "type": "minecraft:sub",
+        "left": -0.225,
+        "right": "minecraft:overworld/erosion"
+      },
+      "right": {
+        "type": "minecraft:max",
+        "left": {
+          "type": "minecraft:sub",
+          "left": "minecraft:overworld/depth",
+          "right": 0.9
+        },
+        "right": 0.0
+      }
+    },
+    "fluid_level_floodedness": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_fluid_level_floodedness",
+      "xz_scale": 1.0,
+      "y_scale": 0.67
+    },
+    "fluid_level_spread": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_fluid_level_spread",
+      "xz_scale": 1.0,
+      "y_scale": 0.7142857142857143
+    },
+    "lava": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_lava",
+      "xz_scale": 1.0,
+      "y_scale": 1.0
+    },
+    "surface_level": "minecraft:overworld/preliminary_surface_level"
+  },
+  "debug_functions": [
+    {
+      "function": "minecraft:overworld/final_density",
+      "label": "N"
+    },
+    {
+      "function": "minecraft:overworld/temperature",
+      "label": "T"
+    },
+    {
+      "function": "minecraft:overworld/vegetation",
+      "label": "V"
+    },
+    {
+      "function": "minecraft:overworld/continents",
+      "label": "C"
+    },
+    {
+      "function": "minecraft:overworld/erosion",
+      "label": "E"
+    },
+    {
+      "function": "minecraft:overworld/depth",
+      "label": "D"
+    },
+    {
+      "function": "minecraft:overworld/ridges",
+      "label": "W"
+    },
+    {
+      "function": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:add",
+          "left": {
+            "type": "minecraft:abs",
+            "input": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:abs",
+                "input": "minecraft:overworld/ridges"
+              },
+              "right": -0.6666667
+            }
+          },
+          "right": -0.33333334
+        },
+        "right": -3.0
+      },
+      "label": "PV"
+    },
+    {
+      "function": "minecraft:overworld/preliminary_surface_level",
+      "label": "PS"
+    }
+  ],
+  "default_block": {
+    "id": "remnant_bosses:eclipse_stone"
+  },
+  "default_fluid": {
+    "id": "minecraft:water",
+    "properties": {
+      "level": "0"
+    }
+  },
+  "disable_mob_generation": false,
+  "legacy_random_source": false,
+  "material_rule": {
+    "type": "minecraft:sequence",
+    "sequence": [
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "above_bottom": 5
+          },
+          "random_name": "minecraft:bedrock_floor",
+          "true_at_and_below": {
+            "above_bottom": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "id": "minecraft:bedrock"
+          }
+        }
+      },
+      "minecraft:overworld/copper_ore_vein",
+      "minecraft:overworld/iron_ore_vein",
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:above_preliminary_surface"
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:stone_depth",
+                "offset": 0,
+                "add_surface_depth": false,
+                "secondary_depth_range": 0,
+                "surface_type": "floor"
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:water",
+                  "offset": -1,
+                  "surface_depth_multiplier": 0,
+                  "add_stone_depth": false
+                },
+                "then_run": {
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "remnant_bosses:stilled_sea"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:steep"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "remnant_bosses:eclipse_stone"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:y_above",
+                              "anchor": {
+                                "absolute": 64
+                              },
+                              "surface_depth_multiplier": 1,
+                              "add_stone_depth": false
+                            },
+                            "then_run": {
+                              "type": "minecraft:sequence",
+                              "sequence": [
+                                {
+                                  "type": "minecraft:condition",
+                                  "if_true": {
+                                    "type": "minecraft:water",
+                                    "offset": 0,
+                                    "surface_depth_multiplier": 0,
+                                    "add_stone_depth": false
+                                  },
+                                  "then_run": {
+                                    "type": "minecraft:block",
+                                    "result_state": {
+                                      "id": "minecraft:grass_block",
+                                      "properties": {
+                                        "snowy": "false"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:dirt"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:gravel",
+                              "min_threshold": -0.05,
+                              "max_threshold": 0.05
+                            },
+                            "then_run": {
+                              "type": "minecraft:sequence",
+                              "sequence": [
+                                {
+                                  "type": "minecraft:condition",
+                                  "if_true": {
+                                    "type": "minecraft:stone_depth",
+                                    "offset": 0,
+                                    "add_surface_depth": false,
+                                    "secondary_depth_range": 0,
+                                    "surface_type": "ceiling"
+                                  },
+                                  "then_run": {
+                                    "type": "minecraft:block",
+                                    "result_state": {
+                                      "id": "remnant_bosses:eclipse_stone"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:gravel"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:stone_depth",
+                                  "offset": 0,
+                                  "add_surface_depth": false,
+                                  "secondary_depth_range": 0,
+                                  "surface_type": "ceiling"
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:sandstone"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:sand"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "remnant_bosses:lantern_heights"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:steep"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:calcite"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": 0.24,
+                              "max_threshold": 1.7976931348623157e+308
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:calcite"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": -1.7976931348623157e+308,
+                              "max_threshold": -0.45
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:coarse_dirt"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:water",
+                                  "offset": 0,
+                                  "surface_depth_multiplier": 0,
+                                  "add_stone_depth": false
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:grass_block",
+                                    "properties": {
+                                      "snowy": "false"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:steep"
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "id": "remnant_bosses:eclipse_stone"
+                        }
+                      }
+                    },
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "remnant_bosses:ashen_wastes"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": 0.32,
+                              "max_threshold": 1.7976931348623157e+308
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "remnant_bosses:eclipse_stone"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": 0.0,
+                              "max_threshold": 0.32
+                            },
+                            "then_run": {
+                              "type": "minecraft:sequence",
+                              "sequence": [
+                                {
+                                  "type": "minecraft:condition",
+                                  "if_true": {
+                                    "type": "minecraft:stone_depth",
+                                    "offset": 0,
+                                    "add_surface_depth": false,
+                                    "secondary_depth_range": 0,
+                                    "surface_type": "ceiling"
+                                  },
+                                  "then_run": {
+                                    "type": "minecraft:block",
+                                    "result_state": {
+                                      "id": "remnant_bosses:eclipse_stone"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:gravel"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": -0.3,
+                              "max_threshold": 0.0
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:coarse_dirt"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:water",
+                                  "offset": 0,
+                                  "surface_depth_multiplier": 0,
+                                  "add_stone_depth": false
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:grass_block",
+                                    "properties": {
+                                      "snowy": "false"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "remnant_bosses:gravefield_barrows"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": 0.18,
+                              "max_threshold": 1.7976931348623157e+308
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:podzol",
+                                "properties": {
+                                  "snowy": "false"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "noise": "minecraft:surface",
+                              "min_threshold": -1.7976931348623157e+308,
+                              "max_threshold": -0.42
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:rooted_dirt"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:water",
+                                  "offset": 0,
+                                  "surface_depth_multiplier": 0,
+                                  "add_stone_depth": false
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:grass_block",
+                                    "properties": {
+                                      "snowy": "false"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:water",
+                            "offset": 0,
+                            "surface_depth_multiplier": 0,
+                            "add_stone_depth": false
+                          },
+                          "then_run": {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "id": "minecraft:grass_block",
+                              "properties": {
+                                "snowy": "false"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "id": "minecraft:dirt"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:water",
+                "offset": -6,
+                "surface_depth_multiplier": -1,
+                "add_stone_depth": true
+              },
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:stone_depth",
+                      "offset": 0,
+                      "add_surface_depth": true,
+                      "secondary_depth_range": 0,
+                      "surface_type": "floor"
+                    },
+                    "then_run": {
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:biome",
+                            "biome_is": [
+                              "remnant_bosses:stilled_sea"
+                            ]
+                          },
+                          "then_run": {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:y_above",
+                                  "anchor": {
+                                    "absolute": 64
+                                  },
+                                  "surface_depth_multiplier": 1,
+                                  "add_stone_depth": false
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:dirt"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:sequence",
+                                "sequence": [
+                                  {
+                                    "type": "minecraft:condition",
+                                    "if_true": {
+                                      "type": "minecraft:stone_depth",
+                                      "offset": 0,
+                                      "add_surface_depth": false,
+                                      "secondary_depth_range": 0,
+                                      "surface_type": "ceiling"
+                                    },
+                                    "then_run": {
+                                      "type": "minecraft:block",
+                                      "result_state": {
+                                        "id": "minecraft:sandstone"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "minecraft:block",
+                                    "result_state": {
+                                      "id": "minecraft:sand"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:biome",
+                            "biome_is": [
+                              "remnant_bosses:lantern_heights"
+                            ]
+                          },
+                          "then_run": {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:steep"
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:calcite"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:noise_threshold",
+                                  "noise": "minecraft:surface",
+                                  "min_threshold": 0.24,
+                                  "max_threshold": 1.7976931348623157e+308
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:calcite"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:steep"
+                          },
+                          "then_run": {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "id": "remnant_bosses:eclipse_stone"
+                            }
+                          }
+                        },
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:biome",
+                            "biome_is": [
+                              "remnant_bosses:ashen_wastes"
+                            ]
+                          },
+                          "then_run": {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:noise_threshold",
+                                  "noise": "minecraft:surface",
+                                  "min_threshold": 0.32,
+                                  "max_threshold": 1.7976931348623157e+308
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "remnant_bosses:eclipse_stone"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:noise_threshold",
+                                  "noise": "minecraft:surface",
+                                  "min_threshold": 0.0,
+                                  "max_threshold": 0.32
+                                },
+                                "then_run": {
+                                  "type": "minecraft:sequence",
+                                  "sequence": [
+                                    {
+                                      "type": "minecraft:condition",
+                                      "if_true": {
+                                        "type": "minecraft:stone_depth",
+                                        "offset": 0,
+                                        "add_surface_depth": false,
+                                        "secondary_depth_range": 0,
+                                        "surface_type": "ceiling"
+                                      },
+                                      "then_run": {
+                                        "type": "minecraft:block",
+                                        "result_state": {
+                                          "id": "remnant_bosses:eclipse_stone"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "minecraft:block",
+                                      "result_state": {
+                                        "id": "minecraft:gravel"
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:noise_threshold",
+                                  "noise": "minecraft:surface",
+                                  "min_threshold": -0.3,
+                                  "max_threshold": 0.0
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:coarse_dirt"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:coarse_dirt"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:biome",
+                            "biome_is": [
+                              "remnant_bosses:gravefield_barrows"
+                            ]
+                          },
+                          "then_run": {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:noise_threshold",
+                                  "noise": "minecraft:surface",
+                                  "min_threshold": -1.7976931348623157e+308,
+                                  "max_threshold": -0.2
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:rooted_dirt"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "id": "minecraft:dirt"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:biome",
+                      "biome_is": [
+                        "remnant_bosses:stilled_sea"
+                      ]
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:stone_depth",
+                        "offset": 0,
+                        "add_surface_depth": true,
+                        "secondary_depth_range": 6,
+                        "surface_type": "floor"
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "id": "minecraft:sandstone"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:stone_depth",
+                "offset": 0,
+                "add_surface_depth": false,
+                "secondary_depth_range": 0,
+                "surface_type": "floor"
+              },
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:biome",
+                      "biome_is": [
+                        "remnant_bosses:stilled_sea"
+                      ]
+                    },
+                    "then_run": {
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:noise_threshold",
+                            "noise": "minecraft:surface",
+                            "min_threshold": 0.0,
+                            "max_threshold": 1.7976931348623157e+308
+                          },
+                          "then_run": {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:stone_depth",
+                                  "offset": 0,
+                                  "add_surface_depth": false,
+                                  "secondary_depth_range": 0,
+                                  "surface_type": "ceiling"
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "id": "minecraft:sandstone"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "minecraft:sand"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "minecraft:sequence",
+                          "sequence": [
+                            {
+                              "type": "minecraft:condition",
+                              "if_true": {
+                                "type": "minecraft:stone_depth",
+                                "offset": 0,
+                                "add_surface_depth": false,
+                                "secondary_depth_range": 0,
+                                "surface_type": "ceiling"
+                              },
+                              "then_run": {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "id": "remnant_bosses:eclipse_stone"
+                                }
+                              }
+                            },
+                            {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "id": "minecraft:gravel"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "minecraft:sequence",
+                    "sequence": [
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:stone_depth",
+                          "offset": 0,
+                          "add_surface_depth": false,
+                          "secondary_depth_range": 0,
+                          "surface_type": "ceiling"
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "id": "remnant_bosses:eclipse_stone"
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "id": "minecraft:gravel"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 8
+          },
+          "random_name": "minecraft:deepslate",
+          "true_at_and_below": {
+            "absolute": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "id": "minecraft:deepslate",
+            "properties": {
+              "axis": "y"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "noise": {
+    "height": 384,
+    "min_y": -64
+  },
+  "noise_router": {
+    "chunk_surface_level": "minecraft:overworld/chunk_surface_level",
+    "continents": "minecraft:overworld/continents",
+    "depth": "minecraft:overworld/depth",
+    "erosion": "minecraft:overworld/erosion",
+    "final_density": "minecraft:overworld/final_density",
+    "ridges": "minecraft:overworld/ridges",
+    "temperature": "minecraft:overworld/temperature",
+    "vegetation": "minecraft:overworld/vegetation"
+  },
+  "sea_level": 63,
+  "spawn_target": [
+    {
+      "minecraft:overworld/continents": [
+        -0.11,
+        1.0
+      ],
+      "minecraft:overworld/erosion": [
+        -1.0,
+        1.0
+      ],
+      "minecraft:overworld/ridges": [
+        -1.0,
+        -0.16
+      ],
+      "minecraft:overworld/temperature": [
+        -1.0,
+        1.0
+      ],
+      "minecraft:overworld/vegetation": [
+        -1.0,
+        1.0
+      ]
+    },
+    {
+      "minecraft:overworld/continents": [
+        -0.11,
+        1.0
+      ],
+      "minecraft:overworld/erosion": [
+        -1.0,
+        1.0
+      ],
+      "minecraft:overworld/ridges": [
+        0.16,
+        1.0
+      ],
+      "minecraft:overworld/temperature": [
+        -1.0,
+        1.0
+      ],
+      "minecraft:overworld/vegetation": [
+        -1.0,
+        1.0
+      ]
+    }
+  ]
+}

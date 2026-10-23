@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "remnant_bosses:warden"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "remnant_bosses:warden"
+      }
+    ]
+  }
+}

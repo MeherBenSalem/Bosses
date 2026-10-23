@@ -1,0 +1,190 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#66687e",
+    "minecraft:visual/fog_color": "#ba9f63",
+    "minecraft:visual/water_fog_color": "#132a2a",
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      },
+      "additions": {
+        "sound": "minecraft:block.amethyst_block.chime",
+        "tick_chance": 0.004
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "remnant_bosses:grace_mote"
+        },
+        "probability": 0.004
+      }
+    ],
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "minecraft:music.overworld.cherry_grove",
+        "min_delay": 12000,
+        "max_delay": 24000
+      }
+    }
+  },
+  "has_precipitation": false,
+  "temperature": 0.6,
+  "downfall": 0.8,
+  "spawners": {
+    "monster": [
+      {
+        "type": "remnants:catacomb_rat",
+        "weight": 12,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "remnants:crypt_lurker",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "remnants:hollow_sentinel",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "remnants:lost_pilgrim",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "remnants:shardling",
+        "weight": 12,
+        "minCount": 3,
+        "maxCount": 4
+      }
+    ],
+    "creature": [
+      {
+        "type": "minecraft:sheep",
+        "weight": 8,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:rabbit",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 3
+      },
+      {
+        "type": "minecraft:fox",
+        "weight": 3,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ],
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "weight": 4,
+        "minCount": 8,
+        "maxCount": 8
+      }
+    ],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {
+    "remnants:catacomb_rat": {
+      "energy_budget": 0.2,
+      "charge": 0.5
+    },
+    "remnants:crypt_lurker": {
+      "energy_budget": 0.15,
+      "charge": 0.7
+    },
+    "remnants:hollow_sentinel": {
+      "energy_budget": 0.15,
+      "charge": 0.7
+    },
+    "remnants:lost_pilgrim": {
+      "energy_budget": 0.15,
+      "charge": 0.7
+    },
+    "remnants:shardling": {
+      "energy_budget": 0.2,
+      "charge": 0.5
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "features": [
+    [],
+    [
+      "remnant_bosses:lake_lava_underground"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [
+      "remnant_bosses:spring_water",
+      "remnant_bosses:spring_lava"
+    ],
+    [
+      "remnant_bosses:glow_lichen",
+      "remnant_bosses:gracewood_giant_trees",
+      "remnant_bosses:gracewood_trees",
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_forest",
+      "minecraft:flower_default",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:patch_sugar_cane"
+    ],
+    []
+  ],
+  "effects": {
+    "water_color": "#2f5e5e",
+    "grass_color": "#a3b24a",
+    "foliage_color": "#98a83e"
+  }
+}

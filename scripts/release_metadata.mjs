@@ -15,6 +15,7 @@ export const DEPENDENCY_PROJECTS = Object.freeze({
 
 const SUPPORTED_TARGETS = new Set([
   "fabric:1.20.1", "forge:1.20.1", "fabric:1.21.1", "neoforge:1.21.1",
+  "fabric:26.2", "neoforge:26.2", "fabric:26.3", "neoforge:26.3",
 ]);
 
 export function assertCompleteRelease(releases) {
@@ -55,7 +56,7 @@ export function curseforgeRelations(loader, game) {
 export function parseJar(jar, expectedVersion) {
   const name = path.basename(jar);
   const match = name.match(
-    /^remnant_bosses-(fabric|forge|neoforge)-(\d+\.\d+\.\d+)-(\d+\.\d+\.\d+(?:-[A-Za-z0-9.]+)?)\.jar$/,
+    /^remnant_bosses-(fabric|forge|neoforge)-(\d+\.\d+(?:\.\d+)?)-(\d+\.\d+\.\d+(?:-[A-Za-z0-9.]+)?)\.jar$/,
   );
   if (!match) throw new Error(`Cannot parse release jar ${name}`);
   const [, loader, game, version] = match;

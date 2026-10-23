@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:amethyst_shard",
+    "minecraft:ender_pearl",
+    "minecraft:gold_ingot"
+  ],
+  "result": {
+    "id": "remnant_bosses:eclipse_shard",
+    "count": 1
+  }
+}

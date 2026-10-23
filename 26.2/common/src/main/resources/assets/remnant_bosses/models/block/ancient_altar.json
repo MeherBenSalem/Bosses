@@ -1,0 +1,9 @@
+{
+  "parent": "remnant_bosses:custom/alter",
+  "textures": {
+    "all": "remnant_bosses:block/alter",
+    "particle": "remnant_bosses:block/alter",
+    "2": "remnant_bosses:block/alter"
+  },
+  "render_type": "solid"
+}

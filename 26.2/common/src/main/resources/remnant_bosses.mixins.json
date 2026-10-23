@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.nightbeam.remnants.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "JournalLivingEntityMixin",
+    "PlayerSweepMixin",
+    "RelicDamageMixin",
+    "RealmBuildMixin",
+    "RealmItemUseMixin",
+    "RealmBucketMixin",
+    "RealmExplosionMixin"
+  ],
+  "client": [
+    "BossHealthOverlayMixin",
+    "GuiRealmOverlayMixin",
+    "CameraShakeMixin",
+    "SkyRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

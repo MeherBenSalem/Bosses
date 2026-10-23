@@ -1,0 +1,192 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#6a6562",
+    "minecraft:visual/fog_color": "#a2927a",
+    "minecraft:visual/water_fog_color": "#172628",
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.soul_sand_valley.mood",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      },
+      "additions": {
+        "sound": "minecraft:ambient.soul_sand_valley.additions",
+        "tick_chance": 0.0111
+      },
+      "loop": "minecraft:ambient.soul_sand_valley.loop"
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:white_ash"
+        },
+        "probability": 0.06
+      }
+    ],
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "minecraft:music.nether.soul_sand_valley",
+        "min_delay": 12000,
+        "max_delay": 24000
+      }
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {
+          "remnants:hollow_sentinel": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:gravebound_soldier": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:soulbound_knight": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          },
+          "remnants:crypt_lurker": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:ashbound_crawler": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:ember_servitor": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:rusted_guardian": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          }
+        },
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "remnants:hollow_sentinel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 20
+            },
+            {
+              "type": "remnants:gravebound_soldier",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 15
+            },
+            {
+              "type": "remnants:soulbound_knight",
+              "count": 1,
+              "weight": 8
+            },
+            {
+              "type": "remnants:crypt_lurker",
+              "count": 1,
+              "weight": 10
+            },
+            {
+              "type": "remnants:ashbound_crawler",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 25
+            },
+            {
+              "type": "remnants:ember_servitor",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 12
+            },
+            {
+              "type": "remnants:rusted_guardian",
+              "count": 1,
+              "weight": 4
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "has_precipitation": false,
+  "temperature": 1.2,
+  "downfall": 0.0,
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "features": [
+    [],
+    [
+      "remnant_bosses:lake_lava_underground",
+      "remnant_bosses:lake_lava_surface"
+    ],
+    [
+      "minecraft:amethyst_geode",
+      "remnant_bosses:ashen_wastes_boulders"
+    ],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "remnant_bosses:ashen_wastes_ash"
+    ],
+    [],
+    [
+      "remnant_bosses:spring_water",
+      "remnant_bosses:spring_lava"
+    ],
+    [
+      "remnant_bosses:glow_lichen",
+      "remnant_bosses:ashen_wastes_pillars",
+      "remnant_bosses:ashen_wastes_bones",
+      "remnant_bosses:ashen_wastes_withered_trees",
+      "minecraft:patch_grass_badlands",
+      "minecraft:patch_dead_bush_2"
+    ],
+    []
+  ],
+  "effects": {
+    "water_color": "#34535a",
+    "grass_color": "#9c927b",
+    "foliage_color": "#8e846f"
+  }
+}

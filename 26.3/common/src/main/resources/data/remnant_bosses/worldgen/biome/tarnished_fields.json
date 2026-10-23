@@ -1,0 +1,209 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#5d6a84",
+    "minecraft:visual/fog_color": "#b09970",
+    "minecraft:visual/water_fog_color": "#12262b",
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "minecraft:music.overworld.old_growth_taiga",
+        "min_delay": 12000,
+        "max_delay": 24000
+      }
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {
+          "remnants:hollow_sentinel": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:hollow_arbalist": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:fallen_standard_bearer": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          },
+          "remnants:soulbound_knight": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          },
+          "remnants:catacomb_rat": {
+            "energy_budget": 0.2,
+            "charge": 0.5
+          },
+          "remnants:shardling": {
+            "energy_budget": 0.2,
+            "charge": 0.5
+          },
+          "remnants:ancient_vessel": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          },
+          "remnants:rusted_guardian": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          }
+        },
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "remnants:hollow_sentinel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 30
+            },
+            {
+              "type": "remnants:hollow_arbalist",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 18
+            },
+            {
+              "type": "remnants:fallen_standard_bearer",
+              "count": 1,
+              "weight": 4
+            },
+            {
+              "type": "remnants:soulbound_knight",
+              "count": 1,
+              "weight": 2
+            },
+            {
+              "type": "remnants:catacomb_rat",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 8
+            },
+            {
+              "type": "remnants:shardling",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 3
+              },
+              "weight": 6
+            },
+            {
+              "type": "remnants:ancient_vessel",
+              "count": 1,
+              "weight": 4
+            },
+            {
+              "type": "remnants:rusted_guardian",
+              "count": 1,
+              "weight": 2
+            }
+          ],
+          "creature": [
+            {
+              "type": "minecraft:rabbit",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 3
+              },
+              "weight": 4
+            },
+            {
+              "type": "minecraft:sheep",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 6
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "has_precipitation": false,
+  "temperature": 0.7,
+  "downfall": 0.3,
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "features": [
+    [],
+    [
+      "remnant_bosses:lake_lava_underground"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [
+      "remnant_bosses:spring_water",
+      "remnant_bosses:spring_lava"
+    ],
+    [
+      "remnant_bosses:glow_lichen",
+      "remnant_bosses:tarnished_fields_pillars",
+      "remnant_bosses:tarnished_fields_gravestones",
+      "remnant_bosses:tarnished_fields_trees",
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain",
+      "minecraft:flower_default",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:patch_sugar_cane"
+    ],
+    []
+  ],
+  "effects": {
+    "water_color": "#2e5a62",
+    "grass_color": "#b5a866",
+    "foliage_color": "#a6994f"
+  }
+}

@@ -1,0 +1,48 @@
+package com.nightbeam.remnants.item;
+
+import com.nightbeam.remnants.event.SovereignRelics;
+import net.minecraft.world.InteractionResult;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+
+/**
+ * Sovereign's Sigil, an off-hand relic. Passive (off-hand): owned allies within 16 blocks deal +10%
+ * damage. Use (off-hand): two allied spectral royal guards for 400 ticks at the cost of 4 max health.
+ */
+public class SovereignsSigilItem extends Item {
+	public static final int COOLDOWN = 1800;
+
+	public SovereignsSigilItem(Properties properties) {
+		super(properties);
+	}
+
+	@Override
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (hand != InteractionHand.OFF_HAND) {
+			if (!level.isClientSide()) player.sendOverlayMessage(Component.translatable(getDescriptionId() + ".offhand"));
+			return InteractionResult.FAIL;
+		}
+		if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.FAIL;
+		if (player instanceof ServerPlayer serverPlayer) {
+			if (!SovereignRelics.summonSigilGuards(serverPlayer)) return InteractionResult.FAIL;
+			player.getCooldowns().addCooldown(stack, COOLDOWN);
+		}
+		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
+		LoreItem.appendLore(this, 3, tooltip);
+	}
+}

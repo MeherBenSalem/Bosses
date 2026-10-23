@@ -57,17 +57,20 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 | --- | --- | --- | --- |
 | `1.20.1/` | 1.20.1 | Fabric, Forge | 17 |
 | `1.21.1/` | 1.21.1 | Fabric, NeoForge | 21 |
+| `26.2/` | 26.2 | Fabric, NeoForge | 25 |
+| `26.3/` | 26.3 | Fabric, NeoForge | 25 |
 
 Each version folder is an independent MultiLoader Gradle project. Shared gameplay lives in `common/`; loader modules register content, events, and networking.
 
-The release version is `3.1.0` in both workspaces. Keep those `version=` lines identical. See [the release notes](patchnotes/3.1.0.md).
+The release version is `3.1.0` in every workspace. Keep those `version=` lines identical (`./gradlew syncVersion -PmodVersion=x.y.z` sets them all). See [the release notes](patchnotes/3.1.0.md).
 
 ## Requirements
 
 - JDK 17 for `1.20.1/`
 - JDK 21 for `1.21.1/`
-- GeckoLib (required)
-- JAuml 2.1.1 (required at runtime)
+- JDK 25 for `26.2/` and `26.3/`
+- GeckoLib (required; GeckoLib 5 on 26.x)
+- JAuml (required at runtime: 2.1.1 on 1.20.1 and 1.21.1, 2.3.1 on 26.x)
 
 ## Build
 
@@ -79,6 +82,9 @@ cd 1.20.1
 
 cd ../1.21.1
 ./gradlew :neoforge:build :fabric:build
+
+cd ../26.2      # and 26.3, with JAVA_HOME on JDK 25
+./gradlew :neoforge:build :fabric:build
 ```
 
 From the repository root:
@@ -87,7 +93,9 @@ From the repository root:
 ./1.20.1/gradlew -p . buildAll
 ```
 
-Run Gradle with JDK 21. The workspace wrapper selects Gradle 8.11, which can run on that JVM; the older root wrapper is Gradle 8.2.1. Java toolchains compile 1.20.1 with Java 17 and 1.21.1 with Java 21. On Windows use `1.20.1\gradlew.bat -p . buildAll`. The task builds both workspaces and copies the four loader jars into `releases/`.
+Run Gradle with JDK 21. The workspace wrapper selects Gradle 8.11, which can run on that JVM; the older root wrapper is Gradle 8.2.1. Java toolchains compile 1.20.1 with Java 17 and 1.21.1 with Java 21. The 26.x workspaces (Gradle 9.8, Fabric Loom 1.19) must run Gradle itself on JDK 25: pass `-Pjava25Home=<path to JDK 25>` or set `JAVA_HOME_25_X64`, and the root build starts them on it. On Windows use `1.20.1\gradlew.bat -p . buildAll`. The task builds every workspace and copies the eight loader jars into `releases/`.
+
+`tools/prod-boot/` boots the 26.x jars the way players run them: `installed_server.py` on servers made by the official Fabric and NeoForge installers, and `client_scenario.py` with a client installed the same way, joining that server and walking through items, armor, bosses and the Eclipsed Realm.
 
 ## Run clients
 
@@ -97,6 +105,10 @@ cd 1.20.1
 ./gradlew :fabric:runClient
 
 cd ../1.21.1
+./gradlew :neoforge:runClient
+./gradlew :fabric:runClient
+
+cd ../26.3      # or 26.2, on JDK 25
 ./gradlew :neoforge:runClient
 ./gradlew :fabric:runClient
 ```

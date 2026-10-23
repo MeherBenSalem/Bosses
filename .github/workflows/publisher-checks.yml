@@ -7,6 +7,8 @@ on:
       - "scripts/**"
       - "1.20.1/**"
       - "1.21.1/**"
+      - "26.2/**"
+      - "26.3/**"
       - ".github/workflows/publish.yml"
       - ".github/workflows/publisher-checks.yml"
       - "**/src/main/resources/fabric.mod.json"
@@ -16,6 +18,8 @@ on:
       - "scripts/**"
       - "1.20.1/**"
       - "1.21.1/**"
+      - "26.2/**"
+      - "26.3/**"
       - ".github/workflows/publish.yml"
       - ".github/workflows/publisher-checks.yml"
       - "**/src/main/resources/fabric.mod.json"
@@ -47,13 +51,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        game: ['1.20.1', '1.21.1']
+        include:
+          - { game: '1.20.1', java: '21' }
+          - { game: '1.21.1', java: '21' }
+          - { game: '26.2', java: '25' }
+          - { game: '26.3', java: '25' }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: ${{ matrix.java }}
       - uses: gradle/actions/setup-gradle@v4
       - name: Build both loaders and run native crafting/loot regression
         run: |

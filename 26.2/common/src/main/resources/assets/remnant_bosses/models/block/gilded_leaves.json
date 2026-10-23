@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "remnant_bosses:block/gilded_leaves"
+  },
+  "render_type": "minecraft:cutout_mipped"
+}

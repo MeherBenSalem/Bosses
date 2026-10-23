@@ -1,0 +1,31 @@
+{
+  "parent": "remnant_bosses:realm/kindle_waygate",
+  "display": {
+    "icon": {
+      "id": "remnant_bosses:grace_ember"
+    },
+    "title": {
+      "translate": "advancements.remnant_bosses.realm.enter_realm.title"
+    },
+    "description": {
+      "translate": "advancements.remnant_bosses.realm.enter_realm.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enter": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "remnant_bosses:eclipsed_realm"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "enter"
+    ]
+  ]
+}

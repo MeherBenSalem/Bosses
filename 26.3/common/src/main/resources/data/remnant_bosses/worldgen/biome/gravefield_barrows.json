@@ -1,0 +1,178 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#56606f",
+    "minecraft:visual/fog_color": "#928d76",
+    "minecraft:visual/water_fog_color": "#102228",
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      },
+      "additions": {
+        "sound": "minecraft:ambient.soul_sand_valley.additions",
+        "tick_chance": 0.0055
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:white_ash"
+        },
+        "probability": 0.012
+      }
+    ],
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "minecraft:music.overworld.swamp",
+        "min_delay": 12000,
+        "max_delay": 24000
+      }
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {
+          "remnants:gravebound_soldier": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:crypt_lurker": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:catacomb_rat": {
+            "energy_budget": 0.2,
+            "charge": 0.5
+          },
+          "remnants:hollow_arbalist": {
+            "energy_budget": 0.15,
+            "charge": 0.7
+          },
+          "remnants:relic_stalker": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          },
+          "remnants:ancient_vessel": {
+            "energy_budget": 0.12,
+            "charge": 1.0
+          }
+        },
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "remnants:gravebound_soldier",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 3
+              },
+              "weight": 30
+            },
+            {
+              "type": "remnants:crypt_lurker",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 20
+            },
+            {
+              "type": "remnants:catacomb_rat",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 3,
+                "max_inclusive": 5
+              },
+              "weight": 20
+            },
+            {
+              "type": "remnants:hollow_arbalist",
+              "count": 1,
+              "weight": 6
+            },
+            {
+              "type": "remnants:relic_stalker",
+              "count": 1,
+              "weight": 5
+            },
+            {
+              "type": "remnants:ancient_vessel",
+              "count": 1,
+              "weight": 6
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "has_precipitation": false,
+  "temperature": 0.4,
+  "downfall": 0.2,
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "features": [
+    [],
+    [
+      "remnant_bosses:lake_lava_underground"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "remnant_bosses:gravefield_barrows_ash"
+    ],
+    [],
+    [
+      "remnant_bosses:spring_water",
+      "remnant_bosses:spring_lava"
+    ],
+    [
+      "remnant_bosses:glow_lichen",
+      "remnant_bosses:gravefield_barrows_gravestones",
+      "remnant_bosses:gravefield_barrows_bones",
+      "remnant_bosses:gravefield_barrows_withered_trees",
+      "minecraft:patch_grass_taiga_2",
+      "minecraft:patch_dead_bush",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal"
+    ],
+    []
+  ],
+  "effects": {
+    "water_color": "#2a4f58",
+    "grass_color": "#7f8b6a",
+    "foliage_color": "#707b5c"
+  }
+}

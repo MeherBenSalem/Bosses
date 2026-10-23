@@ -1,0 +1,79 @@
+# Production client walkthrough (client_scenario.py). Console commands; "@probe" is the client's player.
+# yaw 0 faces south (+z), 180 north; negative pitch looks up.
+
+# A sky platform in the overworld: held items, the three armor sets, spawn eggs and the bosses.
+gamemode creative @probe
+time set noon
+weather clear
+gamerule advance_time false
+forceload add 0 0 32 32
+fill 0 199 0 24 199 24 minecraft:smooth_stone
+tp @probe 12.5 200 2.5 0 15
+wait 6
+item replace entity @probe hotbar.0 with remnant_bosses:sovereigns_ruin
+item replace entity @probe hotbar.1 with remnant_bosses:ossukage_sword
+item replace entity @probe hotbar.2 with remnant_bosses:memory_staff
+item replace entity @probe hotbar.3 with remnant_bosses:hollow_sovereign_spawn_egg
+item replace entity @probe hotbar.4 with remnant_bosses:remnant_ossukage_spawn_egg
+item replace entity @probe hotbar.5 with remnant_bosses:ancient_altar
+item replace entity @probe hotbar.6 with remnant_bosses:eclipse_waygate
+item replace entity @probe hotbar.7 with remnant_bosses:boss_journal
+item replace entity @probe hotbar.8 with remnant_bosses:gilded_leaves
+summon minecraft:armor_stand 9.5 200 6.5 {ShowArms:1b,Rotation:[180f,0f],equipment:{head:{id:"remnant_bosses:hollow_crown"},chest:{id:"remnant_bosses:regalia_cuirass"},legs:{id:"remnant_bosses:regalia_greaves"},feet:{id:"remnant_bosses:regalia_sabatons"},mainhand:{id:"remnant_bosses:sovereigns_ruin"}}}
+summon minecraft:armor_stand 12.5 200 6.5 {ShowArms:1b,Rotation:[180f,0f],equipment:{head:{id:"remnant_bosses:warden_helm"},chest:{id:"remnant_bosses:warden_hauberk"},legs:{id:"remnant_bosses:warden_tassets"},feet:{id:"remnant_bosses:warden_boots"},mainhand:{id:"remnant_bosses:wardens_grasp"}}}
+summon minecraft:armor_stand 15.5 200 6.5 {ShowArms:1b,Rotation:[180f,0f],equipment:{head:{id:"remnant_bosses:archivist_hood"},chest:{id:"remnant_bosses:archivist_robe"},legs:{id:"remnant_bosses:archivist_leggings"},feet:{id:"remnant_bosses:archivist_boots"},mainhand:{id:"remnant_bosses:gravebound_executioner"}}}
+setblock 6 200 6 remnant_bosses:ancient_altar
+setblock 18 200 6 remnant_bosses:ancient_pedestal
+wait 4
+shot 01-overworld-items-armor
+
+# The four bosses, held still so they can be seen whole.
+summon remnants:ossukage 6.5 200 16.5 {NoAI:1b,Rotation:[180f,0f]}
+summon remnants:hollow_sovereign 12.5 200 18.5 {NoAI:1b,Rotation:[180f,0f]}
+summon remnants:gravebound_warden 18.5 200 16.5 {NoAI:1b,Rotation:[180f,0f]}
+wait 5
+shot 02-overworld-bosses
+kill @e[type=remnants:ossukage]
+kill @e[type=remnants:hollow_sovereign]
+kill @e[type=remnants:gravebound_warden]
+summon remnants:forgotten_watcher 12.5 201 14.5 {NoAI:1b,Rotation:[180f,0f]}
+summon remnants:burial_guardian 7.5 200 13.5 {NoAI:1b,Rotation:[180f,0f]}
+summon remnants:soul_collector 17.5 200 13.5 {NoAI:1b,Rotation:[180f,0f]}
+wait 5
+shot 03-overworld-watcher
+kill @e[type=remnants:forgotten_watcher]
+kill @e[type=remnants:burial_guardian]
+kill @e[type=remnants:soul_collector]
+
+# A live boss: its themed boss bar, and its attacks against a survival target.
+summon remnants:hollow_sovereign 12.5 200 16.5
+wait 6
+shot 04-overworld-boss-bar
+kill @e[type=remnants:hollow_sovereign]
+
+# Into the Eclipsed Realm: the Arrival Shrine, its Waygate and Grace, the eclipse and the Gracetree.
+execute in remnant_bosses:eclipsed_realm run forceload add 0 0 16 16
+execute in remnant_bosses:eclipsed_realm run place template remnant_bosses:realm/arrival_shrine 0 120 0
+# Something to stand on in front of the shrine and up in the sky (a creative teleport does not start flying).
+execute in remnant_bosses:eclipsed_realm run fill 1 120 9 10 120 18 remnant_bosses:eclipse_stone_bricks keep
+execute in remnant_bosses:eclipsed_realm run setblock 5 159 12 minecraft:barrier
+execute in remnant_bosses:eclipsed_realm run setblock 0 139 0 minecraft:barrier
+execute in remnant_bosses:eclipsed_realm run tp @probe 5.5 121 12.5 180 8
+wait 12
+shot 05-realm-shrine-grace-waygate
+execute in remnant_bosses:eclipsed_realm run tp @probe 5.5 121 12.5 0 -45
+wait 4
+shot 06-realm-eclipse-sky
+execute in remnant_bosses:eclipsed_realm run tp @probe 5.5 160 12.5 180 -2
+wait 6
+shot 07-realm-gracetree
+execute in remnant_bosses:eclipsed_realm run summon remnants:hollow_sentinel 3.5 121 16.5 {NoAI:1b,Rotation:[180f,0f]}
+execute in remnant_bosses:eclipsed_realm run summon remnants:ashbound_crawler 5.5 121 17.5 {NoAI:1b,Rotation:[180f,0f]}
+execute in remnant_bosses:eclipsed_realm run summon remnants:relic_stalker 7.5 121 16.5 {NoAI:1b,Rotation:[180f,0f]}
+execute in remnant_bosses:eclipsed_realm run summon remnants:lost_pilgrim 9.5 121 17.5 {NoAI:1b,Rotation:[180f,0f]}
+execute in remnant_bosses:eclipsed_realm run tp @probe 6.5 121 9.5 0 10
+wait 5
+shot 08-realm-creatures
+execute in remnant_bosses:eclipsed_realm run tp @probe 0.5 140 0.5 30 45
+wait 10
+shot 09-realm-terrain

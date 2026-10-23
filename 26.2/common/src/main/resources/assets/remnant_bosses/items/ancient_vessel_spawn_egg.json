@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "remnant_bosses:item/spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 6249059
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 14121920
+      }
+    ]
+  }
+}

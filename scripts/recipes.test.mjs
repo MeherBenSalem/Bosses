@@ -13,8 +13,10 @@ const crafting = [
     'memory_lens', 'archivist_hood', 'archivist_robe', 'archivist_leggings', 'archivist_boots']
     .map((name) => [name, `remnant_bosses:${name}`]),
 ];
-for (const game of ['1.20.1', '1.21.1']) {
-  const modern = game === '1.21.1';
+// Resource and data pack formats each game version must accept.
+const packFormats = { '1.20.1': [15], '1.21.1': [34, 48], '26.2': [88, 107], '26.3': [97, 121] };
+for (const game of Object.keys(packFormats)) {
+  const modern = game !== '1.20.1';
   const resources = `${root}/${game}/common/src/main/resources`;
   const recipes = `data/remnant_bosses/${modern ? 'recipe' : 'recipes'}`;
   const loot = `data/remnant_bosses/${modern ? 'loot_table' : 'loot_tables'}/blocks`;
@@ -39,8 +41,9 @@ for (const game of ['1.20.1', '1.21.1']) {
   });
   test(`${game}: pack metadata accepts the client resources and server data format`, () => {
     const pack = JSON.parse(fs.readFileSync(`${resources}/pack.mcmeta`)).pack;
-    const supported = pack.supported_formats ?? { min_inclusive: pack.pack_format, max_inclusive: pack.pack_format };
-    for (const format of modern ? [34, 48] : [15]) {
+    const supported = 'min_format' in pack ? { min_inclusive: pack.min_format, max_inclusive: pack.max_format }
+      : pack.supported_formats ?? { min_inclusive: pack.pack_format, max_inclusive: pack.pack_format };
+    for (const format of packFormats[game]) {
       assert.ok(supported.min_inclusive <= format && supported.max_inclusive >= format, `Pack rejects format ${format}`);
     }
   });

@@ -1,0 +1,60 @@
+package com.nightbeam.remnants.client;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.sounds.SoundSource;
+import com.nightbeam.remnants.init.ModSounds;
+import com.nightbeam.remnants.network.ClientboundBossMusicPacket;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public final class ClientBossMusicHandler {
+    private static final Map<Integer, SimpleSoundInstance> playingSounds = new HashMap<>();
+
+    private ClientBossMusicHandler() {
+    }
+
+    public static void handle(ClientboundBossMusicPacket msg) {
+        boolean ossukage = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "ossukage",
+                "boss_music_enabled") > 0;
+        boolean warden = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "gravebound_warden",
+                "boss_music_enabled") > 0;
+        boolean sovereign = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "hollow_sovereign",
+                "boss_music_enabled") > 0;
+        boolean watcher = com.nightbeam.remnants.config.JaumlConfigLib.getNumberValue("remnant/bosses", "forgotten_watcher",
+                "boss_music_enabled") > 0;
+        if (!ossukage && !warden && !sovereign && !watcher) {
+            return;
+        }
+
+        Minecraft mc = Minecraft.getInstance();
+        int entityId = msg.entityId();
+
+        if (msg.play()) {
+            if (!playingSounds.containsKey(entityId)) {
+                SimpleSoundInstance sound = new SimpleSoundInstance(
+                        ModSounds.SKELETONFIGHT_THEME.get().location(),
+                        SoundSource.RECORDS,
+                        1.0f,
+                        1.0f,
+                        net.minecraft.util.RandomSource.create(),
+                        true,
+                        0,
+                        SimpleSoundInstance.Attenuation.NONE,
+                        0.0,
+                        0.0,
+                        0.0,
+                        true
+                );
+                mc.getSoundManager().play(sound);
+                playingSounds.put(entityId, sound);
+            }
+        } else {
+            SimpleSoundInstance sound = playingSounds.remove(entityId);
+            if (sound != null) {
+                mc.getSoundManager().stop(sound);
+            }
+        }
+    }
+}

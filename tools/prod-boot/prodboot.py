@@ -58,7 +58,8 @@ def prepare(run: Path, mods: list[Path], port: int, keep: tuple = ()) -> None:
     (run / "eula.txt").write_text("eula=true\n")
     (run / "server.properties").write_text(
         f"server-port={port}\nonline-mode=false\nlevel-seed=20261019\nview-distance=4\nsimulation-distance=4\n"
-        "spawn-protection=0\nmax-tick-time=-1\n")
+        # 26.3 servers whitelist by default; the probe client has to be able to join.
+        "spawn-protection=0\nmax-tick-time=-1\nwhite-list=false\n")
 
 
 def boot(cmd: list[str], run: Path, log_path: Path, commands: list[str], timeout: int = 900) -> int:

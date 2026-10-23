@@ -1,0 +1,317 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:soul_lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "east"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:amethyst_block"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:soul_lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "west"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:calcite"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:soul_lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "south"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:chiseled_sandstone"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:soul_lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "north"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:lectern",
+            "properties": {
+              "facing": "west",
+              "has_book": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "east"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:amethyst_block"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "west"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:calcite"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "south"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:chiseled_sandstone"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:lantern"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "north"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:lectern",
+            "properties": {
+              "facing": "east",
+              "has_book": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:white_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "east"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:amethyst_block"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:white_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "west"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:calcite"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:white_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "south"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:chiseled_sandstone"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:white_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "north"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:lectern",
+            "properties": {
+              "facing": "north",
+              "has_book": "false",
+              "powered": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:black_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "east"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:amethyst_block"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:black_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "west"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:calcite"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:black_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "south"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:chiseled_sandstone"
+          }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:black_candle"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "id": "minecraft:magenta_glazed_terracotta",
+              "properties": {
+                "facing": "north"
+              }
+            }
+          },
+          "output_state": {
+            "id": "minecraft:lectern",
+            "properties": {
+              "facing": "south",
+              "has_book": "false",
+              "powered": "false"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

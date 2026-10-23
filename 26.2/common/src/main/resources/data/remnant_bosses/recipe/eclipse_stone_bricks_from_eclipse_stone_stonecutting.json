@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "remnant_bosses:eclipse_stone",
+  "result": {
+    "id": "remnant_bosses:eclipse_stone_bricks",
+    "count": 1
+  }
+}

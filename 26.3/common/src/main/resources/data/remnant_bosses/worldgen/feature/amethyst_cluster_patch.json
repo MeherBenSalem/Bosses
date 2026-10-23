@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": {
+          "id": "minecraft:amethyst_cluster",
+          "properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:large_amethyst_bud",
+          "properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 2
+      }
+    ]
+  }
+}

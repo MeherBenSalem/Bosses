@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RGR",
+    "GEG",
+    "RGR"
+  ],
+  "key": {
+    "R": "remnant_bosses:tarnished_regalia",
+    "G": "minecraft:gold_ingot",
+    "E": "minecraft:echo_shard"
+  },
+  "result": {
+    "count": 1,
+    "id": "remnant_bosses:sovereigns_seal"
+  }
+}

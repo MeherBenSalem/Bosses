@@ -1,0 +1,106 @@
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    neoFormVersion = neo_form_version
+    // GeckoLib mixes GeoRenderState into the vanilla render states; this makes the interface visible at compile time.
+    interfaceInjectionData.from(rootProject.file('gradle/geckolib/interface_injections.json'))
+    // Automatically enable AccessTransformers if the file exists
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+}
+
+dependencies {
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
+    compileOnly "maven.modrinth:geckolib:${geckolib_neoforge_id}"
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+// Exercise the versioned Minecraft parsers, rather than a hand-written JSON schema.
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.compileClasspath
+tasks.register('verifyCrafting', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.RecipeRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args project.findProperty('recipeResources') ?: file('src/main/resources').absolutePath
+    if (project.hasProperty('recipeJar')) args project.property('recipeJar')
+}
+tasks.named('check') { dependsOn 'verifyCrafting' }
+
+
+tasks.register('verifyJournal', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.JournalRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+}
+tasks.named('check') { dependsOn 'verifyJournal' }
+
+// Alias table integrity, guard semantics and entity loot coverage (docs/remnants/migration.md).
+tasks.register('verifyAliases', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.AliasRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/resources').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyAliases' }
+
+// Animation clip names and lengths the entities play, checked against the animation JSON (slice 2).
+tasks.register('verifyClips', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.nightbeam.remnants.ClipContractRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/resources').absolutePath, file('src/main/java/com/nightbeam/remnants/entity').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyClips' }
+
+// Mixins may only use refmap-mapped members (production Forge 1.20.1 does not rename @Shadow members).
+tasks.register('verifyMixinPolicy', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.nightbeam.remnants.MixinPolicyRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+    args file('src/main/java').absolutePath, rootProject.file('fabric/src/main/java').absolutePath,
+            rootProject.file('neoforge/src/main/java').absolutePath
+}
+tasks.named('check') { dependsOn 'verifyMixinPolicy' }
+
+// The regressions are JavaExec mains, not JUnit tests; Gradle 9 otherwise fails the empty test task.
+tasks.named('test', Test) { failOnNoDiscoveredTests = false }

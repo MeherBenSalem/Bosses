@@ -6,7 +6,7 @@
 
 Remnant Bosses opens a new dimension, the **Eclipsed Realm**, and fills it with the bosses who outlived their kingdoms. Build a Waygate, cross under the black sun, rest at Grace Embers and fight your way to each boss's arena. Every boss brings its own creature family, weapon, armor set and relic.
 
-Built for **Minecraft 1.21.1** (NeoForge, Fabric) and **1.20.1** (Forge, Fabric).
+Built for **Minecraft 26.3** and **26.2** (NeoForge, Fabric), **1.21.1** (NeoForge, Fabric) and **1.20.1** (Forge, Fabric).
 
 ---
 
@@ -200,6 +200,8 @@ The three Realm bosses answer only inside the Eclipsed Realm by default (`ritual
 
 | Loader | Minecraft | Also install |
 |---|---|---|
+| NeoForge | 26.3, 26.2 | GeckoLib 5, JAuml 2.3.1+ |
+| Fabric | 26.3, 26.2 | Fabric API, GeckoLib 5, JAuml 2.3.1+ |
 | NeoForge | 1.21.1 | GeckoLib, JAuml 1.2.0+ |
 | Fabric | 1.21.1 | Fabric API, GeckoLib, JAuml 1.2.0+ |
 | Forge | 1.20.1 | GeckoLib, JAuml 1.2.0+ |

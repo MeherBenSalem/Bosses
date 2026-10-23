@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:disk",
+  "state_provider": {
+    "type": "minecraft:rule_based",
+    "fallback": {
+      "type": "minecraft:weighted",
+      "entries": [
+        {
+          "data": {
+            "id": "minecraft:coarse_dirt"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "id": "minecraft:gravel"
+          },
+          "weight": 2
+        }
+      ]
+    },
+    "rules": []
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "minecraft:grass_block",
+      "minecraft:dirt",
+      "minecraft:podzol"
+    ]
+  },
+  "radius": {
+    "type": "minecraft:uniform",
+    "min_inclusive": 2,
+    "max_inclusive": 4
+  },
+  "half_height": 1
+}

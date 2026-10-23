@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "remnant_bosses:eclipse_stone_bricks"
+  },
+  "result": {
+    "id": "remnant_bosses:eclipse_stone_brick_stairs",
+    "count": 4
+  }
+}

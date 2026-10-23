@@ -6,42 +6,43 @@ String wrapperCmd(String rootDirName) {
     return new File(root, 'gradlew').absolutePath
 }
 
-tasks.register('build1201', Exec) {
-    group = 'build'
-    description = 'Build all 1.20.1 loaders (Fabric + Forge).'
-    workingDir = file('1.20.1')
-    commandLine wrapperCmd('1.20.1'), 'build'
-}
+// Each workspace is its own Gradle build; the loaders it ships sit next to common/. The 26.x builds (Fabric Loom 1.19)
+// need Gradle itself on Java 25: pass -Pjava25Home=<jdk> or set JAVA_HOME_25_X64 (setup-java does).
+def workspaces = [
+    '1201': [dir: '1.20.1', loaders: ['fabric', 'forge'], java: 21],
+    '1211': [dir: '1.21.1', loaders: ['fabric', 'neoforge'], java: 21],
+    '262' : [dir: '26.2', loaders: ['fabric', 'neoforge'], java: 25],
+    '263' : [dir: '26.3', loaders: ['fabric', 'neoforge'], java: 25],
+]
+def java25Home = findProperty('java25Home') ?: System.getenv('JAVA_HOME_25_X64')
+def loaderNames = [fabric: 'Fabric', forge: 'Forge', neoforge: 'NeoForge']
 
-tasks.register('build1211', Exec) {
-    group = 'build'
-    description = 'Build all 1.21.1 loaders (Fabric + NeoForge).'
-    workingDir = file('1.21.1')
-    commandLine wrapperCmd('1.21.1'), 'build'
-}
+workspaces.each { key, ws ->
+    tasks.register("build${key}", Exec) {
+        group = 'build'
+        description = "Build all ${ws.dir} loaders (${ws.loaders.collect { loaderNames[it] }.join(' + ')})."
+        workingDir = file(ws.dir)
+        commandLine wrapperCmd(ws.dir), 'build'
+        if (ws.java == 25 && java25Home) environment 'JAVA_HOME', java25Home
+    }
 
-tasks.register('clean1201', Exec) {
-    group = 'build'
-    description = 'Clean the 1.20.1 workspace.'
-    workingDir = file('1.20.1')
-    commandLine wrapperCmd('1.20.1'), 'clean'
-}
-
-tasks.register('clean1211', Exec) {
-    group = 'build'
-    description = 'Clean the 1.21.1 workspace.'
-    workingDir = file('1.21.1')
-    commandLine wrapperCmd('1.21.1'), 'clean'
+    tasks.register("clean${key}", Exec) {
+        group = 'build'
+        description = "Clean the ${ws.dir} workspace."
+        workingDir = file(ws.dir)
+        commandLine wrapperCmd(ws.dir), 'clean'
+        if (ws.java == 25 && java25Home) environment 'JAVA_HOME', java25Home
+    }
 }
 
 tasks.register('dist') {
     group = 'build'
-    description = 'Build both workspaces and copy loader jars into releases/.'
-    dependsOn 'build1201', 'build1211'
+    description = 'Build every workspace and copy loader jars into releases/.'
+    dependsOn workspaces.keySet().collect { "build${it}" }
     doLast {
         def outDir = file('releases')
         outDir.mkdirs()
-        ['1.20.1/fabric', '1.20.1/forge', '1.21.1/fabric', '1.21.1/neoforge'].each { modDir ->
+        workspaces.values().collectMany { ws -> ws.loaders.collect { "${ws.dir}/${it}" } }.each { modDir ->
             def libsDir = file("${modDir}/build/libs")
             if (libsDir.exists()) {
                 fileTree(libsDir).matching {
@@ -61,7 +62,7 @@ tasks.register('dist') {
 
 tasks.register('buildAll') {
     group = 'build'
-    description = 'Build 1.20.1 and 1.21.1 and collect jars into releases/.'
+    description = 'Build every workspace and collect jars into releases/.'
     dependsOn 'dist'
 }
 
@@ -73,8 +74,8 @@ tasks.register('build') {
 
 tasks.register('cleanAll') {
     group = 'build'
-    description = 'Clean both workspaces and releases/.'
-    dependsOn 'clean1201', 'clean1211'
+    description = 'Clean every workspace and releases/.'
+    dependsOn workspaces.keySet().collect { "clean${it}" }
     doLast {
         def outDir = file('releases')
         if (outDir.exists()) {
@@ -86,13 +87,13 @@ tasks.register('cleanAll') {
 
 tasks.register('syncVersion') {
     group = 'build'
-    description = 'Set version= in both workspace gradle.properties (use -PmodVersion=x.y.z).'
+    description = 'Set version= in every workspace gradle.properties (use -PmodVersion=x.y.z).'
     doLast {
         def v = project.findProperty('modVersion')
         if (!v) {
             throw new GradleException('Pass -PmodVersion=x.y.z')
         }
-        ['1.20.1', '1.21.1'].each { dir ->
+        workspaces.values().collect { it.dir }.each { dir ->
             def file = file("${dir}/gradle.properties")
             if (!file.exists()) {
                 throw new GradleException("Missing ${file}")

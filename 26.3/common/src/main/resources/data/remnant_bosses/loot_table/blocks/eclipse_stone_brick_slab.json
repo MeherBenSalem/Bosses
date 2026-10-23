@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "remnant_bosses:eclipse_stone_brick_slab",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "remnant_bosses:eclipse_stone_brick_slab",
+                "state": {
+                  "type": "double"
+                }
+              },
+              "add": false,
+              "count": 2
+            },
+            {
+              "type": "minecraft:explosion_decay"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "remnant_bosses:blocks/eclipse_stone_brick_slab"
+}

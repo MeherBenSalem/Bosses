@@ -12,7 +12,7 @@ Deadly Minecraft bosses, custom mobs, weapons, and Ancient Altar rituals. Summon
 
 ## Full description
 
-**Remnant Bosses** adds animated boss fights, remnant mobs, legendary weapons, and altar rituals for Minecraft **1.20.1** (Forge + Fabric) and **1.21.1** (NeoForge + Fabric).
+**Remnant Bosses** adds animated boss fights, remnant mobs, legendary weapons, and altar rituals for Minecraft **1.20.1** (Forge + Fabric), **1.21.1** (NeoForge + Fabric), and **26.2** and **26.3** (NeoForge + Fabric).
 
 ### Bosses
 

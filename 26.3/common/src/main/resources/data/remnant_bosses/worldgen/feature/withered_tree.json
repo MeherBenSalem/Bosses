@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:tree",
+  "trunk_provider": {
+    "id": "remnant_bosses:graceroot_log",
+    "properties": {
+      "axis": "y"
+    }
+  },
+  "trunk_placer": {
+    "type": "minecraft:cherry_trunk_placer",
+    "base_height": 5,
+    "height_rand_a": 2,
+    "height_rand_b": 0,
+    "branch_count": {
+      "type": "minecraft:weighted_list",
+      "distribution": [
+        {
+          "data": 1,
+          "weight": 1
+        },
+        {
+          "data": 2,
+          "weight": 2
+        }
+      ]
+    },
+    "branch_horizontal_length": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 2,
+      "max_inclusive": 3
+    },
+    "branch_start_offset_from_top": {
+      "min_inclusive": -3,
+      "max_inclusive": -2
+    },
+    "branch_end_offset_from_top": {
+      "type": "minecraft:uniform",
+      "min_inclusive": -1,
+      "max_inclusive": 0
+    }
+  },
+  "foliage_provider": {
+    "id": "remnant_bosses:graceroot_log",
+    "properties": {
+      "axis": "y"
+    }
+  },
+  "foliage_placer": {
+    "type": "minecraft:blob_foliage_placer",
+    "radius": 0,
+    "offset": 0,
+    "height": 0
+  },
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "limit": 1,
+    "lower_size": 0,
+    "upper_size": 2
+  },
+  "decorators": [],
+  "ignore_vines": true,
+  "below_trunk_provider": "minecraft:soil_beneath_tree"
+}

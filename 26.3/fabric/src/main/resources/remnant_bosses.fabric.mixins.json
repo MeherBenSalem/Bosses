@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.nightbeam.remnants.fabric.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["MappedRegistryAliasMixin"],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

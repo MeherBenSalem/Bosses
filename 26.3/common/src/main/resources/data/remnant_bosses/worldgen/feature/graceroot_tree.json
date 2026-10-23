@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:tree",
+  "trunk_provider": {
+    "id": "remnant_bosses:graceroot_log",
+    "properties": {
+      "axis": "y"
+    }
+  },
+  "trunk_placer": {
+    "type": "minecraft:fancy_trunk_placer",
+    "base_height": 6,
+    "height_rand_a": 6,
+    "height_rand_b": 0
+  },
+  "foliage_provider": {
+    "id": "remnant_bosses:gilded_leaves",
+    "properties": {
+      "distance": "7",
+      "persistent": "false",
+      "waterlogged": "false"
+    }
+  },
+  "foliage_placer": {
+    "type": "minecraft:fancy_foliage_placer",
+    "radius": 3,
+    "offset": 4,
+    "height": 3
+  },
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "limit": 0,
+    "lower_size": 0,
+    "upper_size": 0,
+    "min_clipped_height": 4
+  },
+  "decorators": [],
+  "ignore_vines": true,
+  "below_trunk_provider": "minecraft:soil_beneath_tree"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:bone",
+    "minecraft:ink_sac"
+  ],
+  "result": {
+    "id": "remnant_bosses:boss_journal",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    " b ",
+    "cac"
+  ],
+  "key": {
+    "a": "minecraft:chiseled_deepslate",
+    "b": "minecraft:diamond",
+    "c": "minecraft:emerald"
+  },
+  "result": {
+    "count": 1,
+    "id": "remnant_bosses:ancient_altar"
+  }
+}

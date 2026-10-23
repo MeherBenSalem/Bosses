@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "DSD",
+    "D D",
+    "DGD"
+  ],
+  "key": {
+    "D": "minecraft:polished_deepslate",
+    "S": "remnant_bosses:eclipse_shard",
+    "G": "minecraft:gold_ingot"
+  },
+  "result": {
+    "id": "remnant_bosses:eclipse_waygate",
+    "count": 1
+  }
+}

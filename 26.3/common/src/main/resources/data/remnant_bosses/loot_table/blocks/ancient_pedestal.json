@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "remnant_bosses:blocks/ancient_pedestal",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "remnant_bosses:ancient_pedestal"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      }
+    }
+  ]
+}
