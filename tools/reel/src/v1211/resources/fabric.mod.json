@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "reel_director",
+  "version": "1.0.0-dev",
+  "name": "Remnant Bosses Reel Director",
+  "description": "Development-only cinematic capture client for the Remnant Bosses promotional reel.",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.nightbeam.reel.ReelDirector"]
+  },
+  "mixins": ["reel_director.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "1.21.1",
+    "remnant_bosses": "*"
+  }
+}
