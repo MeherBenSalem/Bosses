@@ -54,3 +54,9 @@ _tmp_ogg_fix/
 *.class
 /tools/remnants/structures/out/
 
+
+build/
+out/
+target/
+*.ipr
+*.iws
