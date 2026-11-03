@@ -150,9 +150,20 @@ def save_png(im, rel, sheet=True):
     return rel
 
 
+def _without_forge_data(obj):
+    if isinstance(obj, dict):
+        return {k: _without_forge_data(v) for k, v in obj.items() if k != 'forge_data'}
+    if isinstance(obj, list):
+        return [_without_forge_data(v) for v in obj]
+    return obj
+
+
 def save_json(obj, rel):
-    text = json.dumps(obj, indent=2) + '\n'
     for tree in TREES:
+        # 'forge_data' is Forge's element key (1.20.1). NeoForge uses 'neoforge_data', and models that still carried
+        # 'forge_data' rendered as missing textures there (the fog gate and Grace Ember on NeoForge 1.21.1).
+        data = obj if '1.20.1' in tree.parts else _without_forge_data(obj)
+        text = json.dumps(data, indent=2) + '\n'
         out = tree / rel
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(text, encoding='utf-8', newline='\n')

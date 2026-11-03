@@ -174,12 +174,21 @@ def check_tree(tree):
     return errs
 
 
+def _same_but_forge_data(a, b):
+    """1.20.1 keeps Forge's 'forge_data' element key and the NeoForge-era tree drops it (common.save_json)."""
+    if a.suffix != '.json':
+        return False
+    from common import _without_forge_data
+    return _without_forge_data(json.loads(a.read_text(encoding='utf-8'))) == \
+        _without_forge_data(json.loads(b.read_text(encoding='utf-8')))
+
+
 def check():
     errs = []
     for tree in TREES:
         errs += [f'[{tree.parts[-7]}] {e}' for e in check_tree(tree)]
     a, b = TREES
     for rel in WRITTEN:
-        if (a / rel).read_bytes() != (b / rel).read_bytes():
+        if (a / rel).read_bytes() != (b / rel).read_bytes() and not _same_but_forge_data(a / rel, b / rel):
             errs.append(f'trees differ: {rel}')
     return errs
