@@ -1,5 +1,9 @@
 ![Remnant Bosses 3.1: The Realm Endures](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/banner.png)
 
+**[Discord](https://discord.gg/TJc3CxR4jK) · [The modpack](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy) · [Support NightBeam](https://nightbeam.dev/support) · [NightBeam Pro](https://nightbeam.dev/memberships) · [All projects](https://nightbeam.dev/projects)**
+
+> **Play it in [Remnants: Ashen Legacy](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy)**, NightBeam's story-driven soulslike RPG modpack. It builds The Eclipsed Realm into one rule set with the rest of the Remnants series.
+
 ## Cross into the eclipse
 
 Kindle a Waygate and step into the **Eclipsed Realm**, a dimension under a black eclipse sun with the Gracetree burning on the horizon. Rest at **Grace Embers**, follow their golden motes to three arenas sealed by fog gates, and raise the bosses who outlived their kingdoms at the **Ancient Altar**. Each boss has its own bar, phases, gear and creature family, and a personal **Boss Hunts** journal records every hunt. Everything can be tuned in JAuml config files.
@@ -36,7 +40,7 @@ Grace shrines stand across the Realm's land biomes: a ring of weathered standing
 
 - heals you to full, puts out fire, clears harmful effects and sets your respawn point there;
 - sends a trail of golden motes toward the nearest arena;
-- opens the grace menu. It lists the grace you are at first, then every other grace you have found, nearest first with the distance in meters. Travel to any of them, or **Depart** the Realm.
+- opens the grace menu. It lists the grace you are at, then every other grace you have found, nearest at the top with the distance in meters. Travel to any of them, or **Depart** the Realm.
 
 Use a named Name Tag on a grace to rename it.
 
@@ -51,7 +55,7 @@ Use a named Name Tag on a grace to rename it.
 | **Forgotten Observatory** | Lantern Heights | Forgotten Watcher, under the dome |
 
 - A **fog gate** seals each boss room. Players walk through it. Bosses and creatures cannot.
-- Each arena's Ancient Altar already holds the default offerings, so you only need to bring the summon item.
+- Each arena's Ancient Altar already holds the default offerings, so you just need to bring the summon item.
 - The Hollow Legion guards the Citadel, a **Burial Guardian** holds the Catacombs' burial vault and a **Soul Collector** waits in the Observatory's memory vault.
 
 ![The Bosses](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/header-bosses.png)
@@ -113,7 +117,7 @@ The **Forgotten Watcher** is raised at the altar under the Forgotten Observatory
 - **Crypt Key:** 6 Grave Iron around an Iron Block. The Cryptborn drop Grave Iron, and a Burial Guardian sometimes drops a Crypt Key.
 - **Lens of Memory:** 4 Memory Shards, 4 Amethyst Shards and a Spyglass. The Forgotten Souls drop Memory Shards.
 
-The Hollow Sovereign, the Gravebound Warden and the Forgotten Watcher answer only inside the Eclipsed Realm (`rituals_realm_only`). Their rites also refuse on Peaceful or when the same boss is already within 64 blocks. Ossukage's rite works in any dimension: lightning strikes each offering, and Ossukage arrives about four seconds later.
+The Hollow Sovereign, the Gravebound Warden and the Forgotten Watcher answer inside the Eclipsed Realm and nowhere else (`rituals_realm_only`). Their rites also refuse on Peaceful or when the same boss is already within 64 blocks. Ossukage's rite works in any dimension: lightning strikes each offering, and Ossukage arrives about four seconds later.
 
 ![Boss Hunts](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/header-hunts.png)
 
@@ -127,7 +131,7 @@ The Hollow Sovereign, the Gravebound Warden and the Forgotten Watcher answer onl
 
 ![Credit where it is due](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/card-credit.png)
 
-**Fair multiplayer credit.** The final hit and every player who really damaged the boss in the last 60 seconds, within 64 blocks, get the defeat. Arrows count for their shooter and pets for their owner. Spectators, bystanders and hits that do not lower its health do not count. A defeat is recorded only after Minecraft accepts the boss's death, so cancelled deaths award nothing.
+**Fair multiplayer credit.** The final hit and every player who really damaged the boss in the last 60 seconds, within 64 blocks, get the defeat. Arrows count for their shooter and pets for their owner. Spectators, bystanders and hits that do not lower its health do not count. A defeat is recorded once Minecraft accepts the boss's death, so cancelled deaths award nothing.
 
 ![Bars & Banners](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/header-presentation.png)
 
@@ -160,7 +164,7 @@ The Hollow Sovereign, the Gravebound Warden and the Forgotten Watcher answer onl
 - **Ancient Vessel:** a heavy urn that slows you with a pulse when you come close, and bursts when broken.
 - **Relic Stalker:** lies hidden and invisible until you come within 7 blocks, then ambushes.
 
-Constructs and relics only damage creatures. Like everything else in the Realm, they never break or place blocks. Every creature has a spawn egg.
+Constructs and relics hurt creatures and nothing else. Like everything else in the Realm, they never break or place blocks. Every creature has a spawn egg.
 
 ![Boss Gear](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/header-gear.png)
 
@@ -178,7 +182,7 @@ Relics work from the off-hand. The Hollow Crown and the Warden armor drop from t
 
 ![Every number is yours](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/card-config.png)
 
-JAuml generates the configuration on first launch under `config/remnant/`. Existing values are kept when new defaults are added.
+JAuml generates the configuration at launch under `config/remnant/`. Existing values are kept when new defaults are added.
 
 - `bosses/<boss>.json`: health, armor, speed, phase thresholds, each attack's damage and range, `summoning_enabled` and the fight theme.
 - `bosses/<boss>_summon.json`: the summon item and the four offerings. Change a ritual without touching the mod.
@@ -194,7 +198,7 @@ JAuml generates the configuration on first launch under `config/remnant/`. Exist
 - **Entity IDs** for commands and datapacks use the `remnants:` namespace, for example `remnants:hollow_sovereign`, `remnants:gravebound_warden`, `remnants:forgotten_watcher` and `remnants:ossukage`. Items and blocks use `remnant_bosses:`.
 - **Older worlds convert.** Retired creatures, spawn eggs and items are replaced when a world loads. In 3.1 the Armored Grub becomes the Ashbound Crawler and the Sickleghast becomes the Relic Stalker.
 - **Spawn eggs** for every boss and creature in the Remnant Bosses creative tab.
-- **Five Realm advancements**, from crafting your first Eclipse Shard to felling the Hollow Sovereign.
+- **Five Realm advancements**, from crafting an Eclipse Shard to felling the Hollow Sovereign.
 
 ![Downloads & Compatibility](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/header-compatibility.png)
 
@@ -297,3 +301,15 @@ Set `vfx_density` between `0` and `1`, and `camera_shake` to `0`, in `config/rem
 ---
 
 Remnant Bosses is licensed under Apache-2.0. The Cinzel and EB Garamond fonts used in this artwork are licensed under the SIL Open Font License 1.1. Remnant Bosses is an independent project and is not affiliated with any game it takes inspiration from.
+
+---
+
+### More from NightBeam Studio
+
+- **[Remnants: Ashen Legacy](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy)**: the story-driven soulslike RPG modpack built on NightBeam's mods
+- **[Premium server plugins](https://nightbeam.dev/store)**: anti-cheat, ranked PvP, SMP setups and more on BuiltByBit
+- **[NightBeam Pro](https://nightbeam.dev/memberships)**: the model library and NightBeam Forge credits, from $5 a month
+- **[Discord](https://discord.gg/TJc3CxR4jK)**: support, bug reports, suggestions and early looks
+- **[Support NightBeam](https://nightbeam.dev/support)**: help keep every mod free
+
+**Follow:** [YouTube](https://www.youtube.com/@nightbeamstudio) · [Instagram](https://www.instagram.com/nightbeamstudio/) · [X](https://x.com/NightBeamLLC) · [Facebook](https://www.facebook.com/profile.php?id=61574823331471) · [Source and issues](https://github.com/MeherBenSalem/Bosses)
