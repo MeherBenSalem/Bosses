@@ -29,6 +29,35 @@ if (providers.gradleProperty('realmRuntimeTest').isPresent()) {
         }
     }
 }
+// Cinematic capture client for the promotional reel (tools/reel). Never part of a release jar.
+if (providers.gradleProperty('reelDirector').isPresent()) {
+    sourceSets {
+        reelDirector {
+            java.srcDir(rootProject.file('../tools/reel/src/v1211/java'))
+            resources.srcDir(rootProject.file('../tools/reel/src/v1211/resources'))
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+        }
+    }
+    loom {
+        mods {
+            remnant_bosses { sourceSet sourceSets.main }
+            reel_director { sourceSet sourceSets.reelDirector }
+        }
+        runs {
+            reelClient {
+                client()
+                source sourceSets.reelDirector
+                setConfigName('Remnant Bosses Reel Director')
+                ideConfigGenerated(false)
+                runDir('runs/reel')
+                programArgs '--width', providers.gradleProperty('reelWidth').getOrElse('1080'),
+                        '--height', providers.gradleProperty('reelHeight').getOrElse('1920'), '--username', 'Tarnished'
+                vmArgs '-Xmx6G'
+            }
+        }
+    }
+}
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {
