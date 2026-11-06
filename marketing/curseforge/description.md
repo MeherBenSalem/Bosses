@@ -1,6 +1,6 @@
 ![Remnant Bosses 3.1: The Realm Endures](https://raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/banner.png)
 
-**[Discord](https://discord.gg/TJc3CxR4jK) · [Source and issues](https://github.com/MeherBenSalem/Bosses)**
+**[Docs](https://nightbeam.dev/docs/remnant-bosses) · [Discord](https://discord.gg/TJc3CxR4jK) · [Source and issues](https://github.com/MeherBenSalem/Bosses)**
 
 ## Cross into the eclipse
 
