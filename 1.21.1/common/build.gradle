@@ -81,6 +81,18 @@ tasks.register('verifyAliases', JavaExec) {
 }
 tasks.named('check') { dependsOn 'verifyAliases' }
 
+// Ticket-0229: equipment that cannot be encoded must not crash the save (EquipmentSaveGuard).
+tasks.register('verifyEquipmentSave', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath + fileTree(layout.buildDirectory.dir('moddev/artifacts')) {
+        include '*minecraft-resources*.jar'
+    }
+    mainClass = 'com.nightbeam.remnants.EquipmentSaveRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(java_version) }
+    workingDir = rootProject.projectDir
+}
+tasks.named('check') { dependsOn 'verifyEquipmentSave' }
+
 // Animation clip names and lengths the entities play, checked against the animation JSON (slice 2).
 tasks.register('verifyClips', JavaExec) {
     dependsOn testClasses

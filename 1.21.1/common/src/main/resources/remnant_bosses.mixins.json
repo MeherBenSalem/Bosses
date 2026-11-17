@@ -7,6 +7,7 @@
     "EntityTypeAliasMixin",
     "ItemStackAliasMixin",
     "JournalLivingEntityMixin",
+    "MobEquipmentSaveMixin",
     "PlayerSweepMixin",
     "RelicDamageMixin",
     "RealmBuildMixin",
