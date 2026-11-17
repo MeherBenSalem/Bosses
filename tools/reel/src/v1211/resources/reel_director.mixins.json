@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.nightbeam.reel.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "CameraMixin",
+    "EntityRenderDispatcherMixin",
+    "GameRendererMixin",
+    "GuiMixin",
+    "LevelRendererMixin",
+    "MinecraftInvoker",
+    "MinecraftMixin",
+    "MinecraftServerMixin",
+    "ParticleEngineMixin",
+    "SectionOcclusionGraphMixin",
+    "SoundEngineMixin",
+    "TimerMixin",
+    "WorldOpenFlowsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

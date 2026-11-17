@@ -62,6 +62,13 @@ Every screenshot and both GIFs are unedited captures of the **1.21.1 Fabric deve
 - **Journal:** captured with Minecraft's *Menu Background Blur* set to 0. At the default blur the 1.21.1 journal's title, detail page and footer render blurred. The Defeated entry is a real defeat: the Warden was killed with player-attributed damage. The Hollow Sovereign was witnessed to show Encountered.
 - **GIFs:** recorded at the normal tick rate and played back at 1.5× speed. `realm-crossing.gif` cuts the loading screen between the overworld and the Realm. Other action shots were recorded at `/tick rate 4`, and single frames were picked from them.
 
+## Video
+
+`video/remnant_bosses_reel.mp4` is a 41.5 s vertical reel (1080×1920, 30 fps) for Instagram Reels, TikTok and YouTube
+Shorts, with `video/cover.jpg` as its cover. Its running order, posting copy and an optional voice-over script are in
+[`video/README.md`](video/README.md). Every shot is gameplay rendered frame by frame by the 1.21.1 dev client; the
+capture client and the edit are in [`tools/reel/`](../tools/reel/README.md).
+
 ## Regenerating the artwork
 
 The cards, banner, icon and headers are HTML rendered with Playwright from the screenshots above and the bundled fonts:
