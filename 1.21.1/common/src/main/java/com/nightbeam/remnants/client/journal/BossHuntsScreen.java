@@ -210,6 +210,14 @@ public final class BossHuntsScreen extends Screen {
         down.active = scroll < Math.max(0, contentHeight - layout.details().height());
     }
 
+    /**
+     * Screen.render calls this after our pages are drawn, and on 1.21 it applies the menu blur, which
+     * smeared the whole journal except its buttons. render() paints the journal's own backdrop instead.
+     */
+    @Override
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    }
+
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0xC0100D16);
