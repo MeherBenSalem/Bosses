@@ -6,8 +6,10 @@ Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the 
 
 | File | Use |
 | --- | --- |
-| [`curseforge/description.md`](curseforge/description.md) | Full project description (Markdown; also works on Modrinth) |
-| [`curseforge/summary.txt`](curseforge/summary.txt) | Short project summary (231 characters) |
+| [`curseforge/description.md`](curseforge/description.md) | Full CurseForge project description (Markdown) |
+| [`curseforge/summary.txt`](curseforge/summary.txt) | Short CurseForge project summary |
+| [`modrinth/description.md`](modrinth/description.md) | Full Modrinth project body: the same copy, with the screenshots moved to the project's Gallery tab |
+| [`modrinth/summary.txt`](modrinth/summary.txt) | Modrinth summary (Modrinth allows 256 characters) |
 | [`../patchnotes/3.1.0.md`](../patchnotes/3.1.0.md) | File changelog for 3.1.0 |
 
 Image links in the description point at `raw.githubusercontent.com/MeherBenSalem/Bosses/main/marketing/images/...`, so they work once this folder is on `main`. To host on CurseForge instead, upload the images to the project gallery and replace each URL.
@@ -19,7 +21,7 @@ The description leads with the Eclipsed Realm, then Grace Embers, the arenas, th
 The supported versions are listed in exactly two places:
 
 1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). Add one line, for example `{ minecraft: '26.2', loaders: ['Fabric', 'NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
-2. The table under **Downloads & Compatibility** in `curseforge/description.md`. Add one row.
+2. The table under **Downloads & Compatibility** in `curseforge/description.md`. Add one row, then regenerate the Modrinth copy with `python3 tools/make_modrinth_md.py .`.
 
 No other copy or artwork names a Minecraft version. A new release name or number goes in `RELEASE` in `render.cjs` and in the first lines of the description.
 

@@ -204,6 +204,8 @@ JAuml generates the configuration at launch under `config/remnant/`. Existing va
 | --- | --- | --- | --- |
 | 1.20.1 | Fabric, Forge | 17+ | GeckoLib and JAuml (all loaders), Fabric API (Fabric) |
 | 1.21.1 | Fabric, NeoForge | 21+ | GeckoLib and JAuml (all loaders), Fabric API (Fabric) |
+| 26.2 | Fabric, NeoForge | 25+ | GeckoLib and JAuml (all loaders), Fabric API (Fabric) |
+| 26.3 | Fabric, NeoForge | 25+ | GeckoLib and JAuml (all loaders), Fabric API (Fabric) |
 
 - Download the file with your loader in its name: `-fabric-`, `-forge-` or `-neoforge-`.
 - Install Remnant Bosses on **both the server and every client**, at the same version.
