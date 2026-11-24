@@ -49,7 +49,7 @@ Pedestals must be **Ancient Pedestal** blocks. Offerings sit **one block above**
 
 **Commands:** `/summon remnants:ossukage`, `/summon remnants:forgotten_watcher`, `/summon remnants:hollow_sovereign`, `/summon remnants:gravebound_warden`
 
-**Configuration:** JAuml files `remnant/bosses/{boss}_summon` — keys `portal_activation_item`, `pedestal_one_activation_block` … `pedestal_four_activation_block`. See [docs/store-listing.md](docs/store-listing.md) for paste-ready Modrinth/CurseForge copy and full registry IDs.
+**Configuration:** JAuml files `remnant/bosses/{boss}_summon` — keys `portal_activation_item`, `pedestal_one_activation_block` … `pedestal_four_activation_block`. See [docs/store-listing.md](docs/store-listing.md) for paste-ready CurseForge copy and full registry IDs.
 
 ## Supported versions
 

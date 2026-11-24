@@ -1,16 +1,16 @@
-# Publish Remnant Bosses to Modrinth + CurseForge on version tags.
+# Publish Remnant Bosses to CurseForge on version tags (NightBeam convention: CurseForge only since 24 Nov 2026).
 #
 # Repo secrets:
-#   MODRINTH_TOKEN
-#   CURSEFORGE_TOKEN
-#   CURSEFORGE_API_KEY
+#   CURSEFORGE_TOKEN (upload token)
+#   CURSEFORGE_API_KEY (Core API key, for the same-day guard)
 #
-# Repo variables:
-#   MODRINTH_ID
+# Repo variable:
 #   CURSEFORGE_ID
 #
+# The existing Modrinth project stays up as it is but gets no new versions.
+#
 # Same-day guard (NightBeam convention): scripts/same_day_guard.mjs stops the run if this mod already had a
-# release today (Africa/Tunis day), on Modrinth, CurseForge or an earlier Publish run. A dry run only reports it.
+# release today (Africa/Tunis day), on CurseForge or in an earlier Publish run. A dry run only reports it.
 #
 # Usage after a release build is ready:
 #   git tag v1.2.3 && git push --tags
@@ -69,12 +69,11 @@ jobs:
 
       - name: Same-day guard
         env:
-          MODRINTH_ID: ${{ vars.MODRINTH_ID }}
           CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID }}
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           PUBLISH_WORKFLOW: publish.yml
-          UPLOAD_STEP: Upload Modrinth + CurseForge
+          UPLOAD_STEP: Upload CurseForge|Upload Modrinth + CurseForge
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/same_day_guard.mjs
 
@@ -108,26 +107,23 @@ jobs:
       - name: Same-day guard (again, right before upload)
         if: ${{ inputs.dry_run != 'true' }}
         env:
-          MODRINTH_ID: ${{ vars.MODRINTH_ID }}
           CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID }}
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           PUBLISH_WORKFLOW: publish.yml
-          UPLOAD_STEP: Upload Modrinth + CurseForge
+          UPLOAD_STEP: Upload CurseForge|Upload Modrinth + CurseForge
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/same_day_guard.mjs
 
-      - name: Upload Modrinth + CurseForge
+      - name: Upload CurseForge
         if: ${{ inputs.dry_run != 'true' }}
         env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
-          MODRINTH_ID: ${{ vars.MODRINTH_ID }}
           CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID }}
           VERSION: ${{ steps.ver.outputs.version }}
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${MODRINTH_ID:-}" && test -n "${CURSEFORGE_ID:-}"
+          test -n "${CURSEFORGE_ID:-}" || { echo "Set the repo variable CURSEFORGE_ID" >&2; exit 1; }
           node scripts/upload_platforms.mjs --version "$VERSION" --jar-dir releases --require-all-targets --changelog-file "patchnotes/$VERSION.md"

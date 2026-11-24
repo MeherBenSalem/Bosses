@@ -1,10 +1,10 @@
 # Remnant Bosses — store listing copy
 
-Paste-ready text for Modrinth and CurseForge. Summon mechanics verified against `GameEvents.java` / `BlockInteractionEvents.java` and JAuml defaults in `JaumlConfigBootstrap.java` (v2.6.0).
+Paste-ready text for CurseForge (NightBeam publishes to CurseForge only). Summon mechanics verified against `GameEvents.java` / `BlockInteractionEvents.java` and JAuml defaults in `JaumlConfigBootstrap.java` (v2.6.0).
 
 ---
 
-## Short description (Modrinth / CF summary)
+## Short description (CurseForge summary)
 
 Deadly Minecraft bosses, custom mobs, weapons, and Ancient Altar rituals. Summon Ossukage, Kotsukage, and Umbrakar with configurable pedestal offerings.
 

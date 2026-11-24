@@ -1,16 +1,16 @@
 import path from "node:path";
 
-export const MODRINTH_ID = "coZxDAGe";
+// NightBeam publishes to CurseForge only (since 24 Nov 2026); the existing Modrinth project stays up as it is but gets
+// no new versions.
 export const CURSEFORGE_ID = "1225026";
 export const MOD_TITLE = "Remnant Bosses";
 export const LOADER_IDS = Object.freeze({ fabric: 7499, forge: 7498, neoforge: 10150 });
 
-// Runtime requirements in each loader's fabric.mod.json / mods.toml.
-// Project IDs verified against https://api.modrinth.com/v2/project/{id}.
+// Runtime requirements in each loader's fabric.mod.json / mods.toml: mod id -> CurseForge slug.
 export const DEPENDENCY_PROJECTS = Object.freeze({
-  geckolib: "8BmcQJ2H",
-  jauml: "ihvBalM2",
-  "fabric-api": "P7dR8mSH",
+  geckolib: "geckolib",
+  jauml: "jauml",
+  "fabric-api": "fabric-api",
 });
 
 const SUPPORTED_TARGETS = new Set([
@@ -32,25 +32,21 @@ export function normalizeVersion(value) {
   return version;
 }
 
-export function modrinthDependencies(loader, game) {
+/** Required mod ids for a target (fails closed on an unsupported target). */
+export function requiredMods(loader, game) {
   if (!SUPPORTED_TARGETS.has(`${loader}:${game}`)) {
     throw new Error(`Unsupported release target ${loader} ${game}`);
   }
   const mods = ["geckolib", "jauml"];
   if (loader === "fabric") mods.push("fabric-api");
-  return mods.map((mod) => ({
-    project_id: DEPENDENCY_PROJECTS[mod],
-    version_id: null,
-    file_name: null,
-    dependency_type: "required",
-  }));
+  return mods;
 }
 
 export function curseforgeRelations(loader, game) {
-  const ids = modrinthDependencies(loader, game).map((d) => d.project_id);
+  const mods = requiredMods(loader, game);
   return { projects: Object.entries(DEPENDENCY_PROJECTS)
-    .filter(([, id]) => ids.includes(id))
-    .map(([slug]) => ({ slug, type: "requiredDependency" })) };
+    .filter(([mod]) => mods.includes(mod))
+    .map(([, slug]) => ({ slug, type: "requiredDependency" })) };
 }
 
 export function parseJar(jar, expectedVersion) {
@@ -60,28 +56,9 @@ export function parseJar(jar, expectedVersion) {
   );
   if (!match) throw new Error(`Cannot parse release jar ${name}`);
   const [, loader, game, version] = match;
-  modrinthDependencies(loader, game); // Fail closed instead of guessing a target.
+  requiredMods(loader, game); // Fail closed instead of guessing a target.
   if (expectedVersion && version !== normalizeVersion(expectedVersion)) {
     throw new Error(`Jar version ${version} does not match ${expectedVersion}: ${name}`);
   }
   return { jar, name, loader, game, version };
-}
-
-export function modrinthMetadata(release, { version, changelog, projectId = MODRINTH_ID }) {
-  version = normalizeVersion(version);
-  if (release.version !== version) throw new Error(`Jar version does not match ${version}`);
-  return {
-    name: `${version} · ${release.loader} · ${release.game}`,
-    version_number: `${version}+${release.loader}-${release.game}`,
-    changelog,
-    dependencies: modrinthDependencies(release.loader, release.game),
-    game_versions: [release.game],
-    version_type: "release",
-    loaders: [release.loader],
-    featured: false,
-    status: "listed",
-    project_id: projectId,
-    file_parts: ["file_0"],
-    primary_file: "file_0",
-  };
 }

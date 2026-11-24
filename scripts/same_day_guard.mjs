@@ -3,21 +3,23 @@
 //
 // Maher's rule: never release a second update of the same mod on the same calendar day. This script runs at the
 // start of Publish (and again right before the upload) and fails the run when this mod already had a release today,
-// "today" being the calendar day in Africa/Tunis. It looks in three places, because each can lag or miss a release:
-//   1. Modrinth: the project's versions (public API, no token needed).
-//   2. CurseForge: the project's files (Core API, needs CURSEFORGE_API_KEY; files still in review may not show).
-//   3. GitHub: earlier successful Publish runs of this repo whose upload step actually ran (not dry runs).
+// "today" being the calendar day in Africa/Tunis. NightBeam publishes to CurseForge only (Maher, 24 Nov 2026), and the
+// guard looks in two places, because each can lag or miss a release:
+//   1. CurseForge: the project's files (Core API, needs CURSEFORGE_API_KEY; files still in review may not show).
+//   2. GitHub: earlier successful Publish runs of this repo whose upload step actually ran (not dry runs). The upload
+//      step was called "Upload Modrinth + CurseForge" before 24 Nov 2026, so both names count.
 // It fails closed: if a source can't be read on a real release, the release stops. On a dry run it only reports.
 //
-// Env: MODRINTH_ID, CURSEFORGE_ID, CURSEFORGE_API_KEY, GITHUB_TOKEN, GITHUB_REPOSITORY, GITHUB_RUN_ID,
+// Env: CURSEFORGE_ID, CURSEFORGE_API_KEY, GITHUB_TOKEN, GITHUB_REPOSITORY, GITHUB_RUN_ID,
 //      GITHUB_API_URL, GITHUB_STEP_SUMMARY, PUBLISH_WORKFLOW (file name, default publish.yml),
-//      UPLOAD_STEP (step name, default "Upload Modrinth + CurseForge"), RELEASE_TZ (default Africa/Tunis),
+//      UPLOAD_STEP (upload step names separated by "|", default DEFAULT_UPLOAD_STEPS), RELEASE_TZ (default Africa/Tunis),
 //      DRY_RUN ("true" to report only).
 
 import { appendFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 export const DEFAULT_TZ = "Africa/Tunis";
+export const DEFAULT_UPLOAD_STEPS = "Upload CurseForge|Upload Modrinth + CurseForge";
 
 export function dayIn(date, timeZone = DEFAULT_TZ) {
   // en-CA formats as YYYY-MM-DD.
@@ -30,13 +32,6 @@ async function getJson(fetchImpl, url, headers = {}) {
   const res = await fetchImpl(url, { headers: { Accept: "application/json", "User-Agent": "nightbeam-publish-guard", ...headers } });
   if (!res.ok) throw new Error(`${url} answered HTTP ${res.status}`);
   return res.json();
-}
-
-export async function checkModrinth({ fetchImpl, id, today, timeZone }) {
-  const versions = await getJson(fetchImpl, `https://api.modrinth.com/v2/project/${encodeURIComponent(id)}/version`);
-  return versions
-    .filter((v) => dayIn(v.date_published, timeZone) === today)
-    .map((v) => `Modrinth ${v.version_number} (${v.date_published})`);
 }
 
 export async function checkCurseForge({ fetchImpl, id, apiKey, today, timeZone }) {
@@ -57,17 +52,18 @@ export async function checkGitHub({ fetchImpl, api, repo, token, workflow, uploa
     `${api}/repos/${repo}/actions/workflows/${encodeURIComponent(workflow)}/runs?per_page=50&created=%3E%3D${since}`,
     headers,
   );
+  const names = new Set(String(uploadStep).split("|").map((n) => n.trim()).filter(Boolean));
   const hits = [];
   for (const run of runs.workflow_runs || []) {
     if (String(run.id) === String(currentRunId)) continue;
     if (dayIn(run.run_started_at || run.created_at, timeZone) !== today) continue;
     const jobs = await getJson(fetchImpl, `${api}/repos/${repo}/actions/runs/${run.id}/jobs?per_page=50`, headers);
     const uploaded = (jobs.jobs || []).some((j) =>
-      (j.steps || []).some((s) => s.name === uploadStep && s.conclusion === "success"),
+      (j.steps || []).some((s) => names.has(s.name) && s.conclusion === "success"),
     );
     // A run still in progress with its upload step running counts too: it is about to release.
     const uploading = (jobs.jobs || []).some((j) =>
-      (j.steps || []).some((s) => s.name === uploadStep && s.status === "in_progress"),
+      (j.steps || []).some((s) => names.has(s.name) && s.status === "in_progress"),
     );
     if (uploaded || uploading) hits.push(`GitHub Publish run ${run.id} (${run.run_started_at || run.created_at}, ${uploaded ? "uploaded" : "uploading"})`);
   }
@@ -82,7 +78,6 @@ export async function runGuard(env = process.env, { fetchImpl = fetch, now = new
   const problems = [];
 
   const sources = [
-    ["Modrinth", env.MODRINTH_ID, () => checkModrinth({ fetchImpl, id: env.MODRINTH_ID, today, timeZone })],
     [
       "CurseForge",
       env.CURSEFORGE_ID && env.CURSEFORGE_API_KEY,
@@ -98,7 +93,7 @@ export async function runGuard(env = process.env, { fetchImpl = fetch, now = new
           repo: env.GITHUB_REPOSITORY,
           token: env.GITHUB_TOKEN,
           workflow: env.PUBLISH_WORKFLOW || "publish.yml",
-          uploadStep: env.UPLOAD_STEP || "Upload Modrinth + CurseForge",
+          uploadStep: env.UPLOAD_STEP || DEFAULT_UPLOAD_STEPS,
           currentRunId: env.GITHUB_RUN_ID,
           today,
           timeZone,

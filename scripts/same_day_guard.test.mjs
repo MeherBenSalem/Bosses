@@ -17,7 +17,6 @@ function fakeFetch(routes) {
 }
 
 const ENV = {
-  MODRINTH_ID: "abc",
   CURSEFORGE_ID: "123",
   CURSEFORGE_API_KEY: "k",
   GITHUB_TOKEN: "t",
@@ -34,10 +33,17 @@ test("dayIn uses Africa/Tunis", () => {
 });
 
 const clean = [
-  ["https://api.modrinth.com/", [{ version_number: "1.0.0", date_published: "2026-11-20T09:00:00Z" }]],
   ["https://api.curseforge.com/", { data: [{ fileName: "a.jar", fileDate: "2026-11-20T09:00:00Z" }] }],
   ["https://api.github.com/repos/o/r/actions/workflows/", { workflow_runs: [] }],
 ];
+
+test("never asks Modrinth (CurseForge only since 24 Nov 2026)", async () => {
+  const seen = [];
+  const f = fakeFetch(clean);
+  const r = await runGuard(ENV, { fetchImpl: async (url, o) => (seen.push(url), f(url, o)), now: NOW, log: quiet });
+  assert.equal(r.ok, true);
+  assert.ok(seen.every((u) => !u.includes("modrinth")));
+});
 
 test("passes when nothing was released today", async () => {
   const r = await runGuard(ENV, { fetchImpl: fakeFetch(clean), now: NOW, log: quiet });
@@ -45,15 +51,8 @@ test("passes when nothing was released today", async () => {
   assert.equal(r.blocked, false);
 });
 
-test("blocks a real release when Modrinth has a version from today in Tunis", async () => {
-  const routes = [["https://api.modrinth.com/", [{ version_number: "1.0.1", date_published: "2026-11-22T23:30:00Z" }]], ...clean.slice(1)];
-  const r = await runGuard(ENV, { fetchImpl: fakeFetch(routes), now: NOW, log: quiet });
-  assert.equal(r.blocked, true);
-  assert.match(r.hits[0], /Modrinth 1\.0\.1/);
-});
-
 test("blocks on a CurseForge file from today", async () => {
-  const routes = [clean[0], ["https://api.curseforge.com/", { data: [{ fileName: "b.jar", fileDate: "2026-11-23T08:00:00Z" }] }], clean[2]];
+  const routes = [["https://api.curseforge.com/", { data: [{ fileName: "b.jar", fileDate: "2026-11-23T08:00:00Z" }] }], clean[1]];
   const r = await runGuard(ENV, { fetchImpl: fakeFetch(routes), now: NOW, log: quiet });
   assert.equal(r.blocked, true);
 });
@@ -61,28 +60,30 @@ test("blocks on a CurseForge file from today", async () => {
 test("blocks on an earlier Publish run today whose upload step succeeded, ignores dry runs", async () => {
   const routes = [
     clean[0],
-    clean[1],
     [
       "https://api.github.com/repos/o/r/actions/workflows/",
       {
         workflow_runs: [
           { id: 1, run_started_at: "2026-11-23T07:00:00Z" },
           { id: 2, run_started_at: "2026-11-23T08:00:00Z" },
+          { id: 3, run_started_at: "2026-11-23T09:00:00Z" },
           { id: 999, run_started_at: "2026-11-23T10:00:00Z" },
         ],
       },
     ],
     ["https://api.github.com/repos/o/r/actions/runs/1/jobs", { jobs: [{ steps: [{ name: "Upload Modrinth + CurseForge", conclusion: "skipped" }] }] }],
     ["https://api.github.com/repos/o/r/actions/runs/2/jobs", { jobs: [{ steps: [{ name: "Upload Modrinth + CurseForge", conclusion: "success" }] }] }],
+    ["https://api.github.com/repos/o/r/actions/runs/3/jobs", { jobs: [{ steps: [{ name: "Upload CurseForge", conclusion: "success" }] }] }],
   ];
   const r = await runGuard(ENV, { fetchImpl: fakeFetch(routes), now: NOW, log: quiet });
   assert.equal(r.blocked, true);
-  assert.equal(r.hits.length, 1);
+  assert.equal(r.hits.length, 2);
   assert.match(r.hits[0], /run 2/);
+  assert.match(r.hits[1], /run 3/);
 });
 
 test("fails closed when a source can't be read", async () => {
-  const routes = [["https://api.modrinth.com/", new Error("down")], ...clean.slice(1)];
+  const routes = [["https://api.curseforge.com/", new Error("down")], ...clean.slice(1)];
   const r = await runGuard(ENV, { fetchImpl: fakeFetch(routes), now: NOW, log: quiet });
   assert.equal(r.blocked, true);
   assert.equal(r.problems.length, 1);
@@ -94,7 +95,7 @@ test("fails closed when an ID is missing", async () => {
 });
 
 test("dry run reports but does not block", async () => {
-  const routes = [["https://api.modrinth.com/", [{ version_number: "1.0.1", date_published: "2026-11-23T09:00:00Z" }]], ...clean.slice(1)];
+  const routes = [["https://api.curseforge.com/", { data: [{ fileName: "c.jar", fileDate: "2026-11-23T09:00:00Z" }] }], ...clean.slice(1)];
   const r = await runGuard({ ...ENV, DRY_RUN: "true" }, { fetchImpl: fakeFetch(routes), now: NOW, log: quiet });
   assert.equal(r.ok, false);
   assert.equal(r.blocked, false);
